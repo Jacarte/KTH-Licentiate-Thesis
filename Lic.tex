@@ -1,36 +1,238 @@
-\title{LicThesis-KTH}
-% please read the enclosed README file for more information 
-
 \documentclass{kthesis}
-
 % the used packages are just examples, you can use your preferred packages instead
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage{lmodern}
 \usepackage[latin1]{inputenc}
 \usepackage[swedish, english]{babel}
+\usepackage{tocloft}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{subcaption}
+\usepackage{graphicx,booktabs}
+\usepackage{float}
 %\usepackage{graphics}
 %\usepackage{amssymb}
 %\usepackage{amsmath}
-\usepackage{graphicx} 
-%\usepackage{caption}
-%\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{newfloat}
+\usepackage[cmex10]{amsmath}
+\usepackage{subcaption}
 %\usepackage{color} 
 %\usepackage{transparent} 
 %\usepackage{bm} % bold math
 %\usepackage{fmtcount}
 %\usepackage{booktabs}
 \usepackage{multirow}
+\usepackage{xspace}
+\usepackage{tikz}
+%\usepackage{algpseudocode}
+%\usepackage{algorithm}
+\usepackage{algorithm2e}
 %\usepackage{url}
 %\usepackage{cite}
 
-%\usepackage[singlelinecheck=off]{caption}
+\usepackage[singlelinecheck=off]{caption}
 
 \DeclareGraphicsExtensions{.pdf,.png,.jpg,.eps}
+
+\DeclareFloatingEnvironment[fileext=frm,placement={tph},name=Listing]{code}
+\captionsetup[lstlisting]{singlelinecheck=false, margin=0pt}
+
+\newcommand{\wasm}{WebAssembly\xspace}
+\newcommand{\ie}{\textit{i.e.,}\xspace}
+\newcommand{\etal}{et al.\xspace}
+
+\newcommand\Chapter[2]{
+  \chapter[#1]{#1\\[2ex]\Large\itshape#2}
+}
+
+\newcommand*\badge[1]{ \colorbox{red}{\color{white}#1}}
+\newcommand*\badget[1]{\colorbox{red}{\color{white}#1}}
+\newcommand*\badgeg[1]{\colorbox{green}{\color{white}#1}}
+
+
+\makeatletter
+\newenvironment{btHighlight}[1][]
+{\begingroup\tikzset{bt@Highlight@par/.style={#1}}\begin{lrbox}{\@tempboxa}}
+{\end{lrbox}\bt@HL@box[bt@Highlight@par]{\@tempboxa}\endgroup}
+
+
+\definecolor{commentgreen}{RGB}{176, 176, 176}
+\definecolor{rowcolor}{cmyk}{0,0.87,0.68,0.32}
+\definecolor{rowcolor2}{cmyk}{ 20, 0, 37, 34}
+
+\definecolor{eminence}{RGB}{108,48,130}
+\definecolor{weborange}{RGB}{255,165,0}
+\definecolor{frenchplum}{RGB}{129,20,82}
+\definecolor{darkgreen}{RGB}{10, 92, 10}
+
+
+\definecolor{celadon}{rgb}{0.67, 0.88, 0.69}
+%\renewcommand{\blue}{}
+
+\newcommand\btHL[1][]{%
+  \begin{btHighlight}[#1]\bgroup\aftergroup\bt@HL@endenv%
+}
+\def\bt@HL@endenv{%
+  \end{btHighlight}%   
+  \egroup
+}
+\newcommand{\bt@HL@box}[2][]{%
+  \tikz[#1]{%
+    \pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd #2}{\ht #2}}%
+    \pgfusepath{use as bounding box}%
+    \node[anchor=base west, fill=orange!30,outer sep=0pt,inner xsep=1pt, inner ysep=0pt, rounded corners=3pt, minimum height=\ht\strutbox+1pt,#1]{\raisebox{1pt}{\strut}\strut\usebox{#2}};
+  }%
+}
+\makeatother
+
+\makeatletter
+
+\lstdefinelanguage{WAT}{
+    otherkeywords={},
+    morekeywords=[1]{i32,f32,i64,f64},
+    morekeywords=[2]{0},
+    morekeywords=[3]{add,const,mul,shl,get,rem_s,rem_u,ne,tee,sub,set,store},
+    morekeywords=[4]{},
+    morekeywords=[5]{global, get_global, mut, set_global, export, import,loop, memory, data, get_local,if, block,module, set_local,call,br_if,end, all,call_indirect,local,global,module, func, param, result, type},
+    morekeywords=[6]{=,;},
+    morekeywords=[7]{(,),[,],.},
+    sensitive=false,
+    morecomment=[l]{;},
+    morecomment=[s]{;}{;},
+    morestring=[b]",
+    keywordstyle=[1]\color{eminence}\bfseries,
+    keywordstyle=[3]\color{frenchplum},
+    keywordstyle=[5]\color{darkgreen}\bfseries,
+    commentstyle=\color{commentgreen}
+}
+\lstdefinelanguage{llvm}{
+    morecomment = [l]{;},
+    morestring=[b]", 
+    sensitive = true,
+    morekeywords=[2]{i32,f32,i64,f64},
+    morekeywords=[3]{
+        define, declare, global, constant,
+        internal, external, private,
+        linkonce, linkonce_odr, weak, weak_odr, appending,
+        common, extern_weak,
+        thread_local, dllimport, dllexport,
+        hidden, protected, default,
+        except, deplibs,
+        volatile, fastcc, coldcc, cc, ccc,
+        x86_stdcallcc, x86_fastcallcc,
+        ptx_kernel, ptx_device,
+        signext, zeroext, inreg, sret, nounwind, noreturn,
+        nocapture, byval, nest, readnone, readonly, noalias, uwtable,
+        inlinehint, noinline, alwaysinline, optsize, ssp, sspreq,
+        noredzone, noimplicitfloat, naked, alignstack,
+        module, asm, align, tail, to,
+        addrspace, section, alias, sideeffect, c, gc,
+        target, datalayout, triple,
+        blockaddress
+    },
+    morekeywords=[4]{
+        fadd, sub, fsub, mul, fmul,
+        sdiv, udiv, fdiv, srem, urem, frem,
+        and, or, xor,
+        icmp, fcmp,
+        eq, ne, ugt, uge, ult, ule, sgt, sge, slt, sle,
+        oeq, ogt, oge, olt, ole, one, ord, ueq, ugt, uge,
+        ult, ule, une, uno,
+        nuw, nsw, exact, inbounds,
+        phi, call, select, shl, lshr, ashr, va_arg,
+        trunc, zext, sext,
+        fptrunc, fpext, fptoui, fptosi, uitofp, sitofp,
+        ptrtoint, inttoptr, bitcast,
+        ret, br, indirectbr, switch, invoke, unwind, unreachable,
+        malloc, alloca, free, load, store, getelementptr,
+        extractelement, insertelement, shufflevector,
+        extractvalue, insertvalue,
+    },
+    alsoletter={\%},
+    keywordsprefix={\%},% All identifiers starting with '%' will be printed as first order keywords.
+    keywordstyle=[1]\bfseries,% As mentioned above, these are the keywords starting with '%', like '%5'
+    keywordstyle=[2]\color{eminence}\bfseries,
+    keywordstyle=[3]\color{darkgreen}\bfseries,
+    keywordstyle=[4]\color{frenchplum},
+}
+\makeatother
+
+\newcommand{\todo}[1]{%
+%\refstepcounter{todo}
+\noindent\textbf{\badge{TODO}} {\color{red} #1}
+%\addcontentsline{td}{todo}
+%{\color{red}\thesection.\thetodo\xspace #1}
+}
+
+\newcommand{\done}[1]{%
+\noindent\textbf{\badgeg{DONE}} {\color{green}#1}
+}
+
+\newtheorem{definition}{Definition}
+\providecommand*{\definitionautorefname}{Definition}
+\newtheorem{metric}{Metric}
+\providecommand*{\metricautorefname}{Metric}
+\hyphenation{Web-Assembly}
+
+\newcommand{\citationneeded}{\refstepcounter{todo}\badget{[?]}
+
+
+\addcontentsline{td}{todo}
+{\color{red}\thesection.\thetodo\xspace Citation needed}}
+
+\makeatletter
+\lstset{
+    language=C,
+    basicstyle=\ttfamily\footnotesize\lst@ifdisplaystyle\scriptsize\fi,
+    escapeinside={\%*}{*)},
+    captionpos=t
+}
+\makeatother
+
+
+\lstdefinestyle{CStyle}{
+  numbers=none,
+  stepnumber=1,
+  numbersep=10pt,
+  tabsize=4,
+  showspaces=false,
+  showstringspaces=true,
+}
+
+\lstdefinestyle{WATStyle}{
+  numbers=left,
+  stepnumber=1,
+  numbersep=10pt,
+  tabsize=4,
+  showspaces=false,
+  showstringspaces=true,
+}
+
+\lstdefinestyle{LLVMStyle}{
+  numbers=none,
+  stepnumber=0,
+  numbersep=10pt,
+  tabsize=4,
+  showspaces=false,
+  showstringspaces=true,
+}
+
 \input{Lic-bibl}
 \begin{document}
 
-\addcontentsline{toc}{chapter}{Note: \\ It is not allowed to "copy and paste" from your papers to your dissertation.} % these are notes and they are not a part of the thesis
+%\addcontentsline{toc}{chapter}{Note: \\ It is not allowed to "copy and paste" from your papers to your dissertation.} % these are notes and they are not a part of the thesis
 
 \frontmatter
 \maketitle
@@ -43,7 +245,7 @@
 \clearpage
 
 \setcounter{tocdepth}{2} % used for content layout
-\renewcommand{\contentsname}{Contents (suggestion)} % changes the appearance of Contents
+\renewcommand{\contentsname}{Contents} % changes the appearance of Contents
 \tableofcontents
 \clearpage
 
@@ -58,6 +260,10 @@
 \setcounter{secnumdepth}{3} % used for content layout
 
 \input{Chapter1} % calls the separate document named Chapter1.tex
+\chapter{State of the art}
+\section{RQ1, generation}
+\section{RQ2, assesment}
+\section{RQN, usage}
 \input{Chapter2}
 \input{Chapter3}
 \input{Chapter4}
@@ -68,9 +274,11 @@
 
 %\backmatter % should be used for the actual thesis, separate documents can be added without the numbering, similar to the \frontmatter
 %\appendix{\input{app_papers}}
-\appendix
-\addcontentsline{toc}{chapter}{Summary of the appended papers (only for the collection of papers thesis)} % for template purposes
-\addcontentsline{toc}{chapter}{Appended Papers (only for the collection of papers thesis), for which you need to request copyright for reprinting them in the dissertation} % for template purposes
+% \appendix
+
+
+\addcontentsline{toc}{chapter}{Appended papers} % for template purposes
+\input{Contributions}
 
 \end{document}
 \endinput

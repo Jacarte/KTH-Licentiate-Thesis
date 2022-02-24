@@ -1,0 +1,95 @@
+
+\begin{definition}{Functional equivalence:}
+    \label{def:semantic_equivalence}
+    Let P and P' two programs, P and P' are functionally equivalent if given the same input both programs produce the same output.
+    
+    Notice that, by definition, P is semantically equivalent to P itself. Besides, this definition is sound with the definition of equivalence module input of Lee \etal \cite{}.
+\end{definition}
+
+Let us have the space of all possible programs that can be constructed under a given language. A diversifier can be defined as a searching problem, \ie given a program in this space, search all other programs that are functionally equivalent to it. The found programs are called variants. Notice that, the concept of functional equivalence is subjective by nature. For example, two programs can be functionally equivalent module input but in terms of performance they might not be considered equivalent. In the majority of the cases \cite{}, a program variant is only considered under equivalence modulo input \cite{}.
+
+% TODO, extend this with why a theorem prover is needed, why not based on unit tests ?
+The problem of searching for program variants is challenging for obvious reasons. First, this space is infinite and checking all possible programs for those equivalent variants is algorithmically impossible. Second, the equivalence checking is expensive because a theorem prover is needed to prove that two programs are fully equivalent \cite{}.
+
+Program optimization during compiling can be seen as a subproblem, \ie given a program, to find the best equivalent program in all the program's space. Compilers usually solve this problem by changing the original program following known transformation rules that are known move this search from a program to a smaller one in terms on number of instructions. 
+
+
+\begin{definition}{Code transformation:}
+    \label{def:code_transformation}
+    TODO
+\end{definition}
+
+This process is then followed with the result foundlings until no it cannot find another smaller program. 
+
+
+All this said, the very first premise to find program variants is that the found variants should be semantically equivalent, \ie every time a program variant is executed with the same input as the original program, both should return the same result. In terms of wording, we can say that the programs are not created, but they are found in the large space of all possible programs. 
+
+
+\begin{definition}{Program variant:}
+    \label{def:variant}
+    Let P and P' two programs, P' is a variant of P if, according to the \autoref{def:semantic_equivalence}, they are functionally equivalent.
+\end{definition}
+    
+
+With the previous definitions we enunciate what a diversifier should be in \autoref{alg:diversifier}:
+
+
+\begin{algorithm}[H]
+
+    \SetKwData{optimizations}{optimizations}
+    \SetKwData{variants}{variants}
+    \SetKwData{B}{P'}
+    \SetKwData{subset}{subset}
+    \SetKwFunction{so}{sop}
+    \SetKwFunction{variantfrom}{variant from}
+    \SetKwFunction{to}{to}
+    \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+    \Input{program $P$}
+    \Output{Collection of program variants \variants }
+    $\variants \leftarrow \emptyset$ \;
+    \While{True}{
+        \B $\leftarrow$ \variantfrom $P$\;   
+        \If{\B and $P$ are semantically equivalent}{
+            \variants $\leftarrow$ \variants $+$ \B\;
+        }
+    }
+    
+    \caption{Program diversifier}
+\label{alg:diversifier}
+
+\end{algorithm}
+
+A program variant can be created by transforming the original program. This transformation must be consequent with the defined functional equivalence rule. 
+XXX and YYY proposed to solve this issue by using the optimization options already available in the compilers. For example, by applying a set of the compiler optimizations during the compilation of the original program, the variants are created by changing out code that it not the best in terms of performance. The result of the transformations is a program that behaves as the original program but faster. 
+
+% Extend this into a paragraph
+The main limitation with this approach is that the number of programs that can be generated from all compiler option combinations are finite. The key challenge then, is to find a way to remove the limits on the number of variants that can be generated. This limit is the definition of compiler optimization.  Imagine the space of all possible program variants, the compiler just take care about those programs that are better than the original in terms of perormance.
+
+
+\section{A superdiversifier}
+
+Given a program, code superoptimization produces new program variant, functionally equivalent to the original but better according to a concrete criterion. For example, a superoptimizer would try to generate a program variant with fewer instructions or that produces a smaller compiled binary \cite{1987_Massalin_Sueroptimizer}. Superoptimizers first detect all \emph{optimizations}. Optimizations are the pieces of code that could be replaced by a functionally equivalent code fragment, ensuring an improvement of the criterion. A \emph{superoptimized} program will result from applying all these replacements or optimizations at once. Thus, this process could be defined in the algorthm proposed in \autoref{gen:algorthm}
+
+
+We leverage the search strategy of superoptimizers to generate several variants of a given program. Our main idea is to generate a new program variant by applying a subset of the optimizations found by a superoptimizer. Our proposal is summarized in \autoref{alg:generation}. We consider the superoptimization search strategy to be a function that takes as input a program, and returns the set of all possible optimizations for a concrete criterion. Once the superoptimizer has detected all possible optimizations, we build the \emph{power set} of all these replacements. Then, we apply, in turn, all the optimization subsets in this power set. The application of the optimizations in the subset will generate a new program variant. Notice that, applying the empty subset produces the original program and applying the set of all optimizations is equivalent to \emph{superoptimizing} the original program. Thus, these two variants are also produced by our strategy.
+
+
+%In this section, we discuss key concepts and we enumerate the definitions used along this chapter. 
+
+%\subsubsection{WebAssembly}
+
+
+% Probably to be moved to introduction
+%WebAssembly is a binary instruction format for a stack-based virtual machine. It addresses the issues of being safe, fast, portable and compact low-level code on the web. The language was first published in 2015 \cite{}, formalized then by Haas \etal \cite{} and since 2020 it was officially accepted as the four web language \cite{}. Further the web development, WebAssembly has been used in standalone environments, given it is platform-agnostic \cite{}.
+
+\section{Superdiversifier}
+
+\section{Souper}
+
+\section{Methodology}
+
+\section{CROW}
+
+\subsection{Functional equivalence}
+
+In this section, we define and discuss the concept of functional equivalence, code transformation and program variant.
