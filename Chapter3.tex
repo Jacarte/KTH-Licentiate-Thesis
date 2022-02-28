@@ -1,15 +1,54 @@
-\chapter{Diversity Assessment (STRAC + CROW)} 
-
-\section{Static}
-
-\section{Dynamic}
-	\subsection{Trace based}
-	\subsection{Timing}
-
-\section{Preservation}
-\subsection{Browser based study (V8)}
-\subsection{Backend based study (wasmtime)}
+\Chapter{Variant's assessment}{RQ2. To what extent the generated variants are different ?} 
 
 
-One chaper per RQ, turn chapter title into RQ
-- chapter two, state of the art (RW), survey
+In this chapter, we investigate whether the artifically created variants are different. We propose a methodology to compare the program variants both statically and during runtime. Besides, we present a novel study on code preservation, demonstrating that the code transformations introduced by CROW are resilient to later compiling transformations during machine code generation. We evaluate the variant's assessment in both existing scenarios for \wasm, browsers and standalone engines.
+
+\section{Later compiler transformations}
+
+\wasm is an intermediate language, this means that compilers used it to produce machine code. For program variants, this means that compilers can undo artificial introduced transformations, for example, through optimization passes. When a code transformation is maintained from the first time it is introduced to the final machine code generation is  a preserved variant. 
+
+Part of the contributions of this thesis are our strategies to prevent reversion of code transformations. We take engineering decision regarding this in all the stages of the CROW workflow. First, we disable all optimizations inside CROW in the generation of the \wasm binaries. This prevents the LLVM toolchain used to remove some introduced transformations. However, the LLVM toolchain applies optimizations by default, such as constant folding or logical operations' normalization. As we illustrate previously, these are some transformations found and applied by CROW. We modified the LLVM backend for \wasm to avoid this reversion during the creation of Wasm binaries.
+
+\todo{Add link to repository here}
+
+This phenomenon is sometimes bypassed by diversification studies when they are conducted at high-level. As another contribution, we conduct a study on preservation for both scenarios where Wasm is used, browsers and standalone engines. In
+
+\begin{table}[h]
+	\begin{tabular}{p{2cm} | p{9cm} }
+	%\hline
+	Name & Properties \\
+	\hline
+	V8 \cite{} & V8  is the engine used by Chrome and NodeJS to execute JavaScript and \wasm. \todo{Explain compilation process} \\
+	\hline
+	wasmtime \cite{} & Wasmtime is a standalone runtime for WebAssembly. This engine is used by the Fastly platform to provide Edge-Cloud computing services. \todo{Explain compilation process}  \\		
+	\end{tabular}
+	\caption{Wasm engines used during the diversification assesment study. The table is composed by the name of the engine and the description of the compilation process for them.}
+	\label{assesment:preservation:engines}
+\end{table}
+
+
+\section{Metrics}
+
+\subsection{Static}
+
+\subsection{Dynamic}
+	\subsubsection{Trace based}
+	\subsubsection{Timing}
+
+\subsection{Preservation}
+\subsubsection{Browser based study (V8)}
+\subsubsection{Backend based study (wasmtime)}
+
+\section{Evaluation}
+
+\subsection{Corpora}
+To answer RQ2, we use the corpora proposed in \autoref{chapter:generation}.
+
+\subsection{Setup}
+
+\section{Results}
+
+\section{Conclusions}
+
+%One chaper per RQ, turn chapter title into RQ
+%- chapter two, state of the art (RW), survey

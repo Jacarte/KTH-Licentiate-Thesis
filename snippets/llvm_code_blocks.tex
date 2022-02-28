@@ -1,0 +1,116 @@
+
+ \begin{code}
+    \lstset{language=C,caption={C function that calculates the quantity $2x + x$},label=CExample}
+    \begin{lstlisting}[style=CStyle]
+    int f(int x) { 
+        return 2 * x + x; 
+    }
+    
+    int main(void) { return f(10); }
+    \end{lstlisting}
+    
+    \end{code}
+
+ \lstdefinelanguage{LLVM}
+    {morekeywords={i32,mul,align,nsw,add,load,store,define,br, ret, shl, ret},
+    sensitive=false,
+    morecomment=[l]{;},
+    morecomment=[s]{;}{;},
+    morestring=[b]",
+}
+\lstdefinestyle{nccode}{
+    numbers=left,
+    tabsize=4,
+    showspaces=false,
+    breaklines=true, 
+    showstringspaces=false,
+    moredelim=**[is][{\btHL[fill=black!10]}]{`}{`},
+    moredelim=**[is][{\btHL[fill=celadon!40]}]{!}{!}
+}
+\lstset{
+    language=LLVM,
+    style=nccode,
+    %basicstyle=\small\ttfamily,
+    columns=fullflexible,
+    breaklines=true
+}
+
+
+\begin{code}
+    \centering
+    \captionof{lstlisting}{LLVM's intermediate representation program and its code blocks.}\label{example:crow:original:llvm}
+    \lstset{numbers=none}
+    \noindent\begin{minipage}[b]{.55\linewidth}
+    \centering
+    \begin{lstlisting}[xleftmargin=1em,escapechar=?]
+    define i32 @f(i32) {
+
+     ?\tikzmarkWS{2}{code block 2}{12.5}{10}{4.5cm}?
+     ?\tikzmarkWS{1}{code block 1}{13.5}{4}{3.5cm}?
+     %2 = mul nsw i32 %0,2
+     %3 = add nsw i32 %0,%2 
+
+     ret i32 %3
+    }
+    
+    define i32 @main() {
+     %1 = tail call i32 @f(i32 10)
+     ret i32 %1
+    }
+    \end{lstlisting}
+    \end{minipage}\hfill%
+    \noindent\begin{minipage}[b]{.4\linewidth}
+    \vspace{-8cm}
+        \lstdefinestyle{nccode}{
+          tabsize=4, 
+          showspaces=false,
+          breaklines=true, 
+          showstringspaces=false,
+        moredelim=**[is][{\btHL[fill=black!10]}]{`}{`},
+        moredelim=**[is][{\btHL[fill=celadon!40]}]{!}{!}
+        }
+        \lstset{
+            language=LLVM,
+            style=nccode,
+            columns=fullflexible,
+            breaklines=true,
+            belowcaptionskip=1pt,
+            abovecaptionskip=1pt,
+        }
+        \vfill%
+        \begin{lstlisting}[label={ref:block1} ,name={A},escapechar=?]
+    ?\tikzmarkPROBE{5}{bb4}{-4}{10}? 
+    %2 = mul nsw i32 %0,2
+        \end{lstlisting}
+        \begin{lstlisting}[name={B},escapechar=?]
+    ?\tikzmarkPROBE{6}{bb4}{-4}{8}? 
+    %2 = mul nsw i32 %0,2
+    %3 = add nsw i32 %0,%2
+        \end{lstlisting}
+    \end{minipage}
+\end{code}
+
+
+\begin{tikzpicture}[remember picture,overlay]
+%\path (2.north) edge[<-, bend left] (1.north);
+%\path[draw, ->] (3.west) edge[<-, bend left] (2.west);
+%\path (4.west) edge[<-, bend left] (3.west);
+%\path (1.south) edge[<-, bend left] (4.south);
+
+%\path (2.east) edge[<-, bend left, blue] (5.north);
+%\path (3.east) edge[<-, bend right, olive] (2.east);
+\path (1.east) edge[<-, bend right, black] (5.east);
+\path (2.east) edge[<-, bend right, black] (6.east);
+%\path (6.east) edge[<-, bend right, black] (3.east);
+%\path (9.east) edge[<-, bend right, black] (4.east);
+%\path (7.east) edge[<-, bend right, black] (8.east);
+%\path (5.south) edge[<-, bend right, blue] (4.east);
+%\path (9.north) edge[<-] (8.south);
+%\path (5.south) edge[<-, bend left] (9.south);
+
+
+%\path (10.north) edge[<-, bend left] (11.north);
+%\path (11.south) edge[<-, bend left] (10.south);
+%\path (7) edge[<-, bend right] (6.east);
+%\path (8) edge[<-, bend right] (7.east);
+\end{tikzpicture}
