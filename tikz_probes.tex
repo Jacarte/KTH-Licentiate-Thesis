@@ -2,7 +2,7 @@
 \newcommand\tikzmarkWS[5]{%
 \tikz[remember picture, overlay]{%
         \pgfusepath{use as bounding box}%
-        \node[right=#3 mm, fill=white!0, draw=black!40,text width=#5,align =center,outer sep=0pt,inner xsep=1pt, inner ysep=0pt, rounded corners=3pt,anchor=north, minimum height=#4 mm, text depth = #4 mm] at (1 mm,2 mm) (#1) {#2};
+        \node[right=#3 mm, fill=white!0, draw=black!40,text width=#5,align =center,outer sep=-0.5pt,inner xsep=1pt, inner ysep=1.5pt, rounded corners=3pt,anchor=north, minimum height=#4 mm, text depth = #4 mm] at (1 mm,2 mm) (#1) {#2};
       %\node[right=#3 mm, align=center, shape=circle,text=black,draw=black, fill=white,inner sep=0.5pt] (#1) {#2};
   }
  }

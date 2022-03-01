@@ -4,3 +4,8 @@ Lic.log
 Lic.aux
 *.gz
 *.xml
+./*.pdf
+*.lot
+*.out
+*.lof
+chapter*.pdf

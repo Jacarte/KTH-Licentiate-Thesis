@@ -1,22 +1,20 @@
-
- \begin{code}
+    
+\begin{code}
     \lstset{language=C,caption={C function that calculates the quantity $2x + x$},label=CExample}
     \begin{lstlisting}[style=CStyle]
     int f(int x) { 
         return 2 * x + x; 
-    }
-    
-    int main(void) { return f(10); }
+    }    
     \end{lstlisting}
     
-    \end{code}
+\end{code}
 
- \lstdefinelanguage{LLVM}
+\lstdefinelanguage{LLVM}
     {morekeywords={i32,mul,align,nsw,add,load,store,define,br, ret, shl, ret},
     sensitive=false,
     morecomment=[l]{;},
     morecomment=[s]{;}{;},
-    morestring=[b]",
+    morestring=[b],
 }
 \lstdefinestyle{nccode}{
     numbers=left,
@@ -38,34 +36,44 @@
 
 \begin{code}
     \centering
-    \captionof{lstlisting}{LLVM's intermediate representation program and its code blocks.}\label{example:crow:original:llvm}
+    \captionof{lstlisting}{LLVM's intermediate representation program, its extracted code blocks and replacement candidates. Gray highlighted lines represent original code block, green for candidate code replacements. }\label{example:crow:original:llvm}
     \lstset{numbers=none}
-    \noindent\begin{minipage}[b]{.55\linewidth}
+    \noindent\begin{minipage}[t]{.33\linewidth}
     \centering
     \begin{lstlisting}[xleftmargin=1em,escapechar=?]
     define i32 @f(i32) {
 
-     ?\tikzmarkWS{2}{code block 2}{12.5}{10}{4.5cm}?
-     ?\tikzmarkWS{1}{code block 1}{13.5}{4}{3.5cm}?
-     %2 = mul nsw i32 %0,2
-     %3 = add nsw i32 %0,%2 
+    ?\tikzmarkWS{2}{code block 2}{11.5}{10}{3.5cm}?
+    ?\tikzmarkWS{1}{code block 1}{11.5}{3.5}{3.0cm}?
+    %2 = mul nsw i32 %0,2
+    %3 = add nsw i32 %0,%2 
 
-     ret i32 %3
+    ret i32 %3
     }
     
     define i32 @main() {
-     %1 = tail call i32 @f(i32 10)
-     ret i32 %1
+    %1 = tail call i32 @f(i32 10)
+    ret i32 %1
     }
     \end{lstlisting}
-    \end{minipage}\hfill%
-    \noindent\begin{minipage}[b]{.4\linewidth}
-    \vspace{-8cm}
+    \end{minipage}%\hfill%
+    \begin{minipage}[t]{.32\linewidth}
+        \begin{lstlisting}[xleftmargin=1em,escapechar=?]
+?Replacement candidates for code\_block\_1?
+
+`%2 = mul nsw i32 %0,2`
+
+!%2 = add nsw i32 %0,%0!
+
+!%2 = shl nsw i32 %0, 1:i32!
+    \end{lstlisting}
+    \end{minipage}%\hfill%
+    \begin{minipage}[t]{.32\linewidth}
         \lstdefinestyle{nccode}{
-          tabsize=4, 
-          showspaces=false,
-          breaklines=true, 
-          showstringspaces=false,
+        tabsize=4, 
+        showspaces=false,
+        breaklines=true, 
+        showstringspaces=false,
         moredelim=**[is][{\btHL[fill=black!10]}]{`}{`},
         moredelim=**[is][{\btHL[fill=celadon!40]}]{!}{!}
         }
@@ -76,17 +84,68 @@
             breaklines=true,
             belowcaptionskip=1pt,
             abovecaptionskip=1pt,
-        }
-        \vfill%
-        \begin{lstlisting}[label={ref:block1} ,name={A},escapechar=?]
-    ?\tikzmarkPROBE{5}{bb4}{-4}{10}? 
-    %2 = mul nsw i32 %0,2
-        \end{lstlisting}
+        } 
         \begin{lstlisting}[name={B},escapechar=?]
-    ?\tikzmarkPROBE{6}{bb4}{-4}{8}? 
-    %2 = mul nsw i32 %0,2
-    %3 = add nsw i32 %0,%2
+?Replacement candidates for code\_block\_2?
+
+`%3 = add nsw i32 %0,%2`
+
+!%3 = mul nsw %0, 3:i32!
         \end{lstlisting}
+    \end{minipage}
+    
+\end{code}
+
+
+
+
+
+\begin{code}
+    \centering
+    \captionof{lstlisting}{Candidate code replacements combination. Orange highlighted code illustrate replacement candidate overlapping.}\label{example:crow:original:combination}
+    \lstset{numbers=none}
+    \noindent\begin{minipage}[t]{.5\linewidth}
+    \begin{lstlisting}[xleftmargin=1em,escapechar=?]
+`%2 = mul nsw i32 %0,2`
+`%3 = add nsw i32 %0,%2`
+
+!%2 = add nsw i32 %0,%0!
+`%3 = add nsw i32 %0,%2`
+
+!%2 = shl nsw i32 %0, 1:i32!
+`%3 = add nsw i32 %0,%2`
+
+    \end{lstlisting}
+    \end{minipage}%\hfill%
+    \begin{minipage}[t]{.5\linewidth}
+        \lstdefinestyle{nccode}{
+        tabsize=4, 
+        showspaces=false,
+        breaklines=true, 
+        showstringspaces=false,
+        moredelim=**[is][{\btHL[fill=black!10]}]{`}{`},
+        moredelim=**[is][{\btHL[fill=celadon!40]}]{!}{!},
+        moredelim=**[is][{\btHL[fill=weborange!40]}]{'}{'}
+        }
+        \lstset{
+            language=LLVM,
+            style=nccode,
+            columns=fullflexible,
+            breaklines=true,
+            belowcaptionskip=1pt,
+            abovecaptionskip=1pt,
+        } 
+        \begin{lstlisting}[xleftmargin=1em,escapechar=?]
+'%2 = mul nsw i32 %0,2'
+!%3 = mul nsw %0, 3:i32!
+
+'%2 = add nsw i32 %0,%0'
+!%3 = mul nsw %0, 3:i32!
+
+'%2 = shl nsw i32 %0, 1:i32'
+!%3 = mul nsw %0, 3:i32!
+
+    \end{lstlisting}
     \end{minipage}
 \end{code}
 
@@ -99,9 +158,9 @@
 
 %\path (2.east) edge[<-, bend left, blue] (5.north);
 %\path (3.east) edge[<-, bend right, olive] (2.east);
-\path (1.east) edge[<-, bend right, black] (5.east);
-\path (2.east) edge[<-, bend right, black] (6.east);
-%\path (6.east) edge[<-, bend right, black] (3.east);
+%\path (1.east) edge[<-, bend left, black] (replall1.west);
+%\path (2.east) edge[<-, bend left, black] (replall2.west);
+%\path (rep11.east) edge[<-, bend left, black] (6.east);
 %\path (9.east) edge[<-, bend right, black] (4.east);
 %\path (7.east) edge[<-, bend right, black] (8.east);
 %\path (5.south) edge[<-, bend right, blue] (4.east);
@@ -114,3 +173,4 @@
 %\path (7) edge[<-, bend right] (6.east);
 %\path (8) edge[<-, bend right] (7.east);
 \end{tikzpicture}
+

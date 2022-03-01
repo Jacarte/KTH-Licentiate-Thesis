@@ -31,4 +31,8 @@ jobs:
 
          git add assets/pdf/Lic.pdf && git commit -m "Updating Lic document"
          
-         git push
+         git push https://$USERNAME:$REPO_KEY@github.com/Jacarte/jacarte.github.io.git
+         
+        env:
+          REPO_KEY: ${{secrets.REPO_KEY}}
+          USERNAME: github-actions[bot]

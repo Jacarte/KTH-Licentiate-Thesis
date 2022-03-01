@@ -1,17 +1,43 @@
 \Chapter{Variant's assessment}{RQ2. To what extent the generated variants are different ?} 
 
 
+\newcommand{\DTWStatic}{dt\_static\xspace}
+
 In this chapter, we investigate whether the artifically created variants are different. We propose a methodology to compare the program variants both statically and during runtime. Besides, we present a novel study on code preservation, demonstrating that the code transformations introduced by CROW are resilient to later compiling transformations during machine code generation. We evaluate the variant's assessment in both existing scenarios for \wasm, browsers and standalone engines.
 
-\section{Later compiler transformations}
+\section{Metrics}
 
-\wasm is an intermediate language, this means that compilers used it to produce machine code. For program variants, this means that compilers can undo artificial introduced transformations, for example, through optimization passes. When a code transformation is maintained from the first time it is introduced to the final machine code generation is  a preserved variant. 
+In this section we propose the metrics used along this chapter to answer RQ2. We define the metrics to compare an original program and its variants statically and during runtime. Besides, we proposed the metrics to compare program variants preservation.
+
+\subsubsection{Static}
+
+To measure the static difference between programs, we compare their bytecode instructions using a global alignment approach. In a previous work of us \cite{} we empirically demonstrated that programs semantic can be detected out of natural diversity. We compare the \wasm of each program and its variant using Dynamic Time Warping (DTW) \cite{Maia08usinga}. DTW computes the global alignment between two sequences. It returns a value capturing the cost of this alignment, which is actually a distance metric, called DTW. The larger the DTW distance, the more different the two sequences are.
+
+\begin{metric}{dt\_static:}\label{metric:static1}
+	Given two programs $P_X$ and $V_X$ written in $X$ code, dt\_static($P_X$, $V_X$), computes the DTW distance between the corresponding program instructions for representation $X$. A dt\_static($P_X$, $V_X$) of $0$ means that the code of both the original program and the variant  is the same, i.e., they are statically identical in the representation $X$. The higher the value of dt\_static, the more different the programs are in representation X. \\
+\end{metric}
+	
+
+
+\subsubsection{Program traces and execution times}
+
+We measure the difference between programs at runtime by evluating their execution trace, at function and instruction level. Also, we include the measuring of the execution time of the programs.
+
+\begin{metric}{DTW}
+
+\end{metric}
+
+\subsubsection{Variants preservation}
+
+The later metric is needed because \wasm is an intermediate language and compilers use it to produce machine code. For program variants, this means that compilers can undo artificial introduced transformations, for example, through optimization passes. When a code transformation is maintained from the first time it is introduced to the final machine code generation is  a preserved variant. 
 
 Part of the contributions of this thesis are our strategies to prevent reversion of code transformations. We take engineering decision regarding this in all the stages of the CROW workflow. First, we disable all optimizations inside CROW in the generation of the \wasm binaries. This prevents the LLVM toolchain used to remove some introduced transformations. However, the LLVM toolchain applies optimizations by default, such as constant folding or logical operations' normalization. As we illustrate previously, these are some transformations found and applied by CROW. We modified the LLVM backend for \wasm to avoid this reversion during the creation of Wasm binaries.
-
-\todo{Add link to repository here}
-
 This phenomenon is sometimes bypassed by diversification studies when they are conducted at high-level. As another contribution, we conduct a study on preservation for both scenarios where Wasm is used, browsers and standalone engines. In
+
+The final metric corresponds to the preservation study. We compare two programs to be different under the \wasm representation and under the machine code representation (x86) after they are compiled through several engines. The engines used are listed in \autoref{assesment:preservation:engines}. We only measure the difference in x86 after the \wasm code is compiled to the machine target. This decision is not arbitrary, according to the study of \cite{Paper on binary diff survey}, any conclusion carried out by comparing two program binaries under a specific target can be extrapolated to another target for the same binaries.
+
+\begin{metric}{Preservation}
+\end{metric}
 
 \begin{table}[h]
 	\begin{tabular}{p{2cm} | p{9cm} }
@@ -26,18 +52,11 @@ This phenomenon is sometimes bypassed by diversification studies when they are c
 	\label{assesment:preservation:engines}
 \end{table}
 
+The key property we consider is as follows: if \DTWStatic{}($P_{Wasm}$, $P_{Wasm}'$) $>$ 0 and \DTWStatic{}($P_{x86}$, $P_{x86}'$) $>$ 0, this means that  both programs are still different when compiled to machine code, and we conclude that V8's compiler does not remove the transformations made by CROW.  Notice that, this property only makes sense between variants of the same program (including the original).
 
-\section{Metrics}
+\section{Setup}
 
-\subsection{Static}
-
-\subsection{Dynamic}
-	\subsubsection{Trace based}
-	\subsubsection{Timing}
-
-\subsection{Preservation}
-\subsubsection{Browser based study (V8)}
-\subsubsection{Backend based study (wasmtime)}
+To answer RQ2 we use the same corpora proposed and evaluated in \autoref{chapter:generation}.
 
 \section{Evaluation}
 
