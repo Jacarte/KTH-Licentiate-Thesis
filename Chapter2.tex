@@ -21,8 +21,8 @@
 
 
 
-This chapter investigates whether we can artificially create program variants through semantically equivalent code transformations. Finally, we propose a framework to generate program variants functionally equivalent to their original.
-We propose retargeting a superoptimizer, using its exhaustive search strategy to provide semantically equivalent code transformations. 
+This chapter investigates whether we can artificially create program variants through semantically equivalent code transformations. We propose a framework to generate program variants functionally equivalent to their original.
+We introduce the retargeting of a superoptimizer, using its exhaustive search strategy to provide semantically equivalent code transformations. 
 The presented methodology and transformation tool, CROW, are contributions to this thesis.
 We evaluate the usage of CROW on two corpora of open-source and nature diverse programs. 
 
@@ -58,7 +58,7 @@ Figure \ref{diagrams:crow} highlights the main two stages of the CROW's workflow
     Applying $T$ to $P$ means replacing $B_1$ by $B_2$. The application of $T$ to $P$ produces a program variant $P'$ which consequently is functionally equivalent to $P$.     
 \end{definition}
 
-We implement the \emph{exploration} stage by retargeting a superoptimizer for  LLVM, using its subset of the LLVM intermediate representation. CROW operates at the code block level, taking them from the functions defined inside the input LLVM bitcode module. In addition, the retargeted superoptimizer is in charge of finding the potential places in the original code blocks where a replacement can be applied. 0Finally, we use the enumerative synthesis strategy of the retargeted superoptimizer to generate code replacements.
+We implement the \emph{exploration} stage by retargeting a superoptimizer for  LLVM, using its subset of the LLVM intermediate representation. CROW operates at the code block level, taking them from the functions defined inside the input LLVM bitcode module. In addition, the retargeted superoptimizer is in charge of finding the potential places in the original code blocks where a replacement can be applied. Finally, we use the enumerative synthesis strategy of the retargeted superoptimizer to generate code replacements.
 The code replacements generated through synthesis are verified, according to \autoref{def:functional-equivalence}, by internally using a theorem prover. 
 
 Moreover, we prevent the superoptimizer from synthesizing instructions that have no correspondence in \wasm for the sake of reducing the searching space for equivalent program variants. Besides, we disable all optimizations in the \wasm LLVM backend that could reverse the superoptimizer transformations, such as constant folding and instructions normalization.
@@ -66,7 +66,7 @@ Moreover, we prevent the superoptimizer from synthesizing instructions that have
 %\todo{We disable cost restrictions and the LLVM backend optimizations...maybe for the assesment RQ ?}
 
 In the \emph{combining} stage, CROW combines the candidate code replacements to generate different LLVM bitcode variants, selecting and merging the code replacements. 
-Then, a variant bitcode is compiled into a \wasm binary if requested. Finally, CROW generates the variants from all possible combinations of code replacements as the power set of all code replacements.  
+Then for each combination, a variant bitcode is compiled into a \wasm binary if requested. Finally, CROW generates the variants from all possible combinations of code replacements as the power set of all code replacements.  
 
 \subsection{Example}
 \label{section:crow:example}
@@ -79,7 +79,7 @@ Then, a variant bitcode is compiled into a \wasm binary if requested. Finally, C
 CROW, in the exploration stage detects 2 code blocks, \texttt{code\_block\_1} and \texttt{code\_block\_2} as the enclosing boxes in the left most part of \autoref{example:crow:original:llvm} show. CROW synthesizes $2 + 1$ candidate code replacements for each code block respectively as the green highlighted lines show in the right most parts of \autoref{example:crow:original:llvm}.
 The baseline strategy of CROW is to generate variants out of all possible combinations of the candidate code replacements, \ie uses the power set of all candidate code replacements.
 
-In the example, the power set is the cartesian product of the found candidate code replacements for each code block, including the original ones, as \autoref{example:crow:original:combination} shows. The power set size results in $6$ potential function variants. Yet, the generation stage would eventually generate $4$ variants from the original program. CROW generated 4 statically different Wasm files, as \autoref{example:crow:variants:wasm} illustrates. This gap between the potential and the actual number of variants is a consequence of the redundancy among the bitcode variants when composed into one. In other words, if the replaced code removes other code blocks, all possible combinations having it will be in the end the same program. In the example case, replacing \texttt{code\_block\_2} by \texttt{mul nsw \%0, 3}, turns \texttt{code\_block\_1} into dead code, thus, later replacements generate the same program variants. The rightmost part of \autoref{example:crow:original:combination} illustrates how for three different combinations, CROW produces the same variant. We call this phenomenon a candidate code replacement overlapping.
+In the example, the power set is the cartesian product of the found candidate code replacements for each code block, including the original ones, as \autoref{example:crow:original:combination} shows. The power set size results in $6$ potential function variants. Yet, the generation stage would eventually generate $4$ variants from the original program. CROW generated 4 statically different Wasm files, as \autoref{example:crow:variants:wasm} illustrates. This gap between the potential and the actual number of variants is a consequence of the redundancy among the bitcode variants when composed into one. In other words, if the replaced code removes other code blocks, all possible combinations having it will be in the end the same program. In the example case, replacing \texttt{code\_block\_2} by \texttt{mul nsw \%0, 3}, turns \texttt{code\_block\_1} into dead code, thus, later replacements generate the same program variants. The rightmost part of \autoref{example:crow:original:combination} illustrates how for three different combinations, CROW produces the same variant. We call this phenomenon an overlapping.
 
 One might think that a reasonable heuristic could be implemented to avoid such overlapping cases. Instead, we have found it easier and faster to generate the variants with the combination of the replacement and check their uniqueness after the program variant is compiled. This prevents us from having an expensive checking for overlapping inside the CROW code. Still, this phenomenon calls for later optimizations in future works.
 
@@ -89,12 +89,12 @@ One might think that a reasonable heuristic could be implemented to avoid such o
 \section{Evaluation}
 \label{section:crow:exp_setup}
 
-We use CROW; the tool described at \autoref{section:crow} to answer RQ1. This section describes the corpora of original programs that we pass to CROW for the sake of variants generation. Besides, we describe our metrics and finalize the section by discussing the results.
+We use CROW, the tool described at \autoref{section:crow}, to answer RQ1. This section describes the corpora of original programs that we pass to CROW for the sake of variants generation. Besides, we describe our metrics and finalize the section by discussing the results.
 
 \subsection{Corpora}
 \label{section:crow:corpora}
 
-We answer RQ1 with two corpora of programs appropriate for our experiments. The first corpus, \textbf{CROW prime}, is part of the CROW contribution \cite{}. The second corpus, \textbf{MEWE prime}, is part of the MEWE contribution \cite{}. In \autoref{table:corpora} we summarize the selection criteria, and we mention each corpus properties. With both corpora we evaluate CROW with a total of $303 + 7$ programs, containing $303 + \py{\allmewefunctions}$ functions. 
+We answer RQ1 with two corpora of programs appropriate for our experiments. The first corpus, \textbf{CROW prime}, is part of the CROW contribution \cite{}. The second corpus, \textbf{MEWE prime}, is part of the MEWE contribution \cite{}. In \autoref{table:corpora} we summarize the selection criteria, and we mention each corpus properties. With both corpora we evaluate CROW with a total of $303 + \py{\allmewefunctions}$ functions. 
 
 \subsection{Metric}
  
@@ -130,6 +130,8 @@ We compare the \wasm program and its variant using the \texttt{md5} hash of each
     \label{table:corpora}
 \end{table}
 
+\todo{Move text out of the table}
+
 
 
 \subsection{Setup}
@@ -155,26 +157,11 @@ These two configuration parameters allow the user to find a trade-off between th
     \label{table:corpora:setup}
 \end{table}
 
-% Move this to the next chapter, assesment
-%Since \wasm binaries are further transformed into machine code before they execute, we also check that this additional transformation preserves the difference introduces by CROW in the \wasm binary. We use the Turbofan ahead-of-time compiler of V8, with all its possible optimizations, to generate a x86 binary for each \wasm binary. Then, we compare the x86 version of each variant against the x86 binary corresponding to the original \wasm binary.
-
-% Replace DTW here by the sha comparison
-
-
-%Dynamic Time Warping (DTW)  \cite{Maia08usinga}. DTW computes the global alignment between two sequences. It returns a value capturing the cost of this alignment, which is actually a distance metric, called DTW. The larger the DTW distance, the more different the two sequences are. In our case, we compare the sequence of instructions of each variant with the initial program and the other variants. We obtain two DTW distance values for each program-variant pair: one at the level of \wasm code and the another one at the level of x86 code. \autoref{metric:static1} below defines these metrics.
-
-
-%\begin{metric}{Md5:}
-%    \label{metric:static1}
-%    Given a program $P$, its \texttt{md5} hash is the result of encoding its bytestream using the md5 algorithm.
-%\end{metric}
-
-
 \section{Results}
 
 We summarize the results in \autoref{table:crow:general_results}.
-CROW produces at least one unique program variant for $239/303{}$ programs for \textbf{CROW prime} with 1h for timeout. For the rest of the programs ($64/303{}$), the timeout is reached before CROW can find any valid variant. 
-In the case of \textbf{MEWE prime}, CROW produces variants for $\py{\allmewediversified}/\py{\allmewefunctions}$ original functions with 5 minutes per function as timeout. The rest of the programs resulted in timeout before finding function variants or produce no variants.
+CROW produces at least one unique program variant for $239/303{}$ single function programs for \textbf{CROW prime} with 1h for timeout. For the rest of the programs ($64/303{}$), the timeout is reached before CROW can find any valid variant. 
+In the case of \textbf{MEWE prime}, CROW produces variants for $\py{\allmewediversified}/\py{\allmewefunctions}$ functions with 5 minutes per function as timeout. The rest of the functions resulted in timeout before finding function variants or produce no variants.
 
 \input{tables/generation/result_static_diversity.tex}
 
@@ -205,7 +192,7 @@ We identify two main challenges for diversification.
 We manually analyzed the programs that yield more than 100 unique variants to study the critical properties of programs leveraging a high number of variants.
 This reveals one key reason that favors many unique variants: the programs include bounded loops. In these cases, CROW synthesizes variants for the loops by replacing them with a constant if the constant inferring is successful. Every time a loop constant is inferred, the loop body is replaced by a single instruction. This creates a new, statically different program. The number of variants grows exponentially if the function contains nested loops for which CROW can successfully infer. 
 
-A second key factor for synthesizing many variants relates to the presence of arithmetic. Souper, the synthesis engine used by CROW, effectively replaces arithmetic instructions with equivalent instructions that lead to the same result. For example, CROW generates unique variants by replacing multiplications with additions or shift left instructions (\autoref{add:example}). Also, logical comparisons are replaced, inverting the operation and the operands (\autoref{cmp:examples}). Besides, CROW can use overflow and underflow of integers to produce variants (\autoref{overflow:example}), using the intrinsics of underlying the computation model.
+A second key factor for synthesizing many variants relates to the presence of arithmetic. Souper, the synthesis engine used by CROW, effectively replaces arithmetic instructions with equivalent instructions that lead to the same result. For example, CROW generates unique variants by replacing multiplications with additions or shift left instructions (\autoref{add:example}). Also, logical comparisons are replaced, inverting the operation and the operands (\autoref{cmp:examples}). Besides, CROW can use overflow and underflow of integers to produce variants (\autoref{overflow:example}), using the intrinsics of the underlying computation model.
 
 {
 \begin{code}
