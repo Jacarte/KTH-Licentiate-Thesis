@@ -1,5 +1,390 @@
-\Chapter{Variant's application}{RQ3. To what extent the generated variants can be used in security vulnerable applications?} 
+\chapter{Results} 
 
-\section{Security MTD}
 
-\section{Reliability (CVE + fuzz) future work}
+% Define some numbers here for the autmation of the tables
+
+\newcommand{\diversifiedsodium}{89}
+\newcommand{\diversifiedqrcode}{130}
+\newcommand{\libpopulation}{2408}
+\newcommand{\qrpopulation}{4155}
+
+
+\newcommand{\allmewediversified}{\diversifiedsodium + \diversifiedqrcode}
+\newcommand{\allmewepopulation}{\libpopulation + \qrpopulation}
+
+\subsection{Example}
+\label{section:crow:example}
+ Let us illustrate how CROW works with the simple example code in \autoref{CExample}. The \texttt{f} function calculates the value of $2 * x + x$ where \texttt{x} is the input for the function.  CROW compiles this source code and generates the intermediate LLVM bitcode in the left most part of \autoref{example:crow:original:llvm}. CROW potentially finds two code blocks to look for variants, as the right-most part of \autoref{example:crow:original:llvm} shows.
+
+% snippet of code showing the detection of code blocks
+\input{snippets/llvm_code_blocks.tex}
+    
+
+CROW, in the exploration stage detects 2 code blocks, \texttt{code\_block\_1} and \texttt{code\_block\_2} as the enclosing boxes in the left most part of \autoref{example:crow:original:llvm} show. CROW synthesizes $2 + 1$ candidate code replacements for each code block respectively as the green highlighted lines show in the right most parts of \autoref{example:crow:original:llvm}.
+The baseline strategy of CROW is to generate variants out of all possible combinations of the candidate code replacements, \ie uses the power set of all candidate code replacements.
+
+In the example, the power set is the cartesian product of the found candidate code replacements for each code block, including the original ones, as \autoref{example:crow:original:combination} shows. The power set size results in $6$ potential function variants. Yet, the generation stage would eventually generate $4$ variants from the original program. CROW generated 4 statically different Wasm files, as \autoref{example:crow:variants:wasm} illustrates. This gap between the potential and the actual number of variants is a consequence of the redundancy among the bitcode variants when composed into one. In other words, if the replaced code removes other code blocks, all possible combinations having it will be in the end the same program. In the example case, replacing \texttt{code\_block\_2} by \texttt{mul nsw \%0, 3}, turns \texttt{code\_block\_1} into dead code, thus, later replacements generate the same program variants. The rightmost part of \autoref{example:crow:original:combination} illustrates how for three different combinations, CROW produces the same variant. We call this phenomenon an overlapping.
+
+One might think that a reasonable heuristic could be implemented to avoid such overlapping cases. Instead, we have found it easier and faster to generate the variants with the combination of the replacement and check their uniqueness after the program variant is compiled. This prevents us from having an expensive checking for overlapping inside the CROW code. Still, this phenomenon calls for later optimizations in future works.
+
+\input{snippets/wasm_codes.tex}
+
+
+
+
+\newcommand{\DTWStatic}{dt\_static\xspace}
+\newcommand{\DTW}{dt\_dyn\xspace}
+\newcommand{\tool}{CROW\xspace}
+
+In this chapter, we investigate to what extent the artifically created variants are different. We propose a methodology to compare the program variants both statically and during runtime. Besides, we present a novel study on code preservation, demonstrating that the code transformations introduced by CROW are resilient to later compiling transformations during machine code generation. We evaluate the variant's preservation in both existing scenarios for \wasm, browsers and standalone engines.
+
+\section{Metrics}
+
+In this section we propose the metrics used along this chapter to answer RQ2. We define the metrics to compare an original program and its variants statically and during runtime. Besides, we proposed the metrics to compare program variants preservation.
+
+\subsection{Static}
+
+To measure the static difference between programs, we compare their bytecode instructions using a global alignment approach. In a previous work of us  we empirically demonstrated that programs semantic can be detected out of its natural diversity \citationneeded. We compare the \wasm of each program and its variant using Dynamic Time Warping (DTW) \cite{Maia08usinga}. DTW computes the global alignment between two sequences. It returns a value capturing the cost of this alignment, which is actually a distance metric. The larger the DTW distance, the more different the two sequences are.
+
+\todo{Add and example here ?}
+
+\begin{metric}{dt\_static:}\label{metric:static1}
+	Given two programs $P_X$ and $V_X$ written in $X$ code, dt\_static($P_X$, $V_X$), computes the DTW distance between the corresponding program instructions for representation $X$. \\
+	
+	A dt\_static($P_X$, $V_X$) of $0$ means that the code of both the original program and the variant  is the same, i.e., they are statically identical in the representation $X$. The higher the value of dt\_static, the more different the programs are in representation X. \\
+
+	Notice that for comparing \wasm programs and its variants, the metric is the instantiation of \DTWStatic with $X=WebAssembly$.
+\end{metric}
+
+\subsection{Program traces and execution times}
+
+We measure the difference between programs at runtime by evaluating their execution trace, at function and instruction level. Also, we include the measuring of the execution time of the programs. Besides, we compare their execution times.
+
+\todo{Replace and explain the stack trace as stack operations}
+
+\begin{metric}{\DTW{}:}\label{metric:stack}
+	Given a program P, a \tool generated variant P' and $T$ a trace space ($T \in \{Function, Instruction \}$) \DTW{}(P,P',T), computes the DTW distance between the traces collected during their execution in the $T$ space. A \DTW{} of $0$ means that both traces are identical. \\ 
+	
+	The higher the value, the more different the traces. 
+\end{metric}
+
+
+\begin{metric}{Execution time:}\label{metric:time}
+	Given a \wasm program P, the execution time is the time spent to execute the binary.
+\end{metric}
+
+\subsection{Variants preservation}
+
+The last metric is needed because \wasm is an intermediate language and compilers use it to produce machine code. For program variants, this means that compilers can undo artificial introduced transformations, for example, through optimization passes. When a code transformation is maintained from the first time it is introduced to the final machine code generation is  a preserved variant. 
+
+Part of the contributions of this thesis are our strategies to prevent reversion of code transformations. We take engineering decision regarding this in all the stages of the CROW workflow. We disable all optimizations inside CROW in the generation of the \wasm binaries. This prevents the LLVM toolchain used to remove some introduced transformations. However, the LLVM toolchain applies optimizations by default, such as constant folding or logical operations' normalization. As we illustrate previously, these are some transformations found and applied by CROW. We modified the LLVM backend for \wasm to avoid this reversion during the creation of Wasm binaries.
+This phenomenon is sometimes bypassed by diversification studies when they are conducted at high-level. As another contribution, we conduct a study on preservation for both scenarios where Wasm is used, browsers and standalone engines. In
+
+The final metric corresponds to the preservation study. We compare two programs to be different under the \wasm representation and under the machine code representation after they are compiled through a collection of selected \wasm engines. We use two instances of \autoref{metric:static1} for two different code representations, \wasm and x86. The key property we consider is as follows: \\
+
+\begin{property}{Preservation:}
+	\label{property:preservation}
+	Given a program P and a \tool generated variant P', if \DTWStatic{}($P_{Wasm}$, $P_{Wasm}'$) $>$ 0 and \DTWStatic{}($P_{x86}$, $P_{x86}'$) $>$ 0 $\implies$  both programs are still different when compiled to machine code.
+	
+	If the property fits for two programs, then the underlying compiler does not remove the transformations made by \tool. Notice that, this property only makes sense between variants of the same program, including the original.
+\end{property}
+
+\todo{Improve this !}
+
+\begin{metric}{Preservation ratio}\label{metric:preservation}
+
+	Given a program P and a corpus of variants $V$ generated by \tool from P.\\
+
+	$$
+		preservation\_ratio = \frac{|v_1, v_2 \in V\cap\{P\}, \forall v_1,v_2\ ensuring\ {\autoref{property:preservation}}|}{|V\cap\{P\}|^2}
+	$$ \\
+
+	Notice that \autoref{metric:preservation} implies a pairwise comparison between all variants and the original program.
+\end{metric}
+
+We only take into account the x86 representation after the \wasm code is compiled to the machine code. 
+This decision is not arbitrary, according to the study of \todo{Paper on binary diff survey}, any conclusion carried out by comparing two program binaries under a specific target can be extrapolated to another target for the same binaries.
+
+%\section{Setup}
+
+\section{Evaluation}
+
+To answer RQ2 we use the same corpora proposed and evaluated in \autoref{chapter:generation}, \textbf{CROW prime} and \textbf{MEWE prime}. We analyze the variants generated in the RQ1 answering. \todo{Add the numbers here}
+
+% Static
+\subsection{Static comparison}
+For each function on the corpora, we compare the sequence of instructions of each variant with the initial program and the other variants. We obtain the \autoref{metric:static} values for each program-variant \wasm pair code. We compute the DTW distances with STRAC~\cite{Cabrera19}. 
+
+% Dynamic
+\subsection{Dynamic comparison}
+To compare program and variants behavior during runtime, we analyze all the unique program variants generated by \tool in a pairwise comparison. 
+We use SWAM\footnote{\url{https://github.com/satabin/swam}} to collect the function and instruction traces. SWAM is a \wasm interpreter that provides functionalities to capture the dynamic information of \wasm program executions including the stack operations. We compute the DTW distances with STRAC~\cite{Cabrera19}. 
+
+Furthermore, we collect the execution time, \autoref{metric:time}, for all programs and their variants. We execute each program or variant \todo{XXX} times and we compare the collected execution times using a Mann-Withney test \citationneeded.
+
+\subsection{Preservation}
+
+We collect \autoref{metric:preservation} for all programs and their generated variants. We use the engines listed in \autoref{assesment:preservation:engines}.
+
+\todo{ We can add the other binaries }
+
+\begin{table}[h]
+	\begin{tabular}{p{2cm} | p{9cm} }
+	%\hline
+	Name & Properties \\
+	\hline
+	V8 \citationneeded & V8  is the engine used by Chrome and NodeJS to execute JavaScript and \wasm. \todo{Explain compilation process} \\
+	\hline
+	wasmtime \citationneeded & Wasmtime is a standalone runtime for WebAssembly. This engine is used by the Fastly platform to provide Edge-Cloud computing services. \todo{Explain compilation process}  \\		
+	\end{tabular}
+	\caption{Wasm engines used during the diversification assessment study. The table is composed by the name of the engine and the description of the compilation process for them.}
+	\label{assesment:preservation:engines}
+\end{table}
+
+%\subsection{Setup}
+
+
+\section{Results}
+
+\section{Results}
+
+We summarize the results in \autoref{table:crow:general_results}.
+CROW produces at least one unique program variant for $239/303{}$ single function programs for \textbf{CROW prime} with 1h for timeout. For the rest of the programs ($64/303{}$), the timeout is reached before CROW can find any valid variant. 
+In the case of \textbf{MEWE prime}, CROW produces variants for $\py{\allmewediversified}/\py{\allmewefunctions}$ functions with 5 minutes per function as timeout. The rest of the functions resulted in timeout before finding function variants or produce no variants.
+
+\input{tables/generation/result_static_diversity.tex}
+
+
+\subsection{Challenges for automatic diversification}
+
+
+
+CROW generates variants for functions in both corpora. However, we have observed a remarkable difference between the number of successfully diversified functions versus the number of failed-to-diversify functions, as it can be appreciated in \autoref{table:crow:general_results}. CROW successfully diversified approx. 79 \% and \py{100*{\allmewediversified} / {\allmewefunctions}}\% of the original functions for \textbf{CROW prime} and  \textbf{MEWE prime} respectively. On the other hand, CROW generated more variants for \textbf{MEWE prime}, \py{\allmewepopulation} program variants for \py{\allmewediversified} diversified programs. Not surprisingly, setting the timeout affects the capacity of CROW for diversification. On the other hand, a low timeout for exploration gives CROW more power to combine code replacements. This can be appreciated in the last column of the table, where for a lower number of diversified functions, CROW created, overall, more variants.
+
+
+
+Moreover, we look at the cases that yield a few variants per function. There is no direct correlation between the number of identified codes for replacement and the number of unique variants. Therefore, we manually analyze programs that include many potential places for replacements, for which CROW generates few or no variants. 
+We identify two main challenges for diversification.
+
+\emph{1) Constant computation}  We have observed that Souper searches for a constant replacement for more than $45\%$ of the blocks of each function while constant values cannot be inferred. For instance,  constant values cannot be inferred for memory load operations because CROW is oblivious to a memory model. 
+
+%\todo{Add example here}
+
+% candidates overlapping
+\emph{2) Combination computation}  The overlap between code blocks, mentioned in \autoref{section:crow:example}, is a second factor that limits the number of unique variants. CROW can generate a high number of variants, but not all replacement combinations are necessarily unique. 
+
+%\todo{Add all the found examples here}
+
+
+\subsection{Properties for large diversification using CROW}
+
+We manually analyzed the programs that yield more than 100 unique variants to study the critical properties of programs leveraging a high number of variants.
+This reveals one key reason that favors many unique variants: the programs include bounded loops. In these cases, CROW synthesizes variants for the loops by replacing them with a constant if the constant inferring is successful. Every time a loop constant is inferred, the loop body is replaced by a single instruction. This creates a new, statically different program. The number of variants grows exponentially if the function contains nested loops for which CROW can successfully infer. 
+
+A second key factor for synthesizing many variants relates to the presence of arithmetic. Souper, the synthesis engine used by CROW, effectively replaces arithmetic instructions with equivalent instructions that lead to the same result. For example, CROW generates unique variants by replacing multiplications with additions or shift left instructions (\autoref{add:example}). Also, logical comparisons are replaced, inverting the operation and the operands (\autoref{cmp:examples}). Besides, CROW can use overflow and underflow of integers to produce variants (\autoref{overflow:example}), using the intrinsics of the underlying computation model.
+
+{
+\begin{code}
+    \footnotesize
+    \lstdefinestyle{nccode}{
+        numbers=none,
+        firstnumber=2,
+        stepnumber=1,
+        numbersep=10pt,
+        tabsize=4, 
+        showspaces=false,
+        breaklines=true, 
+        showstringspaces=false,
+        moredelim=**[is][\btHL]{`}{`},
+        moredelim=**[is][{\btHL[fill=black!10]}]{`}{`},
+        moredelim=**[is][{\btHL[fill=celadon!40]}]{!}{!}
+    }
+
+    \lstset{
+        language=WAT,
+        style=nccode,
+        basicstyle=\footnotesize\ttfamily,
+        columns=fullflexible,
+        breaklines=true
+    }
+    \noindent\begin{minipage}[b]{0.32\linewidth}
+        \captionof{lstlisting}{Diversification through arithmetic expression replacement.}\label{add:example}
+        \noindent\begin{minipage}[t]{0.46\linewidth}
+            \begin{lstlisting}
+local.get 0
+`i32.const 2`
+`i32.mul`
+            \end{lstlisting}
+        \end{minipage}%
+        \hfill\noindent\begin{minipage}[t]{0.46\linewidth}
+            
+            \begin{lstlisting}
+local.get 0
+!i32.const 1!
+!i32.shl!
+            \end{lstlisting}
+        \end{minipage}
+    \end{minipage}\hfill%
+    \begin{minipage}[b]{0.31\linewidth}
+        \captionof{lstlisting}{Diversification through inversion of comparison operations.}\label{cmp:examples}
+        \begin{minipage}[t]{.46\linewidth}
+            \begin{lstlisting}
+`local.get 0`
+`i32.const 10`
+`i32.gt_s`
+            \end{lstlisting}
+        \end{minipage}\hfill\begin{minipage}[t]{.46\linewidth}
+           
+            \begin{lstlisting}
+!i32.const 11!
+!local.get 0!
+!i32.le_s!
+            \end{lstlisting}
+        \end{minipage}%
+        
+        
+    \end{minipage}\hfill\noindent
+    \noindent\begin{minipage}[b]{0.32\linewidth}
+        \captionof{lstlisting}{Diversification through overflow of integer operands.}\label{overflow:example}
+        \noindent\begin{minipage}[t]{0.46\linewidth}
+            \begin{lstlisting}
+`i32.const 2`
+i32.mul
+\end{lstlisting}
+        \end{minipage}%
+        \hfill\noindent\begin{minipage}[t]{0.46\linewidth}
+            
+            \begin{lstlisting}
+i32.const 2
+i32.mul
+!i32.const -2147483647!
+!i32.mul!
+            \end{lstlisting}
+        \end{minipage}
+    \end{minipage}
+    \end{code}
+}
+
+% \input{parts/example_rq1_replacements}
+
+
+
+% \input{parts/example_rq1_babbage}
+
+
+%We now discuss the prevalence of the transformations made by CROW when the \wasm binaries are transformed to machine code, specifically with the V8's engine. In \autoref{fig:rq1} we plot the cumulative distribution of
+%\DTWStatic{}, comparing \wasm binaries (in blue) and x86 binaries (in orange). The figure plots  a total of 103003 \DTWStatic{} values for each representation, two values for each variant pair comparison (including original) for the 239 program.
+%The value on the y-axis shows which percentage of the total comparisons lie below the corresponding \DTWStatic{} value on the x-axis.
+%Since we measure the distances between original programs and \wasm variants, then $100\%$ of these  binaries have $\DTWStatic{}>0$.
+%Let us consider the x86 variants: \DTWStatic{} is strictly positive for \nPreservedPercent{} of variants. In all these cases, the V8 compilation phase does not undo the CROW diversification transformations.
+%Also, we see that there is a gap between both distributions, the main reason is the natural inflation of machine code. For example, two variants that differ by one single instruction in \wasm, can be translated to machine code where the difference is increased by more than one machine code instruction.
+
+% Negative prevalence
+%The zoomed subplot focuses on the beginning of the distribution, it shows that the \DTWStatic{} is zero for $0.52\%$ of the x86 binaries.
+%In these cases the V8 TurboFan compiler from \wasm to x86 reverts the CROW transformations.
+%We find that CROW produces at least one of these reversible transformations for $34/303Diversified{}$ programs.
+%\autoref{add:prevalence_example} shows one of the most common transformations that is reversed by TurboFan, according to our experiments.
+
+%Besides, local variables reordering and common subexpressions are cases that TurboFan reverses.
+%\input{parts/non-prevalence-example}
+
+
+
+
+\subsection{Variant properties}
+
+Regarding the potential size overhead of the generated variants, we have compared the \wasm binary size of the diversified programs with their variants. The ratio of size change between the original program and the variants ranges from 82\% (variants are smaller) to 125\% (variants are larger) for \textbf{CROW prime} and \textbf{MEWE prime}. This limited impact on the binary size of the variants is good news because they are meant to save bandwidth when they become assets to distribute over the network.
+
+\pagebreak
+\section{Conclusions}
+
+The proposed methodology can generate program variants that are syntactically different from their original versions. We have shown that CROW generates diversity among the binary code variants using semantically equivalent code transformations. We identified the properties that original programs should have to provide a handful number of variants. Besides, we enumerated the challenges faced to provide automatic diversification by retargeting a superoptimizer.
+
+In the next chapter, we evaluate the assessment of the generated variants answering to what extent the artificial programs are different from the original in terms of static difference, execution behavior, and preservation.
+
+
+\subsection{Static}
+\subsection{Dynamic}
+\subsection{Preservation}
+
+We translate each \wasm multivariant binary with Lucet, to determine the impact of this translation to machine code on the function variants and the diversity of paths in the multivariant call graph. 
+
+% Description of the table and general stats
+The 'x86 code' section of \autoref{table:CFG1} summarizes the key data to answer RQ2. Column \#Variants shows the number of preserved variants in the x86 code of each endpoint, column \#Paths shows the number of possible paths in the x86 multivariant binary. The last two columns show  the ratio of paths (PP) and variants (PV) preserved in x86. 
+Note that the path preservation ratio metric is a projection of the variant preservation and the call graph in the multivariant binary.
+
+ 
+% Previous works and why some functions have several preserved transformations
+In all cases, more than 77\% of the individual function variants present in the multivariant Wasm binary are preserved in the x86 multivariant. This high preservation rate for function variants allows to preserve a large ratio of possible paths in the multivariant call graph.
+In 4 out of 7 cases, more than 83\% of the possible execution paths in the multivariant Wasm  binary are preserved.
+The translation to machine code preserves 21\% and 17\% of the possible paths for \texttt{qr\_str} and \texttt{qr\_image}. Yet, the x86 version of the multiversion call graph for these endpoints still includes millions of possible paths, with 17 and 15 randomization points. The translation to machine drastically reduces the potential for randomized execution paths only for \texttt{bin2base64}, for which it preserves only 25\% of the possible paths, for a total of 41 paths.
+
+% Population's compression
+We have identified why some variants are not preserved the translation from Wasm to x86. Lucet performs optimization passes before generating machine code. 
+In some cases, this can annihilate the effect of CROW's diversification transformation. 
+For example, in \autoref{mul:prevalence_example}, CROW synthesizes a variant in the right column by splitting it in two  multiplications relying on the integer overflow mechanism. 
+A  constant merging optimization pass could remove the constant multiplications by performing it at compilation time. 
+The other transformation cases that we have observed have the same property, the transformations are simple enough to be quickly verified at compilation time.
+
+\lstset{
+    language=WAT,
+    style=WATStyle,
+    stepnumber=0,
+    label=EQExample}
+\begin{code}
+\noindent\begin{minipage}[b]{0.9\linewidth}
+    
+    \begin{minipage}[t]{0.45\linewidth}
+        \begin{lstlisting}
+; previous stack code;
+i32.const -10
+i32.mul
+        \end{lstlisting}
+    \end{minipage}%
+    \hfill\noindent\begin{minipage}[t]{0.45\linewidth}
+       
+        \begin{lstlisting}
+; previous stack code ;
+i32.const -1931544174
+i32.mul
+i32.const 109653155
+i32.mul
+        \end{lstlisting}
+    \end{minipage}
+    
+    %\noindent\rule{\linewidth}{0.4pt}
+    \captionof{lstlisting}{Two examples of block variants that are functionally equivalent and implement with different \wasm instructions. The variant on the left, generated by \tool, is not preserved through the translation to machine code.}\label{mul:prevalence_example}
+\end{minipage}
+\end{code}
+
+
+
+
+
+We identified where the optimizations are done in Lucet's compiler, \footnote{\url{https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/codegen/src/preopt.peepmatic} and \url{https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/codegen/src/postopt.rs}}. It performs optimization-like transformations that are simpler than the ones introduced by CROW. 
+With this result we also encourage to avoid the usage of the insertion of \texttt{nop} instructions either in Wasm or machine code. \texttt{nop} operations could be easily detected and removed by a latter optimization stage.
+
+
+
+Moreover, the last three endpoints have a path preservation ratio that is less than 0.25, even with more than 87\%  of individual function  variants that are preserved. This is explained by the fact that the number of possible paths is related to both the number of variants and to the complexity of the call graph.
+
+\todo{Add image}
+
+
+The example in \autoref{diag:preservation}  illustrates this phenomenon.
+Suppose an original binary composed of three functions with the call graph illustrated at the top of the figure. Here, we count 2 possible paths (one with no iteration, and one with a single iteration).
+\tool generates 2 variants for $f2$ and 4 variants for $f3$, the multivariant wasm call graph is illustrated at the center of the figure. The number of possible execution paths increases to 40.
+In the translation process, Lucet transforms the two \wasm function variants for $f2$ into the same x86 function.
+In this case, the number of possible execution paths in the x86 multivariant call graph is reduced by a factor of 2, from 40 to 20.
+However, the number of variants is decreased only in 1. 
+The complexity of the call graph has a major impact on the number of possible execution paths. 
+
+
+	The translation from \wasm to machine code through Lucet preserves a high ratio of function variants. This leads to the preservation of high numbers of possible execution paths in the multivariant binaries. 
+	Our multivariant execution scheme is appropriate for the state-of-the-art runtime of edge computing nodes.
+
+
+\section{Conclusions}
+
+%One chaper per RQ, turn chapter title into RQ
+%- chapter two, state of the art (RW), survey
