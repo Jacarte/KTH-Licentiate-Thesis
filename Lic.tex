@@ -179,18 +179,23 @@
 \newcommand{\done}[1]{%
 \noindent\textbf{\badgeg{DONE}} {\color{green}#1}
 }
+\newcommand{\citationneeded}{
+  \badget{[?]}
+}
 
 \newtheorem{definition}{Definition}
 \providecommand*{\definitionautorefname}{Definition}
 \newtheorem{metric}{Metric}
 \providecommand*{\metricautorefname}{Metric}
+
+\newtheorem{property}{Property}
+\providecommand*{\propertyautorefname}{Property}
+
 \hyphenation{Web-Assembly}
 
-\newcommand{\citationneeded}{\refstepcounter{todo}\badget{[?]}
+%\addcontentsline{td}{todo}
+%{\color{red}\thesection.\thetodo\xspace Citation needed}}
 
-
-\addcontentsline{td}{todo}
-{\color{red}\thesection.\thetodo\xspace Citation needed}}
 
 \makeatletter
 \lstset{
@@ -267,7 +272,7 @@
 %\section{RQN, usage}
 \input{Chapter2}
 \input{Chapter3}
-%\input{Chapter4}
+\input{Chapter4}
 %\input{Chapter5}
 
 \bibliographystyle{IEEEtran} % this is just an example, other styles can be used as well

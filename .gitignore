@@ -9,3 +9,7 @@ Lic.aux
 *.out
 *.lof
 chapter*.pdf
+out
+libsodium
+out_lib
+original_sodium
