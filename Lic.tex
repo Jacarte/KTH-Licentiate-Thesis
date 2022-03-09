@@ -1,4 +1,4 @@
-\documentclass[openany]{kthesis}
+\documentclass{kthesis}
 % the used packages are just examples, you can use your preferred packages instead
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
@@ -33,7 +33,6 @@
 %\usepackage{bm} % bold math
 %\usepackage{fmtcount}
 %\usepackage{booktabs}
-\usepackage{multirow}
 \usepackage{xspace}
 \usepackage{tikz}
 %\usepackage{algpseudocode}
@@ -52,10 +51,6 @@
 \newcommand{\wasm}{WebAssembly\xspace}
 \newcommand{\ie}{\textit{i.e.,}\xspace}
 \newcommand{\etal}{et al.\xspace}
-
-\newcommand\Chapter[2]{
-  \chapter[#1]{#1\\[2ex]\Large\itshape#2}
-}
 
 \newcommand*\badge[1]{ \colorbox{red}{\color{white}#1}}
 \newcommand*\badget[1]{\colorbox{red}{\color{white}#1}}
@@ -273,9 +268,9 @@
 \input{Chapter1}
 \input{Chapter2}
 \input{Chapter3}
-\input{Chapter4}
-\input{Chapter5}
-\input{Chapter6}
+%\input{Chapter4}
+%\input{Chapter5}
+%\input{Chapter6}
 %\input{Chapter5}
 
 \bibliographystyle{IEEEtran} % this is just an example, other styles can be used as well

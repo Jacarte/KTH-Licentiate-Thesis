@@ -1,0 +1,74 @@
+# This example demonstrates the ability to pass artifacts
+# from one step to the next.
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: dtw-compare-
+spec:
+  entrypoint: read-folders
+  parallelism: 6
+  templates:
+  - name: read-folders
+    steps:
+    - - name: read-input 
+        template: read-input-template
+    - - name: dtw-compare-
+        template: dtw-compare-wat-template
+        arguments:
+          parameters:
+          - name: folder
+            value: "{{item.folder}}"
+          - name: filter
+            value: "{{item.filter}}"
+        withParam: "{{steps.read-input.outputs.parameters.programs}}"
+  - name: read-input-template
+    inputs: 
+      artifacts:
+        - name: "crow_out"
+          path: /input.json
+          s3:
+            bucket: my-bucket
+            key:  /input.json
+    script:
+      image: ubuntu:latest
+      command: ['bash']
+      source: |
+        cat /input.json
+
+    outputs:
+      parameters:
+        - name: programs
+          valueFrom: 
+            path: "/input.json"
+  - name: dtw-compare-wat-template
+    inputs: 
+      parameters:
+      - name: folder
+      - name: filter
+      artifacts:
+        - name: "crow_out"
+          path: /crow_out
+          s3:
+            bucket: my-bucket
+            key:  /crow_out/{{inputs.parameters.folder}}
+      
+    outputs:
+      artifacts:
+      - name: unique
+        path: "/unique.txt"
+      - name: total
+        path: "/total.txt"
+
+    script:
+      image: ubuntu:latest
+      command: ['bash']
+      source: |
+        find /crow_out -name "{{inputs.parameters.filter}}" | wc -l > /unique.txt
+        find /crow_out -type f | wc -l > /total.txt
+
+    #outputs:
+    #parameters:
+    #  - name: programs
+    #    valueFrom: 
+    #      path: "/input.json"
+    

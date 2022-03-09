@@ -1,0 +1,124 @@
+# This example demonstrates the ability to pass artifacts
+# from one step to the next.
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: dtw-compare-
+spec:
+  entrypoint: read-folders
+  parallelism: 10
+  templates:
+  - name: read-folders
+    steps:
+    - - name: read-input 
+        template: read-input-template
+    - - name: dtw-compare-
+        template: dtw-compare-wat-template
+        arguments:
+          parameters:
+          - name: folder
+            value: "{{item.folder}}"
+          - name: filter
+            value: "{{item.filter}}"
+        withParam: "{{steps.read-input.outputs.parameters.programs}}"
+        continueOn:
+          failed: true
+    - - name: reduce
+        template: merge
+  - name: read-input-template
+    inputs: 
+      artifacts:
+        - name: "crow_out"
+          path: /input.json
+          s3:
+            bucket: my-bucket
+            key:  /input.json
+    script:
+      image: ubuntu:latest
+      command: ['bash']
+      source: |
+        cat /input.json
+
+    outputs:
+      parameters:
+        - name: programs
+          valueFrom: 
+            path: "/input.json"
+  - name: dtw-compare-wat-template
+    inputs: 
+      parameters:
+      - name: folder
+      - name: filter
+      artifacts:
+        - name: "crow_out"
+          path: /crow_out
+          s3:
+            bucket: my-bucket
+            key:  /crow_out/{{inputs.parameters.folder}}
+      
+    outputs:
+      artifacts:
+      - name: ratio
+        path: /results{{workflow.name}}/{{inputs.parameters.folder}}.json
+        archive:
+          # prevent compression
+          none: { }
+        s3:
+          key: /results{{workflow.name}}/{{inputs.parameters.folder}}.json
+
+    script:
+      image: ubuntu:latest
+      command: ['bash']
+      source: |
+        ls -R /crow_out
+        mkdir -p /results{{workflow.name}}
+        F="/results{{workflow.name}}/{{inputs.parameters.folder}}.json"
+
+        echo "{ \"total\": " >> $F
+        echo $(find /crow_out -name "{{inputs.parameters.filter}}" | wc -l) >> $F;
+        echo "," >> $F
+
+        echo "\"unique\": " >> $F
+        echo $( md5sum /crow_out/crow_out/{{inputs.parameters.folder}}/{{inputs.parameters.filter}} | sort -k1 |  cut -d' ' -f1 | uniq -c | wc -l ) >> $F;
+
+        echo "}" >> $F
+
+  - name: merge
+    inputs:
+      artifacts:
+        - name: results
+          path: /mnt/in
+          s3:
+            key: "/results{{workflow.name}}"
+    script:
+      image: python:alpine3.6
+      command: 
+          - python
+      source: |
+        import json
+        import os
+        import sys
+        total = 0
+        os.mkdir("/mnt/out")
+        OVERALL = {}
+        for f in os.listdir("/mnt/in/results{{workflow.name}}"):
+          print(f)
+          result = json.loads(open(f"/mnt/in/results{{workflow.name}}/{f}", "r").read())
+          OVERALL[f]=result
+        with open("/mnt/out/total.json" , "w") as f:
+          json.dump(OVERALL, f)
+    outputs:
+      artifacts:
+        - name: overall
+          path: /mnt/out/total.json
+          archive:
+            none: { }
+          s3:
+            key: "{{workflow.name}}/total.json"
+
+    #outputs:
+    #parameters:
+    #  - name: programs
+    #    valueFrom: 
+    #      path: "/input.json"
+    

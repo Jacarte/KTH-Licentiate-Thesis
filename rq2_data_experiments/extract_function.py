@@ -9,6 +9,9 @@ import hashlib
 
 function_name = re.compile(r"@(.+)\(")
 variantre = re.compile(r"((_\d+_$)|_original$|\.\d+$)")
+variantre = re.compile(r"((_\d+_$)|_original$|\.\d+$)")
+
+functionbodyre = re.compile(r"BeginFunctionBody\((\d+), size:(\d+)\)")
 
 hex_function = re.compile(r"_wasm_function_\d+")
 hex_trampoline = re.compile(r"_trampoline_\d+")
@@ -84,14 +87,14 @@ def sort_and_fix_hex_code(hex):
     return "\n".join(result).encode()
 
 def convert_to_machine_code_wasmtime(wasmfile):
-    print("Generating machine code with wasmtime", wasmfile)
-    print(" ".join([
-        os.environ.get("WASMTIME", None),
-        "compile",
-        "-o",
-        f"{wasmfile}.wasmtime.x86",
-        wasmfile
-    ]))
+    #print("Generating machine code with wasmtime", wasmfile)
+    #print(" ".join([
+    #    os.environ.get("WASMTIME", None),
+    #    "compile",
+    #    "-o",
+    #    f"{wasmfile}.wasmtime.x86",
+    #    wasmfile
+    #]))
 
     subprocess.check_output([
         os.environ.get("WASMTIME", None),
@@ -124,22 +127,26 @@ def process_wasm(wasmfile):
 
     md5wasm = hashlib.md5(open(wasmfile, 'rb').read())
     md5wasm = md5wasm.hexdigest()
-    subprocess.check_output([
+    out = subprocess.check_output([
         os.environ['WASM2WAT'],
         wasmfile,
         '-o',
-        f"{wasmfile}.wat"
-    ])
+        f"{wasmfile}.wat",
+        "--verbose"
+    ], stderr=subprocess.STDOUT)
 
+    functions = functionbodyre.findall(out.decode())
+    functions = [ dict(id=int(id), size=int(size)) for id, size in functions ]
+    # print(functions)
     wasmtime_code = convert_to_machine_code_wasmtime(wasmfile)
     # TODO add V8 here
     
-    return md5wasm, f"{wasmfile}.wat", dict(wasmtime=wasmtime_code)
+    return md5wasm, f"{wasmfile}.wat",functions, dict(wasmtime=wasmtime_code)
 
 
 def process_bitcode(bc):
     try:
-        print("bitcode", bc)
+        #print("bitcode", bc)
         # create the ll content
         subprocess.check_output([
             'llvm-dis',
@@ -185,14 +192,32 @@ def process_bitcode(bc):
                 print("Could not extract function name")
                 return None
             
-            #sanitized = functions[0]
-            #sanitized = sanitized.replace("_original", "")
+            # Get defined name
+            names = subprocess.check_output([
+                'llvm-nm',
+                bc            ])
+            names = names.decode()
+            names = names.split("\n")
             
-            print(functions[0])
+
+            for l in names:
+                if "-- T" in l:
+                    names = l
+                    break
+
+            #print(names)
+            if "-- T" in names:
+                names = names[names.index("-- T") + 4:]
+            elif "-- U" in names:
+                names = names[names.index("-- U") + 4:]
+            names = names.strip()
+           
             # Compile to wasm 
             subprocess.check_output([
-                "wasm-ld",
+                # This is our changed backend
+                os.environ.get("WASMLD", None),
                 bc,
+                "-O0",
                 "--no-entry",
                 "--export-all",
                 "--allow-undefined",
@@ -201,8 +226,9 @@ def process_bitcode(bc):
             ])
 
             wasm_data = process_wasm(f"{bc}.wasm")
+            llvmlines = len(function_body.split("\n"))
 
-            return functions[0], function_body, f"{bc}.ll", bc, md5bc, f"{bc}.wasm", *wasm_data
+            return names, function_body, f"{bc}.ll", bc, md5bc, f"{bc}.wasm", llvmlines, *wasm_data
         except Exception as e:
             print(e, bc)
             return None
@@ -210,45 +236,14 @@ def process_bitcode(bc):
         print(e, bc)
         return None
 
-def do_splittiing(bitcode, limit=3):
-    """
-        The limit parameter specifies the number of times the llvm-split is called
-    """
 
-    queue = [bitcode]
-
-    def split(file, it):
-        print("splitting", file)
-        name = os.path.basename(file)
-        subprocess.check_output([
-            "llvm-split",
-            "-j=2",
-            f"-o={OUT}/{name}_{it}",
-            file
-        ])
-        return [ f"{OUT}/{f}" for f in os.listdir(OUT) if f.startswith(f"{name}_{it}")]
-    last = []
-    with ThreadPoolExecutor(8) as pool:
-        for it in range(limit):
-            print(it)
-
-            futures = []
-            last = []
-            while queue:
-                b = queue.pop()
-                print(b)
-                futures.append(pool.submit(split, b, it))
-            for f in futures:
-                splat = f.result()
-                print(splat)
-                queue += splat
-                last += splat
-    for f in os.listdir(OUT):
-        if f"{OUT}/{f}" not in last:
-            os.remove(f"{OUT}/{f}")
-
-def fix_names(file, realnames, wasmfile):
+def fix_names(file, realnames, wasmfile, remove_x=0):
     content = open(file, 'r').read()
+
+    lines = content.split("\n")
+    lines = lines[remove_x:]
+    content = "\n".join(lines)
+
     for f,r in realnames.items():
         content = content.replace(f, r)
 
@@ -263,50 +258,98 @@ def fix_names(file, realnames, wasmfile):
 def split_bitcode(bitcode, skipsplit=True):
     print("Splitting bitcode")
     
-    # Calls llvm-split with a large enough number to separate each function
+    def extract_llvm(bitcode, funcname, out):
+        subprocess.check_output([
+            "llvm-extract",
+            f"--func={funcname}",
+            f"-o={out}",
+            bitcode
+        ])
+        return out
+
+    # Calls llvm-extract on each function 
     if not skipsplit:
+        MEWE_STATS = os.environ.get("MEWE_STATS", None)
+
+        if MEWE_STATS is None:
+            print("MEWE_STATS bin not found")
+            exit(1)
         if os.path.exists(OUT):
             shutil.rmtree(OUT)
         
         os.mkdir(OUT)
         #do_splittiing(bitcode, limit=2)
-        subprocess.check_output([
-            "llvm-split",
-            "-j=3000",
-            f"-o={OUT}/a",
+        meta = subprocess.check_output([
+            MEWE_STATS,
             bitcode
         ])
+
+        meta = json.loads(meta.decode())
+        print("Declared", meta['declared'])
+        print("Defined", meta['defined'])
+
+        # Calling llvm-extract for each function name
+
+        FUNCTIONS_MAP = {}
+        COUNT = 1
+
+        with ThreadPoolExecutor(12) as pool:
+            futures = []
+            for funcname in meta['functions']:
+                futures.append(pool.submit(extract_llvm, bitcode, funcname, f"{OUT}/a{COUNT}.bc" ))
+                FUNCTIONS_MAP[COUNT] = funcname
+                COUNT += 1
+            
+            for i, job in enumerate(futures):
+                r = job.result()
+                sys.stdout.write(f"\r{i}/{meta['defined']} {r}                    ")
+            print()
+
+        
+        with open(f"function.maps.json", 'w') as jsonf:
+            json.dump(FUNCTIONS_MAP, jsonf, indent=4)
+        #exit(2)
 
     OVERALL = {
 
     }
     REALNAMES = {}
-    with ThreadPoolExecutor(8) as pool:
+    with ThreadPoolExecutor(12) as pool:
         futures = []
         files = os.listdir(OUT)
-        files = [f for f in files if not f.endswith(".wasm") and not f.endswith(".wat") and not f.endswith(".ll") and not f.endswith(".wasmtime.x86") and not f.endswith(".wasmtime.hex")]
+        files = [f for f in files if  f.endswith(".bc")]
         for functionbc in files:
             futures.append(pool.submit(process_bitcode, f"{OUT}/{functionbc}"))
-        for future in futures:
+        for i, future in enumerate(futures):
             r = future.result()
             if r:
-                name, body, llfile, bcfile, md5bc, wasmfile, wasmmd5, watfile, machine_code  = r
+                name, body, llfile, bcfile, md5bc, wasmfile, llvmlines, wasmmd5, watfile, wasmmeta, machine_code  = r
                 # Do name sanitization
                 sanitized = name
-                print(variantre.findall(sanitized))
+                #print(variantre.findall(sanitized))
+                sys.stdout.write(f"\r{i}/{len(futures)}                                                                ")
                 if variantre.findall(sanitized):
-                    print("Variant", sanitized)
+                    sys.stdout.write(f"\nVariant {sanitized}                                              ")
                     sanitized = re.sub(variantre, "", sanitized)
                 
+                if "call i32 @discriminate" in body:
+                    print("\nSkipping dispatcher")
+                    continue
+
                 if sanitized not in OVERALL:
                     OVERALL[sanitized] = dict(variants = [])
+                
                 REALNAMES[name] = sanitized
                 wasmfile, md5fix = fix_names(watfile,  REALNAMES, wasmfile )
+                bcfile, md5bc = fix_names(llfile,  REALNAMES, bcfile, remove_x=3)
+
                 OVERALL[sanitized]['variants'].append(dict(
                         name=name,
                         #body=body,
                         llfile=llfile,
                         bcfile=bcfile,
+                        function_wasm_stats=wasmmeta,
+                        llvmlines=llvmlines,
                         md5bc=md5bc,
                         wasmfile=wasmfile,
                         wasmmd5=md5fix,
@@ -321,6 +364,19 @@ def split_bitcode(bitcode, skipsplit=True):
         OVERALL[k]['COUNT'] = len(v['variants'])
         # Getting unique wasm files
         unique_wasm = [v['wasmmd5'] for v in v['variants']]
+        wasm_group = {  }
+        hex_group_wasmtime = {  }
+        for wasm in v['variants']:
+            if wasm['wasmmd5'] not in wasm_group:
+                wasm_group[wasm['wasmmd5']] = []
+
+            if getter(wasm, 'wasmtime', 'hexmd5') not in hex_group_wasmtime:
+                hex_group_wasmtime[getter(wasm, 'wasmtime', 'hexmd5')] = []
+
+            hex_group_wasmtime[getter(wasm, 'wasmtime', 'hexmd5')].append(getter(wasm, 'wasmtime', 'hex'))
+            wasm_group[wasm['wasmmd5']].append(wasm['watfile'])
+
+
         unique_wasm = set(unique_wasm)
         unique_wasm = len(unique_wasm)
         # Getting unique bc files
@@ -338,9 +394,10 @@ def split_bitcode(bitcode, skipsplit=True):
         OVERALL[k]['unique_bc'] = unique_bc
         OVERALL[k]['unique_wasmtime_hex'] = unique_wasmtime_hex
         OVERALL[k]['unique_wasm_ratio'] = 1.0*unique_wasm/len(v['variants'])
-        OVERALL[k]['unique_wasmtime_hex_ratio'] = 1.0*unique_wasmtime_hex/unique_wasm
+        OVERALL[k]['unique_wasmtime_hex_ratio'] = 1.0*unique_wasmtime_hex/(unique_wasm)
         OVERALL[k]['unique_bc_ratio'] = 1.0*unique_bc/len(v['variants'])
-
+        OVERALL[k]['wasm_groups'] = wasm_group
+        OVERALL[k][f"hex_groups_wasmtime"] = hex_group_wasmtime
     return OVERALL
 
 if __name__ == '__main__':
@@ -350,17 +407,27 @@ if __name__ == '__main__':
         if file.endswith(".bc"):
             print(file)
             massive = split_bitcode(f"{sys.argv[1]}/{file}")
+            
+            total = len(massive)
+            diversified_bc = len([v for k, v in massive.items() if v['COUNT'] > 1])
+            diversified = len([v for k, v in massive.items() if v['unique_wasm'] > 1])
+            population = sum([v['COUNT'] for k, v in massive.items()])
 
-            print("TOTAL functions", len(massive))
 
-            print("Diversified", len([v for k, v in massive.items() if v['COUNT'] > 1]))
-            print("Population", sum([v['COUNT'] for k, v in massive.items()]))
+            print("TOTAL functions", total)
+            print("Diversified_bc", diversified_bc)
+            print("Diversified", diversified)
+            print("Population", population)
 
             ks = [k for k, v in massive.items()]
             ks = sorted(ks)
             for k in ks:
                 print("\t", k)
 
+            massive['total_functions'] = total
+            massive['diversified_bc'] = diversified_bc 
+            massive['diversified'] = diversified 
+            massive['population'] = population
             with open(f"{file}.massive.json", 'w') as massivejson:
                 json.dump(massive, massivejson, indent=4)
             # Compile it to Wasm and copy as well
