@@ -1,0 +1,25 @@
+{
+    \renewcommand{\arraystretch}{1.6}
+\begin{table}[h]
+    \centering
+    %\setlength\minrowclearance{1.0pt}
+        \begin{tabular}[t]{ l | l | l | l | l }
+        CORPUS & \#Functions & \# Diversified & \# NonDiversified & \# Variants  \\
+        \hline   
+
+        \corpusrosetta & \fromjson{data/crow_corpus.json}{.[0].functions} & \textbf{239} & 64 & 1906    \\
+        \hline
+
+
+        \corpussodium & \libsodiumfunctions & \textbf{\diversifiedsodium} & \py{\libsodiumfunctions - \diversifiedsodium} & \libsodiumpopulation    \\
+        \hline
+
+        \corpusqrcode & \qrcodefunctions & \textbf{\diversifiedqrcode} & \py{\qrcodefunctions - \diversifiedqrcode} & \qrpopulation    \\
+
+
+        \end{tabular}
+    
+        \caption{General diversification results. The table is composed by the name of the corpus, the number of functions, the number of succesfully diversified functions, the number of non-diversified functions and the cumulative number of variants.}
+        \label{table:crow:general_results}
+\end{table}
+}

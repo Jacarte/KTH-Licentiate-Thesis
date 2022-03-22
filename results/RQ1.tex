@@ -1,0 +1,180 @@
+
+\section{\rqone}
+
+
+\newcommand{\diversifiedsodium}{85}
+\newcommand{\diversifiedqrcode}{32}
+\newcommand{\libsodiumpopulation}{4272}
+\newcommand{\qrpopulation}{6369}
+
+
+\newcommand{\allmewediversified}{\diversifiedsodium + \diversifiedqrcode}
+\newcommand{\allmewepopulation}{\libpopulation + \qrpopulation}
+
+As we \autoref{rq1:method}, our first research question measures the ability of CROW to generate \wasm program variants. We pass each function of the corpora listed in \autoref{table:corpora} to CROW, and we collect how many variants CROW generate for each function.
+This section is organized as follows. First we present the general results for \autoref{metric:md5sum} for each corpus. Second, we discuss the challenges and limitations attempting against the generation of program variants. Third, we enumerate and highlight properties of code that leverage more program variants in CROW. Finally, we illustrate most common code transformations performed by CROW and we answer RQ1.
+
+\subsection{General results}
+
+We summarize the results in \autoref{table:crow:general_results}.
+CROW produces at least one unique program variant for $239/303{}$ single function programs for \corpusrosetta with 1h for timeout. For the rest of the programs ($64/303{}$), the timeout is reached before CROW can find any valid variant. 
+In the case of \corpussodium and \corpusqrcode, CROW produces variants for $\py{\diversifiedsodium}/\py{\libsodiumfunctions}$ and $\py{\diversifiedqrcode}/\py{\qrcodefunctions}$ functions respectively, with 5 minutes per function as timeout. The rest of the functions resulted in timeout before finding function variants or produce no variants.
+
+Regarding the potential size overhead of the generated variants, we have compared the \wasm binary size of the diversified programs with their variants. The ratio of size change between the original program and the variants ranges from 82\% (variants are smaller) to 125\% (variants are larger) for \corpusrosetta, \corpussodium and \corpusqrcode. This limited impact on the binary size of the variants is good news because they are meant to save bandwidth when they become assets to distribute over the network.
+
+\input{results/result_static_diversity.tex}
+
+\subsection{Challenges for automatic diversification with CROW}
+
+
+
+CROW generates variants for functions in three corpora. However, we have observed a remarkable difference between the number of successfully diversified functions versus the number of failed-to-diversify functions, as it can be appreciated in \autoref{table:crow:general_results}. CROW successfully diversified approx. 79 \%, \py{100*{\diversifiedsodium} / {\libsodiumfunctions}}\% and \py{100*{\diversifiedqrcode} / {\qrcodefunctions}}\% of the original functions for \corpusrosetta, \corpussodium and \corpusqrcode respectively. On the other hand, CROW generated more variants for \corpusqrcode, \py{\qrpopulation} program variants for \py{\diversifiedqrcode} diversified functions. 
+
+Not surprisingly, setting up the timeout affects the capacity of CROW for diversification. On the other hand, a low timeout for exploration gives CROW more power to combine code replacements. This can be appreciated in the last column of the table, where for a lower number of diversified functions, CROW created, overall, more variants.
+
+Moreover, we look at the cases that yield a few variants per function. There is no direct correlation between the number of identified codes for replacement and the number of unique variants. Therefore, we manually analyze programs that include many potential places for replacements, for which CROW generates few or no variants. 
+We identify two main challenges for diversification.
+
+\emph{1) Constant computation}  We have observed that Souper searches for a constant replacement for more than $45\%$ of the blocks of each function while constant values cannot be inferred. For instance,  constant values cannot be inferred for memory load operations because CROW is oblivious to a memory model. 
+
+%\todo{Add example here}
+
+% candidates overlapping
+\emph{2) Combination computation}  The overlap between code blocks, is a second factor that limits the number of unique variants. CROW can generate a high number of variants, but not all replacement combinations are necessarily unique. We identify this phenomenon as the principal cause for low diversification in CROW. 
+%\todo{Add all the found examples here}
+
+
+\subsection{Properties for large diversification using CROW}
+
+We manually analyzed the programs that yield more than 100 unique variants to study the critical properties of programs leveraging a high number of variants.
+This reveals one key reason that favors many unique variants: the programs include bounded loops. In these cases, CROW synthesizes variants for the loops by replacing them with a constant if the constant inferring is successful. Every time a loop constant is inferred, the loop body is replaced by a single instruction. This creates a new, statically different program. The number of variants grows exponentially if the function contains nested loops for which CROW can successfully infer. 
+
+A second key factor for synthesizing many variants relates to the presence of arithmetic. Souper, the synthesis engine used by CROW, effectively replaces arithmetic instructions with equivalent instructions that lead to the same result. For example, CROW generates unique variants by replacing multiplications with additions or shift left instructions (\autoref{add:example}). Also, logical comparisons are replaced, inverting the operation and the operands (\autoref{cmp:examples}). Besides, CROW can use overflow and underflow of integers to produce variants (\autoref{overflow:example}), using the intrinsics of the underlying computation model.
+
+{
+\begin{code}
+    \footnotesize
+    \lstdefinestyle{nccode}{
+        numbers=none,
+        firstnumber=2,
+        stepnumber=1,
+        numbersep=10pt,
+        tabsize=4, 
+        showspaces=false,
+        breaklines=true, 
+        showstringspaces=false,
+        moredelim=**[is][\btHL]{`}{`},
+        moredelim=**[is][{\btHL[fill=black!10]}]{`}{`},
+        moredelim=**[is][{\btHL[fill=celadon!40]}]{!}{!}
+    }
+
+    \lstset{
+        language=WAT,
+        style=nccode,
+        basicstyle=\footnotesize\ttfamily,
+        columns=fullflexible,
+        breaklines=true
+    }
+    \noindent\begin{minipage}[b]{0.32\linewidth}
+        \captionof{lstlisting}{Diversification through arithmetic expression replacement.}\label{add:example}
+        \noindent\begin{minipage}[t]{0.46\linewidth}
+            \begin{lstlisting}
+local.get 0
+`i32.const 2`
+`i32.mul`
+            \end{lstlisting}
+        \end{minipage}%
+        \hfill\noindent\begin{minipage}[t]{0.46\linewidth}
+            
+            \begin{lstlisting}
+local.get 0
+!i32.const 1!
+!i32.shl!
+            \end{lstlisting}
+        \end{minipage}
+    \end{minipage}\hfill%
+    \begin{minipage}[b]{0.31\linewidth}
+        \captionof{lstlisting}{Diversification through inversion of comparison operations.}\label{cmp:examples}
+        \begin{minipage}[t]{.46\linewidth}
+            \begin{lstlisting}
+`local.get 0`
+`i32.const 10`
+`i32.gt_s`
+            \end{lstlisting}
+        \end{minipage}\hfill\begin{minipage}[t]{.46\linewidth}
+           
+            \begin{lstlisting}
+!i32.const 11!
+!local.get 0!
+!i32.le_s!
+            \end{lstlisting}
+        \end{minipage}%
+        
+        
+    \end{minipage}\hfill\noindent
+    \noindent\begin{minipage}[b]{0.32\linewidth}
+        \captionof{lstlisting}{Diversification through overflow of integer operands.}\label{overflow:example}
+        \noindent\begin{minipage}[t]{0.46\linewidth}
+            \begin{lstlisting}
+`i32.const 2`
+i32.mul
+\end{lstlisting}
+        \end{minipage}%
+        \hfill\noindent\begin{minipage}[t]{0.46\linewidth}
+            
+            \begin{lstlisting}
+i32.const 2
+i32.mul
+!i32.const -2147483647!
+!i32.mul!
+            \end{lstlisting}
+        \end{minipage}
+    \end{minipage}
+    \end{code}
+}
+
+% \input{parts/example_rq1_replacements}
+
+
+
+% \input{parts/example_rq1_babbage}
+
+
+%We now discuss the prevalence of the transformations made by CROW when the \wasm binaries are transformed to machine code, specifically with the V8's engine. In \autoref{fig:rq1} we plot the cumulative distribution of
+%\DTWStatic{}, comparing \wasm binaries (in blue) and x86 binaries (in orange). The figure plots  a total of 103003 \DTWStatic{} values for each representation, two values for each variant pair comparison (including original) for the 239 program.
+%The value on the y-axis shows which percentage of the total comparisons lie below the corresponding \DTWStatic{} value on the x-axis.
+%Since we measure the distances between original programs and \wasm variants, then $100\%$ of these  binaries have $\DTWStatic{}>0$.
+%Let us consider the x86 variants: \DTWStatic{} is strictly positive for \nPreservedPercent{} of variants. In all these cases, the V8 compilation phase does not undo the CROW diversification transformations.
+%Also, we see that there is a gap between both distributions, the main reason is the natural inflation of machine code. For example, two variants that differ by one single instruction in \wasm, can be translated to machine code where the difference is increased by more than one machine code instruction.
+
+% Negative prevalence
+%The zoomed subplot focuses on the beginning of the distribution, it shows that the \DTWStatic{} is zero for $0.52\%$ of the x86 binaries.
+%In these cases the V8 TurboFan compiler from \wasm to x86 reverts the CROW transformations.
+%We find that CROW produces at least one of these reversible transformations for $34/303Diversified{}$ programs.
+%\autoref{add:prevalence_example} shows one of the most common transformations that is reversed by TurboFan, according to our experiments.
+
+%Besides, local variables reordering and common subexpressions are cases that TurboFan reverses.
+%\input{parts/non-prevalence-example}
+
+
+
+\section{Answer to RQ1.}
+
+With enough time CROW is able to provide more than 70\% of the study cases, for which the functions belong to a non-biased set or program categories. Even when CROW cannot diversify some functions due to timeout, the overall  number of created variants tripled the order of magnitude of the diversified functions. 
+
+While our work is very limited by the provided corpora, it can be easily extended to other\dots
+
+An application that benefits from the ablity of CROW is the larrge amount of generated variants. 
+
+
+- CHeckLong questions for 80%
+- Stress how to do experiments in Software Engineering, the theory behind how to do this in CS.
+- The objects of the experiments are programs that ... 
+- Motivate the corpora selection, size, can be ported, security sensitive, etc,
+- Do not mention CROW in the selection criteria.
+- The motivation is not related to tools, only to concepts
+- Move paragraph after listing of coprpora to before.
+- 
+%The proposed methodology can generate program variants that are syntactically different from their original versions. We have shown that CROW generates diversity among the binary code variants using semantically equivalent code transformations. We identified the properties that original programs should have to provide a handful number of variants. Besides, we enumerated the challenges faced to provide automatic diversification by retargeting a superoptimizer.
+
+%In the next chapter, we evaluate the assessment of the generated variants answering to what extent the artificial programs are different from the original in terms of static difference, execution behavior, and preservation.

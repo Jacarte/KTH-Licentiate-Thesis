@@ -1,4 +1,3 @@
-
 \chapter{Methodology} 
 \label{chapter:method}
 
@@ -27,18 +26,24 @@
 %The presented methodology and transformation tool, CROW, are contributions to this thesis.
 %We evaluate the usage of CROW on two corpora of open-source and nature diverse programs. 
 In this chapter, we present our methodology to answer the research questions enunciated in \autoref{chapter:introduction}.
-We investigate three research questions. 
-In the first question, we artificially generate \wasm program variant, and we qualitatively compare the ability of CROW, one of the contributions of this thesis, to generate statically different yet functionally equivalent variants. 
-Our second research question statically compares the generated variants and compares their behavior through traces, execution time, and preservation through the machine code compiling process.
+We investigate three research questions. In the first question, we artificially generate \wasm program variants, and we qualitatively compare the stati differences between variants. 
+Our second research question focuses on comparing their behavior during their execution.
 The final research question evaluates the feasibility of using the program variants in security-sensitive environments such as Edge-Cloud computing proposing a multivariant execution approach.
 
-
+The main objective of this thesis is to study the feasibility of automatically creating programs variant out of preexisting program sources or case studies. To achieve this goal,
+we use the empirical method \cite{}, proposing a solution and evaluating it through quantitative analyzes in case studies. We follow an iterative and incremental approach that start with the selection of program sources to be amplified through automated diversification. 
 We share the same corpora of programs to answer all our research questions. We first enunciate the corpora of programs. Then, for each research question, we establish the metrics, set the configuration for the experiments, and describe the protocol for them.
+
+
+% Our approach lies under \textit{Design Science} \cite{Runeson2020}, in terms of empirical validation, the scope of the design knowledge gained in a study can be extended by systematically extending the scope of the valudation in subsequent studies. Thus, the size of our corpora can be extended to increase the knowledge of the research area.
+
 
 \section{Corpora}
 \label{section:crow:corpora}
 
 Our experiments assess the impact of artificially created diversity. For such reason, the first step is to build a suitable corpus of programs to generate program variants. We then use the generated variants to study their static, dynamic, and security properties.  We answer all our research questions with three corpora of programs appropriate for our experiments. In \autoref{table:corpora} we listed the corpus name, the number of programs inside the corpus, the total number of functions, the range of lines of code, and the original location of the corpus. In the following, we describe the filtering and description of each corpus.
+
+We build our corpora in an escalating strategy. The first corpus should illustrate the feasibility of CROW to generate program variants out of simple programs in terms of code size. The latter two corpora study the impact of CROW on more extensive real-world programs, including one project meant for security-sensitive applications. Overall, all corpora are considered to come along the LLVM pipeline, having the input for CROW from C/C++ source code or LLVM bitcodes. We base this decision on the previous experimental work of Lehman \etal \citationneeded. This work shows that more than 70\% of all \wasm programs come out of LLVM based tooling.
 
 \begin{enumerate}
     \item \textbf{\corpusrosetta} corpus is part of the CROW contribution \cite{}. We take programs from the  Rosetta Code project\footnote{\url{http://www.rosettacode.org/wiki/Rosetta_Code}}. This website hosts a curated set of solutions for specific programming tasks in various  programming languages. It contains a wide range of tasks, from simple ones, such as adding two numbers, to complex algorithms like a compiler lexer.  We first collect all C programs from Rosetta Code, which represents $989$ programs as of 01/26/2020.  We then apply a number of filters: the programs should successfully compile, they should not require user inputs, the programs should terminate and should not provide in non-deterministic results. The result of the filtering is a corpus of 303 C programs. All programs have a single function in terms of source code. These programs range from $7$ to $150$ lines of code and solve a variety of problems, from the \textit{Babbage} problem to  \textit{Convex Hull} calculation.
@@ -48,7 +53,6 @@ Our experiments assess the impact of artificially created diversity. For such re
     \item \textbf{\corpusqrcode} is part of the MEWE contribution. This project is a QrCode and MicroQrCode generator written in Rust. We selected 2 programs or endpoints to answer our research questions. These endpoints have between $4$ and $725$ lines of code per function. As \corpussodium, we select this project due to its suitability for diversity synthesis with CROW.
 \end{enumerate}
 
-We build our corpora in an escalating strategy. The first corpus should illustrate the feasibility of CROW to generate program variants out of simple programs in terms of code size. The latter two corpora study the impact of CROW on more extensive real-world programs, including one project meant for security-sensitive applications. Overall, all corpora are considered to come along the LLVM pipeline, having the input for CROW from C/C++ source code or LLVM bitcodes. We base this decision on the previous experimental work of Lehman \etal \citationneeded. This work shows that more than 70\% of all \wasm programs come out of LLVM based tooling.
 
 %The first corpus, \textbf{CROW prime}, . The second corpus, \textbf{MEWE prime}, is part of the MEWE contribution \cite{}. In \autoref{table:corpora} we summarize the selection criteria, and we mention each corpus properties. With both corpora we evaluate CROW with a total of $303 + \py{\allmewefunctions}$ functions. 
 
@@ -97,3 +101,9 @@ We build our corpora in an escalating strategy. The first corpus should illustra
 \input{method/RQ2.tex}
 
 \input{method/RQ3.tex}
+
+
+
+\section{Conclusions}
+
+This chapter presents the methodology we follow to answer our three research questions. We first describe and propose the corpora of programs used in this work. We propose to measure the ability of CROW to generate variants out of \py{303  + \libsodiumfunctions + \qrcodefunctions} functions of our corpora. Then, we suggest using the generated variants to study to what extent they offer different observable behavior through  dynamic analysis. Finally, we propose a protocol to study the impact of the composition variants in a multivariant binary deployed at the Edge. Nevertheless, we enumerate and enunciate the properties and metrics that might lead us to answer the impact of automatic diversification for \wasm programs. In the next chapter, we present and discuss the results obtained with this methodology.

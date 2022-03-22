@@ -15,14 +15,6 @@
 %\usepackage{amssymb}
 %\usepackage{amsmath}
 \usepackage{graphicx}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=black
-}
 \usepackage{caption}
 \usepackage{listings}
 \usepackage{newfloat}
@@ -40,9 +32,24 @@
 \usepackage{algorithm2e}
 %\usepackage{url}
 %\usepackage{cite}
-
+\usepackage{hyperref}
 \usepackage[singlelinecheck=off]{caption}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+%\usepackage[sorting=none, backend=bibtex]{biblatex}
 
+%% For autorefname
+\addto\extrasenglish{%
+  \renewcommand{\sectionautorefname}{Section}
+  \renewcommand{\chapterautorefname}{Chapter}
+  \renewcommand{\subsubsectionautorefname}{Subsection}
+  \renewcommand{\subsectionautorefname}{Subsection}
+}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg,.eps}
 
 \DeclareFloatingEnvironment[fileext=frm,placement={tph},name=Listing]{code}
@@ -229,6 +236,7 @@
   showstringspaces=true,
 }
 
+
 \input{tikz_probes.tex}
 \input{Lic-bibl}
 \begin{document}
@@ -268,7 +276,7 @@
 \input{Chapter1}
 \input{Chapter2}
 \input{Chapter3}
-%\input{Chapter4}
+\input{Chapter4}
 %\input{Chapter5}
 %\input{Chapter6}
 %\input{Chapter5}

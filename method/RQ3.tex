@@ -1,5 +1,5 @@
 
-\section{RQ3. To what extent can the artificially generated variants be used to enforce security on Edge-Cloud platforms?}
+\section{\rqthree}
 
 \newcommand{\mewe}{MEWE\xspace}
 
@@ -76,8 +76,3 @@ This process is followed until 100 traces are collected from all edge nodes.
 In addition, we collect 100k execution times for each binary, both the original and multivariant binaries.
 We perform a Mann-Withney U test \cite{mann1947} to compare both execution time distributions. 
 If the P-value is lower than 0.05, two compared distributions are different.
-
-
-\section{Conclusions}
-
-This chapter presents the methodology we follow to answer our three research questions. We first describe and propose the corpora of programs used in this work. We propose to measure the ability of CROW to generate variants out of \py{303  + \libsodiumfunctions + \qrcodefunctions} functions of our corpora. Then, we suggest using the generated variants to study to what extent they offer different observable behavior through static analysis, dynamic analysis, and a variant's preservation study. Finally, we propose a protocol to study the impact of the composition variants in a multivariant binary deployed at the Edge. Nevertheless, we enumerate and enunciate the properties and metrics that might lead us to answer the impact of automatic diversification for \wasm programs. In the next chapter, we present and discuss the results obtained with this methodology.
