@@ -11,6 +11,7 @@ then
         fi
     done
 else 
+  git status --porcelain
   echo "Commit changes before doing this"
 fi
 
