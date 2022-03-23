@@ -13,7 +13,7 @@ In \autoref{diagrams:protocol:rq1} we simplify the workflow to generate \wasm pr
 \end{figure}
 
 
-\subsection{Metrics}
+\subsection*{Metrics}
 
 To assess our approach's ability to generate \wasm binaries that are statically different, we compute the number of unique variants for each original function of each corpus. 
 
@@ -28,7 +28,7 @@ To assess our approach's ability to generate \wasm binaries that are statically 
 
 A program and its variants compose what we call a program's population. Notice that all proposed metrics over programs and their variants make sense only at the population level. Therefore, we compare semantically equivalent programs, from the same population.
 
-\subsection{Protocol}
+\subsection*{Protocol}
 
 To generate program variants, we mainly synthesize program variants with an enumerative strategy, checking each synthesis for equivalence modulo input \cite{Li2018} against the original program. An enumerative synthesis is a brute-force approach to generate programs, with a maximum number of instructions it constructs and checks all possible programs up to that limit. For a simplified instance, with a maximum code size of 2 instructions in a programming language with $L$ possible constructions, an enumerative synthesizer builds all $L\times L$ combinations finding program variants. For obvious reasons, this space is nearly impossible to explore in a reasonable time as soon as the limit of instructions increases.
 Therefore, we use two parameters to control the size of the search space and hence the time required to traverse it.
@@ -37,4 +37,4 @@ On the one hand, one can limit the size of the variants. On the other hand, one 
 The former parameter allows us to find a trade-off between the number of variants that are synthesized and the time taken to produce them. For the current evaluation, given the size of the corpus and the properties of its programs, we set the exploration time to 1 hour maximum per function for \corpusrosetta. In the cases of \corpussodium\ and\ \corpusqrcode, we set the timeout to 5 minutes per function. The decision behind the usage of lower timeout for \corpussodium
 and \corpussodium is motivated by the properties listed in \autoref{table:corpora}. The latter two corpora are remarkably larger in terms of the number of instructions and functions count. 
 
-We pass each of the $303 + \libsodiumfunctions + \qrcodefunctions$ functions in the corpora to CROW, as \autoref{diagrams:protocol:rq1} illustrates, to synthesize program variants. We then calculate \autoref{metric:md5sum} for each program's population and conclude by answering RQ1.
+We pass each of the $303 + \libsodiumfunctions + \qrcodefunctions$ functions in the corpora to CROW, as \autoref{diagrams:protocol:rq1} illustrates, to synthesize program variants. Finally, we calculate \autoref{metric:md5sum} for each program's population and conclude by answering RQ1.

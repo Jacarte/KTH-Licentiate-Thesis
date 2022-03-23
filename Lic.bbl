@@ -42,4 +42,16 @@ J.~Li, B.~Zhao, and C.~Zhang, ``{Fuzzing: a survey},'' \emph{Cybersecurity},
   \url{https://cybersecurity.springeropen.com/articles/10.1186/s42400-018-0002-y}
 \BIBentrySTDinterwordspacing
 
+\bibitem{Maia08usinga}
+M.~D.~A. Maia, V.~Sobreira, K.~R. Paixão, R.~A.~D. Amo, and I.~R. Silva,
+  ``Using a sequence alignment algorithm to identify specific and common code
+  from execution traces,'' in \emph{Proceedings of the 4th International
+  Workshop on Program Comprehension through Dynamic Analysis (PCODA}, 2008, pp.
+  6--10.
+
+\bibitem{mann1947}
+H.~B. Mann and D.~R. Whitney, ``On a test of whether one of two random
+  variables is stochastically larger than the other,'' \emph{Ann. Math.
+  Statist.}, vol.~18, no.~1, pp. 50--60, 03 1947.
+
 \end{thebibliography}

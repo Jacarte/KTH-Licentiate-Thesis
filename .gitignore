@@ -17,3 +17,4 @@ out_qrcode
 Lic.blg
 Lic.out
 pythonlogs.txt
+*.synctex*

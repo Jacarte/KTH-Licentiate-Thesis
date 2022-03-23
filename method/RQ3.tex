@@ -18,7 +18,7 @@ In the last research question, we study whether the created variants can be used
 
 We assess the ability of multivariant binaries to exhibit random execution paths when executed on the edge. We check the diversity of execution traces gathered from the execution of a multivariant binary. The traces are collected from all edge nodes to assess Multivariant Execution (MVE) worldwide. Finally, we measure the differences for the execution times on the edge. Then, we discuss how multivariant binaries contribute to less predictable timing side-channels.
 
-\subsection{Metrics}
+\subsection*{Metrics}
 
 To compare the diversity of function traces, we enunciate the following metrics.  
 
@@ -46,7 +46,7 @@ Notice that we normalize the standard definition of the Shannon Entropy, \autore
 This normalization allows us to compare the calculated entropy between programs.
 The value of the metric can go from 0 to 1. The worst entropy, value 0, means that the program always exhibits the same path independently of the edge node and the number of times the trace is collected for the same node. On the contrary, 1 for the best entropy, when each edge node executes a different path every time the program is requested.
 
-\subsection{Protocol}
+\subsection*{Protocol}
 
 
 We run the experiments to answer RQ3 on the Edge. We deploy and execute the original and the multivariant binaries on 64 edge nodes located around the world\footnote{The number of nodes provided in the whole platform is 72, we decided to keep only the 64 nodes that remained stable during our experimentation.}.
