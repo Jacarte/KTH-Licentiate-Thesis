@@ -4,7 +4,7 @@ git clone https://github.com/Jacarte/jacarte.github.io.git $DIR/jacarte.github.i
 cp $1 $DIR/Lic.pdf
 
 
-python3 $DIR/split_document.py 
+python3 $DIR/split_document.py || exit 1
 
 mkdir -p $DIR/jacarte.github.io/assets/pdf/thesis/
 cp $DIR/chapter* $DIR/jacarte.github.io/assets/pdf/thesis/

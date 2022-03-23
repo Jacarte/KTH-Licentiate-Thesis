@@ -9,6 +9,7 @@ num = "intro"
 
 for i in range(inputpdf.numPages):
     output = PdfFileWriter()
+    print(i)
     content = inputpdf.getPage(i).extractText() + "\n"
     
     if content.startswith("Chapter"):
