@@ -1,6 +1,6 @@
 
 \section{\rqone}
-
+\label{results:rq1}
 
 \newcommand{\diversifiedsodium}{85}
 \newcommand{\diversifiedqrcode}{32}
@@ -11,45 +11,46 @@
 \newcommand{\allmewediversified}{\diversifiedsodium + \diversifiedqrcode}
 \newcommand{\allmewepopulation}{\libpopulation + \qrpopulation}
 
-As we \autoref{rq1:method}, our first research question measures the ability of CROW to generate \wasm program variants. We pass each function of the corpora listed in \autoref{table:corpora} to CROW, and we collect how many variants CROW generate for each function.
-This section is organized as follows. First we present the general results for \autoref{metric:md5sum} for each corpus. Second, we discuss the challenges and limitations attempting against the generation of program variants. Third, we enumerate and highlight properties of code that leverage more program variants in CROW. Finally, we illustrate most common code transformations performed by CROW and we answer RQ1.
+As we describe in \autoref{rq1:method}, our first research question aims to answer how to generate \wasm program variants. We pass each function of the corpora listed in \autoref{table:corpora} to CROW, and we collect how many variants CROW generate for each function.
+This section is organized as follows. First we present the general results for \autoref{metric:md5sum} for each corpus. Second, we discuss the challenges and limitations attempting against the generation of program variants. Third, we enumerate and highlight properties of code that leverage more program variants. Finally, we illustrate most common code transformations and, we answer RQ1.
 
 \subsection{General results}
 
 We summarize the results in \autoref{table:crow:general_results}.
-CROW produces at least one unique program variant for $239/303{}$ single function programs for \corpusrosetta with 1h for timeout. For the rest of the programs ($64/303{}$), the timeout is reached before CROW can find any valid variant. 
-In the case of \corpussodium and \corpusqrcode, CROW produces variants for $\py{\diversifiedsodium}/\py{\libsodiumfunctions}$ and $\py{\diversifiedqrcode}/\py{\qrcodefunctions}$ functions respectively, with 5 minutes per function as timeout. The rest of the functions resulted in timeout before finding function variants or produce no variants.
+We produce at least one unique program variant for $239/303{}$ single function programs for \corpusrosetta with 1h for timeout. For the rest of the programs ($64/303{}$), the timeout is reached before CROW can find any valid variant. 
+In the case of \corpussodium and \corpusqrcode, we produce variants for $\py{\diversifiedsodium}/\py{\libsodiumfunctions}$ and $\py{\diversifiedqrcode}/\py{\qrcodefunctions}$ functions respectively, with 5 minutes per function as timeout. The rest of the functions resulted in timeout before finding function variants or produce no variants.
 
 Regarding the potential size overhead of the generated variants, we have compared the \wasm binary size of the diversified programs with their variants. The ratio of size change between the original program and the variants ranges from 82\% (variants are smaller) to 125\% (variants are larger) for \corpusrosetta, \corpussodium and \corpusqrcode. This limited impact on the binary size of the variants is good news because they are meant to save bandwidth when they become assets to distribute over the network.
 
 \input{results/result_static_diversity.tex}
 
-\subsection{Challenges for automatic diversification with CROW}
+\subsection{Challenges for automatic diversification}
 
 
 
-CROW generates variants for functions in three corpora. However, we have observed a remarkable difference between the number of successfully diversified functions versus the number of failed-to-diversify functions, as it can be appreciated in \autoref{table:crow:general_results}. CROW successfully diversified approx. 79 \%, \py{100*{\diversifiedsodium} / {\libsodiumfunctions}}\% and \py{100*{\diversifiedqrcode} / {\qrcodefunctions}}\% of the original functions for \corpusrosetta, \corpussodium and \corpusqrcode respectively. On the other hand, CROW generated more variants for \corpusqrcode, \py{\qrpopulation} program variants for \py{\diversifiedqrcode} diversified functions. 
+We generate variants for functions in three corpora. However, we have observed a remarkable difference between the number of successfully diversified functions versus the number of failed-to-diversify functions, as it can be appreciated in \autoref{table:crow:general_results}. Our approach successfully diversified approx. 79 \%, \py{100*{\diversifiedsodium} / {\libsodiumfunctions}}\% and \py{100*{\diversifiedqrcode} / {\qrcodefunctions}}\% of the original functions for \corpusrosetta, \corpussodium and \corpusqrcode respectively. On the other hand, we generated more variants for \corpusqrcode, \py{\qrpopulation} program variants for \py{\diversifiedqrcode} diversified functions. 
 
-Not surprisingly, setting up the timeout affects the capacity of CROW for diversification. On the other hand, a low timeout for exploration gives CROW more power to combine code replacements. This can be appreciated in the last column of the table, where for a lower number of diversified functions, CROW created, overall, more variants.
+Not surprisingly, setting up the timeout affects the capacity for diversification. A low timeout for exploration gives our approach more power to combine code replacements. This can be appreciated in the last column of the table, where for a lower number of diversified functions, we create, overall, more variants.
 
-Moreover, we look at the cases that yield a few variants per function. There is no direct correlation between the number of identified codes for replacement and the number of unique variants. Therefore, we manually analyze programs that include many potential places for replacements, for which CROW generates few or no variants. 
+Moreover, we look at the cases that yield a few variants per function. There is no direct correlation between the number of identified codes for replacement and the number of unique variants. Therefore, we manually analyze programs that include many potential places for replacements, for which we generate few or no variants. 
 We identify two main challenges for diversification.
 
-\emph{1) Constant computation}  We have observed that Souper searches for a constant replacement for more than $45\%$ of the blocks of each function while constant values cannot be inferred. For instance,  constant values cannot be inferred for memory load operations because CROW is oblivious to a memory model. 
+\emph{1) Constant computation}  We have observed that our approach searches for a constant replacement for more than $45\%$ of the blocks of each function while constant values cannot be inferred. For instance,  constant values cannot be inferred for memory load operations because our tool is oblivious to a memory model. 
 
 %\todo{Add example here}
 
 % candidates overlapping
-\emph{2) Combination computation}  The overlap between code blocks, is a second factor that limits the number of unique variants. CROW can generate a high number of variants, but not all replacement combinations are necessarily unique. We identify this phenomenon as the principal cause for low diversification in CROW. 
+\emph{2) Combination computation}  The overlap between code blocks, is a second factor that limits the number of unique variants. We can generate a high number of variants, but not all replacement combinations are necessarily unique.
+
 %\todo{Add all the found examples here}
 
 
-\subsection{Properties for large diversification using CROW}
+\subsection{Properties for large diversification}
 
 We manually analyzed the programs that yield more than 100 unique variants to study the critical properties of programs leveraging a high number of variants.
-This reveals one key reason that favors many unique variants: the programs include bounded loops. In these cases, CROW synthesizes variants for the loops by replacing them with a constant if the constant inferring is successful. Every time a loop constant is inferred, the loop body is replaced by a single instruction. This creates a new, statically different program. The number of variants grows exponentially if the function contains nested loops for which CROW can successfully infer. 
+This reveals one key reason that favors many unique variants: the programs include bounded loops. In these cases, we synthesize variants for the loops by replacing them with a constant, if the constant inferring \cite{souper} is successful. Every time a loop constant is inferred, the loop body is replaced by a single instruction. This creates a new, statically different program. The number of variants grows exponentially if the function contains nested loops for which we can successfully infer constants. 
 
-A second key factor for synthesizing many variants relates to the presence of arithmetic. Souper, the synthesis engine used by CROW, effectively replaces arithmetic instructions with equivalent instructions that lead to the same result. For example, CROW generates unique variants by replacing multiplications with additions or shift left instructions (\autoref{add:example}). Also, logical comparisons are replaced, inverting the operation and the operands (\autoref{cmp:examples}). Besides, CROW can use overflow and underflow of integers to produce variants (\autoref{overflow:example}), using the intrinsics of the underlying computation model.
+A second key factor for synthesizing many variants relates to the presence of arithmetic. Souper, the synthesis engine used by our approach, effectively replaces arithmetic instructions with equivalent instructions that lead to the same result. For example, we generate unique variants by replacing multiplications with additions or shift left instructions (\autoref{add:example}). Also, logical comparisons are replaced, inverting the operation and the operands (\autoref{cmp:examples}). Besides, our implementation can use overflow and underflow of integers to produce variants (\autoref{overflow:example}), using the intrinsics of the underlying computation model.
 
 {
 \begin{code}
@@ -160,11 +161,14 @@ i32.mul
 
 \section{Answer to RQ1.}
 
-With enough time CROW is able to provide more than 70\% of the study cases, for which the functions belong to a non-biased set or program categories. Even when CROW cannot diversify some functions due to timeout, the overall  number of created variants tripled the order of magnitude of the diversified functions. 
+With enough time, we are able to provide diversification for more than 70\% of the study cases, for which the functions belong to a non-biased set or program categories. Even when we cannot diversify some functions due to timeout, the overall  number of created variants tripled the order of magnitude of the original functions count. 
+
+
+\begin{comment}
 
 While our work is very limited by the provided corpora, it can be easily extended to other\dots
 
-An application that benefits from the ablity of CROW is the larrge amount of generated variants. 
+An application that benefits from the ablity of CROW is the large amount of generated variants. 
 
 
 - CHeckLong questions for 80%
@@ -178,3 +182,5 @@ An application that benefits from the ablity of CROW is the larrge amount of gen
 %The proposed methodology can generate program variants that are syntactically different from their original versions. We have shown that CROW generates diversity among the binary code variants using semantically equivalent code transformations. We identified the properties that original programs should have to provide a handful number of variants. Besides, we enumerated the challenges faced to provide automatic diversification by retargeting a superoptimizer.
 
 %In the next chapter, we evaluate the assessment of the generated variants answering to what extent the artificial programs are different from the original in terms of static difference, execution behavior, and preservation.
+
+\end{comment}

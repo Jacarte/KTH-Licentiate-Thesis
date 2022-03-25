@@ -1,9 +1,8 @@
 
 \section{\rqthree}
+\label{rq3:method}
 
 \newcommand{\mewe}{MEWE\xspace}
-
-
 
 In the last research question, we study whether the created variants can be used in real-world applications and what properties offer the composition of the variants as multivariant execution binaries. For this purpose, we build multivariant binaries to be deployed at the Edge. We use the variants generated for the programs of the \corpussodium and \corpusqrcode corpora, $2 + 5$ programs involving $ \libsodiumfunctions + \qrcodefunctions$ functions respectively. For this research question, 7 Multivariant binaries are created by converting each program's population of variants into a single function for which each call at runtime selects and executes a different variant. We illustrates the protocol to answer RQ3 in \autoref{diagrams:protocol:rq3}.
 
@@ -60,7 +59,7 @@ The inputs that we pass to execute the programs at the edge and the received out
 For each query, we collect the execution trace, i.e.,  the sequence of function names that have been executed when triggering the query.
 We instrument the multivariant binaries to record each function entrance to observe these traces.
 
-We measure the number of unique execution traces exhibited by each multivariant binary, \autoref{metric:ratio:mve}, on each separate edge node. to compare the traces, we hash them with the \texttt{md5sum} function.
+We measure the number of unique execution traces exhibited by each multivariant binary, \autoref{metric:ratio:mve}, on each separate edge node. To compare the traces, we hash them with the \texttt{md5sum} function.
 We calculate the number of unique hashes among the 100 traces collected for a program on one edge node.
 We follow by collecting the normalized Shannon entropy, \autoref{metric:entropy}, for all collected execution traces for each program.
 The Shannon Entropy gives the uncertainty in the outcome of a sampling process.

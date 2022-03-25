@@ -1,10 +1,14 @@
 
 \section{\rqtwo}
+\label{rq2:method}
 
 In this second research question, we investigate to what extent the artificially created variants are dynamically different between them and to the original program. To conduct this research question, we could separate the question in three fields as \autoref{diagrams:protocol:rq2} illustrates: static comparison, variant's preservation and  dynamic comparison. %The three fields are addressed in the CROW and MEWE contributions.
-The static analysis focuses on the appreciated differences between the program variants between them and against the original program and it is addressed in the answering of RQ1. The preservation study highlight the fact that \wasm still is an intermediate code and compilers can undo code transformations from previous stages, therefore, it is important to conduct a study on how this transformations are maintained through \wasm programs' lifecycle, from their creation to the machine code execution. The preservation study is out of the scope of this work and it was previously addressed in CROW and MEWE contributions.
+The static analysis focuses on the appreciated differences between the program variants between them and against the original program, and we address it in the answering of RQ1. The preservation study highlight the fact that \wasm still is an intermediate code and compilers can undo code transformations from previous stages, therefore, it is important to conduct a study on how these transformations are maintained through \wasm programs' lifecycle, from their creation to the machine code execution. The preservation study is out of the scope of this work, and it was previously addressed in CROW and MEWE contributions.
 All that said, with RQ2, we focus on the last category, the dynamic analysis of the generated variants. This decision is supported due to that dynamic side-channels are offered through the execution of \wasm and we want to go deeper in this analysis.
-We use the original functions from corpora described in \autoref{section:crow:corpora} and their variants generated in the answering of RQ1. 
+We use the original functions from the \corpusrosetta corpus described in \autoref{section:crow:corpora} and their variants generated in the answering of RQ1. 
+We use only the \corpusrosetta to answer RQ2 because this corpus is composed by simple programs that can be executed directly without user interaction.
+
+\todo{stress this fact}
 
 \begin{figure*}[h]
     \centering
@@ -13,7 +17,7 @@ We use the original functions from corpora described in \autoref{section:crow:co
     \label{diagrams:protocol:rq2}
 \end{figure*}
 
-We execute each program on each population of variants to collect their execution traces and execution times. Furthermore, we compare their dynamic behavior. We perform fine-grained comparisons by studying all pairs of programs in the population. Therefore, all defined metrics are formulated to support a pairwise comparison strategy.
+We execute each program on each population of variants to collect their execution traces and execution times. Furthermore, we compare their dynamic behavior. We perform fine-grained comparisons by studying all pairs of programs in the population of variants plus the original program. Therefore, the defined metrics are formulated to support a pairwise comparison strategy.
 In the following, we define the metrics used to answer RQ2.
 
 \subsection*{Metrics}
@@ -22,29 +26,18 @@ We measure the difference between programs at runtime by comparing their executi
 Dynamic Time Warping \cite{Maia08usinga} computes the global alignment between two sequences. It returns a value capturing the cost of this alignment, which is a distance metric. The larger the DTW distance, the more different the two sequences are.
 In the following, we define the $\DTW$ metric. 
  
-\begin{comment}
-
-\begin{metric}{dt\_static:}
-    \label{metric:static1}
-	Given two programs of the same program's population $P_X$ and $V_X$ written in $X$ code, dt\_static($P_X$, $V_X$), computes the DTW distance between the corresponding program instructions for representation $X$. \\
-	
-	A dt\_static($P_X$, $V_X$) of $0$ means that the code of both the original program and the variant  is the same, i.e., they are statically identical in the representation $X$. The higher the value of dt\_static, the more different the programs are in representation X. \\
-
-	Notice that, for comparing \wasm programs, the metric is the instantiation of \DTWStatic with $X=WebAssembly$.
-\end{metric}
-
-\end{comment}
 
 \begin{metric}{\DTW{}:}
 \label{metric:stack}
-	Given two programs P and P' from the same program's population and $T$ a trace space, \DTW{}(P,P',T), computes the DTW distance between the traces collected during their execution in the $T$ space. A \DTW{} of $0$ means that both traces are identical. \\ 
-	
+	Given two programs P and P' from the same program's population, \DTW{}(P,P'), computes the DTW distance between the traces collected during their execution. \\
+	A \DTW{} of $0$ means that both traces are identical.
 	The higher the value, the more different the traces. 
 \end{metric}
 
 
-Notice that, for \autoref{metric:stack} we define $T$ as a trace space. In our experiments, $T$ represents two types of traces, the function call stack traces and the virtual stack operations. A trace for the function call stack is the consecutive list of all functions called during the execution of the \wasm program. The virtual stack trace is the consecutive list of \texttt{push} and \texttt{pop} operations performed by the \wasm engine during the execution of the program.
-We use the execution time of the programs in the population to complement the answer to RQ2.
+In our experiments, a program trace is the consecutive list of \texttt{push} and \texttt{pop} operations performed by the \wasm engine during the execution of the program.
+
+We use the execution time of the programs in the population to complement the answer to RQ2. We compare each execution time distribution from the variants against the distribution of the original program.
 
 \begin{metric}{Execution time:}\label{metric:time}
 	Given a \wasm program P, the execution time is the time spent to execute the binary.
@@ -52,30 +45,10 @@ We use the execution time of the programs in the population to complement the an
 
 %\subsection{Variants preservation}
 
-\begin{comment}
-\wasm is an intermediate language, and interpreters produce machine code to execute them. For program variants, this means that compiling can undo artificially introduced transformations, for example, through optimization passes. When a code transformation for a variant is maintained from the first time it is introduced to the final machine, code generation is then a preserved variant. For this mentioned reasoning, we need a preservation metric. The critical property we consider is as follows:
-
-
-% In
-
-\begin{property}{Preservation:}
-	\label{property:preservation}
-	Given a program P and a variant V' from the same program's population, if \DTWStatic{}($P_{Wasm}$, $P_{Wasm}'$) $>$ 0 and \DTWStatic{}($P_{x86}$, $P_{x86}'$) $>$ 0 $\implies$  both programs are still different when compiled to machine code.
-	
-	If the property fits for two programs, then the underlying compiler does not remove the transformations made by \tool. 
-\end{property}
-
-
-\begin{metric}{Preservation:}\label{metric:preservation}
-	Given a \wasm programs P and a collection of generated variants $V$, the preservation ratio is the number of pair of programs that fit with \autoref{property:preservation} for a specific compiling engine over the total number of program pairs.
-\end{metric}
-
-\end{comment}
-
 \subsection*{Protocol}
 
 % Dynamic
-To compare program and variants behavior during runtime, we analyze all the unique program variants generated in the answering of RQ1 in a pairwise comparison using \autoref{metric:stack}. We use SWAM\footnote{\url{https://github.com/satabin/swam}} to execute each program and variant to collect the function and stack traces. SWAM is a \wasm interpreter that provides functionalities to capture the dynamic information of \wasm program executions, including the virtual stack operations.
+To compare program and variants behavior during runtime, we analyze all the unique program variants generated in the answering of RQ1 in a pairwise comparison using \autoref{metric:stack}. We use SWAM\footnote{\url{https://github.com/satabin/swam}} to execute each program and variant to collect the stack traces in the case of the \corpusrosetta corpus. SWAM is a \wasm interpreter that provides functionalities to capture the dynamic information of \wasm program executions, including the virtual stack operations. 
 
 Furthermore, we collect the execution time, \autoref{metric:time}, for all programs and their variants. We compare the collected execution time distributions between programs using a Mann-Withney test \cite{mann1947} in a pairwise strategy.
 
