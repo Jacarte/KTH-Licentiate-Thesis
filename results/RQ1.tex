@@ -11,26 +11,26 @@
 \newcommand{\allmewediversified}{\diversifiedsodium + \diversifiedqrcode}
 \newcommand{\allmewepopulation}{\libpopulation + \qrpopulation}
 
-As we describe in \autoref{rq1:method}, our first research question aims to answer how to generate \wasm program variants. We pass each function of the corpora listed in \autoref{table:corpora} to CROW, and we collect how many variants CROW generate for each function.
-This section is organized as follows. First we present the general results for \autoref{metric:md5sum} for each corpus. Second, we discuss the challenges and limitations attempting against the generation of program variants. Third, we enumerate and highlight properties of code that leverage more program variants. Finally, we illustrate most common code transformations and, we answer RQ1.
+As we describe in \autoref{rq1:method}, our first research question aims to answer how to generate \wasm program variants. We pass each function of the corpora listed in \autoref{table:corpora} to CROW, and we collect how many variants CROW generates for each function.
+This section is organized as follows. First we present the general results for \autoref{metric:md5sum} for each corpus. Second, we discuss the challenges and limitations attempting against the generation of program variants. Third, we enumerate and highlight properties of code that leverage more program variants. Finally, we illustrate the most common code transformations and answer RQ1.
 
-\subsection{General results}
+\subsection*{General results}
 
 We summarize the results in \autoref{table:crow:general_results}.
-We produce at least one unique program variant for $239/303{}$ single function programs for \corpusrosetta with 1h for timeout. For the rest of the programs ($64/303{}$), the timeout is reached before CROW can find any valid variant. 
+We produce at least one unique program variant for $239/303{}$ single function programs for \corpusrosetta with one hour for a timeout. For the rest of the programs ($64/303{}$), the timeout is reached before CROW can find any valid variant. 
 In the case of \corpussodium and \corpusqrcode, we produce variants for $\py{\diversifiedsodium}/\py{\libsodiumfunctions}$ and $\py{\diversifiedqrcode}/\py{\qrcodefunctions}$ functions respectively, with 5 minutes per function as timeout. The rest of the functions resulted in timeout before finding function variants or produce no variants.
 
-Regarding the potential size overhead of the generated variants, we have compared the \wasm binary size of the diversified programs with their variants. The ratio of size change between the original program and the variants ranges from 82\% (variants are smaller) to 125\% (variants are larger) for \corpusrosetta, \corpussodium and \corpusqrcode. This limited impact on the binary size of the variants is good news because they are meant to save bandwidth when they become assets to distribute over the network.
+Regarding the potential size overhead of the generated variants, we have compared the \wasm binary size of the diversified programs with their variants. For example, the size change ratio between the original program and the variants ranges from 82\% (variants are smaller) to 125\% (variants are larger) for \corpusrosetta, \corpussodium, and \corpusqrcode. This limited impact on the binary size of the variants is good news because they are meant to save bandwidth when they become assets to distribute over the network.
 
 \input{results/result_static_diversity.tex}
 
-\subsection{Challenges for automatic diversification}
+\subsection*{Challenges for automatic diversification}
 
 
 
 We generate variants for functions in three corpora. However, we have observed a remarkable difference between the number of successfully diversified functions versus the number of failed-to-diversify functions, as it can be appreciated in \autoref{table:crow:general_results}. Our approach successfully diversified approx. 79 \%, \py{100*{\diversifiedsodium} / {\libsodiumfunctions}}\% and \py{100*{\diversifiedqrcode} / {\qrcodefunctions}}\% of the original functions for \corpusrosetta, \corpussodium and \corpusqrcode respectively. On the other hand, we generated more variants for \corpusqrcode, \py{\qrpopulation} program variants for \py{\diversifiedqrcode} diversified functions. 
 
-Not surprisingly, setting up the timeout affects the capacity for diversification. A low timeout for exploration gives our approach more power to combine code replacements. This can be appreciated in the last column of the table, where for a lower number of diversified functions, we create, overall, more variants.
+Not surprisingly, setting up the timeout affects the capacity for diversification. A low timeout for exploration gives our approach more power to combine code replacements. We can appreciate this in the last column of the table, where for a lower number of diversified functions, we create, overall, more variants.
 
 Moreover, we look at the cases that yield a few variants per function. There is no direct correlation between the number of identified codes for replacement and the number of unique variants. Therefore, we manually analyze programs that include many potential places for replacements, for which we generate few or no variants. 
 We identify two main challenges for diversification.
@@ -45,7 +45,7 @@ We identify two main challenges for diversification.
 %\todo{Add all the found examples here}
 
 
-\subsection{Properties for large diversification}
+\subsection*{Properties for large diversification}
 
 We manually analyzed the programs that yield more than 100 unique variants to study the critical properties of programs leveraging a high number of variants.
 This reveals one key reason that favors many unique variants: the programs include bounded loops. In these cases, we synthesize variants for the loops by replacing them with a constant, if the constant inferring \cite{souper} is successful. Every time a loop constant is inferred, the loop body is replaced by a single instruction. This creates a new, statically different program. The number of variants grows exponentially if the function contains nested loops for which we can successfully infer constants. 
@@ -161,8 +161,8 @@ i32.mul
 
 \section{Answer to RQ1.}
 
-With enough time, we are able to provide diversification for more than 70\% of the study cases, for which the functions belong to a non-biased set or program categories. Even when we cannot diversify some functions due to timeout, the overall  number of created variants tripled the order of magnitude of the original functions count. 
 
+We can provide diversification for more than 70\% of the study cases. However, even when we cannot diversify some functions due to timeout, the overall number of created variants tripled the order of magnitude of the original functions count. This is the first realization of automated diversification for \wasm to the best of our knowledge.
 
 \begin{comment}
 
