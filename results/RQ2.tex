@@ -7,11 +7,20 @@ To answer RQ2, we execute each program/variant to collect their execution traces
 For each programs' population we compare \autoref{metric:stack} and \autoref{metric:time} for each program/variant pair.
 This section is organized as follows. First, we analyze the programs' populations by comparing the values of \autoref{metric:stack} for each pair of program/variant. The pairwise comparison will hint at the results at the population level. We want to analyze not only the differences of a variant regarding its original program, but we also want to compare the variants against other variants. Second, we do the same pairwise strategy for \autoref{metric:time}, performing a Mann-Withney U test for each pair of program/variant times distribution. Finally, we conclude and answer RQ2.
 
-\subsection*{stack operation traces.}
+\subsection*{Stack operation traces.}
 
 % Describe the first figure
-In \autoref{rq2:dtw_distrib} we plot the distribution of all \DTW comparisons for all pairs of program/variant of each program's population generated un RQ1. All compared programs are statically different. Each vertical violin plot (in logarithmic scale) represents the \DTW values for a program of the \corpusrosetta corpus for which we generated variants. For illustration, we exclude those programs with only one variant. The X-axis is sorted in descending order of the size of the program's population. We want to remark that the programs excluded from the plot all result from their comparisons in \DTW larger than zero. Thus, the unique generated variants present a different behavior in terms of stack operation traces.
+In \autoref{rq2:dtw_distrib} we plot the distribution of all \DTW comparisons for all pairs of program/variant of each program's population generated un RQ1. All compared programs are statically different. Each vertical violin plot (in logarithmic scale) represents the \DTW values for a program of the \corpusrosetta corpus for which we generated variants. For illustration, we exclude those programs with only one variant. The X-axis is sorted in descending order of the size of the program's population. 
 
+%We want to remark that the programs excluded from the plot all result from their comparisons in \DTW larger than zero. Thus, the unique generated variants present a different behavior in terms of stack operation traces.
+
+
+\begin{figure*}[h]
+    \centering
+    \hspace*{-0.1\linewidth}\includegraphics[width=1.2\linewidth]{plots/dtw_distrib.pdf}
+    \caption{Pairwise of \autoref{metric:stack} values in logarithmic scale. Each vertical plot represents a program and its variants. The plot only contains the programs for which we generate more than one variant, \ie more than one pair of programs comparisons. }
+    \label{rq2:dtw_distrib}
+\end{figure*}
 
 % Main insight
 We have observed that in the majority of the cases, the mean of the comparison values is huge in all cases. We analyze the length of the traces, and one reason behind such large values of \DTW is that some variants result from constant inferring. For example, if a loop is replaced by a constant, instead of several symbols in the stack operation trace, we observe one. Consequently, the distance between two program traces is significant. We have observed no relation between how aggressive the transformation is and the length of the traces.  
@@ -21,12 +30,6 @@ In some cases, even when the variants are statically different, two programs/var
 \input{results/same_instruction.tex}
 
 
-\begin{figure*}[h]
-    \centering
-    \hspace*{-0.1\linewidth}\includegraphics[width=1.2\linewidth]{plots/dtw_distrib.pdf}
-    \caption{Pairwise of \autoref{metric:stack} values in logarithmic scale. Each vertical plot represents a program and its variants. The plot only contains the programs for which we generate more than one variant, \ie more than one pair of programs comparisons. }
-    \label{rq2:dtw_distrib}
-\end{figure*}
 
 In \autoref{rq2:zero_ratio} we plot those programs for which at least one comparison (\DTW) is zero. The plot contains 82 vertical bars, one for each program. In the other cases, all \DTW values are non-zero. We can observe that even when some programs/variants result in the same trace, there is no case for which all variants return the same stack operation trace with all bars above $Y=0.2$. There is always at least one generated variant that is dynamically different from the original program. 
 
@@ -51,19 +54,21 @@ In both cases, we generate a variant with a different execution time than the or
 
 To better illustrate the differences between executions times in the variants, we dissect the execution time distributions for two programs' populations. 
 % describe figures
+
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=\linewidth]{plots/base64.pdf}
+    \includegraphics[width=\linewidth]{plots/hilbert_curve.pdf}
+    \caption{Execution time distributions for \texttt{Base64\_decode} and \texttt{Hilbert\_curve} program and their variants in top and bottom figures respectively. Baseline execution time mean is highlighted with the magenta horiontal line. }
+    \label{rq3:perf}
+\end{figure*}
+
 The plots in \autoref{rq3:perf} show the execution time distributions of programs \texttt{Base64\_decode} and \texttt{Hilbert\_curve} and their variants. 
 We illustrate time diversification with these two programs because, for both, we generate unique variants with all types of transformations previously discussed in \autoref{results:rq1}.
 In the plots along the X-axis, each vertical set of points represents the distribution of 100 execution times per program/variant. The Y-axis represents the execution time value in milliseconds. The original program is highlighted in magenta color: the distribution of 100 execution times is given on the left-most part of the plot, and its median execution time is represented as a horizontal dashed line. The median execution time is represented as a blue dot for each execution time distribution, and the vertical gray lines represent the entire distribution. The bolder gray line represents the 75\% interquartile. The program variants are sorted concerning the median execution time in descending order.
 
 
-
-\begin{figure*}[h]
-    \centering
-    \hspace*{-0.05\linewidth}\includegraphics[width=1.1\linewidth]{plots/base64.pdf}
-    \hspace*{-0.05\linewidth}\includegraphics[width=1.1\linewidth]{plots/hilbert_curve.pdf}
-    \caption{Execution time distributions for \texttt{Base64\_decode} and \texttt{Hilbert\_curve} program and their variants in top and bottom figures respectively. Baseline execution time mean is highlighted with the magenta horiontal line. }
-    \label{rq3:perf}
-\end{figure*}
 
 % explanation
 For \texttt{Base64\_decode}, the majority of variants are constantly slower than the reference programs (blue dot above the magenta line). For \texttt{Hilbert\_curve}, many diversified variants are optimizations (blue dots below the magenta bar). The case of \texttt{Hilbert\_curve} is graphically clear, and the last third represents faster variants resulting from code transformations that optimize the original program.

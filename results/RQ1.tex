@@ -20,9 +20,10 @@ We summarize the results in \autoref{table:crow:general_results}.
 We produce at least one unique program variant for $239/303{}$ single function programs for \corpusrosetta with one hour for a timeout. For the rest of the programs ($64/303{}$), the timeout is reached before CROW can find any valid variant. 
 In the case of \corpussodium and \corpusqrcode, we produce variants for $\py{\diversifiedsodium}/\py{\libsodiumfunctions}$ and $\py{\diversifiedqrcode}/\py{\qrcodefunctions}$ functions respectively, with 5 minutes per function as timeout. The rest of the functions resulted in timeout before finding function variants or produce no variants.
 
-Regarding the potential size overhead of the generated variants, we have compared the \wasm binary size of the diversified programs with their variants. For example, the size change ratio between the original program and the variants ranges from 82\% (variants are smaller) to 125\% (variants are larger) for \corpusrosetta, \corpussodium, and \corpusqrcode. This limited impact on the binary size of the variants is good news because they are meant to save bandwidth when they become assets to distribute over the network.
-
 \input{results/result_static_diversity.tex}
+
+%Regarding the potential size overhead of the generated variants, we have compared the \wasm binary size of the diversified programs with their variants. For example, the size change ratio between the original program and the variants ranges from 82\% (variants are smaller) to 125\% (variants are larger) for \corpusrosetta, \corpussodium, and \corpusqrcode. This limited impact on the binary size of the variants is good news because they are meant to save bandwidth when they become assets to distribute over the network.
+
 
 \subsection*{Challenges for automatic diversification}
 

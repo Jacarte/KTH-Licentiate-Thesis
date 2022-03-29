@@ -18,3 +18,4 @@ Lic.blg
 Lic.out
 pythonlogs.txt
 *.synctex*
+./data/cmps/*

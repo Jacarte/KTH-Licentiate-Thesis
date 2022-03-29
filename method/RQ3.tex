@@ -49,13 +49,10 @@ The value of the metric can go from 0 to 1. The worst entropy, value 0, means th
 \subsection*{Protocol}
 
 
-We run the experiments to answer RQ3 on the Edge. We deploy and execute the original and the multivariant binaries on 64 edge nodes located around the world\footnote{The number of nodes provided in the whole platform is 72, we decided to keep only the 64 nodes that remained stable during our experimentation.}.
+We run the experiments to answer RQ3 on the Edge. We deploy and execute the original and the multivariant binaries on 64 edge nodes located around the world.
 These edge nodes usually have an arbitrary and heterogeneous composition in architecture and CPU models.
 
-
-
-We execute each program \todo{XXX} times on each node to measure the diversity of execution traces exhibited by the multivariant binaries. Each query on the same program is performed with the same input value. This guarantees that if we observe different traces for different executions, it is due to the presence of multiple function variants. 
-The inputs that we pass to execute the programs at the edge and the received output for all executions are available in the reproduction repository at \todo{REPO}. 
+We execute each program 100 times on each node to measure the diversity of execution traces exhibited by the multivariant binaries. Each query on the same program is performed with the same input value. This guarantees that if we observe different traces for different executions, it is due to the presence of multiple function variants. 
 % The input values are available as part of our reproduction package.
 
 For each query, we collect the execution trace, i.e.,  the sequence of function names that have been executed when triggering the query.

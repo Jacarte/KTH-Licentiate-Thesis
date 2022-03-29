@@ -9,6 +9,7 @@ In this chapter, we sum up the results of the research of this thesis. We do not
 \input{results/RQ3.tex}
 % Define some numbers here for the autmation of the tables
 
+\pagebreak
 \section{Conclusions}
 
 This work proposes and evaluates our approach to generate \wasm program variants artificially. Our approach generates different, both statically and dynamically, variants for up to 70\% of the programs in our three corpora. While generating statically different programs is still important, we highlighted the importance of complementing static and dynamic studies for programs diversification. We generate variants that exhibit a significant diversity of execution times that we can use to compose time-unpredictable multivariant binaries. Our approach of combining function variants in a single function as multivariants successfully triggers diverse execution paths and execution times at runtime. Therefore, making it virtually impossible for an attacker to predict which code is executed for a given query. Finally, we demonstrate the feasibility of automatically generating \wasm program variants.

@@ -4,7 +4,7 @@ metadata:
   generateName: compare-traces-
 spec:
   entrypoint: slumps-distributed
-  parallelism: 30
+  parallelism: 50
   arguments:
     parameters:
     - name: folder

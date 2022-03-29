@@ -1,22 +1,25 @@
 {
     \renewcommand{\arraystretch}{1.6}
 \begin{table}[h]
+    \small
     \centering
     %\setlength\minrowclearance{1.0pt}
-        \begin{tabular}[t]{ l | l | l | l | l }
-        CORPUS & \#Functions & \# Diversified & \# NonDiversified & \# Variants  \\
+        \begin{tabular}[t]{ l | l | l  l | l  p{2cm} }
+        Corpus & \#Functions & \# Diversified & Div. \% & \# Variants & Population growing factor  \\
         \hline   
 
-        \corpusrosetta & \fromjson{data/crow_corpus.json}{.[0].functions} & \textbf{239} & 64 & 1906    \\
+        \corpusrosetta & \fromjson{data/crow_corpus.json}{.[0].functions} & \textbf{239} & \py{100*239/303}\% & 1906  & \py{1906/303}   \\
         \hline
 
 
-        \corpussodium & \libsodiumfunctions & \textbf{\diversifiedsodium} & \py{\libsodiumfunctions - \diversifiedsodium} & \libsodiumpopulation    \\
+        \corpussodium & \libsodiumfunctions & \textbf{\diversifiedsodium} & \py{100*\diversifiedsodium/\libsodiumfunctions}\% & \libsodiumpopulation  & \py{\libsodiumpopulation/\libsodiumfunctions}    \\
         \hline
 
-        \corpusqrcode & \qrcodefunctions & \textbf{\diversifiedqrcode} & \py{\qrcodefunctions - \diversifiedqrcode} & \qrpopulation    \\
+        \corpusqrcode & \qrcodefunctions & \textbf{\diversifiedqrcode} & \py{100*\diversifiedqrcode/\qrcodefunctions}\% & \qrpopulation  & \py{\qrpopulation/\qrcodefunctions}   \\
 
+        \hline\hline
 
+         & \py{\libsodiumfunctions + \qrcodefunctions + 303 } & \py{239 + \diversifiedqrcode +\diversifiedsodium} & \py{100*{239 + \diversifiedqrcode +\diversifiedsodium}/{\libsodiumfunctions + \qrcodefunctions + 303}}\% & \py{\qrpopulation + 1906 + \libsodiumpopulation}  & \py{{\qrpopulation + 1906 + \libsodiumpopulation}/{\libsodiumfunctions + \qrcodefunctions + 303}}  \\
         \end{tabular}
     
         \caption{General diversification results. The table is composed by the name of the corpus, the number of functions, the number of succesfully diversified functions, the number of non-diversified functions and the cumulative number of variants.}
