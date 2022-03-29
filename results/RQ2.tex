@@ -10,17 +10,19 @@ This section is organized as follows. First, we analyze the programs' population
 \subsection*{Stack operation traces.}
 
 % Describe the first figure
-In \autoref{rq2:dtw_distrib} we plot the distribution of all \DTW comparisons for all pairs of program/variant of each program's population generated un RQ1. All compared programs are statically different. Each vertical violin plot (in logarithmic scale) represents the \DTW values for a program of the \corpusrosetta corpus for which we generated variants. For illustration, we exclude those programs with only one variant. The X-axis is sorted in descending order of the size of the program's population. 
+In \autoref{rq2:dtw_distrib} we plot the distribution of all \DTW comparisons for all pairs of program/variant of each program's population generated un RQ1. All compared programs are statically different. Each vertical group of dots (in logarithmic scale) represents the \DTW values for a program of the \corpusrosetta corpus for which we generated variants. 
 
 %We want to remark that the programs excluded from the plot all result from their comparisons in \DTW larger than zero. Thus, the unique generated variants present a different behavior in terms of stack operation traces.
 
 
-\begin{figure*}[h]
+\begin{figure}[h]
     \centering
-    \hspace*{-0.1\linewidth}\includegraphics[width=1.2\linewidth]{plots/dtw_distrib.pdf}
+    \includegraphics[width=\linewidth]{plots/plot_distribs1.png}
+    \includegraphics[width=\linewidth]{plots/plot_distribs2.png}
+    \includegraphics[width=\linewidth]{plots/plot_distribs3.png}
     \caption{Pairwise of \autoref{metric:stack} values in logarithmic scale. Each vertical plot represents a program and its variants. The plot only contains the programs for which we generate more than one variant, \ie more than one pair of programs comparisons. }
     \label{rq2:dtw_distrib}
-\end{figure*}
+\end{figure}
 
 % Main insight
 We have observed that in the majority of the cases, the mean of the comparison values is huge in all cases. We analyze the length of the traces, and one reason behind such large values of \DTW is that some variants result from constant inferring. For example, if a loop is replaced by a constant, instead of several symbols in the stack operation trace, we observe one. Consequently, the distance between two program traces is significant. We have observed no relation between how aggressive the transformation is and the length of the traces.  
@@ -34,13 +36,6 @@ In some cases, even when the variants are statically different, two programs/var
 In \autoref{rq2:zero_ratio} we plot those programs for which at least one comparison (\DTW) is zero. The plot contains 82 vertical bars, one for each program. In the other cases, all \DTW values are non-zero. We can observe that even when some programs/variants result in the same trace, there is no case for which all variants return the same stack operation trace with all bars above $Y=0.2$. There is always at least one generated variant that is dynamically different from the original program. 
 
 \newcommand{\zerocountprogs}{82\xspace}
-
-\begin{figure*}[h]
-    \centering
-    \hspace*{-0.1\linewidth}\includegraphics[width=1.2\linewidth]{plots/non_zero_ratio.pdf}
-    \caption{ Ratio of \autoref{metric:stack} with non-zero values for each program's population. Each vertical line represents the number of \DTW different from zero in a pairwise comparison of each program and its variants. The plot only contains the \zerocountprogs/239  with at least one pair comparison with zero value.}
-    \label{rq2:zero_ratio}
-\end{figure*}
 
 \subsection*{Execution times.}
 
@@ -58,7 +53,6 @@ To better illustrate the differences between executions times in the variants, w
 
 \begin{figure*}[h]
     \centering
-    \includegraphics[width=\linewidth]{plots/base64.pdf}
     \includegraphics[width=\linewidth]{plots/hilbert_curve.pdf}
     \caption{Execution time distributions for \texttt{Base64\_decode} and \texttt{Hilbert\_curve} program and their variants in top and bottom figures respectively. Baseline execution time mean is highlighted with the magenta horiontal line. }
     \label{rq3:perf}
