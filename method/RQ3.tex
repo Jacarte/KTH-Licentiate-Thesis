@@ -6,7 +6,7 @@
 
 In the last research question, we study whether the created variants can be used in real-world applications and what properties offer the composition of the variants as multivariant execution binaries. For this purpose, we build multivariant binaries to be deployed at the Edge. We use the variants generated for the programs of the \corpussodium and \corpusqrcode corpora, $2 + 5$ programs involving $ \libsodiumfunctions + \qrcodefunctions$ functions respectively. For this research question, 7 Multivariant binaries are created by converting each program's population of variants into a single function for which each call at runtime selects and executes a different variant. We illustrate the protocol to answer RQ3 in \autoref{diagrams:protocol:rq3}.
 
-
+\todo{mention that the process of 'mixing' multiple variants into one multivariant binary is an essential contribution of the thesis that is presented in details in [XXX] and that RQ3 focuses on analyzing the impact of this contribution on exec times}
 
 
 \begin{figure*}[h]
@@ -22,6 +22,8 @@ We assess the ability of multivariant binaries to exhibit random execution paths
 
 To compare the diversity of function traces, we enunciate the following metrics.  
 
+
+\todo{update to limit the discussion / metrics about traces instead, elaborate on how you measure time}
 
 \begin{metric}{Unique traces: $R(n, e)$.}\label{metric:ratio:mve}
     Let $S(n, e)=\{T_1, T_2, ..., T_{100}\}$ be the collection of 100 traces collected for one program $e$ on an edge node $n$, $H(n, e)$ the collection of hashes of each trace and $U(n, e)$ the set of unique trace hashes in $H(n,e)$.

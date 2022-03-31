@@ -3,12 +3,13 @@
 \label{rq2:method}
 
 
-In this second research question, we investigate to what extent the artificially created variants are dynamically different between them and the original program. To conduct this research question, we could separate the question into three fields as \autoref{diagrams:protocol:rq2} illustrates: static comparison, variant's preservation, and dynamic comparison. 
-The static analysis focuses on the appreciated differences between the program variants between them and against the original program, and we address it in answering RQ1. The preservation study highlights that \wasm still is an intermediate code, and compilers can undo code transformations from previous stages. Therefore, it is essential to study how these transformations are maintained through \wasm programs' lifecycle, from their creation to the machine code execution. The preservation study is out of the scope of this work, and it was previously addressed in CROW and MEWE contributions.
-With RQ2, we focus on the last category, the dynamic analysis of the generated variants. This decision is supported because dynamic side-channels are offered through the execution of \wasm \citationneeded, and we want to go deeper in this analysis.
+In this second research question, we investigate to what extent the artificially created variants are dynamically different between them and the original program. To conduct this research question, we could separate the question into two fields as \autoref{diagrams:protocol:rq2} illustrates: static comparison and dynamic comparison. 
+The static analysis focuses on the appreciated differences between the program variants between them and against the original program, and we address it in answering RQ1. 
+With RQ2, we focus on the last category, the dynamic analysis of the generated variants. This decision is supported because dynamic complements RQ1 and it is essential to provide a full understanding of diversification \citationneeded.
 We use the original functions from the \corpusrosetta corpus described in \autoref{section:crow:corpora} and their variants generated in the answering of RQ1. 
 We use only the \corpusrosetta to answer RQ2 because this corpus is composed of simple programs that can be executed directly without user interaction, \ie we only need to call the interpreter passing the \wasm binary to it. 
 
+\todo{don't show steps 1 and 2 (step is rq1, step 2 is out of scope)}
 
 \begin{figure*}[h]
     \centering
