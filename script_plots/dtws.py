@@ -1,3 +1,4 @@
+from random import random
 import sys
 import json
 import pandas as pd
@@ -5,6 +6,7 @@ import matplotlib.pyplot as plt
 from common import *
 import numpy as np
 import os
+import random
 
 def process_csv(file):
     df = pd.read_csv(file)
@@ -43,7 +45,7 @@ def plot_zero(datas):
 def plot_distribs(datas, name="dtw_distrib"):
 
 
-    latexify(fig_height=2.5, fig_width=8.5, font_size=11.5, tick_size=11.5)
+    latexify(fig_height=2.1, fig_width=8.5, font_size=10, tick_size=10)
     fig, ax = plt.subplots()
 
     format_axes(ax, hide=['top', 'right'], show=['left', 'bottom'])
@@ -124,8 +126,10 @@ def plot_distribs(datas, name="dtw_distrib"):
     S=2.0
     vals = sorted(vals, key=lambda x: len(x), reverse=True)
     for i, data in enumerate(vals):
-        ax.scatter([i]*len(data), data, alpha=0.6, color=[0.8,0.8,0.8,0], edgecolors='C0', s=S)
-        ax.vlines(i,  ymin=0, ymax=max(data), alpha=0.3, color=[0.8,0.8,0.8,0.1])
+        xs = [ 10*i + 0*(0.5 - random.random()) for _ in range(len(data)) ]
+        # print(xs)
+        ax.scatter(xs, data, alpha=0.6, color=[0.8,0.8,0.8,0], edgecolors='C0', s=S)
+        ax.vlines(10*i,  ymin=0, ymax=max(data), alpha=0.3, color=[0.8,0.8,0.8,0.1])
         #ax.scatter([i], [0], edgecolors='C1', color=[0.8,0.8,0.8,0])
     #ax.barh(y=0, color='C1', width=len(vals), left=0)
     #ax.set_ylim(0)

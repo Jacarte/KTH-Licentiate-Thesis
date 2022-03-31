@@ -1,23 +1,26 @@
 \section{\rqthree}
+\label{results:rq3}
 
 Here we investigate the impact of the composition of program variants into multivariant binaries.
-To answer this research question, we create multivariant binaries from the program variants generated for the \corpussodium and the \corpusqrcode corpora. Then, we deploy the multivariant binaries into the Edge and collect their function call traces and execution times. 
+To answer this research question, we create multivariant binaries from the program variants generated for the \corpussodium and the \corpusqrcode corpora. Then, we deploy the multivariant binaries into the Edge and collect their execution times. 
 
-\subsection*{Timing side-channels at program level.}
+\subsection*{Timing side-channels.}
 
-We compare the execution time distributions for each program for the original and the multivariant binary. All distributions are measured on 100k executions.
+We compare the execution time distributions for each program for the original and the multivariant binary. All distributions are measured on 100k executions of the program along all Edge platform nodes.
 % statistics
 We have observed that the distributions for multivariant binaries have a higher standard deviation of execution time.
 A statistical comparison between the execution time distributions confirms the significance of this difference (P-value = 0.05 with a  Mann-Withney U test). This hints at the fact that the execution time for multivariant binaries is more unpredictable than the time to execute the original binary. 
 
 
 % Curve flatenning
-In \autoref{rq3:diversity:times}, each subplot represents the distribution for a single program, with the colors blue and green representing the original and multivariant binary, respectively. These plots reveal that the execution times are spread over a more extensive range of values than the original binary. 
+In \autoref{rq3:diversity:times}, each subplot represents the quantile-quantile plot of the two distributions, original and multivariant binary. The dashed line cutting the subplot represents the case in which the two distributions are equal, \ie for two equal distribution we would have all blue dots over the dashed line. These plots reveal that the execution times are different and are spread over a more extensive range of values than the original binary.
+\todo{How much more extensive?}
+\todo{Why do we observe this?} 
 This is evidence that execution time is less predictable for multivariant binaries than original ones.
 
 \begin{figure*}[h]
-    \includegraphics[width=\linewidth]{plots/times.pdf}
-    \caption{Execution time distributions. Each subplot represents the distribution for a single program, blue for the original program and green for the multivariant binary. The X axis shows the execution time in milliseconds and the Y axis shows the density distribution in logarithmic scale.}
+    \includegraphics[width=\linewidth]{plots/qqplots.pdf}
+    \caption{Execution time distributions. Each subplot represents the quantile-quantile plot of the two distributions, original and multivariant binary. }
     \label{rq3:diversity:times}
 \end{figure*}
 
