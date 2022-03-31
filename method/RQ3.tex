@@ -4,14 +4,12 @@
 
 \newcommand{\mewe}{MEWE\xspace}
 
-In the last research question, we study whether the created variants can be used in real-world applications and what properties offer the composition of the variants as multivariant execution binaries. For this purpose, we build multivariant binaries to be deployed at the Edge. We use the variants generated for the programs of the \corpussodium and \corpusqrcode corpora, $2 + 5$ programs involving $ \libsodiumfunctions + \qrcodefunctions$ functions respectively. For this research question, 7 Multivariant binaries are created by converting each program's population of variants into a single function for which each call at runtime selects and executes a different variant. We illustrate the protocol to answer RQ3 in \autoref{diagrams:protocol:rq3}.
-
-\todo{mention that the process of 'mixing' multiple variants into one multivariant binary is an essential contribution of the thesis that is presented in details in [XXX] and that RQ3 focuses on analyzing the impact of this contribution on exec times}
+In the last research question, we study whether the created variants can be used in real-world applications and what properties offer the composition of the variants as multivariant execution binaries. For this purpose, we build multivariant binaries to be deployed at the Edge. The process of \emph{mixing} multiple variants into one multivariant binary is an essential contribution of the thesis that is presented in details in \citationneeded. RQ3 focuses on analyzing the impact of this contribution on execution times. To answer RQ3, we use the variants generated for the programs of the \corpussodium and \corpusqrcode corpora, $2 + 5$ programs involving $ \libsodiumfunctions + \qrcodefunctions$ functions respectively. We illustrate the protocol to answer RQ3 in \autoref{diagrams:protocol:rq3}.
 
 
 \begin{figure*}[h]
     \centering
-    \includegraphics[height=2.50in]{diagrams/Rq3.pdf}
+    \includegraphics[width=\linewidth]{diagrams/Rq3.pdf}
     \caption{Multivariant binary creation and workflow for RQ3.}
     \label{diagrams:protocol:rq3}
 \end{figure*}
@@ -20,33 +18,7 @@ We assess the ability of multivariant binaries to exhibit random execution paths
 
 \subsection*{Metrics}
 
-To compare the diversity of function traces, we enunciate the following metrics.  
-
-
-\todo{update to limit the discussion / metrics about traces instead, elaborate on how you measure time}
-
-\begin{metric}{Unique traces: $R(n, e)$.}\label{metric:ratio:mve}
-    Let $S(n, e)=\{T_1, T_2, ..., T_{100}\}$ be the collection of 100 traces collected for one program $e$ on an edge node $n$, $H(n, e)$ the collection of hashes of each trace and $U(n, e)$ the set of unique trace hashes in $H(n,e)$.
-    The uniqueness ratio of traces collected for edge node $n$ and program $e$ is defined as
-    $$
-        R(n,e) = \frac{|U(n,e)|}{|H(n, e)|}
-    $$
-\end{metric}
-
-
-\begin{metric}{Normalized Shannon entropy: $E(e)$}\label{metric:entropy}
-    Let $e$ be a program, $C(e)=\cdot_{n=0}^{64} H(n, e)$ be the union  of all trace hashes for all edge nodes.
-    The normalized Shannon Entropy for the program $e$ over the collected traces is defined as: \\
-    $$
-        E(e)=-\Sigma \frac{p_x*log(p_x)}{log(|C(e)|)}
-    $$
-    Where $p_x$ is the discrete probability of the occurrence of the hash $x$ over $C(e)$.
-    
-\end{metric}
-
-Notice that we normalize the standard definition of the Shannon Entropy, \autoref{metric:entropy}, by using the perfect case where all trace hashes are different. 
-This normalization allows us to compare the calculated entropy between programs.
-The value of the metric can go from 0 to 1. The worst entropy, value 0, means that the program consistently exhibits the same path independently of the edge node and the number of times the trace is collected for the same node. On the contrary, 1 for the best entropy, each edge node executes a different path every time the program is requested.
+We use the execution time of the multivariant binaries to answer RQ3. We compare the distribution of the execution times for multivariant binary and the original program. 
 
 \subsection*{Protocol}
 
@@ -54,27 +26,9 @@ The value of the metric can go from 0 to 1. The worst entropy, value 0, means th
 We run the experiments to answer RQ3 on the Edge. We deploy and execute the original and the multivariant binaries on 64 edge nodes located around the world.
 These edge nodes usually have an arbitrary and heterogeneous composition in architecture and CPU models.
 
-We execute each program 100 times on each node to measure the diversity of execution traces exhibited by the multivariant binaries. Each query on the same program is performed with the same input value. This guarantees that if we observe different traces for different executions, it is due to the presence of multiple function variants. 
-% The input values are available as part of our reproduction package.
-
-For each query, we collect the execution trace, i.e.,  the sequence of function names that have been executed when triggering the query.
-We instrument the multivariant binaries to record each function entrance to observe these traces.
-
-
-We measure the number of unique execution traces exhibited by each multivariant binary, \autoref{metric:ratio:mve}, on each separate edge node. To compare the traces, we hash them with the \texttt{md5sum} function.
-We calculate the number of unique hashes among the 100 traces collected for a program on one edge node.
-We follow by collecting the normalized Shannon entropy, \autoref{metric:entropy}, for all collected execution traces for each program.
-The Shannon Entropy gives the uncertainty in the outcome of a sampling process.
-If a specific trace has a high frequency of appearing in part of the sampling, then it is inevitable that this trace will appear in the other part of the sampling.
-
-
-We calculate \autoref{metric:entropy} for the seven programs, for 100 traces collected from 64 edge nodes, for a total of 6400 collected traces per program.
-Each trace is collected in a round-robin strategy, i.e., the traces are collected from the 64 edge nodes sequentially.
-For example, we collect the first trace from all nodes before collecting the second trace.
-This process is followed until 100 traces are collected from all edge nodes.
-
-
-In addition, we collect 100k execution times for each binary, both the original and multivariant binaries.
+We collect 100k execution times for each binary, both the original and multivariant binaries.
 We perform a Mann-Withney U test \cite{mann1947} to compare both execution time distributions. 
 If the P-value is lower than 0.05, two compared distributions are different.
+
+\todo{Improve this...}
 
