@@ -4,31 +4,30 @@
 
 \newcommand{\mewe}{MEWE\xspace}
 
-In the last research question, we study whether the created variants can be used in real-world applications and what properties offer the composition of the variants as multivariant execution binaries. For this purpose, we build multivariant binaries to be deployed at the Edge. The process of \emph{mixing} multiple variants into one multivariant binary is an essential contribution of the thesis that is presented in details in \citationneeded. RQ3 focuses on analyzing the impact of this contribution on execution times. To answer RQ3, we use the variants generated for the programs of the \corpussodium and \corpusqrcode corpora, $2 + 5$ programs involving $ \libsodiumfunctions + \qrcodefunctions$ functions respectively. We illustrate the protocol to answer RQ3 in \autoref{diagrams:protocol:rq3}.
-
-
-\begin{figure*}[h]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=\linewidth]{diagrams/Rq3.pdf}
-    \caption{Multivariant binary creation and workflow for RQ3.}
+    \includegraphics[width=0.8\linewidth]{diagrams/Rq3.pdf}
+    \caption{Multivariant binary creation and workflow for RQ3 answering.}
     \label{diagrams:protocol:rq3}
-\end{figure*}
+\end{figure}
 
-We assess the ability of multivariant binaries to exhibit random execution paths when executed on edge. We check the diversity of execution traces gathered from the execution of a multivariant binary. The traces are collected from all edge nodes to assess Multivariant Execution (MVE) worldwide. Finally, we measure the differences for the execution times on the edge. Then, we discuss how multivariant binaries contribute to less predictable timing side-channels.
+In the last research question, we study whether the created variants can be used in real-world applications and what properties offer the composition of the variants as multivariant binaries. We build multivariant binaries, and we deploy and execute them at the Edge. The process of \emph{mixing} multiple variants into one multivariant binary is an essential contribution of the thesis that is presented in details in \citationneeded. RQ3 focuses on analyzing the impact of this contribution on execution times. To answer RQ3, we use the variants generated for the programs of the \corpussodium and \corpusqrcode corpora, $2 + 5$ programs involving $ \libsodiumfunctions + \qrcodefunctions$ functions respectively. We illustrate the protocol to answer RQ3 in \autoref{diagrams:protocol:rq3} starting from the creation of the programs' population.
+
+
+
+%The workflow starts by using the programs' population of each program generated in RQ1 to create the multivariant binaries. We deploy the multivariant binaries at the Edge, and we collect their execution times. We measure the differences for the execution times on the edge. Then, we discuss how multivariant binaries contribute to less predictable timing side-channels.
 
 \subsection*{Metrics}
 
-We use the execution time of the multivariant binaries to answer RQ3. We compare the distribution of the execution times for multivariant binary and the original program. 
+We use the execution time of the multivariant binaries to answer RQ3. We use the same metric defined in \autoref{metric:time} for the execution time of multivariant binaries.
 
 \subsection*{Protocol}
 
 
-We run the experiments to answer RQ3 on the Edge. We deploy and execute the original and the multivariant binaries on 64 edge nodes located around the world.
-These edge nodes usually have an arbitrary and heterogeneous composition in architecture and CPU models.
+We run the experiments to answer RQ3 on the Edge, executing the multivariant binaries as end-to-end HTTP services. 
+The execution times are measured at the backend space, \ie we collect the execution times inside the Edge node and not from the client computer. Therefore, we instrument the binaries to return the execution time as an HTTP header. We do this process for the original program and its multivariant binary. We deploy and execute the original and the multivariant binaries on 64 edge nodes located around the world.
+
 
 We collect 100k execution times for each binary, both the original and multivariant binaries.
 We perform a Mann-Withney U test \cite{mann1947} to compare both execution time distributions. 
-If the P-value is lower than 0.05, two compared distributions are different.
-
-\todo{Improve this...}
-
+If the P-value is lower than 0.05, the two compared distributions are different.

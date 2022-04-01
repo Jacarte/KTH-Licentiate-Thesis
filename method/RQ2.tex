@@ -3,14 +3,6 @@
 \label{rq2:method}
 
 
-In this second research question, we investigate to what extent the artificially created variants are dynamically different between them and the original program. To conduct this research question, we could separate the question into two fields as \autoref{diagrams:protocol:rq2} illustrates: static comparison and dynamic comparison. 
-The static analysis focuses on the appreciated differences between the program variants between them and against the original program, and we address it in answering RQ1. 
-With RQ2, we focus on the last category, the dynamic analysis of the generated variants. This decision is supported because dynamic complements RQ1 and it is essential to provide a full understanding of diversification \citationneeded.
-We use the original functions from the \corpusrosetta corpus described in \autoref{section:crow:corpora} and their variants generated in the answering of RQ1. 
-We use only the \corpusrosetta to answer RQ2 because this corpus is composed of simple programs that can be executed directly without user interaction, \ie we only need to call the interpreter passing the \wasm binary to it. 
-
-\todo{don't show steps 1 and 2 (step is rq1, step 2 is out of scope)}
-
 \begin{figure*}[h]
     \centering
     \includegraphics[width=\linewidth]{diagrams/Rq2.pdf}
@@ -18,39 +10,47 @@ We use only the \corpusrosetta to answer RQ2 because this corpus is composed of 
     \label{diagrams:protocol:rq2}
 \end{figure*}
 
-To dynamically compare programs and their variants, we execute each program on each population of variants to collect their execution traces and execution times. We perform fine-grained comparisons by studying all pairs of programs in the population of variants plus the original program. Therefore, the defined metrics are formulated to support a pairwise comparison strategy.
+In this second research question, we investigate to what extent the artificially created variants are dynamically different between them and the original program. To conduct this research question, we could separate our experiments into two fields as \autoref{diagrams:protocol:rq2} illustrates: static analysis and dynamic analysis. 
+The static analysis focuses on the appreciated differences between the program variants between them and against the original program, and we address it in answering RQ1. 
+With RQ2, we focus on the last category, the dynamic analysis of the generated variants. This decision is supported because dynamic analysis complements RQ1 and, it is essential to provide a full understanding of diversification \citationneeded.
+We use the original functions from the \corpusrosetta corpus described in \autoref{section:crow:corpora} and their variants generated in the answering of RQ1. 
+We use only the \corpusrosetta to answer RQ2 because this corpus is composed of simple programs that can be executed directly without user interaction, \ie we only need to call the interpreter passing the \wasm binary to it. 
+
+
+To dynamically compare programs and their variants, we execute each program on each programs' population to collect their execution traces and execution times. We perform fine-grained comparisons by comparing the traces and execution times for all pairs of programs. Therefore, the defined metrics are formulated to support a pairwise comparison strategy.
 In the following, we define the metrics used to answer RQ2.
 
 \subsection*{Metrics}
 
-We measure the difference between programs at runtime by comparing their execution times and execution traces. We compare their execution traces with an alignment metric at the function and instruction level. We propose a global alignment approach using Dynamic Time Warping (DTW) for their execution traces. %In previous work, we highlighted how this approach measure similarity \citationneeded. 
+We compare the execution traces of two any programs of the same population with a global alignment metric. We propose a global alignment approach using Dynamic Time Warping (DTW). 
 Dynamic Time Warping \cite{Maia08usinga} computes the global alignment between two sequences. It returns a value capturing the cost of this alignment, which is a distance metric. The larger the DTW distance, the more different the two sequences are.
+In our experiments, we define the traces as the sequence of the stack operations during runtime, \ie the consecutive list of \texttt{push} and \texttt{pop} operations performed by the \wasm engine during the execution of the program.
 In the following, we define the $\DTW$ metric. 
  
 
 \begin{metric}{\DTW{}:}
 \label{metric:stack}
-	Given two programs P and P' from the same program's population, \DTW{}(P,P'), computes the DTW distance between the traces collected during their execution. \\
+	Given two programs P and P' from the same program's population, \DTW{}(P,P'), computes the DTW distance between the stack operation traces collected during their execution. \\
 	A \DTW{} of $0$ means that both traces are identical.
 	The higher the value, the more different the traces. 
 \end{metric}
 
 
 
-In our experiments, a stack operation trace is the consecutive list of \texttt{push} and \texttt{pop} operations performed by the \wasm engine during the execution of the program.
-
-We use the execution time of the programs in the population to complement the answer to RQ2. We compare each execution time distribution from the variants against the distribution of the original program.
+Moreover, we use the execution time distribution of the programs in the population to complement the answer to RQ2. For each program pair in the programs' population, we compare their execution time distributions. We define the execution time as follows:
 
 \begin{metric}{Execution time:}\label{metric:time}
 	Given a \wasm program P, the execution time is the time spent to execute the binary.
 \end{metric}
+
+
 
 %\subsection{Variants preservation}
 
 \subsection*{Protocol}
 
 % Dynamic
-To compare program and variants behavior during runtime, we analyze all the unique program variants generated in the answering of RQ1 in a pairwise comparison using \autoref{metric:stack}. We use SWAM\footnote{\url{https://github.com/satabin/swam}} to execute each program and variant to collect the stack operation traces in the case of the \corpusrosetta corpus. SWAM is a \wasm interpreter that provides functionalities to capture the dynamic information of \wasm program executions, including the virtual stack operations. We want to remark that we only collect the stack operation traces due to the memory-agnosticism of our approach to generate variants. Our approach does not change the memory-like operations of the original code.
+To compare program and variants behavior during runtime, we analyze all the unique program variants generated in the answering of RQ1 in a pairwise comparison using the value of aligning their execution traces (\autoref{metric:stack}). We use SWAM\footnote{\url{https://github.com/satabin/swam}} to execute each program and variant to collect the stack operation traces. SWAM is a \wasm interpreter that provides functionalities to capture the dynamic information of \wasm program executions, including the virtual stack operations. We want to remark that we only collect the stack operation traces due to the memory-agnosticism of our approach to generate variants. Our approach does not change the memory-like operations of the original code.
 
 Furthermore, we collect the execution time, \autoref{metric:time}, for all programs and their variants. We compare the collected execution time distributions between programs using a Mann-Withney U test \cite{mann1947} in a pairwise strategy.
 
