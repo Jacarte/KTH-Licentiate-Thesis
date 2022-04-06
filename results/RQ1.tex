@@ -2,29 +2,34 @@
 \section{\rqone}
 \label{results:rq1}
 
+
+\newcommand{\rossetapopulationunique}{2678}
+\newcommand{\rossetapopulation}{809900}
 \newcommand{\diversifiedsodium}{85}
 \newcommand{\diversifiedqrcode}{32}
 \newcommand{\libsodiumpopulation}{4272}
+\newcommand{\libsodiumpopulationunique}{3805}
 \newcommand{\qrpopulation}{6369}
+\newcommand{\qrpopulationunique}{3314}
 
 
 \newcommand{\allmewediversified}{\diversifiedsodium + \diversifiedqrcode}
 \newcommand{\allmewepopulation}{\libpopulation + \qrpopulation}
 
-As we describe in \autoref{rq1:method}, our first research question aims to answer how to generate \wasm program variants. \todo{Motivate} We pass each function of the corpora listed in \autoref{table:corpora} to CROW, and we collect how many variants CROW generates for each function.
-This section is organized as follows. First we present the general results for \emph{Population size}(\autoref{metric:md5sum}) for each corpus. 
+As we describe in \autoref{rq1:method}, our first research question aims to answer how to artifically generate \wasm program variants. 
+This section is organized as follows. First we present the general results calculating the \emph{\corpuspopulationsizename}(\autoref{metric:rq1:corpus_pop}) and \emph{\corpusuniquepopulationsizename}(\autoref{metric:rq1:corpus_pop_unique}) for each corpus. 
 Second, we discuss the challenges and limitations in program variants generation. Finally, we illustrate the most common code transformations performed by our approach and answer RQ1.
 
 \subsection*{Program's populations}
 
 We summarize the results in \autoref{table:crow:general_results}.
-The table is illustrates the Corpus name, the number of functions to diversify, the number of successfully diversified functions (functions with at least one artificially created variant) along with the percentage of successfully diversified functions, the cumulative number of variants taking into account all programs in the corpus and the relation between the increased population size and the original number of functions in the corpus.
+The table illustrates the corpus name, the number of functions to diversify, the number of successfully diversified functions (functions with at least one artificially created variant), the cumulative number of variants (\emph{\corpuspopulationsizename}) and the cumulative number of unique variants (\emph{\corpusuniquepopulationsizename}).
 
 % General results on the number of diversified functions per corpus
 We produce at least one unique program variant for $239/303{}$ single function programs for \corpusrosetta with one hour for a timeout. For the rest of the programs ($64/303{}$), the timeout is reached before CROW can find any valid variant. 
-In the case of \corpussodium and \corpusqrcode, we produce variants for $\py{\diversifiedsodium}/\py{\libsodiumfunctions}$ and $\py{\diversifiedqrcode}/\py{\qrcodefunctions}$ functions respectively, with 5 minutes per function as timeout. The rest of the functions resulted in timeout before finding function variants or produce no variants. For all programs in all corpora, we achieve $356/3021$ successfully diversified functions, for a $11.78\%$.
+In the case of \corpussodium and \corpusqrcode, we produce variants for $\py{\diversifiedsodium}/\py{\libsodiumfunctions}$ and $\py{\diversifiedqrcode}/\py{\qrcodefunctions}$ functions respectively, with 5 minutes per function as timeout. The rest of the functions resulted in timeout before finding function variants or produce no variants. For all programs in all corpora, we achieve $356/3021$ successfully diversified functions, representing a $11.78\%$ of the total.
 % General growing factor
-As the four and fifth columns show, the number of artifically created variants increased the original population $4.15$ times, from $3021$ programs to $12547$.
+As the four and fifth columns show, the number of artifically created variants and the number of unique variants are larger than the original number of functions by one order of magnitude. In the case of \corpusrosetta, the corpus population size is close to one million of programs.
 
 
 \input{results/result_static_diversity.tex}
@@ -33,30 +38,32 @@ As the four and fifth columns show, the number of artifically created variants i
 \subsection*{Challenges for automatic diversification}
 \label{rq1:challenges}
 
-We have observed a remarkable difference between the number of successfully diversified functions versus the number of failed-to-diversify functions (third column of \autoref{table:crow:general_results}). Our approach successfully diversified approx. 79 \%, \py{100*{\diversifiedsodium} / {\libsodiumfunctions}}\% and \py{100*{\diversifiedqrcode} / {\qrcodefunctions}}\% of the original functions for \corpusrosetta, \corpussodium and \corpusqrcode respectively. 
+% Low diversified functions
+We have observed a remarkable difference between the number of successfully diversified functions versus the number of failed-to-diversify functions (third column of \autoref{table:crow:general_results}). Our approach successfully diversified $239/303$, $85/869$ and $32/1849$ of the original functions for \corpusrosetta, \corpussodium and \corpusqrcode respectively.  The main reason of this phenomenon is the set timeout for CROW. Setting up the timeout affects the capacity of our approach to generate variants. For our corpora, a low timeout implies a low number of diversified functions.
 
-Setting up the timeout affects the capacity for diversification. A low timeout for exploration gives our approach more power to combine code replacements. We can appreciate this in the last column of the table, where for a lower number of diversified functions, we create, overall, more variants.
+% High populatio size
+We have noticed a remarkable difference between the number of diversified functions for each corpus, \rossetapopulation\ programs for \corpusrosetta 4272 for \corpussodium and 6369 for \corpusqrcode. The corpus population size for \corpusrosetta is two orders of magnitude larger compared to the other two corpora. The reason behind the large number of variants for \corpusrosetta is that, after certain time, our approach starts to combine the code replacements to generate new variants. However, looking at the fifth column, the number of unique variants have the same order of magnitude for all corpora.
+The variants generated out of the combination of several code replacements are not necessarily unique. Some code replacements can dominate over others, generating the same \wasm programs.
+
+% Why large unique count in low time ? 
+A low timeout offers more unique variants compared to the population size despite the low number of diversified functions, like the \corpussodium and \corpusqrcode cases. This happens because, CROW first generates variants out of single code replacements and then starts to combine them. Thus, more unique variants are generated in the very first moments of the diversification process with CROW.
 
 %Moreover, we look at the cases that yield a few variants per function. There is no direct correlation between the number of identified codes for replacement and the number of unique variants. Therefore, 
 
-Apart from the timeout, we manually analyze programs searching for properties attempting to the generation of program variants using CROW.
-We identify two main challenges for diversification.
+Apart from the timeout and the combination of variants phenomena, we manually analyze programs, searching for properties attempting to the generation of program variants using CROW.
+We identify another challenge for diversification.
+We have observed that our approach searches for a constant replacement for more than $45\%$ of the instructions of each function while constant values cannot be inferred. For instance, constant values cannot be inferred for memory load operations because our tool is oblivious to a memory model. 
 
-\emph{1) Constant computation}  We have observed that our approach searches for a constant replacement for more than $45\%$ of the blocks of each function while constant values cannot be inferred. For instance, constant values cannot be inferred for memory load operations because our tool is oblivious to a memory model. 
-
-\emph{2) Combination computation}  The overlap between code replacements, is a second factor that limits the number of unique variants. We can generate a high number of variants, but not all replacement combinations are necessarily unique.
+%\emph{2) Combination computation}  The overlap between code replacements, is a second factor that limits the number of unique variants. We can generate a high number of variants, but not all replacement combinations are necessarily unique.
 
 %\todo{Add all the found examples here}
 
 
 \subsection*{Properties for large diversification}
 
-We manually analyzed the programs that yield more than 100 variants to study the critical properties of programs producing a high number of variants.
-This reveals one key factor that favors many unique variants: the presence of bounded loops. In these cases, we synthesize variants for the loops by replacing them with a constant, if the constant inferring \cite{souper} is successful. Every time a loop constant is inferred, the loop body is replaced by a single instruction. This creates a new, statically different program. The number of variants grows exponentially if the function contains nested loops for which we can successfully infer constants. 
-
-% 
-\todo{Below is cryptic, take a look}
-The before mentioned factor seems to be contradictory to the challenges mentioned in \autoref{rq1:challenges}. Constant inferring could generate program variants as it can attempt against their generation. In previous studies \citationneeded, the authors highlight that more than 40\% of code can be replaced with a constant. 
+We manually analyzed the programs to study the critical properties of programs producing a high number of variants.
+This reveals one key factor that favors many unique variants: the presence of bounded loops. In these cases, we synthesize variants for the loops by replacing them with a constant, if the constant inferring is successful. Every time a loop constant is inferred, the loop body is replaced by a single instruction. This creates a new, statically different program. The number of variants grows exponentially if the function contains nested loops for which we can successfully infer constants. 
+ 
 
 A second key factor for synthesizing many variants relates to the presence of arithmetic. The synthesis engine used by our approach, effectively replaces arithmetic instructions with equivalent instructions that lead to the same result. For example, we generate unique variants by replacing multiplications with additions or shift left instructions (\autoref{add:example}). Also, logical comparisons are replaced, inverting the operation and the operands (\autoref{cmp:examples}). Besides, our implementation can use overflow and underflow of integers to produce variants (\autoref{overflow:example}), using the intrinsics of the underlying computation model.
 
@@ -134,7 +141,8 @@ i32.mul
             \begin{lstlisting}
 i32.const 2
 i32.mul
-!i32.const -2147483647!
+!i32.const!
+!  -2147483647!
 !i32.mul!
             \end{lstlisting}
         \end{minipage}
@@ -142,11 +150,10 @@ i32.mul
     \end{code}
 }
 
+\begin{tcolorbox}[title=Answer to RQ1.,boxrule=2pt,arc=.3em,boxsep=1.5mm]
+    We can provide diversification for 11.78\% of the programs in our corpora. Constant inferring, complemented with the high presence of arithmetic operations and bounded loops in the original program increased the number of program variants. Nevertheless, the combination of code replacements in our approach is not a determinant factor to provide a large number unique program variants.
+\end{tcolorbox}
 
-
-\section{Answer to RQ1.}
-
-We can provide diversification for 11.78\% of the programs in our corpora. We increase the initial count of programs by a factor of $4.15$. We identify the challenges attempting against the automated creation of programs variants, \emph{Constant computation} and \emph{Combination computation}. Nevertheless, the same constant computation, complemented with the high presence of arithmetic operations in the original program increased the number of program variants. 
 
 
 \begin{comment}

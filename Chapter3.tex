@@ -17,9 +17,10 @@
 
 
 \newcommand{\DTWStatic}{dt\_static\xspace}
-\newcommand{\DTW}{dt\_dyn\xspace}
+\newcommand{\DTW}{TraceDiff\xspace}
 \newcommand{\tool}{CROW\xspace}
 
+%\todo{Recheck the selection of the modules for sodium}
 
 %This chapter investigates whether we can artificially create program variants through semantically equivalent code transformations. We propose a framework to generate program variants functionally equivalent to their original.
 %We introduce the retargeting of a superoptimizer, using its exhaustive search strategy to provide semantically equivalent code transformations. 
@@ -37,7 +38,7 @@ We first enunciate the corpora we share along this work to answer our research q
 % Our approach lies under \textit{Design Science} \cite{Runeson2020}, in terms of empirical validation, the scope of the design knowledge gained in a study can be extended by systematically extending the scope of the valudation in subsequent studies. Thus, the size of our corpora can be extended to increase the knowledge of the research area.
 
 
-\section{Corpora}
+\section*{Corpora}
 \label{section:crow:corpora}
 
 Our experiments assess the impact of artificially created diversity in terms of program variants size, static and dynamic differences. The first step is to build a suitable corpus of programs' seeds to generate the variants. Finally, we answer all our research questions with three corpora of diverse and representative programs for our experiments. 
@@ -48,13 +49,13 @@ We build our three corpora in an escalating strategy. The first corpus is divers
     
     The result of the filtering is a corpus of 303 C programs. All programs include a single function in terms of source code. These programs range from $7$ to $150$ lines of code and solve a variety of problems, from the \textit{Babbage} problem to  \textit{Convex Hull} calculation.
 
-    \item \textbf{\corpussodium}: This project is encryption, decryption, signature, and password hashing library ported to WebAssembly in 102 separated modules. The modules have between $8$ and $2703$ lines of code per function. This project is selected based on two main criteria: first, its importance for security-related applications, and second, its suitability to collect the modules in LLVM intermediate representation. We select 5 programs that interconnect the 102 modules of the project.
+    \item \textbf{\corpussodium}: This project is encryption, decryption, signature, and password hashing library ported to WebAssembly in 102 separated modules. The modules have between $8$ and $2703$ lines of code per function. This project is selected based on two main criteria: first, its importance for security-related applications, and second, its suitability to collect the modules in LLVM intermediate representation. %We select 5 programs that interconnect the 102 modules of the project.
 
     \item \textbf{\corpusqrcode}: This project is a QrCode and MicroQrCode generator written in Rust. This project contains 2 modules having between $4$ and $725$ lines of code per function. As \corpussodium, we select this project due to its suitability for collecting the modules in their LLVM representation. Besides, this project increases the complexity of the previously selected projects due to its integration with the generation of images.
     
 \end{enumerate}
 
-In \autoref{table:corpora} we listed the corpus name, the number of modules, the number of programs inside the corpus, the total number of functions, the range of lines of code, and the original location of the corpus. 
+In \autoref{table:corpora} we listed the corpus name, the number of modules, the total number of functions, the range of lines of code, and the original location of the corpus. 
 
 
 %The first corpus, \textbf{CROW prime}, . The second corpus, \textbf{MEWE prime}, is part of the MEWE contribution \cite{}. In \autoref{table:corpora} we summarize the selection criteria, and we mention each corpus properties. With both corpora we evaluate CROW with a total of $303 + \py{\allmewefunctions}$ functions. 
@@ -63,14 +64,13 @@ In \autoref{table:corpora} we listed the corpus name, the number of modules, the
     \renewcommand{\arraystretch}{1.0}
     \small
     \centering
-    \begin{tabular}{l | l | l | l | l | p{2.8cm}}
-        Corpus & No. modules & No. programs & No. functions & LOC range & Location \\
+    \begin{tabular}{l | l | l | l | p{3.2cm}}
+        Corpus & No. modules & No. functions & LOC range & Location \\
         \midrule
             % CROW
             \corpusrosetta &
             - %\footnote{ The concept of module does not apply for this corpus programs. } 
             &
-            \fromjson{data/crow_corpus.json}{.[0].programs} &
             \fromjson{data/crow_corpus.json}{.[0].functions}  & 
             \fromjson{data/crow_corpus.json}{.[0].min_lines} - 
             \fromjson{data/crow_corpus.json}{.[0].max_lines} & 
@@ -78,14 +78,12 @@ In \autoref{table:corpora} we listed the corpus name, the number of modules, the
         \hline
         \corpussodium & 
         102 &
-        5 & 
         \fromjson{data/allinone.multivariant.bc.massive.sodium.json}{.total_functions}  &
         \fromjson{data/allinone.multivariant.bc.massive.sodium.json}{.min_llvm_loc} - \fromjson{data/allinone.multivariant.bc.massive.sodium.json}{.max_llvm_loc}  &   
         \url{https://github.com/jedisct1/libsodium }\\
         \hline
         \corpusqrcode & 
         2 &
-        2 & 
         \fromjson{data/allinone.multivariant.bc.massive.qr.json}{.total_functions}  & 
         \fromjson{data/allinone.multivariant.bc.massive.qr.json}{.min_llvm_loc} - \fromjson{data/allinone.multivariant.bc.massive.qr.json}{.max_llvm_loc}   & 
         \url{https://github.com/kennytm/qrcode-rust} \\
@@ -93,14 +91,12 @@ In \autoref{table:corpora} we listed the corpus name, the number of modules, the
         \hline
         \hline
         \textbf{Total} & 
-        &
-        \py{
-        5 + 2 + 303} &   
+        & 
         \py{ 303 + \qrcodefunctions + \libsodiumfunctions} &  
         &     \\
 
     \end{tabular}
-    \caption{Corpora description. The table is composed by the name of the corpus, the number of modules, the number of programs, the number of functions, the lines of code range and the location of the corpus.}
+    \caption{Corpora description. The table is composed by the name of the corpus, the number of modules, the number of functions, the lines of code range and the location of the corpus.}
     \label{table:corpora}
 \end{table}
 
@@ -112,8 +108,14 @@ In \autoref{table:corpora} we listed the corpus name, the number of modules, the
 
 %\pagebreak
 
-\section{Conclusions}
+\section*{Conclusions}
 
 This chapter presents the methodology we follow to answer our three research questions. We first describe and propose the corpora of programs used in this work. We propose to measure the ability of our approach to generate variants out of \py{303  + \libsodiumfunctions + \qrcodefunctions} functions of our corpora. Then, we suggest using the generated variants to study to what extent they offer different observable behavior through dynamic analysis. We propose a protocol to study the impact of the composition variants in a multivariant binary deployed at the Edge. Nevertheless, we enumerate and enunciate the properties and metrics that might lead us to answer the impact of automatic diversification for \wasm programs. In the next chapter, we present and discuss the results obtained with this methodology.
+
+
+%\todo{Add the unique and the total.}
+%\todo{Change metrics and the name of dt\_dyn.}
+%\todo{Remove growing factor.}
+%\todo{Explain what a quantile-quantile plot is.}
 
 \clearpage

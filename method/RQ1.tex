@@ -5,33 +5,79 @@
 
 \begin{figure}[h]
     \centering
-    \includegraphics[height=3.5in]{diagrams/RQ1.pdf}
+    \includegraphics[height=4.1in]{diagrams/RQ1.pdf}
     \caption{The program variants generation for RQ1.}
     \label{diagrams:protocol:rq1}
 \end{figure}
 
 
-This research question investigates whether we can artificially generate program variants for \wasm. We use CROW to generate variants from an original program, written in C/C++ in the case of the \corpusrosetta corpus and LLVM bitcodes in the case of \corpussodium and \corpusqrcode. 
-In \autoref{diagrams:protocol:rq1} we simplify the workflow to generate \wasm program variants. We pass each function of the corpora to CROW. To answer RQ1, we study the outcome of this pipeline, the generated variants. 
+This research question investigates whether we can artificially generate program variants for \wasm. We use CROW to generate variants from an original program, written in C/C++ in the case of \corpusrosetta corpus and LLVM bitcode modules in the case of \corpussodium and \corpusqrcode. 
+In \autoref{diagrams:protocol:rq1} we illustrate the workflow to generate \wasm program variants. We pass each function of the corpora to CROW as a program to diversify. To answer RQ1, we study the outcome of this pipeline, the generated \wasm variants. 
 
 
 \subsection*{Metrics}
 
-To assess our approach's ability to generate \wasm binaries that are statically different, we compute the number of unique variants for each original function of each corpus. 
+To assess our approach's ability to generate \wasm binaries that are statically different, we compute the number of variants and the number of unique variants for each original function of each corpus. 
+On top, we define the aggregation of these former two metrics to quantitatively evaluate RQ1 at the corpus level.
 
-\begin{metric}{Population size $S(P)$:}\label{metric:md5sum}
-    Given a program P and its generated variants $V$, the population size metric is defined as.\\
+
+\begin{definition}{Program's population $M(P)$:}\label{def:rq1:programspopulation}
+    Given a program P and its generated variants, the program's population is defined as.\\
     $$
-        S(P)=|V|
+        M(P)=\{v\ \text{where v is a variant of P}\}
     $$
 
-    Notice that, the variant population includes P as an instance.
+    Notice that, the program's population includes the original program P.
+\end{definition}
+
+%Notice that all metrics over programs and their variants make sense only at the population level. Therefore, we compare semantically equivalent programs from the same population.
+
+\begin{definition}{Program's unique population $U(P)$:}\label{def:rq1:programsuniquepopulation}
+    Given a program P and its program's population $M(P)$, the program's unique population is defined as.\\
+    $$
+        U(P)=\{v\ \in\ M(P)\}
+    $$
+    such that $\forall v_i,v_j \in U(P)$, $md5sum(v_i) \neq md5sum(v_j)$.
+    $Md5sum(v)$ is the md5 hash calculated over the byte stream of the program file $v$. Notice that, the original program $P$ is included in $U(P)$.
+
+\end{definition}
+
+\begin{metric}{Program's population size $S(P)$:}\label{metric:rq1:PS}
+    Given a program P and its program's population $M(P)$ according to \autoref{def:rq1:programspopulation}, the program's population size is defined as.\\
+    $$
+        S(P)=|M(P)|
+    $$
 \end{metric}
 
-A program and its variants compose what we call a program's population. Notice that all proposed metrics over programs and their variants make sense only at the population level. Therefore, we compare semantically equivalent programs from the same population.
+
+\begin{metric}{Program's unique population size $US(P)$:}\label{metric:rq1:UP}
+    Given a program P and its program's unique population $U(P)$ according to \autoref{def:rq1:programsuniquepopulation}, the program's unique population size is defined as.\\
+    $$
+        US(P)=|U(P)|
+    $$
+\end{metric}
+
+\newcommand{\corpuspopulationsizename}{Corpus population size\xspace}
+\newcommand{\corpusuniquepopulationsizename}{Corpus unique population size\xspace}
+
+\begin{metric}{\corpuspopulationsizename$CS(C)$:}\label{metric:rq1:corpus_pop}
+    Given a program's corpus $C$, the corpus population size is defined as the sum of all program's population sizes over the corpus $C$.\\
+    $$
+        CS(C)=\Sigma{S(P)}\ \forall\ P\ \in\ C
+    $$
+\end{metric}
+
+\begin{metric}{\corpusuniquepopulationsizename$UCS(C)$:}\label{metric:rq1:corpus_pop_unique}
+
+    Given a program's corpus $C$, the corpus unique population size is defined as the sum of all program's unique population sizes over the corpus $C$\\
+    $$
+    UCS(C)=\Sigma{US(P)}\ \forall\ P\ \in\ C
+    $$
+\end{metric}
+
 
 \subsection*{Protocol}
-To generate program variants, we mainly synthesize program variants with an enumerative strategy, checking each synthesis for equivalence modulo input \cite{Li2018} against the original program. An enumerative synthesis is a brute-force approach to generate program variants. With a maximum number of instructions, it constructs and checks all possible programs up to that limit. For a simplified instance, with a maximum code size of 2 instructions in a programming language with $L$ possible constructions, an enumerative synthesizer builds all $L\times L$ combinations finding program variants. For obvious reasons, this space is nearly impossible to explore in a reasonable time as soon as the limit of instructions increases.
+To generate program variants, we synthesize program variants with an enumerative strategy, checking each synthesis for equivalence modulo input \cite{Li2018} against the original program. An enumerative synthesis is a brute-force approach to generate program variants. With a maximum number of instructions, it constructs and checks all possible programs up to that limit. For a simplified instance, with a maximum code size of 2 instructions in a programming language with $L$ possible constructions, an enumerative synthesizer builds all $L\times L$ combinations finding program variants. For obvious reasons, this space is nearly impossible to explore in a reasonable time as soon as the limit of instructions increases.
 Therefore, we use two parameters to control the size of the search space and hence the time required to traverse it.
 On the one hand, one can limit the size of the variants. On the other hand, one can limit the set of instructions used for the synthesis. In our experiments for RQ1, we use all the $60$ supported instructions in our synthesizer.
 
@@ -39,4 +85,4 @@ On the one hand, one can limit the size of the variants. On the other hand, one 
 The former parameter allows us to find a trade-off between the number of variants that are synthesized and the time taken to produce them. For the current evaluation, given the size of the corpus and the properties of its programs, we set the exploration time to 1 hour maximum per function for \corpusrosetta. In the cases of \corpussodium\ and\ \corpusqrcode, we set the timeout to 5 minutes per function. The decision behind the usage of lower timeout for \corpussodium
 and \corpussodium is motivated by the properties listed in \autoref{table:corpora}. The latter two corpora are remarkably larger regarding the number of instructions and functions count. 
 
-We pass each of the $303 + \libsodiumfunctions + \qrcodefunctions$ functions in the corpora to CROW, as \autoref{diagrams:protocol:rq1} illustrates, to synthesize program variants. Finally, we calculate \autoref{metric:md5sum} for each program's population and conclude by answering RQ1.
+We pass each of the $303 + \libsodiumfunctions + \qrcodefunctions$ functions in the corpora to CROW, as \autoref{diagrams:protocol:rq1} illustrates, to synthesize program variants. We calculate the \emph{Corpus population size}(\autoref{metric:rq1:corpus_pop}) and \emph{Corpus unique population size}(\autoref{metric:rq1:corpus_pop_unique}) for each corpus and conclude by answering RQ1.

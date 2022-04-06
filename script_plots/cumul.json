@@ -1,0 +1,932 @@
+{
+    "Thue-Morse.variants.csv": {
+        "total": 2941,
+        "unique": 19
+    },
+    "Pernicious_numbers.variants.csv": {
+        "total": 1004,
+        "unique": 3
+    },
+    "Check_input_device_is_a_terminal.variants.csv": {
+        "total": 58,
+        "unique": 2
+    },
+    "Factors_of_an_integer.variants.csv": {
+        "total": 1948,
+        "unique": 5
+    },
+    "Vigene\u0300re_cipher-Cryptanalysis.variants.csv": {
+        "total": 16,
+        "unique": 16
+    },
+    "Run-length_encoding.variants.csv": {
+        "total": 3139,
+        "unique": 106
+    },
+    "Poker_hand_analyser.variants.csv": {
+        "total": 5011,
+        "unique": 14
+    },
+    "Loops-Wrong_ranges.variants.csv": {
+        "total": 23,
+        "unique": 4
+    },
+    "Parsing-RPN_to_infix_conversion.variants.csv": {
+        "total": 9133,
+        "unique": 16
+    },
+    "Check_output_device_is_a_terminal.variants.csv": {
+        "total": 40,
+        "unique": 1
+    },
+    "Sorting_algorithms-Bubble_sort.variants.csv": {
+        "total": 441,
+        "unique": 2
+    },
+    "Roman_numerals-Decode.variants.csv": {
+        "total": 1455,
+        "unique": 10
+    },
+    "Find_the_intersection_of_two_lines.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "Repeat_a_string.variants.csv": {
+        "total": 20,
+        "unique": 1
+    },
+    "Largest_int_from_concatenated_ints.variants.csv": {
+        "total": 4,
+        "unique": 1
+    },
+    "Execute_a_Markov_algorithm.variants.csv": {
+        "total": 720,
+        "unique": 17
+    },
+    "Permutations.variants.csv": {
+        "total": 3760,
+        "unique": 5
+    },
+    "Amicable_pairs.variants.csv": {
+        "total": 4,
+        "unique": 4
+    },
+    "Ramseys_theorem.variants.csv": {
+        "total": 810,
+        "unique": 2
+    },
+    "URL_encoding.variants.csv": {
+        "total": 240,
+        "unique": 1
+    },
+    "Validate_International_Securities_Identification_Number.variants.csv": {
+        "total": 11642,
+        "unique": 144
+    },
+    "Averages-Pythagorean_means.variants.csv": {
+        "total": 166,
+        "unique": 3
+    },
+    "Hash_from_two_arrays.variants.csv": {
+        "total": 13579,
+        "unique": 6
+    },
+    "Draw_a_cuboid.variants.csv": {
+        "total": 1146,
+        "unique": 4
+    },
+    "Strip_a_set_of_characters_from_a_string.variants.csv": {
+        "total": 640,
+        "unique": 1
+    },
+    "The_Name_Game.variants.csv": {
+        "total": 3761,
+        "unique": 3
+    },
+    "Substring-Top_and_tail.variants.csv": {
+        "total": 61,
+        "unique": 2
+    },
+    "Idiomatically_determine_all_the_lowercase_and_uppercase_letters.variants.csv": {
+        "total": 12843,
+        "unique": 101
+    },
+    "Doubly-linked_list-Traversal.variants.csv": {
+        "total": 402,
+        "unique": 1
+    },
+    "Emirp_primes.variants.csv": {
+        "total": 381,
+        "unique": 6
+    },
+    "Binary_search.variants.csv": {
+        "total": 140,
+        "unique": 8
+    },
+    "Caesar_cipher.variants.csv": {
+        "total": 11573,
+        "unique": 36
+    },
+    "4-rings_or_4-squares_puzzle.variants.csv": {
+        "total": 7318,
+        "unique": 11
+    },
+    "Knapsack_problem-Unbounded.variants.csv": {
+        "total": 40,
+        "unique": 1
+    },
+    "Department_Numbers.variants.csv": {
+        "total": 27,
+        "unique": 8
+    },
+    "Old_lady_swallowed_a_fly.variants.csv": {
+        "total": 30131,
+        "unique": 16
+    },
+    "Inverted_index.variants.csv": {
+        "total": 7686,
+        "unique": 2
+    },
+    "List_rooted_trees.variants.csv": {
+        "total": 80,
+        "unique": 1
+    },
+    "Set_of_real_numbers.variants.csv": {
+        "total": 1677,
+        "unique": 5
+    },
+    "Elliptic_curve_arithmetic.variants.csv": {
+        "total": 39,
+        "unique": 1
+    },
+    "A*_search_algorithm.variants.csv": {
+        "total": 27,
+        "unique": 27
+    },
+    "Perfect_shuffle.variants.csv": {
+        "total": 4,
+        "unique": 4
+    },
+    "Show_Ascii_table.variants.csv": {
+        "total": 5,
+        "unique": 5
+    },
+    "Longest_increasing_subsequence.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "Kahan_summation.variants.csv": {
+        "total": 3835,
+        "unique": 6
+    },
+    "100_doors.variants.csv": {
+        "total": 21,
+        "unique": 8
+    },
+    "Square_but_not_cube.variants.csv": {
+        "total": 92,
+        "unique": 3
+    },
+    "Pascals_triangle.variants.csv": {
+        "total": 26,
+        "unique": 4
+    },
+    "Ethiopian_multiplication.variants.csv": {
+        "total": 67,
+        "unique": 10
+    },
+    "Multifactorial.variants.csv": {
+        "total": 88,
+        "unique": 3
+    },
+    "Lucas-Lehmer_test.variants.csv": {
+        "total": 3,
+        "unique": 3
+    },
+    "Maximum_triangle_path_sum.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "Babbage_problem.variants.csv": {
+        "total": 55,
+        "unique": 7
+    },
+    "ABC_Problem.variants.csv": {
+        "total": 9,
+        "unique": 3
+    },
+    "Reverse_words_in_a_string.variants.csv": {
+        "total": 3599,
+        "unique": 9
+    },
+    "First-class_functions.variants.csv": {
+        "total": 15183,
+        "unique": 27
+    },
+    "Create_an_HTML_table.variants.csv": {
+        "total": 40,
+        "unique": 1
+    },
+    "Sudoku.variants.csv": {
+        "total": 60,
+        "unique": 8
+    },
+    "Cheryls_Birthday.variants.csv": {
+        "total": 3,
+        "unique": 3
+    },
+    "String_concatenation.variants.csv": {
+        "total": 20,
+        "unique": 1
+    },
+    "Sum_of_squares.variants.csv": {
+        "total": 160,
+        "unique": 3
+    },
+    "Find_the_missing_permutation.variants.csv": {
+        "total": 27239,
+        "unique": 17
+    },
+    "Return_multiple_values.variants.csv": {
+        "total": 141,
+        "unique": 1
+    },
+    "Check_that_file_exists.variants.csv": {
+        "total": 360,
+        "unique": 1
+    },
+    "Range_extraction.variants.csv": {
+        "total": 17396,
+        "unique": 85
+    },
+    "Paraffins.variants.csv": {
+        "total": 21,
+        "unique": 3
+    },
+    "Non-continuous_subsequences.variants.csv": {
+        "total": 3,
+        "unique": 3
+    },
+    "Hofstadter_Q_sequence.variants.csv": {
+        "total": 67,
+        "unique": 3
+    },
+    "Loops-N_plus_one_half.variants.csv": {
+        "total": 19741,
+        "unique": 78
+    },
+    "Move-to-front_algorithm.variants.csv": {
+        "total": 175,
+        "unique": 6
+    },
+    "Continued_fraction-Arithmetic-Construct_from_rational_number.variants.csv": {
+        "total": 2,
+        "unique": 1
+    },
+    "Sort_numbers_lexicographically.variants.csv": {
+        "total": 340,
+        "unique": 2
+    },
+    "Permutation_test.variants.csv": {
+        "total": 800,
+        "unique": 6
+    },
+    "Undefined_values.variants.csv": {
+        "total": 40,
+        "unique": 1
+    },
+    "Linear_congruential_generator.variants.csv": {
+        "total": 40,
+        "unique": 1
+    },
+    "General_FizzBuzz.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "Topological_sort.variants.csv": {
+        "total": 3,
+        "unique": 3
+    },
+    "Test_integerness.variants.csv": {
+        "total": 9450,
+        "unique": 1
+    },
+    "Four_bit_adder.variants.csv": {
+        "total": 3,
+        "unique": 3
+    },
+    "Temperature_conversion.variants.csv": {
+        "total": 7,
+        "unique": 1
+    },
+    "Sum_to_100.variants.csv": {
+        "total": 3,
+        "unique": 3
+    },
+    "Forward_difference.variants.csv": {
+        "total": 11,
+        "unique": 3
+    },
+    "Water_collected_between_towers.variants.csv": {
+        "total": 220,
+        "unique": 3
+    },
+    "Numerical_integration-Adaptive_Simpsons_method.variants.csv": {
+        "total": 24,
+        "unique": 2
+    },
+    "Nth_root.variants.csv": {
+        "total": 18685,
+        "unique": 62
+    },
+    "Digital_root-Multiplicative_digital_root.variants.csv": {
+        "total": 19,
+        "unique": 2
+    },
+    "Substring.variants.csv": {
+        "total": 8,
+        "unique": 5
+    },
+    "Deconvolution-1D.variants.csv": {
+        "total": 994,
+        "unique": 5
+    },
+    "Sort_using_a_custom_comparator.variants.csv": {
+        "total": 20,
+        "unique": 3
+    },
+    "Pascal_matrix_generation.variants.csv": {
+        "total": 11158,
+        "unique": 20
+    },
+    "Averages-Mode.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "Cartesian_product_of_two_or_more_lists.variants.csv": {
+        "total": 4,
+        "unique": 4
+    },
+    "Sum_of_a_series.variants.csv": {
+        "total": 8,
+        "unique": 8
+    },
+    "S-Expressions.variants.csv": {
+        "total": 26083,
+        "unique": 4
+    },
+    "Smith_numbers.variants.csv": {
+        "total": 90,
+        "unique": 1
+    },
+    "One-dimensional_cellular_automata.variants.csv": {
+        "total": 400,
+        "unique": 3
+    },
+    "Text_processing-2.variants.csv": {
+        "total": 720,
+        "unique": 2
+    },
+    "Quickselect_algorithm.variants.csv": {
+        "total": 203,
+        "unique": 8
+    },
+    "Map_range.variants.csv": {
+        "total": 2934,
+        "unique": 19
+    },
+    "Hofstadter_Figure-Figure_sequences.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "Dinesmans_multiple-dwelling_problem.variants.csv": {
+        "total": 360,
+        "unique": 3
+    },
+    "Hamming_numbers.variants.csv": {
+        "total": 48,
+        "unique": 9
+    },
+    "Old_Russian_measure_of_length.variants.csv": {
+        "total": 32715,
+        "unique": 14
+    },
+    "Modular_inverse.variants.csv": {
+        "total": 155,
+        "unique": 3
+    },
+    "Extract_file_extension.variants.csv": {
+        "total": 595,
+        "unique": 4
+    },
+    "Stern-Brocot_sequence.variants.csv": {
+        "total": 6,
+        "unique": 1
+    },
+    "Spiral_matrix.variants.csv": {
+        "total": 453,
+        "unique": 6
+    },
+    "Sorting_algorithms-Selection_sort.variants.csv": {
+        "total": 170,
+        "unique": 1
+    },
+    "Permutations_by_swapping.variants.csv": {
+        "total": 197,
+        "unique": 9
+    },
+    "Tokenize_a_string.variants.csv": {
+        "total": 120,
+        "unique": 3
+    },
+    "Zebra_puzzle.variants.csv": {
+        "total": 11705,
+        "unique": 29
+    },
+    "Anti-primes.variants.csv": {
+        "total": 601,
+        "unique": 5
+    },
+    "Gapful_numbers.variants.csv": {
+        "total": 20,
+        "unique": 1
+    },
+    "Soundex.variants.csv": {
+        "total": 450,
+        "unique": 1
+    },
+    "Parametric_polymorphism.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "String_case.variants.csv": {
+        "total": 21400,
+        "unique": 1
+    },
+    "Copy_a_string.variants.csv": {
+        "total": 4005,
+        "unique": 5
+    },
+    "Filter.variants.csv": {
+        "total": 46627,
+        "unique": 38
+    },
+    "Playing_cards.variants.csv": {
+        "total": 80,
+        "unique": 1
+    },
+    "Sequence_of_non-squares.variants.csv": {
+        "total": 81,
+        "unique": 2
+    },
+    "Natural_sorting.variants.csv": {
+        "total": 209,
+        "unique": 9
+    },
+    "Negative_base_numbers.variants.csv": {
+        "total": 3,
+        "unique": 3
+    },
+    "Jewels_and_Stones.variants.csv": {
+        "total": 4059,
+        "unique": 4
+    },
+    "Numeric_error_propagation.variants.csv": {
+        "total": 20,
+        "unique": 2
+    },
+    "Knapsack_problem-Continuous.variants.csv": {
+        "total": 124,
+        "unique": 2
+    },
+    "Accumulator_factory.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "Binary_digits.variants.csv": {
+        "total": 9637,
+        "unique": 159
+    },
+    "Ternary_logic.variants.csv": {
+        "total": 8,
+        "unique": 8
+    },
+    "Fivenum.variants.csv": {
+        "total": 55,
+        "unique": 13
+    },
+    "Zeckendorf_number_representation.variants.csv": {
+        "total": 20,
+        "unique": 3
+    },
+    "Deal_cards_for_FreeCell.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "Roots_of_a_function.variants.csv": {
+        "total": 12834,
+        "unique": 20
+    },
+    "Remove_duplicate_elements.variants.csv": {
+        "total": 3240,
+        "unique": 1
+    },
+    "Symmetric_difference.variants.csv": {
+        "total": 165,
+        "unique": 5
+    },
+    "Circles_of_given_radius_through_two_points.variants.csv": {
+        "total": 4163,
+        "unique": 7
+    },
+    "Find_the_intersection_of_a_line_with_a_plane.variants.csv": {
+        "total": 94,
+        "unique": 2
+    },
+    "JortSort.variants.csv": {
+        "total": 140,
+        "unique": 2
+    },
+    "Bacon_cipher.variants.csv": {
+        "total": 58758,
+        "unique": 43
+    },
+    "Probabilistic_choice.variants.csv": {
+        "total": 880,
+        "unique": 1
+    },
+    "Runge-Kutta_method.variants.csv": {
+        "total": 12598,
+        "unique": 89
+    },
+    "Terminal_control-Preserve_screen.variants.csv": {
+        "total": 2736,
+        "unique": 15
+    },
+    "Harshad_or_Niven_series.variants.csv": {
+        "total": 40,
+        "unique": 3
+    },
+    "Determine_if_two_triangles_overlap.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "Type_detection.variants.csv": {
+        "total": 240,
+        "unique": 1
+    },
+    "Sierpinski_triangle.variants.csv": {
+        "total": 14642,
+        "unique": 44
+    },
+    "Multisplit.variants.csv": {
+        "total": 3888,
+        "unique": 5
+    },
+    "Sorting_algorithms-Heapsort.variants.csv": {
+        "total": 40,
+        "unique": 2
+    },
+    "Visualize_a_tree.variants.csv": {
+        "total": 900,
+        "unique": 2
+    },
+    "Truncatable_primes.variants.csv": {
+        "total": 230,
+        "unique": 13
+    },
+    "Resistor_mesh.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "Stack.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "Van_der_Corput_sequence.variants.csv": {
+        "total": 29,
+        "unique": 1
+    },
+    "Cycle_detection.variants.csv": {
+        "total": 40,
+        "unique": 1
+    },
+    "Greatest_subsequential_sum.variants.csv": {
+        "total": 1902,
+        "unique": 16
+    },
+    "Law_of_cosines_-_triples.variants.csv": {
+        "total": 280,
+        "unique": 1
+    },
+    "McNuggets_Problem.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "Approximate_Equality.variants.csv": {
+        "total": 501,
+        "unique": 3
+    },
+    "Population_count.variants.csv": {
+        "total": 3,
+        "unique": 1
+    },
+    "Horners_rule_for_polynomial_evaluation.variants.csv": {
+        "total": 220,
+        "unique": 2
+    },
+    "Set.variants.csv": {
+        "total": 1017,
+        "unique": 11
+    },
+    "Price_fraction.variants.csv": {
+        "total": 18519,
+        "unique": 21
+    },
+    "Universal_Turing_machine.variants.csv": {
+        "total": 20,
+        "unique": 3
+    },
+    "AKS_test_for_primes.variants.csv": {
+        "total": 15954,
+        "unique": 21
+    },
+    "Numerical_integration-Gauss-Legendre_Quadrature.variants.csv": {
+        "total": 15478,
+        "unique": 190
+    },
+    "Vector.variants.csv": {
+        "total": 96,
+        "unique": 2
+    },
+    "Averages-Mean_angle.variants.csv": {
+        "total": 3,
+        "unique": 3
+    },
+    "Combinations.variants.csv": {
+        "total": 20,
+        "unique": 3
+    },
+    "Ordered_Partitions.variants.csv": {
+        "total": 81,
+        "unique": 1
+    },
+    "ISBN13_check_digit.variants.csv": {
+        "total": 16880,
+        "unique": 26
+    },
+    "Dijkstras_algorithm.variants.csv": {
+        "total": 20,
+        "unique": 5
+    },
+    "Sorting_algorithms-Stooge_sort.variants.csv": {
+        "total": 80,
+        "unique": 2
+    },
+    "Split_a_character_string_based_on_change_of_character.variants.csv": {
+        "total": 1936,
+        "unique": 5
+    },
+    "Roots_of_unity.variants.csv": {
+        "total": 6,
+        "unique": 6
+    },
+    "Multiplication_tables.variants.csv": {
+        "total": 11777,
+        "unique": 74
+    },
+    "Sequence:_smallest_number_greater_than_previous_term_with_exactly_n_divisors.variants.csv": {
+        "total": 200,
+        "unique": 2
+    },
+    "Variable-length_quantity.variants.csv": {
+        "total": 20,
+        "unique": 5
+    },
+    "Longest_Common_Substring.variants.csv": {
+        "total": 4,
+        "unique": 4
+    },
+    "Welchs_t-test.variants.csv": {
+        "total": 1097,
+        "unique": 18
+    },
+    "Number_names.variants.csv": {
+        "total": 1272,
+        "unique": 34
+    },
+    "Optional_parameters.variants.csv": {
+        "total": 1001,
+        "unique": 32
+    },
+    "Base64_decode_data.variants.csv": {
+        "total": 9330,
+        "unique": 220
+    },
+    "99_Bottles_of_Beer.variants.csv": {
+        "total": 12183,
+        "unique": 39
+    },
+    "Sum_data_type.variants.csv": {
+        "total": 160,
+        "unique": 2
+    },
+    "Hilbert_curve.variants.csv": {
+        "total": 3844,
+        "unique": 47
+    },
+    "Extreme_floating_point_values.variants.csv": {
+        "total": 192,
+        "unique": 1
+    },
+    "Sexy_primes.variants.csv": {
+        "total": 1388,
+        "unique": 11
+    },
+    "Totient_function.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "CSV_to_HTML_translation.variants.csv": {
+        "total": 1500,
+        "unique": 1
+    },
+    "The_ISAAC_Cipher.variants.csv": {
+        "total": 41,
+        "unique": 3
+    },
+    "Almost_prime.variants.csv": {
+        "total": 5470,
+        "unique": 4
+    },
+    "Fast_Fourier_transform.variants.csv": {
+        "total": 6037,
+        "unique": 9
+    },
+    "P-value_correction.variants.csv": {
+        "total": 88,
+        "unique": 28
+    },
+    "Fibonacci_word-fractal.variants.csv": {
+        "total": 61,
+        "unique": 3
+    },
+    "Reverse_a_string.variants.csv": {
+        "total": 3079,
+        "unique": 9
+    },
+    "Non-decimal_radices-Output.variants.csv": {
+        "total": 3256,
+        "unique": 17
+    },
+    "Averages-Root_mean_square.variants.csv": {
+        "total": 10296,
+        "unique": 8
+    },
+    "Sorting_algorithms-Quicksort.variants.csv": {
+        "total": 4,
+        "unique": 4
+    },
+    "Determine_if_a_string_has_all_the_same_characters.variants.csv": {
+        "total": 373,
+        "unique": 5
+    },
+    "Heronian_triangles.variants.csv": {
+        "total": 990,
+        "unique": 1
+    },
+    "Jensens_Device.variants.csv": {
+        "total": 80,
+        "unique": 2
+    },
+    "Increment_a_numerical_string.variants.csv": {
+        "total": 20,
+        "unique": 3
+    },
+    "Pangram_checker.variants.csv": {
+        "total": 10618,
+        "unique": 12
+    },
+    "Continued_fraction.variants.csv": {
+        "total": 17248,
+        "unique": 4
+    },
+    "Stable_marriage_problem.variants.csv": {
+        "total": 20,
+        "unique": 1
+    },
+    "Power_set.variants.csv": {
+        "total": 180,
+        "unique": 13
+    },
+    "Carmichael_3_strong_pseudoprimes.variants.csv": {
+        "total": 35,
+        "unique": 9
+    },
+    "Van_Eck_sequence.variants.csv": {
+        "total": 2,
+        "unique": 2
+    },
+    "Sparkline_in_unicode.variants.csv": {
+        "total": 320,
+        "unique": 17
+    },
+    "Named_parameters.variants.csv": {
+        "total": 2,
+        "unique": 1
+    },
+    "Two_Sum.variants.csv": {
+        "total": 7,
+        "unique": 7
+    },
+    "Imaginary_base_numbers.variants.csv": {
+        "total": 4327,
+        "unique": 5
+    },
+    "Comma_quibbling.variants.csv": {
+        "total": 20,
+        "unique": 11
+    },
+    "Middle_three_digits.variants.csv": {
+        "total": 268,
+        "unique": 9
+    },
+    "Huffman_coding.variants.csv": {
+        "total": 4,
+        "unique": 4
+    },
+    "Rep-string.variants.csv": {
+        "total": 3,
+        "unique": 3
+    },
+    "Command-line_arguments.variants.csv": {
+        "total": 160,
+        "unique": 1
+    },
+    "Terminal_control-Unicode_output.variants.csv": {
+        "total": 54355,
+        "unique": 74
+    },
+    "Sort_an_array_of_composite_structures.variants.csv": {
+        "total": 84,
+        "unique": 30
+    },
+    "Ray-casting_algorithm.variants.csv": {
+        "total": 3072,
+        "unique": 17
+    },
+    "Strip_whitespace_from_a_string-Top_and_tail.variants.csv": {
+        "total": 10308,
+        "unique": 14
+    },
+    "State_name_puzzle.variants.csv": {
+        "total": 61,
+        "unique": 4
+    },
+    "Combinations_with_repetitions.variants.csv": {
+        "total": 28,
+        "unique": 1
+    },
+    "Sum_multiples_of_3_and_5.variants.csv": {
+        "total": 4,
+        "unique": 4
+    },
+    "Random_numbers.variants.csv": {
+        "total": 160,
+        "unique": 1
+    },
+    "Burrows\u2013Wheeler_transform.variants.csv": {
+        "total": 40,
+        "unique": 1
+    },
+    "Delegates.variants.csv": {
+        "total": 3,
+        "unique": 2
+    },
+    "Loop_over_multiple_arrays_simultaneously.variants.csv": {
+        "total": 17427,
+        "unique": 15
+    },
+    "Sorting_algorithms-Cycle_sort.variants.csv": {
+        "total": 61,
+        "unique": 4
+    },
+    "Subtractive_generator.variants.csv": {
+        "total": 7,
+        "unique": 2
+    },
+    "Towers_of_Hanoi.variants.csv": {
+        "total": 3,
+        "unique": 3
+    },
+    "Set_consolidation.variants.csv": {
+        "total": 109,
+        "unique": 9
+    },
+    "Total": 809900,
+    "Unique": 2678,
+    "UniqueAvg": 11.593073593073592,
+    "TotalAvg": 3506.060606060606,
+    "UniqueMedian": 3.0,
+    "TotalMedian": 159.0
+}

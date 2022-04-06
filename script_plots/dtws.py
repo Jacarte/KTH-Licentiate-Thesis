@@ -45,7 +45,7 @@ def plot_zero(datas):
 def plot_distribs(datas, name="dtw_distrib"):
 
 
-    latexify(fig_height=2.1, fig_width=8.5, font_size=10, tick_size=10)
+    latexify(fig_height=3.1, fig_width=8.5, font_size=10, tick_size=10)
     fig, ax = plt.subplots()
 
     format_axes(ax, hide=['top', 'right'], show=['left', 'bottom'])
@@ -122,7 +122,7 @@ def plot_distribs(datas, name="dtw_distrib"):
 
     ax.set_xticks([])
     #ax.violinplot(vals, showmeans=True)#, widths=[1.2]*len(vals))
-    ax.set_ylabel("dt\_dyn value")
+    ax.set_ylabel("TraceDiff value")
     S=2.0
     vals = sorted(vals, key=lambda x: len(x), reverse=True)
     for i, data in enumerate(vals):
@@ -225,7 +225,7 @@ def plot_grama(data, name="name"):
     ax.set_xticks([])
     #ax.violinplot(vals, showmeans=True)#, widths=[1.2]*len(vals))
     ax.set_ylabel("dt\_dyn value")
-    S=30
+    S=150
     for i, data in enumerate(vals):
         ax.scatter([i]*len(data), data, alpha=0.5, color=[0.8,0.8,0.8,0], edgecolors='C0', s=S/len(data))
         #ax.scatter([i], [0], edgecolors='C1', color=[0.8,0.8,0.8,0])
@@ -252,7 +252,7 @@ if __name__ == '__main__':
     datas = sorted(datas, key=lambda x: len(x), reverse=True)
     print([len(d) for d in datas])
     
-    datas = [ d for d in datas if d if len(d) > 0]
+    datas = [ d for d in datas if d if len(d) > 2]
     print(len(datas))
     datas = sorted(datas, key=lambda x: len(x), reverse=True)
 
@@ -260,5 +260,6 @@ if __name__ == '__main__':
     middle = len(datas)/3
     middle = int(middle)
     plot_distribs(datas[:middle], name="plot_distribs1")
+    print(datas[middle])
     plot_distribs(datas[middle:2*middle], name="plot_distribs2")
     plot_distribs(datas[2*middle:], name="plot_distribs3")

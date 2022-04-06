@@ -1,28 +1,28 @@
 {
     \renewcommand{\arraystretch}{1.6}
 \begin{table}[h]
-    \small
+    %\small
     \centering
     %\setlength\minrowclearance{1.0pt}
-        \begin{tabular}[t]{ l | c | r  | r  c }
-        Corpus & \#Functions & \# Diversified & \# Variants & Population growing factor  \\
+        \begin{tabular}[t]{ l | r | l  | l | r}
+        Corpus & \#Functions & \# Diversified &  \# Variants & \#  Unique  Variants \\
         \hline   
 
-        \corpusrosetta & \fromjson{data/crow_corpus.json}{.[0].functions} & \textbf{239} (\py{100*239/303}\%) & 1906  & \py{1906/303}   \\
+        \corpusrosetta & \fromjson{data/crow_corpus.json}{.[0].functions} & 239 & \rossetapopulation  &  \rossetapopulationunique \\
         \hline
 
 
-        \corpussodium & \libsodiumfunctions & \textbf{\diversifiedsodium} (\py{100*\diversifiedsodium/\libsodiumfunctions}\%) & \libsodiumpopulation  & \py{\libsodiumpopulation/\libsodiumfunctions}    \\
+        \corpussodium & \libsodiumfunctions & \diversifiedsodium & \libsodiumpopulation & \libsodiumpopulationunique     \\
         \hline
 
-        \corpusqrcode & \qrcodefunctions & \textbf{\diversifiedqrcode} (\py{100*\diversifiedqrcode/\qrcodefunctions}\%) & \qrpopulation  & \py{\qrpopulation/\qrcodefunctions}   \\
+        \corpusqrcode & \qrcodefunctions & \diversifiedqrcode  &  \qrpopulation & \qrpopulationunique \\
 
         \hline\hline
 
-         & \py{\libsodiumfunctions + \qrcodefunctions + 303 } & \py{239 + \diversifiedqrcode +\diversifiedsodium} (\py{100*{239 + \diversifiedqrcode +\diversifiedsodium}/{\libsodiumfunctions + \qrcodefunctions + 303}}\%) & \py{\qrpopulation + 1906 + \libsodiumpopulation}  & \py{{\qrpopulation + 1906 + \libsodiumpopulation}/{\libsodiumfunctions + \qrcodefunctions + 303}}  \\
+         & \py{\libsodiumfunctions + \qrcodefunctions + 303 } & \py{239 + \diversifiedqrcode +\diversifiedsodium}  & \py{\qrpopulation + \rossetapopulation + \libsodiumpopulation} & \py{\qrpopulationunique + \rossetapopulationunique + \libsodiumpopulationunique}   \\
         \end{tabular}
     
-        \caption{General program's populations statistics. The table is composed by the name of the corpus, the number of functions, the number of succesfully diversified functions, the number of non-diversified functions and the cumulative number of variants.}
+        \caption{General program's populations statistics. The table is composed by the name of the corpus, the number of functions, the number of succesfully diversified functions, the cumulative number of generated variants and the cumulative number of unique variants.}
         \label{table:crow:general_results}
 \end{table}
 }

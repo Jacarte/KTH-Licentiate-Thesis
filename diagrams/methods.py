@@ -39,15 +39,45 @@ def method1():
     gat['ranksep'] = "1.2"
     gat['nodesep'] = "0.3"
     with Diagram("", show=False, outformat="pdf", graph_attr=gat, node_attr=na, edge_attr=ea, direction="LR", filename="Rq1", curvestyle="curved"):
-        dns = Custom("program", "resources/program.png")
         lb = Custom("\nCROW", "resources/gear.png")
+        lb2 = Custom("\nCROW ", "resources/gear.png")
 
-        with Cluster("\nStatic analysis\n of programs' population", graph_attr=ga2):
-            svc_group = [Custom("\nWasm\nvariant n", "resources/wasm.png"),
-                        Custom("\nWasm\nvariant 2", "resources/wasm.png"),
-                        Custom("\nWasm\nvariant 1", "resources/wasm.png")]
 
-        dns >> lb  >> svc_group
+        with Cluster("\nCorpus", graph_attr=ga2):
+            dns = Custom("program1", "resources/program.png")
+            p2 = Custom("program2","resources/program.png")
+        
+
+        with Cluster("\nCorpus's population", graph_attr=ga2):
+            with Cluster("\nProgram1's population", graph_attr=ga2):
+
+                v1 = Custom("\nWasm\nvariant n", "resources/wasm.png")
+                v2 = Custom("\nWasm\nvariant 2", "resources/wasm.png")
+
+            with Cluster("\nProgram2's population ", graph_attr=ga2):
+
+                v3 = Custom("\nWasm\nvariant 1", "resources/wasm.png")
+            
+        with Cluster("\nCorpus's unique population", graph_attr=ga2):
+
+            with Cluster("\nProgram1's unique\n population", graph_attr=ga2):
+
+                u1 = Custom("\nWasm\nvariant n", "resources/wasm.png")
+                
+            with Cluster("\nProgram2's unique\n population", graph_attr=ga2):
+    
+                u2 = Custom("\nWasm\nvariant 1", "resources/wasm.png")
+                            
+        
+        dns >> lb  
+        lb >> v1
+        lb >> v2
+        p2 >> lb2
+        lb2 >> v3
+
+        v1 >> u1
+        v3 >> u2
+
         #lb >> db_primary
         #svc_group >> memcached
 

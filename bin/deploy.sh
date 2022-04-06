@@ -8,6 +8,7 @@ python3 $DIR/split_document.py || exit 1
 
 mkdir -p $DIR/jacarte.github.io/assets/pdf/thesis/
 cp $DIR/chapter* $DIR/jacarte.github.io/assets/pdf/thesis/
+cp $DIR/Lic.pdf $DIR/jacarte.github.io/assets/pdf/thesis/Lic.pdf
 
 CW=$PWD
 cd $DIR/jacarte.github.io

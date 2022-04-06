@@ -1,8 +1,22 @@
 \chapter{Background and State of the art}
 
 
+\todo{Wasm and portable code}
+    \todo{How => Why: Motivation, security, reliability}
+\todo{Diversification, Superoptimization and Superdiversification.}
+    \todo{Prexisting => Artificial}
+    \todo{How => Why: Motivation, security, reliability}
+    \todo{Fuzzing (CVE)}
+\todo{Randomization (runtime).}
+    \todo{N-version, Isomeron eg}
+    \todo{How => Why: Motivation, security, reliability}
+\todo{1 - page MEWE and << CROW (Our contributions)}
+    \todo{n-variant}
+
 \section{CROW}
 \label{section:crow}
+
+\begin{comment}
 This section describes CROW, a tool tailored to create semantically equivalent variants out of a single program, either C/C++ code or LLVM bitcode. We assume that the \wasm programs are generated through the LLVM compilation pipeline to implement CROW. This assumption is supported by the work of Lehman et al. \cite{}; the fact that LLVM-based compilers are the most popular compilers to build \wasm programs \cite{usenixWASM2020} and the availability of source code (typically C/C++; and LLVM for \wasm) that provides a structure to perform code analysis and produce code replacements that is richer than the binary code. CROW is part of the contributions of this thesis.
 In \autoref{diagrams:crow}, we describe the workflow of CROW to create program variants.
 
@@ -40,3 +54,5 @@ Moreover, we prevent the superoptimizer from synthesizing instructions that have
 
 In the \emph{combining} stage, CROW combines the candidate code replacements to generate different LLVM bitcode variants, selecting and merging the code replacements. 
 Then for each combination, a variant bitcode is compiled into a \wasm binary if requested. Finally, CROW generates the variants from all possible combinations of code replacements as the power set of all code replacements.  
+
+\end{comment}
