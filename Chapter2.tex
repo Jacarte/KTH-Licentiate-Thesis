@@ -3,7 +3,7 @@
 This chapter discusses the state of the art in the areas of \emph{\wasm}, \emph{Diversification} and \emph{Runtime Randomization}. We present a summary of the relevant related work and the key concepts and background that we use along this writing. 
 We select the discussed works by their novelty and key insights aimed to provide automatic diversification. 
 
-\todo{Chapter layout}
+In \autoref{sota:wasm} we describe the context in which this dissertation is based, \wasm. We include the both usage scenarios for Wasm and its main security issues. In \autoref{sota:diversification} we discussed the main diversification techniques in the wild, we introduce the concept of superoptimization used in this work and we end the section by highlighting superdiversification as the work on which our contributions are based. In \autoref{sota:randomization} we mention close works to runtime diversification and how diversification can be used to construct resilient binaries. 
 
 \section{\wasm}
 \label{sota:wasm}
@@ -11,18 +11,18 @@ We select the discussed works by their novelty and key insights aimed to provide
 In this section we introduce an overview on the motivation for \wasm and its usage. Besides, we describe the process to obtain Wasm programs and how this novel technology evolves from being only-browser based to standalone executions in the backend. Nevertheless, we describe its major limitations regarding security that are our main motivation for our research.
 
 % What is Wasm
-The \wasm language was first publicly announced in 2015. \wasm is a binary instruction format for a stack-based virtual machine.
+The \wasm (Wasm) language was first publicly announced in 2015. \wasm is a binary instruction format for a stack-based virtual machine.
 It is designed to address the problem of safe, fast, portable and compact low-level code on the Web.
 A paper by Haas \etal~\cite{Haas_2017} formalizes the language and its type system.
 Since 2015, major web browsers have implemented support for the standard.
 
 % How to generate Wasm code
-\wasm binaries are usually compiled from source code like C/C++ or Rust \cite{Hilbig2021AnES}. The \wasm code is further interpreted or compiled ahead of time into machine code by engines such as the browsers. Since version 8, LLVM supports Wasm as a backend opening the door for its wide collection of frontend languages. The LLVM support was encouraged by the seminal work of Zakai \etal with Emscripten.
-Emscripten is an open source tool for compiling C/C++ to the \wasm. It uses LLVM to create Wasm, but it provides support for faster linking to the object files. Instead of all the IR being compiled by LLVM, the object file is prelinked with Wasm, which is faster. The last version of Emscripten also uses the Wasm LLVM backend as the target for the input code.
+\wasm binaries are obtained from source code like C/C++ or Rust \cite{Hilbig2021AnES}. The \wasm code is further interpreted or compiled ahead of time into machine code by engines such as the browsers. Since version 8, LLVM supports Wasm as a backend opening the door for its wide collection of frontend languages. The LLVM support was encouraged by the seminal work of Zakai \etal with Emscripten.
+Emscripten is an open source tool for compiling C/C++ to the \wasm. It uses LLVM to create Wasm, but it provides support for faster linking to the object files. Instead of all the IR being compiled by LLVM, the object file is prelinked with Wasm, which is faster. 
 
 \subsection*{\wasm for backend execution}
 
-Further browser context, the adoption of \wasm for backend has grown exponentially in the last four years. For instance, platforms such as Cloudflare and Fastly adapted their platforms to provide FaaS directly with \wasm. In 2019, the bytecode alliance team \footnote{\url{https://bytecodealliance.org/}} proposed WebAssembly System Interface (WASI). WASI is the foundation to build Wasm code outside of browser with a system interface platform. WASI allows the adoption of \wasm outside web browsers \cite{bryant2020webassembly} in heterogeneous platforms like the Edge \cite{Narayan2021Swivel,Sledge}. Previous studies resulted on huge performance increasing in terms of bandwidth saving, execution and process-on-demand spawning \cite{9640153, wen2020wasmachine}.  The words of Solomon Hykes \footnote{\url{https://twitter.com/solomonstre/status/1111004913222324225}}, the former CEO of docker, show the impact of WASI: 
+Further browser context, the adoption of \wasm for backend has grown exponentially in the last four years. For instance, platforms such as Cloudflare and Fastly adapted their platforms to provide FaaS directly with \wasm. In 2019, the bytecode alliance team \footnote{\url{https://bytecodealliance.org/}} proposed WebAssembly System Interface (WASI). WASI is the foundation to build Wasm code outside of browser with a system interface platform. It allows the adoption of \wasm outside web browsers \cite{bryant2020webassembly} in heterogeneous platforms like the Edge or IoT \cite{Narayan2021Swivel,Sledge}. Previous studies resulted on huge performance increasing in terms of bandwidth saving, execution and process-on-demand spawning \cite{9640153, wen2020wasmachine}.  The words of Solomon Hykes \footnote{\url{https://twitter.com/solomonstre/status/1111004913222324225}}, the former CEO of docker, show the impact of WASI: 
 \begin{displayquote}
 \textit{
     If WASM+WASI existed in 2008, we wouldn't have needed to created Docker. That's how important it is. Webassembly on the server is the future of computing. A standardized system interface was the missing link. Let's hope WASI is up to the task!
@@ -32,24 +32,20 @@ Further browser context, the adoption of \wasm for backend has grown exponential
 % Why is important to study Wasm
 \subsection*{\wasm security and our motivation for diversification}
 
-\todo{Rework this text}
+\wasm is characterized by a robust security model~\cite{WebAssemblySecurity}. It should run inside a sandboxed execution environment that provides protection against common security issues such as data corruption, code injection and return oriented programming (ROP). However, WebAssembly is vulnerable under certain conditions, at the execution engine's level \cite{ChromeZero} or the binary itself ~\cite{usenixWasm2020}.
+Implementations in both, browsers and standalone runtimes~\cite{Narayan2021Swivel} are vulnerable.
+This means that if one environment is vulnerable, all the others are vulnerable in the exact same manner as the same \wasm binary is replicated, turning it into a monoculture problem.
 
-\wasm is characterized by a robust security model~\cite{WebAssemblySecurity}. It should run inside a sandboxed execution environment that provides protection against common security issues such as data corruption, code injection and return oriented programming (ROP). However, WebAssembly is vulnerable under certain conditions.  
-
-\wasm is not exempt of vulnerabilities either at the execution engine's level \cite{ChromeZero} or the binary itself ~\cite{usenixWasm2020}.
-Implementations in both, browsers and standalone runtimes~\cite{Narayan2021Swivel}, have been found to be vulnerable, opening the door to different attacks.
-This means that if one environment is vulnerable, all the others are vulnerable in the exact same manner as the same \wasm binary is replicated. This is clearly a monoculture problem.
-
-On the other hand, the \wasm environment lacks of natural diversity \cite{natural_diversity}. Compared to the work of Harrand \etal \citationneeded, in WebAssembly, we cannot use preexisting and different programs to provide diversification solving monoculture. In fact, according to the work of Hilbig \etal \cite{Hilbig2021AnES}, the artificial variants created with one of our works contributes to the half of executable and available \wasm binaries in the wild. 
+On the other hand, the \wasm environment lacks of natural diversity \cite{natural_diversity}. Compared to the work of Harrand \etal \citationneeded, in WebAssembly, one could not use preexisting and different program versions to provide diversification for monoculture solving. In fact, according to the work of Hilbig \etal \cite{Hilbig2021AnES}, the artificial variants created with one of our works contributes to the half of executable and available \wasm binaries in the wild. 
 
 
-The current limitations on security and the lack of preexisting diversity motivate our work on software diversification as one possible mitigation among the wide range of security counter-measures.
+The current limitations on security and the lack of preexisting diversity motivate our work on software diversification as one possible mitigation among the wide range of security counter-measures. 
 
-\section{Diversification and Superoptimization for Superdiversification}
+\section{Diversification and Superdiversification}
 \label{sota:diversification}
 %\todo{https://www.sciencedirect.com/science/article/pii/S0950584918301484?via\%3Dihub Diversification and obfuscation techniques for software security: A systematic literature review}
 
-Program diversification approaches can be applied at different stages of the development pipeline. In this section we analyze the related works for both static and dynamic diversification. Besides, we motivate the usage of the superoptimization strategies to provide a "superdiversifier" that uses intermediate solutions of the searching of optimal programs to provide program variant. 
+Program diversification approaches can be applied at different stages of the development pipeline. In this section we analyze the related works for both static and dynamic diversification. Besides, we motivate the usage of the superoptimization strategies to provide a "superdiversifier" that uses intermediate solutions of the searching of optimal programs to provide program variant. Finally, we describe our contribution on the field.
 
 
 Static diversification consists in synthesizing, building and distributing different, functionally equivalent, binaries to end users. This aims at increasing the complexity and applicability of an attack against a large population of users~\cite{cohen1993operating}. 
@@ -59,54 +55,57 @@ The aim of their work is to prevent reverse engineering of security patches for 
 Their approach, continuously applies a random selection of predefined transformations using a binary diffing tool as feedback \citationneeded.
 A downside of their method is that attackers are, in theory, able to identify the type of transformations applied and find a way to ignore or reverse them.
 
-% How to use the compiler
-\todo{Doe} \etal \citationneeded proposed to use the optimization flags of several compilers to generate semantically equivalent binaries out of the same source code. This, techniques place the compiler in the core of the diversification technique. However, this approach is limited by the number of available flags in the compiler implementation and by the fact that the optimization is applied in all possible places in the code.
-
 % Runtime diversification
 Previous works have attempted to generate diversified variants that are alternated during execution.
 It has been shown to drastically increase the number of execution traces that a side-channel attack requires succeeding.
 Amarilli \etal~\cite{amarilli2011can} are the first to propose generation of code variants against side-channel attacks.
 Agosta \etal~\cite{agosta2015meet} and Crane \etal~\cite{crane2015thwarting}
-modify the LLVM toolchain to compile multiple functionally equivalent variants to randomize the control flow of software \todo{How} \todo{Why},
-while Courouss{\'e} \etal~\cite{courousse2016runtime} implement an assembly-like DSL to generate equivalent code at runtime in order to increase protection against side-channel attacks.
+modify the LLVM toolchain to compile multiple functionally equivalent variants to randomize the control flow of software,
+while Courouss{\'e} \etal~\cite{courousse2016runtime} implement an assembly-like DSL to generate equivalent code at runtime in order to increase protection against side-channel attacks. 
 
-\todo{Blend to superoptimize}
+
+% How to use the compiler
+Jackson \etal \cite{jackson} have explored how to use NOP operations inserted during compiling time to statically diversify programs. Another idea is to use the optimization flags of several compilers to generate semantically equivalent binaries out of the same source code. This, techniques place the compiler in the core of the diversification technique. However, this approach is limited by the number of available flags in the compiler implementation and by the fact that the optimization is applied in all possible places in the code.
+
 
 \subsection*{Superoptimization}
 
-The search of optimal algorithms to compute a function is older as the first compiler. This problem is commonly solved by using human-written heuristics inside the compiler implementations. However, this solution has limitations. First, the optimizations are applied to small pieces of code and do not take into account more complex processes like instruction selections, register allocation and target-dependent optimizations. Second, the well-known phase ordering problem \citationneeded. To solve this problem, Massalin \etal \cite{Massalin1987} proposed a superoptimizer, a statistical method to exhaustively explore all possible program constructions to find the smallest program.
+The search of optimal algorithms to compute a function is older as the first compiler. This problem is commonly solved by using human-written heuristics inside the compiler implementations. However, this solution has limitations. First, the optimizations are applied to small pieces of code and do not take into account more complex processes like instruction selections, register allocation and target-dependent optimizations. Second, the well-known phase ordering problem \cite{phase-ordering-problem}. To solve this problem, Massalin \etal \cite{Massalin1987} proposed a superoptimizer, a statistical method to exhaustively explore all possible program constructions to find the smallest program.
 Given an input program, code superoptimization focuses on \emph{searching} for a new program variant which is faster or smaller than the original code, while preserving its correctness \cite{bunel_learning_2017}.
 The search space for the optimal program is defined by choosing a subset of the machine's instruction set and generating combinations of optimized programs, sorted by length in ascending order. If any of these programs are found to perform the same function as the source program, the search halts. However, for larger instruction sets, the exhaustive exploration approach becomes virtually impossible.
 Because of this, the paper proposes a pruning method over the search space and a fast probabilistic test to check programs equivalence.
 
 Appart from recent works on the area of Machine Learning \cite{2021arXiv210913498S}, to the best of our knowledge, there are two main implementations for superoptimizers using two completely different strategies.
-Churchill et al. \cite{churchill_sound_nodate} implement STOKE \cite{bansal_automatic_nodate} to superoptimize large programs for the  Google Native Client stack. They use a bounded verifier to make sure that every generated optimization goes through all the checks for semantic equivalence. STOKE uses a probabilistic approach, following a MonteCarlo-Markov-Chain strategy to select code transformations that lead to smaller programs.
+Churchill et al. \cite{churchill_sound_nodate} implement STOKE to superoptimize large programs for the  Google Native Client stack. They use a bounded verifier to make sure that every generated optimization goes through all the checks for semantic equivalence. STOKE uses a probabilistic approach, following a MonteCarlo-Markov-Chain strategy to select code transformations that lead to smaller programs.
 On the other hand, Souper \cite{bansal_automatic_nodate} automatically generates smaller programs for LLVM following an exhaustive enumerative synthesizis. Souper finds subexpressions at the LLVM function level, builds all possible expression that can be constructed from all the instructions on its own intermediate representation that are no larger than the original subexpression. When Souper finds a replacement, it uses an SMT solver \cite{SMT_solver} to verify the semantic equivalence with the original program. 
 Superoptimization is time expensive compared to traditional optimization heuristics in compilers, yet, provides deeper and more robust code transformations.
 
 
-\subsection*{Superdiversification}
+\subsection*{Superdiversification and statement of novelty}
 
 During the finding of optimized code, the idea and the implementations of superoptimization discard intermediate solutions that are semantically equivalent to the original program. The discarding of intermediate solutions follows the principle of optimization, finding the best possible program. Jacob \etal~\cite{jacob2008superdiversifier} propose the use of a ''superdiversification'' technique, inspired by superoptimization,
 to synthesize individualized versions of programs, their main idea is to keep the intermediate solutions finding the optimal program.
 The tool developed by Jacob \etal does not output only the optimal instruction sequence, but any semantically equivalent sequences.
 Their work focuses on a specific subset of x86 instructions.
 
+In this research we contribute to the state of the art of artificially creating diversity. While the number of related work for software diversity is enormous, none approach has been applied to the context of \wasm. One of our contributions, CROW, extrapolates the idea of superdiversification for \wasm. CROW works directly with LLVM IR, enabling it to generalize to more languages and CPU architectures something not possible with the x86-specific approach of previous works.
+Furthermore, we conducted a sanity check for diversification preservation, researching to what extent browser compilers do not remove our introduced diversity.
 
+CROW focuses on static diversification of software. However, because of the specificities of code execution in the browser, this is not far from being a dynamic approach. Since \wasm is served at each page refreshment, every time a user asks for a \wasm binary, she can be served a different variant provided by CROW.
+It also can be used in fuzzing campaigns \citationneeded to provide reliability. The diversification created by CROW can unleash hidden behaviors in compilers and interpreters.
+By generating several functionally equivalent, and yet different variants, deeper bugs can be discovered. 
+Thanks to CROW, a bug was discovered in the Lucet compiler \footnote{\url{REPO}}.
+Fastly acknowledged our work as part of a technical blog post 
+\footnote{\url{https://www.fastly.com/blog/defense-in-depth-stopping-a-wasm-compiler-bug-before-it-became-a-problem}} that describes the bug and the patch. 
 
-\subsection*{Statement of novelty}
-
-In this research we contribute to the state of the art of artificially creating diversity. While the number of related work for software diversity is enormous, none approach has been applied to the context of \wasm. One of our contributions, CROW, extrapolates the idea of superdiversification for \wasm. This previous study shows that CROW offers both static and runtime diversity for \wasm. CROW works directly with LLVM IR, enabling it to generalize to more languages and CPU architectures something not possible with the x86-specific approach of previous works.
-Moreover, we conducted the first sanity check for diversification preservation, researching to what extent browser compilers do not remove introduced diversity.
-
-\section{Runtime randomization}
+\section{Runtime diversification}
 \label{sota:randomization}
 
-In this section we list and mention previous works that evidence the benefits of diversification. Moreover, we describe and discuss the foundation that supports the composition of diverse, yet semantically equivalent, programs to enforce security.
+In this section we highlight past works on runtime strategy for diversification. Besides, we describe and discuss the foundation that supports the composition of diverse, yet semantically equivalent, programs to enforce security. Finally, we describe our contribution in the field.
 
 
 A randomization technique creates a set of unique executions for the very same program \cite{bhatkar03}. Seminal works include instruction-set randomization \cite{Kc03,barrantes2003randomized}
-to create a unique mapping between artificial CPU instructions and real ones. This makes  it very hard for an attacker ignoring the key to inject executable code. Compiler-based  techniques can randomly introduce NOP and padding to statically diversify programs \cite{jackson} have explored how to use NOP .  This breaks the predictability of program execution and to this extent mitigates certain exploits.
+to create a unique mapping between artificial CPU instructions and real ones. This makes  it very hard for an attacker ignoring the key to inject executable code. This breaks the predictability of program execution and to this extent mitigates certain exploits.
 
 
 Chew and Song \cite{Chew02mitigatingbuffer} target operating system randomization. They randomize the interface between the operating system and the user applications:
@@ -115,23 +114,27 @@ Bathkar et al. \cite{bhatkar03,bhatkar2005efficient} have proposed  three kinds 
 Dynamic randomization can address different kinds of problems. In particular, it  mitigates a large range of memory error exploits. 
 Recent work in this field include stack layout randomization against data-oriented programming \cite{aga2019smokestack} and memory safety violations \cite{lee2021savior}, as well as a technique to reduce the exposure time of persistent memory objects to increase the frequency of address randomization \cite{xu2020merr}.
 
-We contribute to the field of randomization, at two stages. First, we automatically generate variants of a given program, which have different  \wasm code and still behave the same. Second, we randomly select which variant is executed at runtime, creating a multivariant execution scheme that randomizes the observable execution trace at each run of the program.
-
-Davi \etal proposed Isomeron \cite{davi2015isomeron}, an approach 
-for execution-path randomization.
-Isomeron simultaneously loads the original program and a variant. While the program is running, Isomeron continuously flips a coin to decide which copy of the program should be executed next at the level of function calls. With this strategy a potential attacker cannot predict whether the original or the variant of a program will execute.
 
 
-\subsection*{Multivariant execution and Moving Target Defense}
+
+\subsection*{Moving Target Defense and Multivariant execution}
 \label{sota:multivariantex}
 
+% Intro and benefits
+Moving Target Defense (MTD) for software was first proposed  as a collection of techniques that aim to improve security of a system by constantly moving its vulnerable components \cite{MTDNationalCyberLaep}.
+Usually, MTD techniques revolve around changing system inputs and configurations to reduce attack surfaces . 
+This increases uncertainty for attackers and makes their attacks more difficult. 
+Ultimately, potential attackers cannot hit what they cannot see. 
+MTD can be implemented in different ways, including via dynamic runtime platforms \cite{10.1145/3318216.3363338}. 
+Segupta \etal illustrated how a dynamic MTD system \cite{10.5555/3091125.3091155} can be applied to different technology stacks.
+Using this technique, the authors illustrated that some CVE related to specific database engines can be avoided.
 
-In 2006, security researchers of University of Virginia have laid the foundations of a novel approach to security that consists in executing multiple variants of the same program. They called this ''N-variant systems'' \cite{cox06}. 
+On the same topic, Multivariant Execution (MVE) can be seen as a Moving Target Defense strategy. In 2006, security researchers of University of Virginia have laid the foundations of a novel approach to security that consists in executing multiple variants of the same program. They called this ''N-variant systems'' \cite{cox06}. 
 %There is a wide range of realizations of MVE in different contexts.
 % 2007 @inproceedings{bruschi2007diversified, title={Diversified process replic{\ae} for defeating memory error exploits},
 Bruschi et al. \cite{bruschi2007diversified} and Salamat et al. \cite{salamat2007stopping} pioneered the idea of executing the variants in parallel.
 % 2018 @article{lu2018stopping,  title={Stopping memory disclosures via diversification and replicated execution},
-Subsequent techniques focus on MVE for mitigating memory vulnerabilities \cite{lu2018stopping}
+Subsequent techniques focus on Multivariant Execution (MVE) for mitigating memory vulnerabilities \cite{lu2018stopping}
 % 2015 volckaert2015cloning  title={Cloning your gadgets: Complete ROP attack immunity with multi-variant execution
 and other specific security problems incl. return-oriented programming attacks \cite{volckaert2015cloning} and code injection \cite{SalamatJWWF11}.
 % 2019 @inproceedings{osterlund2019kmvx,  title={kMVX: Detecting kernel information leaks with multi-variant execution},
@@ -139,29 +142,21 @@ and other specific security problems incl. return-oriented programming attacks \
 A key design decision of MVE is whether it is achieved in kernel space \cite{osterlund2019kmvx}, in user-space \cite{salamat2009orchestra},
 % 2016 @inproceedings{koning2016secure, title={Secure and efficient multi-variant execution using hardware-assisted process virtualization},
 with exploiting hardware features \cite{koning2016secure}, or even through code polymorphism \cite{10.1145/3281662}.
-Finally, one can neatly exploit the limit case of executing only two variants \cite{maurer2012tachyon, davi2015isomeron,Kim2015}.
-The body of research on MVE in a distributed setting has been less researched.
-Notably, Voulimeneas \etal proposed a multivariant execution system by parallelizing the execution of the variants in different machines \cite{voulimeneas2021dmvx} for sake of efficiency.
+Finally, one can neatly exploit the limit case of executing only two variants \cite{maurer2012tachyon,,Kim2015}. Notably, 
+Davi \etal proposed Isomeron \cite{davi2015isomeron}, an approach 
+for execution-path randomization.
+Isomeron simultaneously loads the original program and a variant. While the program is running, Isomeron continuously flips a coin to decide which copy of the program should be executed next at the level of function calls. With this strategy a potential attacker cannot predict whether the original or the variant of a program will execute.
+
 % 2021 voulimeneas2021dmvx dMVX: Secure and Efficient Multi-Variant Execution in a Distributed Setting
 
 
-% Intro and benefits
-Moving Target Defense (MTD) for software was first proposed  as a collection of techniques that aim to improve security of a system by constantly moving its vulnerable components \cite{MTDNationalCyberLaep}.
-Usually, MTD techniques revolve around changing system inputs and configurations to reduce attack surfaces . 
-This increases uncertainty for attackers and makes their attacks more difficult. 
-Ultimately, potential attackers cannot hit what they cannot see. 
-
 % Example
-MTD can be implemented in different ways, including via dynamic runtime platforms \cite{10.1145/3318216.3363338}. 
-Segupta \etal illustrated how a dynamic MTD system \cite{10.5555/3091125.3091155} can be applied to different technology stacks.
-Using this technique, the authors illustrated that some CVE related to specific database engines can be avoided.
-Notice that MTD implementation should be practical, in the previous example, the challenging part is to maintain the synchronization between the different implementations.
 
 %\todo{https://link.springer.com/chapter/10.1007/978-3-030-52683-2\_11 Distributed Heterogeneous N-Variant Execution} 
 
 %\todo{https://ieeexplore.ieee.org/document/9139097 Multi-Variant eXecution: State-of-the-Art and Research Challenges}
 
-%CROW focuses on static diversification of software. However, because of the specificities of code execution in the browser, this is not far from being a dynamic approach. Since \wasm is served at each page refreshment, every time a user asks for a \wasm binary, she can be served a different variant provided by CROW.
+%
 
 
 %\todo{https://www.sciencedirect.com/science/article/pii/S0950584918301484?via\%3Dihub Diversification and obfuscation techniques for software security: A systematic literature review}
@@ -170,20 +165,17 @@ Notice that MTD implementation should be practical, in the previous example, the
 \label{sota:contribs}
 
 
-We propose an original kind of MVE in the context of edge computing. We generate multiple program variants, which we execute on edge computing nodes. We use the natural redundancy of Edge-Cloud computing architectures to deploy an internet-based MVE. Next section goes into the details of our procedure to generate variants and assemble them into multivariant binaries.
 
+Researching on MVE in a distributed setting like the Edge \citationneeded has been less researched. Voulimeneas \etal proposed a multivariant execution system by parallelizing the execution of the variants in different machines \cite{voulimeneas2021dmvx} for sake of efficiency. Since, CROW offers both static and runtime diversity for \wasm and its adoption for the Edge and backend executions are becoming security sensitive fields, we propose an original kind of MVE, MEWE. We generate multiple program variants, which we execute on edge computing nodes. We use the natural redundancy of Edge-Cloud computing architectures to deploy an internet-based MVE.
 
-%\tool proposes two key novel contributions. First,  our code diversification step can generate variants of complex control flow structures by inferring constants or loop unrolling.
-%Second, \tool interconnects hundreds of variants and several randomization dispatchers in a single binary, increasing by orders of magnitude the runtime uncertainty about what code will actually run, compared to the choice among 2 variants proposed by Isomeron.
+With MEWE, We contribute to the field of randomization, at two stages. First, we automatically generate variants of a given program with CROW, which have different \wasm code and still behave the same behavior. Second, we randomly select which variant is executed at runtime, creating a multivariant execution scheme that randomizes the observable behaviors at each run of the program.
 
-Furthermore, the diversification created by MEWE can unleash hidden behaviors in compilers and interpreters.
-By generating several functionally equivalent, and yet different variants, deeper bugs can be discovered. 
-Thanks to MEWE and the variants created by CROW, a bug was discovered in the Lucet compiler.
-Fastly acknowledged our work as part of a technical blog post 
-\footnote{The link to the post will be provided with the  deanonymized version of this paper.} that describes the bug and the patch. 
 
 \section{Conclusions}
 \label{sota:conclusions}
+
+Software Diversification have been widely researched, not being the case in the \wasm context. With this dissertation we aim to settle down the foundation to study automatic diversification for \wasm. We contribute to the field of articial diversity by extending the superdiversifier idea of Jacob \etal \cite{jacob2008superdiversifier}. We empirically demonstrate that CROW provides robust program diversification. Finally, we propose a novel approach to merge program variants to provide multivariant execution.  Our
+contributions are obtained by following the methodology described in \autoref{chapter:method}. 
 
 %\todo{Wasm and portable code}
 %    \todo{How => Why: Motivation, security, reliability}

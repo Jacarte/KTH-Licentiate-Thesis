@@ -42,6 +42,10 @@ Hilbig,A., Lehmann,D., and Pradel,M. (2021).
 \newblock {Multi-Variant Execution at the Edge}.
 \newblock {\em arXiv e-prints}, page arXiv:2108.08125.
 
+\bibitem[MTD, 2021]{MTDNationalCyberLaep}
+ (2021).
+\newblock {National Cyber Leap Year}.
+
 \bibitem[Xu et~al., 2020]{xu2020merr}
 Xu,Y., Solihin,Y., and Shen,X. (2020).
 \newblock Merr: Improving security of persistent memory objects via efficient
@@ -83,6 +87,12 @@ Bryant,D. (2020).
   computing.
 \newblock In {\em Proc. of ICWE 2020}, pages 9--12.
 
+\bibitem[Roy et~al., 2019]{10.1145/3318216.3363338}
+Roy,A., Chhabra,A., Kamhoua,C.~A., and Mohapatra,P. (2019).
+\newblock A moving target defense against adversarial machine learning.
+\newblock In {\em Proceedings of the 4th ACM/IEEE Symposium on Edge Computing},
+  page 383–388.
+
 \bibitem[{\"O}sterlund et~al., 2019]{osterlund2019kmvx}
 {\"O}sterlund,S., Koning,K., Olivier,P., Barbalace,A., Bos,H., and Giuffrida,C.
   (2019).
@@ -117,6 +127,14 @@ Belleville,N., Courouss\'{e},D., Heydemann,K., and Charles,H.-P. (2018).
 \newblock Automated software protection for the masses against side-channel
   attacks.
 \newblock {\em ACM Trans. Archit. Code Optim.}, 15(4).
+
+\bibitem[Sengupta et~al., 2017]{10.5555/3091125.3091155}
+Sengupta,S., Vadlamudi,S.~G., Kambhampati,S., Doup\'{e},A., Zhao,Z.,
+  Taguinod,M., and Ahn,G.-J. (2017).
+\newblock A game theoretic approach to strategy generation for moving target
+  defense in web applications.
+\newblock In {\em Proceedings of the 16th Conference on Autonomous Agents and
+  MultiAgent Systems}, page 178–186.
 
 \bibitem[Haas et~al., 2017]{Haas_2017}
 Haas,A., Rossberg,A., Schuff,D.~L., Schuff,D.~L., Titzer,B.~L., Holman,M.,
@@ -203,6 +221,12 @@ Maurer,M. and Brumley,D. (2012).
 \newblock Tachyon: Tandem execution for efficient live patch testing.
 \newblock In {\em 21st USENIX Security Symposium (USENIX Security 12)}, pages
   617--630.
+
+\bibitem[Kulkarni and Cavazos, 2012]{phase-ordering-problem}
+Kulkarni,S. and Cavazos,J. (2012).
+\newblock Mitigating the compiler optimization phase-ordering problem using
+  machine learning.
+\newblock {\em SIGPLAN Not.}, 47(10):147–162.
 
 \bibitem[Jackson, 2012]{jackson}
 Jackson,T. (2012).
