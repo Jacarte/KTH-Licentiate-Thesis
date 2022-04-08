@@ -212,7 +212,7 @@ FUNCTION {format.names}
   s num.names$ 'numnames :=
   numnames 'namesleft :=
     { namesleft #0 > }
-    { s nameptr "{vv~}{ll}{, jj}{, f.}" format.name$ 't :=   % last name first
+    { s nameptr "{vv~}{ll}{,jj}{,f.}" format.name$ 't :=   % last name first
       nameptr #1 >
         { namesleft #1 >
             { ", " * t * }
@@ -1067,10 +1067,10 @@ REVERSE {reverse.pass}
 %                               on sort.label then year then title.  This is
 %                               for the second sorting pass.
 FUNCTION {bib.sort.order}
-{ sort.label
+{ year field.or.null sortify
   "    "
   *
-  year field.or.null sortify
+  sort.label
   *
   "    "
   *
@@ -1080,6 +1080,7 @@ FUNCTION {bib.sort.order}
   #1 entry.max$ substring$
   'sort.key$ :=
 }
+
 
 ITERATE {bib.sort.order}
 
@@ -1097,7 +1098,7 @@ EXECUTE {begin.bib}
 
 EXECUTE {init.state.consts}
 
-ITERATE {call.type$}
+REVERSE {call.type$}
 
 FUNCTION {end.bib}
 { newline$

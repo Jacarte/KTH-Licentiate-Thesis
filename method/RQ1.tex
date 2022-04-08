@@ -18,13 +18,13 @@ In \autoref{diagrams:protocol:rq1} we illustrate the workflow to generate \wasm 
 \subsection*{Metrics}
 
 To assess our approach's ability to generate \wasm binaries that are statically different, we compute the number of variants and the number of unique variants for each original function of each corpus. 
-On top, we define the aggregation of these former two metrics to quantitatively evaluate RQ1 at the corpus level.
+On top, we define the aggregation of these former two values to quantitatively evaluate RQ1 at the corpus level.
 
 
 \begin{definition}{Program's population $M(P)$:}\label{def:rq1:programspopulation}
-    Given a program P and its generated variants, the program's population is defined as.\\
+    Given a program P and its generated variants $v_i$, the program's population is defined as.\\
     $$
-        M(P)=\{v\ \text{where v is a variant of P}\}
+        M(P)=\{v_i\ \text{where $v_i$ is a variant of P}\}
     $$
 
     Notice that, the program's population includes the original program P.
@@ -83,6 +83,6 @@ On the one hand, one can limit the size of the variants. On the other hand, one 
 
 
 The former parameter allows us to find a trade-off between the number of variants that are synthesized and the time taken to produce them. For the current evaluation, given the size of the corpus and the properties of its programs, we set the exploration time to 1 hour maximum per function for \corpusrosetta. In the cases of \corpussodium\ and\ \corpusqrcode, we set the timeout to 5 minutes per function. The decision behind the usage of lower timeout for \corpussodium
-and \corpussodium is motivated by the properties listed in \autoref{table:corpora}. The latter two corpora are remarkably larger regarding the number of instructions and functions count. 
+and \corpusqrcode is motivated by the properties listed in \autoref{table:corpora}. The latter two corpora are remarkably larger regarding the number of instructions and functions count. 
 
 We pass each of the $303 + \libsodiumfunctions + \qrcodefunctions$ functions in the corpora to CROW, as \autoref{diagrams:protocol:rq1} illustrates, to synthesize program variants. We calculate the \emph{Corpus population size}(\autoref{metric:rq1:corpus_pop}) and \emph{Corpus unique population size}(\autoref{metric:rq1:corpus_pop_unique}) for each corpus and conclude by answering RQ1.

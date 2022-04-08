@@ -3,7 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage{lmodern}
-\usepackage[latin1]{inputenc}
+\usepackage[latin1,utf8]{inputenc}
 \usepackage[swedish, english]{babel}
 \usepackage{tocloft}
 \usepackage{multirow}
@@ -12,6 +12,7 @@
 \usepackage{graphicx,booktabs}
 \usepackage{float}
 \usepackage[listings,skins]{tcolorbox}
+\usepackage{csquotes}
 %\usepackage{graphics}
 %\usepackage{amssymb}
 %\usepackage{amsmath}
@@ -21,6 +22,7 @@
 \usepackage{newfloat}
 \usepackage[cmex10]{amsmath}
 \usepackage{subcaption}
+\usepackage[square,numbers]{natbib}
 %\usepackage{color} 
 %\usepackage{transparent} 
 %\usepackage{bm} % bold math
@@ -195,6 +197,8 @@
 \providecommand*{\propertyautorefname}{Property}
 
 \hyphenation{Web-Assembly}
+\hyphenation{super-optimizers}
+\hyphenation{super-optimize}
 
 %\addcontentsline{td}{todo}
 %{\color{red}\thesection.\thetodo\xspace Citation needed}}
@@ -240,6 +244,11 @@
 
 \input{tikz_probes.tex}
 \input{Lic-bibl}
+
+\pretolerance=8000
+\tolerance=2000 
+\emergencystretch=10pt
+
 \begin{document}
 
 %\addcontentsline{toc}{chapter}{Note: \\ It is not allowed to "copy and paste" from your papers to your dissertation.} % these are notes and they are not a part of the thesis
@@ -275,14 +284,15 @@
 %\section{RQ2, assesment}
 %\section{RQN, usage}
 \input{Chapter1}
-%\input{Chapter2}
+\input{Chapter2}
 \input{Chapter3}
 \input{Chapter4}
 %\input{Chapter5}
 %\input{Chapter6}
 %\input{Chapter5}
 
-\bibliographystyle{IEEEtran} % this is just an example, other styles can be used as well
+%\bibliographystyle{IEEEtranS} % this is just an example, other styles can be used as well
+\bibliographystyle{apalike} % this is just an example, other styles can be used as well
 \bibliography{Lic} % calls the separate document named Lic.bbl
 
 %\backmatter % should be used for the actual thesis, separate documents can be added without the numbering, similar to the \frontmatter
