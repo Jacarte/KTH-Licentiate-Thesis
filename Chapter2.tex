@@ -5,54 +5,33 @@ We select the discussed works by their novelty and critical insights to provide 
 
 In \autoref{sota:wasm} we describe the context in which this dissertation is based, \wasm. We include both usage scenarios for Wasm and its main security issues. In \autoref{sota:diversification} we discuss the main diversification techniques in the wild, we introduce the concept of superoptimization used in this work, and we end the section by highlighting superdiversification as the cornerstone of our contributions are based. In \autoref{sota:randomization} we mention close works to runtime diversification and how diversification can be used to construct resilient binaries. 
 
-\section{\wasm}
-\label{sota:wasm}
 
-In this section, we introduce an overview of the motivation for \wasm and its usage. Besides, we describe the process to obtain Wasm programs and how this novel technology evolves from being only-browser-based to standalone executions in the backend. Nevertheless, we describe its significant limitations regarding security, that is our main motivation for our research.
+\todo{Motivate Wasm here}
 
-% What is Wasm
-The \wasm (Wasm) language was first publicly announced in 2015. \wasm is a binary instruction format for a stack-based virtual machine.
-It is designed to address the problem of safe, fast, portable, and compact low-level code on the Web.
-A paper by Haas \etal~\cite{Haas_2017} formalizes the language and its type system.
-Since 2015, major web browsers have implemented support for the standard.
+\todo{Our area is on wasm, compilers, etc}
 
-% How to generate Wasm code
-\wasm binaries are obtained from source code like C/C++ or Rust \cite{Hilbig2021AnES}. The \wasm code is further interpreted or compiled ahead of time into machine code by engines such as the browsers. Since version 8, LLVM supports Wasm as a backend opening the door for its vast collection of frontend languages. The LLVM support was encouraged by the seminal work of Zakai \etal with Emscripten.
-Emscripten is an open-source tool for compiling C/C++ to the \wasm. It uses LLVM to create Wasm, but it provides support for faster linking to the object files. Instead of all the IR being compiled by LLVM, the object file is prelinked with Wasm in a faster way. 
+\todo{The key related work are in the area of X and Y}
 
-\subsection*{\wasm for backend execution}
+\todo{Wasm is not the context ! Define what the context is : compilers, machine code, portable code, Wasm, interpreters, backend, etc. Use background instead of context. Put everythin that is related to the thesis, concepts. }
 
+\todo{Portable code to be distributed}
 
-Further browser context, the adoption of \wasm for backend has grown exponentially in the last four years. For instance, Cloudflare and Fastly adapted their platforms to provide FaaS directly with \wasm. In 2019, the bytecode alliance team \footnote{\url{https://bytecodealliance.org/}} proposed WebAssembly System Interface (WASI). WASI is the foundation to build Wasm code outside of the browser with a system interface platform. It allows the adoption of \wasm outside web browsers \cite{bryant2020webassembly} in heterogeneous platforms like the Edge or IoT \cite{Narayan2021Swivel,Sledge}. Previous studies resulted in performance increasing in terms of bandwidth saving, execution, and process-on-demand spawning \cite{9640153, wen2020wasmachine}. The words of Solomon Hykes \footnote{\url{https://twitter.com/solomonstre/status/1111004913222324225}}, the former CEO of docker, show the impact of WASI: 
-
-\begin{displayquote}
-\textit{
-    If WASM+WASI existed in 2008, we wouldn't have needed to created Docker. That's how important it is. Webassembly on the server is the future of computing. A standardized system interface was the missing link. Let's hope WASI is up to the task!
-}
-\end{displayquote}
-
-% Why is important to study Wasm
-\subsection*{\wasm security and our motivation for diversification}
-
-
-\wasm is characterized by a robust security model~\cite{WebAssemblySecurity}. It should run inside a sandboxed execution environment that provides protection against common security issues such as data corruption, code injection, and return-oriented programming (ROP). However, WebAssembly is vulnerable under certain conditions, at the execution engine's level \cite{ChromeZero} or the binary itself ~\cite{usenixWasm2020}.
-Implementations in both browsers and standalone runtimes~\cite{Narayan2021Swivel} are vulnerable.
-This means that if one environment is vulnerable, all the others are vulnerable in the same manner as the same \wasm binary is replicated, turning it into a monoculture problem.
-
-
-On the other hand, the \wasm environment lacks natural diversity \cite{natural_diversity}. Compared to the work of Harrand \etal \citationneeded, in WebAssembly, one could not use preexisting and different program versions to provide diversification for monoculture solving. In fact, according to the work of Hilbig \etal \cite{Hilbig2021AnES}, the artificial variants created with one of our works contribute to the half of executable and available \wasm binaries in the wild. 
-
-
-The current limitations on security and the lack of preexisting diversity motivate our work on software diversification as one possible mitigation among the wide range of security countermeasures. 
+\input{sota/wasm.tex}
 
 \section{Diversification and Superdiversification}
 \label{sota:diversification}
 %\todo{https://www.sciencedirect.com/science/article/pii/S0950584918301484?via\%3Dihub Diversification and obfuscation techniques for software security: A systematic literature review}
 
 
+\todo{Draw landscape. Emphasis on why for security, sidechannels, etc.}
+
+\todo{Check nicos How to in background related to diversity.}
+
 Program diversification approaches can be applied at different stages of the development pipeline. This section analyzes the related works for both static and dynamic diversification. Besides, we motivate superoptimization strategies to provide a "superdiversifier" that uses intermediate solutions to search for optimal programs to provide program variants. Finally, we describe our contribution to the field.
 
-Static diversification consists in synthesizing, building, and distributing different, functionally equivalent binaries to end-users. This aims at increasing the complexity and applicability of an attack against a large population of users~\cite{cohen1993operating}. 
+\todo{Searching for software diversity: attaining artificial diversity through program synthesis}
+
+Static diversification consists in synthesizing, building, and distributing different, functionally equivalent binaries to end-users. This aims at increasing the complexity and applicability of an attack against a large population of users~\cite{cohen1993operating}. \todo{Take a look to Building diverse computer systems }
 Dealing with code-reuse attacks, Homescu \etal~\cite{homescu2013profile} propose inserting NOP instruction directly in LLVM IR to generate a variant with a different code layout at each compilation. 
 In this area, Coppens \etal~\cite{coppens2013feedback} use compiler transformations to iteratively diversify software.
 Their work aims to prevent reverse engineering of security patches for attackers targeting vulnerable programs.
@@ -69,7 +48,7 @@ while Courouss{\'e} \etal~\cite{courousse2016runtime} implement an assembly-like
 
 
 % How to use the compiler
-Jackson \etal \cite{jackson} have explored how to use NOP operations inserted during compiling time to statically diversify programs. Another idea is to use the optimization flags of several compilers to generate semantically equivalent binaries out of the same source code. These techniques place the compiler at the core of the diversification technique. However, this approach is limited by the number of available flags in the compiler implementation and because the optimization is applied in all possible places in the code at the same time.
+Jackson \etal \cite{jackson} have explored how to use NOP operations inserted during compiling time to statically diversify programs. Another idea \todo{Jackson} is to use the optimization flags of several compilers to generate semantically equivalent binaries out of the same source code. These techniques place the compiler at the core of the diversification technique. However, this approach is limited by the number of available flags in the compiler implementation and because the optimization is applied in all possible places in the code at the same time.
 
 
 \subsection*{Superoptimization}

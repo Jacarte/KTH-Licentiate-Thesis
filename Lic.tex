@@ -189,6 +189,12 @@
   \badget{[?]}
 }
 
+\newcommand*\step[1]{
+\noindent\tikz[baseline=(char.base)]{
+        \node[shape=circle,text=black,draw=black, fill=white,inner sep=1.2pt] (char) {#1};}}
+
+
+        
 \newtheorem{definition}{Definition}
 \providecommand*{\definitionautorefname}{Definition}
 \newtheorem{metric}{Metric}
@@ -269,11 +275,11 @@
 \tableofcontents
 \clearpage
 
-\listoffigures
-\clearpage
-\listoftables
-\clearpage
-\input{abbreviation}
+%\listoffigures
+%\clearpage
+%\listoftables
+%\clearpage
+%\input{abbreviation}
 \clearpage
 
 \mainmatter
@@ -284,10 +290,10 @@
 %\section{RQ1, generation}
 %\section{RQ2, assesment}
 %\section{RQN, usage}
-\input{Chapter1}
+%\input{Chapter1}
 \input{Chapter2}
-\input{Chapter3}
-\input{Chapter4}
+%\input{Chapter3}
+%\input{Chapter4}
 %\input{Chapter5}
 %\input{Chapter6}
 %\input{Chapter5}

@@ -7,12 +7,6 @@ Voulimeneas,A., Song,D., Larsen,P., Franz,M., and Volckaert,S. (2021).
 \newblock In {\em Proceedings of the 14th European Workshop on Systems
   Security}, pages 41--47.
 
-\bibitem[Spies and Mock, 2021]{9640153}
-Spies,B. and Mock,M. (2021).
-\newblock An evaluation of webassembly in non-web environments.
-\newblock In {\em 2021 XLVII Latin American Computing Conference (CLEI)}, pages
-  1--10.
-
 \bibitem[{Shypula} et~al., 2021]{2021arXiv210913498S}
 {Shypula},A., {Yin},P., {Lacomis},J., {Le Goues},C., {Schwartz},E., and
   {Neubig},G. (2021).
@@ -31,17 +25,6 @@ Lee,S., Kang,H., Jang,J., and Kang,B.~B. (2021).
   stack layout.
 \newblock {\em IEEE Transactions on Dependable and Secure Computing}.
 
-\bibitem[Hilbig et~al., 2021]{Hilbig2021AnES}
-Hilbig,A., Lehmann,D., and Pradel,M. (2021).
-\newblock An empirical study of real-world webassembly binaries: Security,
-  languages, use cases.
-\newblock {\em Proceedings of the Web Conference 2021}.
-
-\bibitem[{Cabrera Arteaga} et~al., 2021]{2021arXiv210808125C}
-{Cabrera Arteaga},J., {Laperdrix},P., {Monperrus},M., and {Baudry},B. (2021).
-\newblock {Multi-Variant Execution at the Edge}.
-\newblock {\em arXiv e-prints}, page arXiv:2108.08125.
-
 \bibitem[MTD, 2021]{MTDNationalCyberLaep}
  (2021).
 \newblock {National Cyber Leap Year}.
@@ -52,34 +35,11 @@ Xu,Y., Solihin,Y., and Shen,X. (2020).
   memory exposure reduction and randomization.
 \newblock In {\em Proc. of ASPLOS}, pages 987--1000.
 
-\bibitem[Wen and Weber, 2020]{wen2020wasmachine}
-Wen,E. and Weber,G. (2020).
-\newblock Wasmachine: Bring iot up to speed with a webassembly os.
-\newblock In {\em 2020 IEEE International Conference on Pervasive Computing and
-  Communications Workshops (PerCom Workshops)}, pages 1--4. IEEE.
-
-\bibitem[Runeson et~al., 2020]{Runeson2020}
-Runeson,P., Engstr{\"o}m,E., and Storey,M.-A. (2020).
-\newblock {\em The Design Science Paradigm as a Frame for Empirical Software
-  Engineering}, pages 127--147.
-\newblock Springer International Publishing, Cham.
-
-\bibitem[Lehmann et~al., 2020]{usenixWasm2020}
-Lehmann,D., Kinder,J., and Pradel,M. (2020).
-\newblock Everything old is new again: Binary security of webassembly.
-\newblock In {\em 29th USENIX Security Symposium (USENIX Security 20)}. USENIX
-  Association.
-
 \bibitem[Gadepalli et~al., 2020]{Sledge}
 Gadepalli,P.~K., McBride,S., Peach,G., Cherkasova,L., and Parmer,G. (2020).
 \newblock Sledge: A serverless-first, light-weight wasm runtime for the edge.
 \newblock In {\em Proceedings of the 21st International Middleware Conference},
   page 265–279.
-
-\bibitem[Chen and {\relax W3C group}, 2020]{WebAssemblySecurity}
-Chen,D. and {\relax W3C group} (2020).
-\newblock {WebAssembly documentation: Security}.
-\newblock {Accessed: 18 June 2020}.
 
 \bibitem[Bryant, 2020]{bryant2020webassembly}
 Bryant,D. (2020).
@@ -106,21 +66,11 @@ Aga,M.~T. and Austin,T. (2019).
   randomization.
 \newblock In {\em Proc. of CGO}, pages 26--36.
 
-\bibitem[Silvanovich, 2018]{ChromeZero}
-Silvanovich,N. (2018).
-\newblock The problems and promise of webassembly.
-\newblock Technical report.
-
 \bibitem[Lu et~al., 2018]{lu2018stopping}
 Lu,K., Xu,M., Song,C., Kim,T., and Lee,W. (2018).
 \newblock Stopping memory disclosures via diversification and replicated
   execution.
 \newblock {\em IEEE Transactions on Dependable and Secure Computing}.
-
-\bibitem[Li et~al., 2018]{Li2018}
-Li,J., Zhao,B., and Zhang,C. (2018).
-\newblock {Fuzzing: a survey}.
-\newblock {\em Cybersecurity}, 1(1):1--13.
 
 \bibitem[Belleville et~al., 2018]{10.1145/3281662}
 Belleville,N., Courouss\'{e},D., Heydemann,K., and Charles,H.-P. (2018).
@@ -146,6 +96,13 @@ Haas,A., Rossberg,A., Schuff,D.~L., Schuff,D.~L., Titzer,B.~L., Holman,M.,
 Churchill,B., Sharma,R., Bastien,J., and Aiken,A. (2017).
 \newblock Sound loop superoptimization for google native client.
 \newblock {\em SIGPLAN Not.}, 52(4):313–326.
+
+\bibitem[Van~Es et~al., 2016]{EsAsm.js}
+Van~Es,N., Nicolay,J., Stievenart,Q., D'Hondt,T., and De~Roover,C. (2016).
+\newblock A performant scheme interpreter in asm.js.
+\newblock In {\em Proceedings of the 31st Annual ACM Symposium on Applied
+  Computing}, SAC '16, page 1944–1951, New York, NY, USA. Association for
+  Computing Machinery.
 
 \bibitem[Koning et~al., 2016]{koning2016secure}
 Koning,K., Bos,H., and Giuffrida,C. (2016).
@@ -190,12 +147,6 @@ Crane,S., Homescu,A., Brunthaler,S., Larsen,P., and Franz,M. (2015).
 \newblock Thwarting cache side-channel attacks through dynamic software
   diversity.
 \newblock In {\em NDSS}, pages 8--11.
-
-\bibitem[Baudry and Monperrus, 2015]{natural_diversity}
-Baudry,B. and Monperrus,M. (2015).
-\newblock The multiple facets of software diversity: Recent developments in
-  year 2000 and beyond.
-\newblock {\em ACM Comput. Surv.}, 48(1).
 
 \bibitem[Agosta et~al., 2015]{agosta2015meet}
 Agosta,G., Barenghi,A., Pelosi,G., and Scandale,M. (2015).
@@ -253,14 +204,6 @@ Salamat,B., Jackson,T., Gal,A., and Franz,M. (2009).
   monitoring of program variants in user-space.
 \newblock In {\em Proceedings of the 4th ACM European conference on Computer
   systems}, pages 33--46.
-
-\bibitem[Maia et~al., 2008]{Maia08usinga}
-Maia,M. D.~A., Sobreira,V., Paixão,K.~R., Amo,R. A.~D., and Silva,I.~R.
-  (2008).
-\newblock Using a sequence alignment algorithm to identify specific and common
-  code from execution traces.
-\newblock In {\em Proceedings of the 4th International Workshop on Program
-  Comprehension through Dynamic Analysis (PCODA}, pages 6--10.
 
 \bibitem[Jacob et~al., 2008]{jacob2008superdiversifier}
 Jacob,M., Jakubowski,M.~H., Naldurg,P., Saw,C. W.~N., and Venkatesan,R. (2008).
@@ -343,16 +286,5 @@ Cohen,F.~B. (1993).
 Henry,M. (1987).
 \newblock {Superoptimizer: a look at the smallest program}.
 \newblock {\em ACM SIGARCH Computer Architecture News}, 15(5):122--126.
-
-\bibitem[Gnanadesikan and Wilk, 1968]{gnanadesikan1968probability}
-Gnanadesikan,R. and Wilk,M.~B. (1968).
-\newblock Probability plotting methods for the analysis of data.
-\newblock {\em Biometrika}, 55(1):1--17.
-
-\bibitem[Mann and Whitney, 1947]{mann1947}
-Mann,H.~B. and Whitney,D.~R. (1947).
-\newblock On a test of whether one of two random variables is stochastically
-  larger than the other.
-\newblock {\em Ann. Math. Statist.}, 18(1):50--60.
 
 \end{thebibliography}

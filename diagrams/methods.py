@@ -190,6 +190,31 @@ def method3():
 
 
 
+def wasm_workflow():
+
+    gat = dict(**ga)
+    gat['ranksep'] = "1.2"
+    gat['nodesep'] = "0.3"
+
+    with Diagram("", show=False, outformat="pdf", graph_attr=gat,  node_attr=na, edge_attr=ea, direction="LR", filename="wasm_workflow", curvestyle="curved"):
+        
+        dns = Custom("\nprogram", "resources/program.png")
+        lb = Custom("\nWasm Compiler", "resources/gear.png")
+        wasm = Custom("\n\nWasm binary", "resources/wasm.png")
+        browser = Custom("\n\n", "resources/screenshot_game.png")
+        browser._height = 15
+
+        #multivariant >> Edge(label="Execute\n\n\n", fontsize="23") >> tt1
+        #original >> Edge(label="Execute", fontsize="23") >> tt1o
+        
+        
+        dns >> lb >> wasm 
+        wasm >> browser
+        #lb >> db_primary
+        #svc_group >> memcached
+
+
+
 if __name__ == "__main__":
     na['width'] = "1.3"
     method1()
