@@ -25,6 +25,12 @@ Lee,S., Kang,H., Jang,J., and Kang,B.~B. (2021).
   stack layout.
 \newblock {\em IEEE Transactions on Dependable and Secure Computing}.
 
+\bibitem[Hilbig et~al., 2021]{Hilbig2021AnES}
+Hilbig,A., Lehmann,D., and Pradel,M. (2021).
+\newblock An empirical study of real-world webassembly binaries: Security,
+  languages, use cases.
+\newblock {\em Proceedings of the Web Conference 2021}.
+
 \bibitem[MTD, 2021]{MTDNationalCyberLaep}
  (2021).
 \newblock {National Cyber Leap Year}.
@@ -35,11 +41,22 @@ Xu,Y., Solihin,Y., and Shen,X. (2020).
   memory exposure reduction and randomization.
 \newblock In {\em Proc. of ASPLOS}, pages 987--1000.
 
+\bibitem[Lehmann et~al., 2020]{usenixWasm2020}
+Lehmann,D., Kinder,J., and Pradel,M. (2020).
+\newblock Everything old is new again: Binary security of webassembly.
+\newblock In {\em 29th USENIX Security Symposium (USENIX Security 20)}. USENIX
+  Association.
+
 \bibitem[Gadepalli et~al., 2020]{Sledge}
 Gadepalli,P.~K., McBride,S., Peach,G., Cherkasova,L., and Parmer,G. (2020).
 \newblock Sledge: A serverless-first, light-weight wasm runtime for the edge.
 \newblock In {\em Proceedings of the 21st International Middleware Conference},
   page 265–279.
+
+\bibitem[Chen and {\relax W3C group}, 2020]{WebAssemblySecurity}
+Chen,D. and {\relax W3C group} (2020).
+\newblock {WebAssembly documentation: Security}.
+\newblock {Accessed: 18 June 2020}.
 
 \bibitem[Bryant, 2020]{bryant2020webassembly}
 Bryant,D. (2020).
@@ -66,6 +83,11 @@ Aga,M.~T. and Austin,T. (2019).
   randomization.
 \newblock In {\em Proc. of CGO}, pages 26--36.
 
+\bibitem[Silvanovich, 2018]{ChromeZero}
+Silvanovich,N. (2018).
+\newblock The problems and promise of webassembly.
+\newblock Technical report.
+
 \bibitem[Lu et~al., 2018]{lu2018stopping}
 Lu,K., Xu,M., Song,C., Kim,T., and Lee,W. (2018).
 \newblock Stopping memory disclosures via diversification and replicated
@@ -77,6 +99,10 @@ Belleville,N., Courouss\'{e},D., Heydemann,K., and Charles,H.-P. (2018).
 \newblock Automated software protection for the masses against side-channel
   attacks.
 \newblock {\em ACM Trans. Archit. Code Optim.}, 15(4).
+
+\bibitem[{WebAssembly Community Group}, 2017]{wasm_spec}
+{WebAssembly Community Group} (2017).
+\newblock {WebAssembly Specification}.
 
 \bibitem[Sengupta et~al., 2017]{10.5555/3091125.3091155}
 Sengupta,S., Vadlamudi,S.~G., Kambhampati,S., Doup\'{e},A., Zhao,Z.,
@@ -147,6 +173,16 @@ Crane,S., Homescu,A., Brunthaler,S., Larsen,P., and Franz,M. (2015).
 \newblock Thwarting cache side-channel attacks through dynamic software
   diversity.
 \newblock In {\em NDSS}, pages 8--11.
+
+\bibitem[Baudry and Monperrus, 2015]{natural_diversity}
+Baudry,B. and Monperrus,M. (2015).
+\newblock The multiple facets of software diversity: Recent developments in
+  year 2000 and beyond.
+\newblock {\em ACM Comput. Surv.}, 48(1).
+
+\bibitem[{Alon Zakai}, 2015]{asmjs}
+{Alon Zakai} (2015).
+\newblock {asm.js Speedups Everywhere}.
 
 \bibitem[Agosta et~al., 2015]{agosta2015meet}
 Agosta,G., Barenghi,A., Pelosi,G., and Scandale,M. (2015).
