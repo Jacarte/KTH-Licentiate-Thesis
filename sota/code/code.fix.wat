@@ -3,7 +3,7 @@
   (type (;0;) (func (param f32) (result i32))) (*@\label{tpe1}@*)
   (type (;1;) (func))(*@\label{tpe2}@*)
   (type (;2;) (func (result i32)))(*@\label{tpe3}@*)
-  (import "env" "ftoi" (func $ftoi (type 0)))(*@\label{import1}@*)
+  (import "env" "ftoi" (func $ftoi (type 0)))(*@\label{import1}@*) (*@\tikzmarkMap{3}{}{-68.5}{1}{2.0cm}@*)
   (func $main (type 2) (result i32)(*@\label{func1}@*)
     (local i32 i32)
     i32.const -1000
@@ -28,7 +28,7 @@
       return
     end (*@\label{end2}@*)
     f32.const 0x1.9147aep+3 ;=12.54;
-    call $ftoi (*@\label{call}@*)
+    call $ftoi (*@\label{call}@*) (*@\tikzmarkMap{2}{}{-21.5}{1}{2.0cm}@*)
     local.get 1
     i32.add) (*@\label{result}@*)
   (memory (;0;) 1) (*@\label{mem1}@*)

@@ -1,0 +1,330 @@
+\begin{thebibliography}{}
+
+\bibitem[Voulimeneas et~al., 2021]{voulimeneas2021dmvx}
+Voulimeneas,A., Song,D., Larsen,P., Franz,M., and Volckaert,S. (2021).
+\newblock dmvx: Secure and efficient multi-variant execution in a distributed
+  setting.
+\newblock In {\em Proceedings of the 14th European Workshop on Systems
+  Security}, pages 41--47.
+
+\bibitem[{Shypula} et~al., 2021]{2021arXiv210913498S}
+{Shypula},A., {Yin},P., {Lacomis},J., {Le Goues},C., {Schwartz},E., and
+  {Neubig},G. (2021).
+\newblock {Learning to Superoptimize Real-world Programs}.
+\newblock {\em arXiv e-prints}, page arXiv:2109.13498.
+
+\bibitem[Narayan et~al., 2021]{Narayan2021Swivel}
+Narayan,S., Disselkoen,C., Moghimi,D., Cauligi,S., Johnson,E., Gang,Z.,
+  Vahldiek-Oberwagner,A., Sahita,R., Shacham,H., Tullsen,D., et~al. (2021).
+\newblock Swivel: Hardening webassembly against spectre.
+\newblock In {\em USENIX Security Symposium}.
+
+\bibitem[Lee et~al., 2021]{lee2021savior}
+Lee,S., Kang,H., Jang,J., and Kang,B.~B. (2021).
+\newblock Savior: Thwarting stack-based memory safety violations by randomizing
+  stack layout.
+\newblock {\em IEEE Transactions on Dependable and Secure Computing}.
+
+\bibitem[Hilbig et~al., 2021]{Hilbig2021AnES}
+Hilbig,A., Lehmann,D., and Pradel,M. (2021).
+\newblock An empirical study of real-world webassembly binaries: Security,
+  languages, use cases.
+\newblock {\em Proceedings of the Web Conference 2021}.
+
+\bibitem[MTD, 2021]{MTDNationalCyberLaep}
+ (2021).
+\newblock {National Cyber Leap Year}.
+
+\bibitem[Xu et~al., 2020]{xu2020merr}
+Xu,Y., Solihin,Y., and Shen,X. (2020).
+\newblock Merr: Improving security of persistent memory objects via efficient
+  memory exposure reduction and randomization.
+\newblock In {\em Proc. of ASPLOS}, pages 987--1000.
+
+\bibitem[Lehmann et~al., 2020]{usenixWasm2020}
+Lehmann,D., Kinder,J., and Pradel,M. (2020).
+\newblock Everything old is new again: Binary security of webassembly.
+\newblock In {\em 29th USENIX Security Symposium (USENIX Security 20)}. USENIX
+  Association.
+
+\bibitem[Gadepalli et~al., 2020]{Sledge}
+Gadepalli,P.~K., McBride,S., Peach,G., Cherkasova,L., and Parmer,G. (2020).
+\newblock Sledge: A serverless-first, light-weight wasm runtime for the edge.
+\newblock In {\em Proceedings of the 21st International Middleware Conference},
+  page 265–279.
+
+\bibitem[Chen and {\relax W3C group}, 2020]{WebAssemblySecurity}
+Chen,D. and {\relax W3C group} (2020).
+\newblock {WebAssembly documentation: Security}.
+\newblock {Accessed: 18 June 2020}.
+
+\bibitem[Bryant, 2020]{bryant2020webassembly}
+Bryant,D. (2020).
+\newblock Webassembly outside the browser: A new foundation for pervasive
+  computing.
+\newblock In {\em Proc. of ICWE 2020}, pages 9--12.
+
+\bibitem[Roy et~al., 2019]{10.1145/3318216.3363338}
+Roy,A., Chhabra,A., Kamhoua,C.~A., and Mohapatra,P. (2019).
+\newblock A moving target defense against adversarial machine learning.
+\newblock In {\em Proceedings of the 4th ACM/IEEE Symposium on Edge Computing},
+  page 383–388.
+
+\bibitem[{\"O}sterlund et~al., 2019]{osterlund2019kmvx}
+{\"O}sterlund,S., Koning,K., Olivier,P., Barbalace,A., Bos,H., and Giuffrida,C.
+  (2019).
+\newblock kmvx: Detecting kernel information leaks with multi-variant
+  execution.
+\newblock In {\em ASPLOS}.
+
+\bibitem[Aga and Austin, 2019]{aga2019smokestack}
+Aga,M.~T. and Austin,T. (2019).
+\newblock Smokestack: thwarting dop attacks with runtime stack layout
+  randomization.
+\newblock In {\em Proc. of CGO}, pages 26--36.
+
+\bibitem[Silvanovich, 2018]{ChromeZero}
+Silvanovich,N. (2018).
+\newblock The problems and promise of webassembly.
+\newblock Technical report.
+
+\bibitem[Lu et~al., 2018]{lu2018stopping}
+Lu,K., Xu,M., Song,C., Kim,T., and Lee,W. (2018).
+\newblock Stopping memory disclosures via diversification and replicated
+  execution.
+\newblock {\em IEEE Transactions on Dependable and Secure Computing}.
+
+\bibitem[Belleville et~al., 2018]{10.1145/3281662}
+Belleville,N., Courouss\'{e},D., Heydemann,K., and Charles,H.-P. (2018).
+\newblock Automated software protection for the masses against side-channel
+  attacks.
+\newblock {\em ACM Trans. Archit. Code Optim.}, 15(4).
+
+\bibitem[{WebAssembly Community Group}, 2017b]{wasm_spec}
+{WebAssembly Community Group} (2017b).
+\newblock {WebAssembly Specification}.
+
+\bibitem[{WebAssembly Community Group}, 2017a]{wasm_roadmap}
+{WebAssembly Community Group} (2017a).
+\newblock {WebAssembly Roadmap}.
+
+\bibitem[Sengupta et~al., 2017]{10.5555/3091125.3091155}
+Sengupta,S., Vadlamudi,S.~G., Kambhampati,S., Doup\'{e},A., Zhao,Z.,
+  Taguinod,M., and Ahn,G.-J. (2017).
+\newblock A game theoretic approach to strategy generation for moving target
+  defense in web applications.
+\newblock In {\em Proceedings of the 16th Conference on Autonomous Agents and
+  MultiAgent Systems}, page 178–186.
+
+\bibitem[Haas et~al., 2017]{Haas_2017}
+Haas,A., Rossberg,A., Schuff,D.~L., Schuff,D.~L., Titzer,B.~L., Holman,M.,
+  Gohman,D., Wagner,L., Zakai,A., and Bastien,J.~F. (2017).
+\newblock Bringing the web up to speed with webassembly.
+\newblock {\em PLDI}.
+
+\bibitem[Churchill et~al., 2017]{churchill_sound_nodate}
+Churchill,B., Sharma,R., Bastien,J., and Aiken,A. (2017).
+\newblock Sound loop superoptimization for google native client.
+\newblock {\em SIGPLAN Not.}, 52(4):313–326.
+
+\bibitem[Van~Es et~al., 2016]{EsAsm.js}
+Van~Es,N., Nicolay,J., Stievenart,Q., D'Hondt,T., and De~Roover,C. (2016).
+\newblock A performant scheme interpreter in asm.js.
+\newblock In {\em Proceedings of the 31st Annual ACM Symposium on Applied
+  Computing}, SAC '16, page 1944–1951, New York, NY, USA. Association for
+  Computing Machinery.
+
+\bibitem[Koning et~al., 2016]{koning2016secure}
+Koning,K., Bos,H., and Giuffrida,C. (2016).
+\newblock Secure and efficient multi-variant execution using hardware-assisted
+  process virtualization.
+\newblock In {\em 2016 46th Annual IEEE/IFIP International Conference on
+  Dependable Systems and Networks (DSN)}, pages 431--442. IEEE.
+
+\bibitem[Courouss{\'e} et~al., 2016]{courousse2016runtime}
+Courouss{\'e},D., Barry,T., Robisson,B., Jaillon,P., Potin,O., and Lanet,J.-L.
+  (2016).
+\newblock Runtime code polymorphism as a protection against side channel
+  attacks.
+\newblock In {\em IFIP International Conference on Information Security Theory
+  and Practice}, pages 136--152. Springer.
+
+\bibitem[{Bunel} et~al., 2016]{bunel_learning_2017}
+{Bunel},R., {Desmaison},A., {Pawan Kumar},M., {Torr},P.~H., and {Kohli},P.
+  (2016).
+\newblock {Learning to superoptimize programs}.
+\newblock {\em arXiv e-prints}, 1(1):arXiv:1611.01787.
+
+\bibitem[Volckaert et~al., 2015]{volckaert2015cloning}
+Volckaert,S., Coppens,B., and De~Sutter,B. (2015).
+\newblock Cloning your gadgets: Complete rop attack immunity with multi-variant
+  execution.
+\newblock {\em IEEE Transactions on Dependable and Secure Computing}, 13(4).
+
+\bibitem[Kim et~al., 2015]{Kim2015}
+Kim,D., Kwon,Y., Sumner,W.~N., Zhang,X., and Xu,D. (2015).
+\newblock Dual execution for on the fly fine grained execution comparison.
+\newblock {\em SIGPLAN Not.}
+
+\bibitem[Davi et~al., 2015]{davi2015isomeron}
+Davi,L., Liebchen,C., Sadeghi,A.-R., Snow,K.~Z., and Monrose,F. (2015).
+\newblock Isomeron: Code randomization resilient to (just-in-time)
+  return-oriented programming.
+\newblock In {\em NDSS}.
+
+\bibitem[Crane et~al., 2015]{crane2015thwarting}
+Crane,S., Homescu,A., Brunthaler,S., Larsen,P., and Franz,M. (2015).
+\newblock Thwarting cache side-channel attacks through dynamic software
+  diversity.
+\newblock In {\em NDSS}, pages 8--11.
+
+\bibitem[Baudry and Monperrus, 2015]{natural_diversity}
+Baudry,B. and Monperrus,M. (2015).
+\newblock The multiple facets of software diversity: Recent developments in
+  year 2000 and beyond.
+\newblock {\em ACM Comput. Surv.}, 48(1).
+
+\bibitem[{Alon Zakai}, 2015]{asmjs}
+{Alon Zakai} (2015).
+\newblock {asm.js Speedups Everywhere}.
+
+\bibitem[Agosta et~al., 2015]{agosta2015meet}
+Agosta,G., Barenghi,A., Pelosi,G., and Scandale,M. (2015).
+\newblock The {MEET} approach: Securing cryptographic embedded software against
+  side channel attacks.
+\newblock {\em IEEE Transactions on Computer-Aided Design of Integrated
+  Circuits and Systems}, 34(8):1320--1333.
+
+\bibitem[Homescu et~al., 2013]{homescu2013profile}
+Homescu,A., Neisius,S., Larsen,P., Brunthaler,S., and Franz,M. (2013).
+\newblock Profile-guided automated software diversity.
+\newblock In {\em Proceedings of the 2013 IEEE/ACM International Symposium on
+  Code Generation and Optimization (CGO)}, pages 1--11. IEEE.
+
+\bibitem[Coppens et~al., 2013]{coppens2013feedback}
+Coppens,B., De~Sutter,B., and Maebe,J. (2013).
+\newblock Feedback-driven binary code diversification.
+\newblock {\em ACM Transactions on Architecture and Code Optimization (TACO)},
+  9(4):1--26.
+
+\bibitem[Maurer and Brumley, 2012]{maurer2012tachyon}
+Maurer,M. and Brumley,D. (2012).
+\newblock Tachyon: Tandem execution for efficient live patch testing.
+\newblock In {\em 21st USENIX Security Symposium (USENIX Security 12)}, pages
+  617--630.
+
+\bibitem[Kulkarni and Cavazos, 2012]{phase-ordering-problem}
+Kulkarni,S. and Cavazos,J. (2012).
+\newblock Mitigating the compiler optimization phase-ordering problem using
+  machine learning.
+\newblock {\em SIGPLAN Not.}, 47(10):147–162.
+
+\bibitem[Jackson, 2012]{jackson}
+Jackson,T. (2012).
+\newblock {\em On the Design, Implications, and Effects of Implementing
+  Software Diversity for Security}.
+\newblock PhD thesis, University of California, Irvine.
+
+\bibitem[Salamat et~al., 2011]{SalamatJWWF11}
+Salamat,B., Jackson,T., Wagner,G., Wimmer,C., and Franz,M. (2011).
+\newblock Runtime defense against code injection attacks using replicated
+  execution.
+\newblock {\em {IEEE} Trans. Dependable Secur. Comput.}, 8(4):588--601.
+
+\bibitem[Amarilli et~al., 2011]{amarilli2011can}
+Amarilli,A., M{\"u}ller,S., Naccache,D., Page,D., Rauzy,P., and Tunstall,M.
+  (2011).
+\newblock Can code polymorphism limit information leakage?
+\newblock In {\em IFIP International Workshop on Information Security Theory
+  and Practices}, pages 1--21. Springer.
+
+\bibitem[Salamat et~al., 2009]{salamat2009orchestra}
+Salamat,B., Jackson,T., Gal,A., and Franz,M. (2009).
+\newblock Orchestra: intrusion detection using parallel execution and
+  monitoring of program variants in user-space.
+\newblock In {\em Proceedings of the 4th ACM European conference on Computer
+  systems}, pages 33--46.
+
+\bibitem[Jacob et~al., 2008]{jacob2008superdiversifier}
+Jacob,M., Jakubowski,M.~H., Naldurg,P., Saw,C. W.~N., and Venkatesan,R. (2008).
+\newblock The superdiversifier: Peephole individualization for software
+  protection.
+\newblock In {\em International Workshop on Security}, pages 100--120.
+  Springer.
+
+\bibitem[de~Moura and Bj{\o}rner, 2008]{SMT_solver}
+de~Moura,L. and Bj{\o}rner,N. (2008).
+\newblock Z3: An efficient smt solver.
+\newblock In Ramakrishnan,C.~R. and Rehof,J., editors, {\em Tools and
+  Algorithms for the Construction and Analysis of Systems}, pages 337--340,
+  Berlin, Heidelberg. Springer Berlin Heidelberg.
+
+\bibitem[Salamat et~al., 2007]{salamat2007stopping}
+Salamat,B., Gal,A., Jackson,T., Manivannan,K., Wagner,G., and Franz,M. (2007).
+\newblock Stopping buffer overflow attacks at run-time: Simultaneous
+  multi-variant program execution on a multicore processor.
+\newblock Technical report, Technical Report 07-13, School of Information and
+  Computer Sciences, UCIrvine.
+
+\bibitem[Bruschi et~al., 2007]{bruschi2007diversified}
+Bruschi,D., Cavallaro,L., and Lanzi,A. (2007).
+\newblock Diversified process replic{\ae} for defeating memory error exploits.
+\newblock In {\em Proc. of the Int. Performance, Computing, and Communications
+  Conference}.
+
+\bibitem[Cox et~al., 2006]{cox06}
+Cox,B., Evans,D., Filipi,A., Rowanhill,J., Hu,W., Davidson,J., Knight,J.,
+  Nguyen-Tuong,A., and Hiser,J. (2006).
+\newblock N-variant systems: a secretless framework for security through
+  diversity.
+\newblock In {\em Proc. of USENIX Security Symposium}, USENIX-SS'06.
+
+\bibitem[Bansal and Aiken, 2006]{bansal_automatic_nodate}
+Bansal,S. and Aiken,A. (2006).
+\newblock Automatic generation of peephole superoptimizers.
+\newblock In {\em Proceedings of the 12th International Conference on
+  Architectural Support for Programming Languages and Operating Systems},
+  ASPLOS XII, page 394–403, New York, NY, USA. Association for Computing
+  Machinery.
+
+\bibitem[Bhatkar et~al., 2005]{bhatkar2005efficient}
+Bhatkar,S., Sekar,R., and DuVarney,D.~C. (2005).
+\newblock Efficient techniques for comprehensive protection from memory error
+  exploits.
+\newblock In {\em Proceedings of the USENIX Security Symposium}, pages
+  271--286.
+
+\bibitem[Kc et~al., 2003]{Kc03}
+Kc,G.~S., Keromytis,A.~D., and Prevelakis,V. (2003).
+\newblock Countering code-injection attacks with instruction-set randomization.
+\newblock In {\em Proc. of CCS}, pages 272--280.
+
+\bibitem[Bhatkar et~al., 2003]{bhatkar03}
+Bhatkar,S., DuVarney,D.~C., and Sekar,R. (2003).
+\newblock Address obfuscation: an efficient approach to combat a board range of
+  memory error exploits.
+\newblock In {\em Proceedings of the USENIX Security Symposium}.
+
+\bibitem[Barrantes et~al., 2003]{barrantes2003randomized}
+Barrantes,E.~G., Ackley,D.~H., Forrest,S., Palmer,T.~S., Stefanovic,D., and
+  Zovi,D.~D. (2003).
+\newblock Randomized instruction set emulation to disrupt binary code injection
+  attacks.
+\newblock In {\em Proc. CCS}, pages 281--289.
+
+\bibitem[Chew and Song, 2002]{Chew02mitigatingbuffer}
+Chew,M. and Song,D. (2002).
+\newblock Mitigating buffer overflows by operating system randomization.
+\newblock Technical Report CS-02-197, Carnegie Mellon University.
+
+\bibitem[Cohen, 1993]{cohen1993operating}
+Cohen,F.~B. (1993).
+\newblock Operating system protection through program evolution.
+\newblock {\em Computers \& Security}, 12(6):565--584.
+
+\bibitem[Henry, 1987]{Massalin1987}
+Henry,M. (1987).
+\newblock {Superoptimizer: a look at the smallest program}.
+\newblock {\em ACM SIGARCH Computer Architecture News}, 15(5):122--126.
+
+\end{thebibliography}

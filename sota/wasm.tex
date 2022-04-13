@@ -5,6 +5,7 @@
 \newcommand{\lstnumberautorefname}{Line}
 \newcommand{\lineref}[1]{\autoref{#1}}
 
+
 %\todo{Intro}
 
 %\subsection*{}
@@ -77,7 +78,9 @@ As the listing shows, instructions are annotated with a type. Wasm binaries cont
 % Example
 \begin{code}
     \begin{minipage}[t]{0.4\linewidth}
-        \lstset{language=C,caption={Arbitrary C function.},label=CExample}
+        \lstset{language=C,caption={Arbitrary C function.},label=CExample,
+        escapeinside={(*@}{@*)}
+        }
 \input{sota/code/code.c}
 \end{minipage}\hspace{20mm}
 \begin{minipage}[t]{0.4\linewidth}
@@ -96,28 +99,17 @@ As the listing shows, instructions are annotated with a type. Wasm binaries cont
 \end{minipage}
 
 
-\begin{tikzpicture}[remember picture,overlay]
-%\path (2.north) edge[<-, bend left] (1.north);
-%\path[draw, ->] (3.west) edge[<-, bend left] (2.west);
-%\path (4.west) edge[<-, bend left] (3.west);
-%\path (1.south) edge[<-, bend left] (4.south);
+%\begin{tikzpicture}[remember picture,overlay]
 
-%\path (2.east) edge[<-, bend left, blue] (5.north);
-%\path (3.east) edge[<-, bend right, olive] (2.east);
-\path (5.east) edge[<-, bend right, black] (2.east);
-\path (6.east) edge[<-, bend right, black] (3.east);
-\path (9.east) edge[<-, bend right, black] (4.east);
-\path (7.east) edge[<-, bend right, black] (8.east);
-%\path (5.south) edge[<-, bend right, blue] (4.east);
-%\path (9.north) edge[<-] (8.south);
-%\path (5.south) edge[<-, bend left] (9.south);
+%\path (2.west) edge[<-, black] (1.west);
+%\path (3.west) edge[<-,  black] (4.west);
+
+%\path (6.east) edge[<-, bend right, black] (3.east);
+%\path (9.east) edge[<-, bend right, black] (4.east);
+%\path (7.east) edge[<-, bend right, black] (8.east);
 
 
-%\path (10.north) edge[<-, bend left] (11.north);
-%\path (11.south) edge[<-, bend left] (10.south);
-%\path (7) edge[<-, bend right] (6.east);
-%\path (8) edge[<-, bend right] (7.east);
-\end{tikzpicture}
+%\end{tikzpicture}
 \end{code}
 
 % Memory, globals and functions
