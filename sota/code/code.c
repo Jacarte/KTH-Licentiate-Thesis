@@ -1,3 +1,4 @@
+\begin{lstlisting}[style=CStyle]
 // Some raw data
 const int A[250];
 
@@ -12,3 +13,4 @@ int main() {
 
     return A[0];
 }
+\end{lstlisting}

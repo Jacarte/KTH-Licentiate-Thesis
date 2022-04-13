@@ -21,8 +21,6 @@
         i32.add
         local.get 0
         i32.add
-        i32.const 1000
-        i32.add
         i32.load
         local.tee 1
         i32.const 101
