@@ -94,6 +94,11 @@ Lu,K., Xu,M., Song,C., Kim,T., and Lee,W. (2018).
   execution.
 \newblock {\em IEEE Transactions on Dependable and Secure Computing}.
 
+\bibitem[Genkin et~al., 2018]{Genkin2018DrivebyKC}
+Genkin,D., Pachmanov,L., Tromer,E., and Yarom,Y. (2018).
+\newblock Drive-by key-extraction cache attacks from portable code.
+\newblock {\em IACR Cryptol. ePrint Arch.}, 2018:119.
+
 \bibitem[Belleville et~al., 2018]{10.1145/3281662}
 Belleville,N., Courouss\'{e},D., Heydemann,K., and Charles,H.-P. (2018).
 \newblock Automated software protection for the masses against side-channel

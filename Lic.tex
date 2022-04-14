@@ -105,6 +105,26 @@
 
 \makeatletter
 
+
+\lstdefinelanguage{C}{
+    otherkeywords={},
+    morekeywords=[1]{const, int},
+    morekeywords=[2]{0},
+    morekeywords=[3]{add,const,mul,shl,get,rem_s,rem_u,ne,tee,sub,set,store},
+    morekeywords=[4]{},
+    morekeywords=[5]{global, get_global, mut, set_global, export, import,loop, memory, data, get_local,if, block,module, set_local,call,br_if,end, all,call_indirect,local,global,module, func, param, result, type},
+    morekeywords=[6]{=,;},
+    morekeywords=[7]{(,),[,],.},
+    sensitive=false,
+    morecomment=[l]{;},
+    morecomment=[s]{;}{;},
+    morestring=[b]",
+    keywordstyle=[1]\color{eminence}\bfseries,
+    keywordstyle=[3]\color{frenchplum},
+    keywordstyle=[5]\color{darkgreen}\bfseries,
+    commentstyle=\color{commentgreen}
+}
+
 \lstdefinelanguage{WAT}{
     otherkeywords={},
     morekeywords=[1]{i32,f32,i64,f64},
@@ -213,7 +233,7 @@
 
 \makeatletter
 \lstset{
-    language=C,
+    %language=C,
     basicstyle=\ttfamily\footnotesize\lst@ifdisplaystyle\scriptsize\fi,
     escapeinside={\%*}{*)},
     captionpos=t
