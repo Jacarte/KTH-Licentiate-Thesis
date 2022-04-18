@@ -19,15 +19,12 @@ In \autoref{diagrams:protocol:rq1} we illustrate the workflow to generate \wasm 
 \subsection*{Metrics}
 
 To assess our approach's ability to generate \wasm binaries that are statically different, we compute the number of variants and the number of unique variants for each original function of each corpus. 
-On top, we define the aggregation of these former two values to quantitatively evaluate RQ1 at the corpus level.
+On top, we define the aggregation of these former two values to quantitatively evaluate RQ1 at the corpus level. 
 
-\todo{
-    clarify source code versus byte code for earch definition.
-
-why are those definitions important? interesting? why do you introduce them?
-}
+We start by defining what a program's population is. This definition can be applied in general to any collection of variants of the same program. All definitions are based upon bytecodes and not the source code of the programs.
 
 \begin{definition}{Program's population $M(P)$:}\label{def:rq1:programspopulation}
+    \normalfont 
     Given a program P and its generated variants $v_i$, the program's population is defined as.\\
     $$
         M(P)=\{v_i\ \text{where $v_i$ is a variant of P}\}
@@ -36,29 +33,36 @@ why are those definitions important? interesting? why do you introduce them?
     Notice that, the program's population includes the original program P.
 \end{definition}
 
+Beyond the program's population, we also want to compare how many program variants are unique. The subset of unique programs in the program's population hints how the variants are different between them and not only against the original program. For example, imagine a program $P$ with two program variants $V_1$ and $V_2$, the program population is composed by $\{P, V_1 \text{ and } V_2\}$ where $V_1$ is different from $P$, and $V_2$ is different from $P$. Either, if $V_1$ is equal or different from $V_2$, the program's population still be the same.
+
+%\todo{
+%    clarify source code versus byte code for earch definition.
+
+%why are those definitions important? interesting? why do you introduce them?
+%}
 %Notice that all metrics over programs and their variants make sense only at the population level. Therefore, we compare semantically equivalent programs from the same population.
 
-\todo{strange to have everything in italics}
+%\todo{
+%    difference unclear or trivial.
 
-\todo{
-    difference unclear or trivial.
+%do you need source code versus bytecode?
 
-do you need source code versus bytecode?
-
-clarify
-}
+%clarify
+%}
 
 \begin{definition}{Program's unique population $U(P)$:}\label{def:rq1:programsuniquepopulation}
+    \normalfont 
     Given a program P and its program's population $M(P)$, the program's unique population is defined as.\\
     $$
         U(P)=\{v\ \in\ M(P)\}
     $$
     such that $\forall v_i,v_j \in U(P)$, $md5sum(v_i) \neq md5sum(v_j)$.
-    $Md5sum(v)$ is the md5 hash calculated over the byte stream of the program file $v$. Notice that, the original program $P$ is included in $U(P)$.
+    $Md5sum(v)$ is the md5 hash calculated over the bytecode stream of the program file $v$. Notice that, the original program $P$ is included in $U(P)$.
 
 \end{definition}
 
 \begin{metric}{Program's population size $S(P)$:}\label{metric:rq1:PS}
+    \normalfont 
     Given a program P and its program's population $M(P)$ according to \autoref{def:rq1:programspopulation}, the program's population size is defined as.\\
     $$
         S(P)=|M(P)|
@@ -67,6 +71,7 @@ clarify
 
 
 \begin{metric}{Program's unique population size $US(P)$:}\label{metric:rq1:UP}
+    \normalfont 
     Given a program P and its program's unique population $U(P)$ according to \autoref{def:rq1:programsuniquepopulation}, the program's unique population size is defined as.\\
     $$
         US(P)=|U(P)|
@@ -77,6 +82,7 @@ clarify
 \newcommand{\corpusuniquepopulationsizename}{Corpus unique population size\xspace}
 
 \begin{metric}{\corpuspopulationsizename$CS(C)$:}\label{metric:rq1:corpus_pop}
+    \normalfont 
     Given a program's corpus $C$, the corpus population size is defined as the sum of all program's population sizes over the corpus $C$.\\
     $$
         CS(C)=\Sigma{S(P)}\ \forall\ P\ \in\ C
@@ -84,7 +90,7 @@ clarify
 \end{metric}
 
 \begin{metric}{\corpusuniquepopulationsizename$UCS(C)$:}\label{metric:rq1:corpus_pop_unique}
-
+    \normalfont 
     Given a program's corpus $C$, the corpus unique population size is defined as the sum of all program's unique population sizes over the corpus $C$\\
     $$
     UCS(C)=\Sigma{US(P)}\ \forall\ P\ \in\ C
@@ -95,7 +101,7 @@ clarify
 \subsection*{Protocol}
 \todo{text sounding like "background text": To generate program variants, we synthesize program variants with an enumerative strategy, checking each synthesis for equivalence modulo input \cite{Li2018} against the original program. An enumerative synthesis is a brute-force approach to generate program variants. With a maximum number of instructions, it constructs and checks all possible programs up to that limit. For a simplified instance, with a maximum code size of 2 instructions in a programming language with $L$ possible constructions, an enumerative synthesizer builds all $L\times L$ combinations finding program variants.} For obvious reasons, this space is nearly impossible to explore in a reasonable time as soon as the limit of instructions increases.
 Therefore, we use two parameters to control the size of the search space and hence the time required to traverse it.
-On the one hand, one can limit the size of the variants. On the other hand, one can limit the set of instructions used for the synthesis. In our experiments for RQ1, we use all the \todo{magicnumber? why?: $60$} supported instructions in our synthesizer.
+On the one hand, one can limit the size of the variants. On the other hand, one can limit the set of instructions used for the synthesis. In our experiments for RQ1, we use all the $60$ supported instructions in our synthesizer.
 
 
 The former parameter allows us to find a trade-off between the number of variants that are synthesized and the time taken to produce them. For the current evaluation, given the size of the corpus and the properties of its programs, we set the exploration time to 1 hour maximum per function for \corpusrosetta. In the cases of \corpussodium\ and\ \corpusqrcode, we set the timeout to 5 minutes per function. The decision behind the usage of lower timeout for \corpussodium

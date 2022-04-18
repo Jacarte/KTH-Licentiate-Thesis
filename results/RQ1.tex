@@ -26,8 +26,7 @@ We summarize the results in \autoref{table:crow:general_results}.
 The table illustrates the corpus name, the number of functions to diversify, the number of successfully diversified functions (functions with at least one artificially created variant), the cumulative number of variants (\emph{\corpuspopulationsizename}) and the cumulative number of unique variants (\emph{\corpusuniquepopulationsizename}).
 
 % General results on the number of diversified functions per corpus
-We produce at least one unique program variant for $239/303{}$ single function programs for \corpusrosetta with one hour for a timeout \todo{ambiguous. execution timeout? diversification timeout?
-}. For the rest of the programs ($64/303{}$), the timeout is reached before CROW can find any valid variant. 
+We produce at least one unique program variant for $239/303{}$ single function programs for \corpusrosetta with one hour for a diversification timeout. For the rest of the programs ($64/303{}$), the timeout is reached before CROW can find any valid variant. 
 In the case of \corpussodium and \corpusqrcode, we produce variants for $\py{\diversifiedsodium}/\py{\libsodiumfunctions}$ and $\py{\diversifiedqrcode}/\py{\qrcodefunctions}$ functions respectively, with 5 minutes per function as timeout. The rest of the functions resulted in timeout before finding function variants or produce no variants. For all programs in all corpora, we achieve $356/3021$ successfully diversified functions, representing a $11.78\%$ of the total.
 % General growing factor
 As the four and fifth columns show, the number of artifically created variants and the number of unique variants are larger than the original number of functions by one order of magnitude. In the case of \corpusrosetta, the corpus population size is close to one million of programs.
@@ -44,7 +43,8 @@ As the four and fifth columns show, the number of artifically created variants a
 \label{rq1:challenges}
 
 % Low diversified functions
-We have observed a remarkable difference between the number of successfully diversified functions versus the number of failed-to-diversify functions (third column of \autoref{table:crow:general_results}). Our approach successfully diversified $239/303$, $85/869$ and $32/1849$ of the original functions for \corpusrosetta, \corpussodium and \corpusqrcode respectively.  The main reason of this phenomenon is the set timeout for CROW. \todo{so what? what does this mean for practitioners?: Setting up the timeout affects the capacity of our approach to generate variants. For our corpora, a low timeout implies a low number of diversified functions.}
+We have observed a remarkable difference between the number of successfully diversified functions versus the number of failed-to-diversify functions (third column of \autoref{table:crow:general_results}). Our approach successfully diversified $239/303$, $85/869$ and $32/1849$ of the original functions for \corpusrosetta, \corpussodium and \corpusqrcode respectively.  The main reason of this phenomenon is the set timeout for CROW. 
+%\todo{so what? what does this mean for practitioners?: Setting up the timeout affects the capacity of our approach to generate variants. For our corpora, a low timeout implies a low number of diversified functions.}
 
 % High populatio size
 We have noticed a remarkable difference between the number of diversified functions for each corpus, \rossetapopulation\ programs for \corpusrosetta 4272 for \corpussodium and 6369 for \corpusqrcode. The corpus population size for \corpusrosetta is two orders of magnitude larger compared to the other two corpora. The reason behind the large number of variants for \corpusrosetta is that, after certain time, our approach starts to combine the code replacements to generate new variants. However, looking at the fifth column, the number of unique variants have the same order of magnitude for all corpora.
@@ -156,7 +156,8 @@ i32.mul
 }
 
 \begin{tcolorbox}[title=Answer to RQ1.,boxrule=2pt,arc=.3em,boxsep=1.5mm]
-    We can provide diversification for 11.78\% of the programs in our corpora. Constant inferring, complemented with the high presence of arithmetic operations and bounded loops in the original program increased the number of program variants. \todo{Remove or elaborate: Nevertheless, the combination of code replacements in our approach is not a determinant factor to provide a large number unique program variants.}
+    We can provide diversification for 11.78\% of the programs in our corpora. Constant inferring, complemented with the high presence of arithmetic operations and bounded loops in the original program increased the number of program variants. 
+    %\todo{Remove or elaborate: Nevertheless, the combination of code replacements in our approach is not a determinant factor to provide a large number unique program variants.}
 \end{tcolorbox}
 
 

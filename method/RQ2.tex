@@ -17,20 +17,27 @@ We use the original functions from \corpusrosetta corpus described in \autoref{s
 We use only \corpusrosetta to answer RQ2 because this corpus is composed of simple programs that can be executed directly without user interaction, \ie we only need to call the interpreter passing the \wasm binary to it. 
 
 
-To dynamically compare programs and their variants, we execute each program on each programs' population to collect \todo{according to whihc definition? add back or forward ref??: their execution traces} and execution times. \todo{vague and subjective, avoid or elaborate: We perform fine-grained} comparisons by comparing the traces and execution times for all pairs of programs. Therefore, the defined metrics are formulated to support a pairwise comparison strategy.
-In the following, we define the metrics used to answer RQ2.
+To dynamically compare programs and their variants, we execute each program on each programs' population to collect and execution times. We define execution trace and execution time in the following section.
+%\todo{vague and subjective, avoid or elaborate: We perform fine-grained} comparisons by comparing the traces and execution times for all pairs of programs. Therefore, the defined metrics are formulated to support a pairwise comparison strategy.
+%In the following, we define the metrics used to answer RQ2.
 
 \subsection*{Metrics}
+\label{rq2:metrics}
 
-We compare the execution traces of two any programs of the same population with a global alignment metric. We propose a global alignment approach using Dynamic Time Warping (DTW). \todo{cite papers which uses DTW for execution trace comparisons}
-Dynamic Time Warping \cite{Maia08usinga} computes the global alignment between two sequences. It returns a value capturing the cost of this alignment, which is a distance metric. The larger the DTW distance, the more different the two sequences are.
+We compare the execution traces of two any programs of the same population with a global alignment metric. We propose a global alignment approach using Dynamic Time Warping (DTW).
+Dynamic Time Warping \cite{NEEDLEMAN1970443} computes the global alignment between two sequences. It returns a value capturing the cost of this alignment, which is a distance metric. The larger the DTW distance, the more different the two sequences are.
+DTW has been used for comparing traces in different domains. For software, De A. Maia \etal \cite{ Maia08usinga} proposed to identify similarity between programs from execution traces.
 In our experiments, we define the traces as the sequence of the stack operations during runtime, \ie the consecutive list of \texttt{push} and \texttt{pop} operations performed by the \wasm engine during the execution of the program.
 In the following, we define the $\DTW$ metric. 
  
 
+
+\todo{before, define this and give an illutrative listing plus, says how you collect those traces, that's part of the protocol: between the stack operation traces }
+
 \begin{metric}{\DTW{}:}
 \label{metric:stack}
-	Given two programs P and P' from the same program's population, \DTW{}(P,P'), computes the DTW distance \todo{before, define this and give an illutrative listing plus, says how you collect those traces, that's part of the protocol: between the stack operation traces }collected during their execution. \\
+\normalfont 
+	Given two programs P and P' from the same program's population, \DTW{}(P,P'), computes the DTW distance collected during their execution. \\
 	A \DTW{} of $0$ means that both traces are identical.
 	The higher the value, the more different the traces. 
 \end{metric}
@@ -40,6 +47,7 @@ In the following, we define the $\DTW$ metric.
 Moreover, we use the execution time distribution of the programs in the population to complement the answer to RQ2. For each program pair in the programs' population, we compare their execution time distributions. We define the execution time as follows:
 
 \begin{metric}{Execution time:}\label{metric:time}
+    \normalfont 
 	Given a \wasm program P, the execution time is the time spent to execute the binary.
 \end{metric}
 
@@ -50,7 +58,8 @@ Moreover, we use the execution time distribution of the programs in the populati
 \subsection*{Protocol}
 
 % Dynamic
-To compare program and variants behavior during runtime, we analyze all the unique program variants generated to answer RQ1 in a pairwise comparison using the value of aligning their execution traces (\autoref{metric:stack}). We use SWAM\footnote{\url{https://github.com/satabin/swam}} to execute each program and variant to collect the stack operation traces. SWAM is a \wasm interpreter that provides functionalities to capture the dynamic information of \wasm program executions, including the virtual stack operations. \todo{Can the reader runderstand that? We want to remark that we only collect the stack operation traces due to the memory-agnosticism of our approach to generate variants. Our approach does not change the memory-like operations of the original code.}
+To compare program and variants behavior during runtime, we analyze all the unique program variants generated to answer RQ1 in a pairwise comparison using the value of aligning their execution traces (\autoref{metric:stack}). We use SWAM\footnote{\url{https://github.com/satabin/swam}} to execute each program and variant to collect the stack operation traces. SWAM is a \wasm interpreter that provides functionalities to capture the dynamic information of \wasm program executions, including the virtual stack operations.
+% \todo{Can the reader runderstand that? We want to remark that we only collect the stack operation traces due to the memory-agnosticism of our approach to generate variants. Our approach does not change the memory-like operations of the original code.}
 
 Furthermore, we collect the execution time, \autoref{metric:time}, for all programs and their variants. We compare the collected execution time distributions between programs using a Mann-Withney U test \cite{mann1947} in a pairwise strategy.
 
