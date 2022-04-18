@@ -25,12 +25,6 @@ Lee,S., Kang,H., Jang,J., and Kang,B.~B. (2021).
   stack layout.
 \newblock {\em IEEE Transactions on Dependable and Secure Computing}.
 
-\bibitem[Hilbig et~al., 2021]{Hilbig2021AnES}
-Hilbig,A., Lehmann,D., and Pradel,M. (2021).
-\newblock An empirical study of real-world webassembly binaries: Security,
-  languages, use cases.
-\newblock {\em Proceedings of the Web Conference 2021}.
-
 \bibitem[MTD, 2021]{MTDNationalCyberLaep}
  (2021).
 \newblock {National Cyber Leap Year}.

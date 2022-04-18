@@ -33,6 +33,16 @@ for t in $texs; do
     fi
 done
 
+for t in $texs; do
+    if grep -q "will " $t 
+    then
+        # echo $t
+        grep -nH --color "will " $t
+        # sed -i 's/We then/We/g' $t || exit 1
+    fi
+done
+
+
 #else 
 #  git status --porcelain
 #  echo "Commit changes before doing this"
