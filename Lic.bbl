@@ -46,6 +46,12 @@ Xu,Y., Solihin,Y., and Shen,X. (2020).
   memory exposure reduction and randomization.
 \newblock In {\em Proc. of ASPLOS}, pages 987--1000.
 
+\bibitem[Shillaker and Pietzuch, 2020]{shillaker2020faasm}
+Shillaker,S. and Pietzuch,P. (2020).
+\newblock Faasm: Lightweight isolation for efficient stateful serverless
+  computing.
+\newblock In {\em USENIX Annual Technical Conference}, pages 419--433.
+
 \bibitem[Runeson et~al., 2020]{Runeson2020}
 Runeson,P., Engstr{\"o}m,E., and Storey,M.-A. (2020).
 \newblock {\em The Design Science Paradigm as a Frame for Empirical Software
@@ -181,6 +187,11 @@ Volckaert,S., Coppens,B., and De~Sutter,B. (2015).
 \newblock Cloning your gadgets: Complete rop attack immunity with multi-variant
   execution.
 \newblock {\em IEEE Transactions on Dependable and Secure Computing}, 13(4).
+
+\bibitem[Morgan and Morgan, 2015]{morgan2015web}
+Morgan,T.~D. and Morgan,J.~W. (2015).
+\newblock Web timing attacks made practical.
+\newblock {\em Black Hat}.
 
 \bibitem[Kim et~al., 2015]{Kim2015}
 Kim,D., Kwon,Y., Sumner,W.~N., Zhang,X., and Xu,D. (2015).
