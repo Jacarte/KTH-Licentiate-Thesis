@@ -36,6 +36,8 @@ The (1) and (2) cases are comparison operations leaving the value $0$ or $1$ in 
 
 \subsection*{Execution times.}
 
+\todo{recall again that execution time diversification is important, should the reader have forgotten about this.}
+
 Even when two programs of the same population offer different execution traces, their execution times can be similar (statistically speaking). In practice, the execution traces of \wasm programs are not necessarily accessible, being not the case with the execution time. For example, in our current experimentation we need to use our own instrumentation of the execution engine to collect the stack trace operations while the execution time is naturally accessible in any execution environment. This mentioned reasoning enforces our comparison of the execution times for the generated variants.
 For each program's population, we compare the execution time distributions, \autoref{metric:time}, of each pair of program/variant.
 Overall diversified programs, $169$ out of $239$ ($71\%$) have at least one variant with a different execution time distribution than the original program (P-value $<$ $0.01$ in the Mann-Withney test). This result shows that we effectively generate variants that yield significantly different execution times.
@@ -64,5 +66,5 @@ Our tool provides program variants in the whole spectrum of time executions, low
     We empirically demonstrate that our approach generates program variants for which execution traces are different. We stress the importance of complementing static and dynamic studies of programs variants. For example, if two programs are statically different, that does not necessarily mean different runtime behavior. There is at least one generated variant for all executed programs that provides a different execution trace. 
     % answer to RQ2
     We generate variants that exhibit a significant diversity of execution times. For example, for $169/239\,(71\%)$ of the diversified programs, at least one variant has an execution time distribution that is different compared to the execution time distribution of the original program. 
-    The result from this study encourages the composition of the variants to provide a more resilient execution.
+    The result from this study encourages the composition of the variants to provide a resilient execution.
 \end{tcolorbox}

@@ -25,6 +25,17 @@ Lee,S., Kang,H., Jang,J., and Kang,B.~B. (2021).
   stack layout.
 \newblock {\em IEEE Transactions on Dependable and Secure Computing}.
 
+\bibitem[Hilbig et~al., 2021]{Hilbig2021AnES}
+Hilbig,A., Lehmann,D., and Pradel,M. (2021).
+\newblock An empirical study of real-world webassembly binaries: Security,
+  languages, use cases.
+\newblock {\em Proceedings of the Web Conference 2021}.
+
+\bibitem[{Cabrera Arteaga} et~al., 2021]{2021arXiv210808125C}
+{Cabrera Arteaga},J., {Laperdrix},P., {Monperrus},M., and {Baudry},B. (2021).
+\newblock {Multi-Variant Execution at the Edge}.
+\newblock {\em arXiv e-prints}, page arXiv:2108.08125.
+
 \bibitem[MTD, 2021]{MTDNationalCyberLaep}
  (2021).
 \newblock {National Cyber Leap Year}.
@@ -34,6 +45,12 @@ Xu,Y., Solihin,Y., and Shen,X. (2020).
 \newblock Merr: Improving security of persistent memory objects via efficient
   memory exposure reduction and randomization.
 \newblock In {\em Proc. of ASPLOS}, pages 987--1000.
+
+\bibitem[Runeson et~al., 2020]{Runeson2020}
+Runeson,P., Engstr{\"o}m,E., and Storey,M.-A. (2020).
+\newblock {\em The Design Science Paradigm as a Frame for Empirical Software
+  Engineering}, pages 127--147.
+\newblock Springer International Publishing, Cham.
 
 \bibitem[Lehmann et~al., 2020]{usenixWasm2020}
 Lehmann,D., Kinder,J., and Pradel,M. (2020).
@@ -87,6 +104,11 @@ Lu,K., Xu,M., Song,C., Kim,T., and Lee,W. (2018).
 \newblock Stopping memory disclosures via diversification and replicated
   execution.
 \newblock {\em IEEE Transactions on Dependable and Secure Computing}.
+
+\bibitem[Li et~al., 2018]{Li2018}
+Li,J., Zhao,B., and Zhang,C. (2018).
+\newblock {Fuzzing: a survey}.
+\newblock {\em Cybersecurity}, 1(1):1--13.
 
 \bibitem[Genkin et~al., 2018]{Genkin2018DrivebyKC}
 Genkin,D., Pachmanov,L., Tromer,E., and Yarom,Y. (2018).
@@ -244,6 +266,14 @@ Salamat,B., Jackson,T., Gal,A., and Franz,M. (2009).
 \newblock In {\em Proceedings of the 4th ACM European conference on Computer
   systems}, pages 33--46.
 
+\bibitem[Maia et~al., 2008]{Maia08usinga}
+Maia,M. D.~A., Sobreira,V., Paixão,K.~R., Amo,R. A.~D., and Silva,I.~R.
+  (2008).
+\newblock Using a sequence alignment algorithm to identify specific and common
+  code from execution traces.
+\newblock In {\em Proceedings of the 4th International Workshop on Program
+  Comprehension through Dynamic Analysis (PCODA}, pages 6--10.
+
 \bibitem[Jacob et~al., 2008]{jacob2008superdiversifier}
 Jacob,M., Jakubowski,M.~H., Naldurg,P., Saw,C. W.~N., and Venkatesan,R. (2008).
 \newblock The superdiversifier: Peephole individualization for software
@@ -325,5 +355,16 @@ Cohen,F.~B. (1993).
 Henry,M. (1987).
 \newblock {Superoptimizer: a look at the smallest program}.
 \newblock {\em ACM SIGARCH Computer Architecture News}, 15(5):122--126.
+
+\bibitem[Gnanadesikan and Wilk, 1968]{gnanadesikan1968probability}
+Gnanadesikan,R. and Wilk,M.~B. (1968).
+\newblock Probability plotting methods for the analysis of data.
+\newblock {\em Biometrika}, 55(1):1--17.
+
+\bibitem[Mann and Whitney, 1947]{mann1947}
+Mann,H.~B. and Whitney,D.~R. (1947).
+\newblock On a test of whether one of two random variables is stochastically
+  larger than the other.
+\newblock {\em Ann. Math. Statist.}, 18(1):50--60.
 
 \end{thebibliography}

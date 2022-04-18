@@ -2,6 +2,7 @@
 \section{\rqone}
 \label{rq1:method}
 
+\todo{the main issue with "Methoology for RQ1" is that CROW has not been introcuded / cast as a contribution yet}
 
 \begin{figure}[h]
     \centering
@@ -11,7 +12,7 @@
 \end{figure}
 
 
-This research question investigates whether we can artificially generate program variants for \wasm. We use CROW to generate variants from an original program, written in C/C++ in the case of \corpusrosetta corpus and LLVM bitcode modules in the case of \corpussodium and \corpusqrcode. 
+This research question investigates whether we can artificially generate program variants for \wasm. We use \todo{defined for the reader? CROW} to generate variants from an original program, written in C/C++ in the case of \corpusrosetta corpus and LLVM bitcode modules in the case of \corpussodium and \corpusqrcode. 
 In \autoref{diagrams:protocol:rq1} we illustrate the workflow to generate \wasm program variants. We pass each function of the corpora to CROW as a program to diversify. To answer RQ1, we study the outcome of this pipeline, the generated \wasm variants. 
 
 
@@ -20,6 +21,11 @@ In \autoref{diagrams:protocol:rq1} we illustrate the workflow to generate \wasm 
 To assess our approach's ability to generate \wasm binaries that are statically different, we compute the number of variants and the number of unique variants for each original function of each corpus. 
 On top, we define the aggregation of these former two values to quantitatively evaluate RQ1 at the corpus level.
 
+\todo{
+    clarify source code versus byte code for earch definition.
+
+why are those definitions important? interesting? why do you introduce them?
+}
 
 \begin{definition}{Program's population $M(P)$:}\label{def:rq1:programspopulation}
     Given a program P and its generated variants $v_i$, the program's population is defined as.\\
@@ -31,6 +37,16 @@ On top, we define the aggregation of these former two values to quantitatively e
 \end{definition}
 
 %Notice that all metrics over programs and their variants make sense only at the population level. Therefore, we compare semantically equivalent programs from the same population.
+
+\todo{strange to have everything in italics}
+
+\todo{
+    difference unclear or trivial.
+
+do you need source code versus bytecode?
+
+clarify
+}
 
 \begin{definition}{Program's unique population $U(P)$:}\label{def:rq1:programsuniquepopulation}
     Given a program P and its program's population $M(P)$, the program's unique population is defined as.\\
@@ -77,9 +93,9 @@ On top, we define the aggregation of these former two values to quantitatively e
 
 
 \subsection*{Protocol}
-To generate program variants, we synthesize program variants with an enumerative strategy, checking each synthesis for equivalence modulo input \cite{Li2018} against the original program. An enumerative synthesis is a brute-force approach to generate program variants. With a maximum number of instructions, it constructs and checks all possible programs up to that limit. For a simplified instance, with a maximum code size of 2 instructions in a programming language with $L$ possible constructions, an enumerative synthesizer builds all $L\times L$ combinations finding program variants. For obvious reasons, this space is nearly impossible to explore in a reasonable time as soon as the limit of instructions increases.
+\todo{text sounding like "background text": To generate program variants, we synthesize program variants with an enumerative strategy, checking each synthesis for equivalence modulo input \cite{Li2018} against the original program. An enumerative synthesis is a brute-force approach to generate program variants. With a maximum number of instructions, it constructs and checks all possible programs up to that limit. For a simplified instance, with a maximum code size of 2 instructions in a programming language with $L$ possible constructions, an enumerative synthesizer builds all $L\times L$ combinations finding program variants.} For obvious reasons, this space is nearly impossible to explore in a reasonable time as soon as the limit of instructions increases.
 Therefore, we use two parameters to control the size of the search space and hence the time required to traverse it.
-On the one hand, one can limit the size of the variants. On the other hand, one can limit the set of instructions used for the synthesis. In our experiments for RQ1, we use all the $60$ supported instructions in our synthesizer.
+On the one hand, one can limit the size of the variants. On the other hand, one can limit the set of instructions used for the synthesis. In our experiments for RQ1, we use all the \todo{magicnumber? why?: $60$} supported instructions in our synthesizer.
 
 
 The former parameter allows us to find a trade-off between the number of variants that are synthesized and the time taken to produce them. For the current evaluation, given the size of the corpus and the properties of its programs, we set the exploration time to 1 hour maximum per function for \corpusrosetta. In the cases of \corpussodium\ and\ \corpusqrcode, we set the timeout to 5 minutes per function. The decision behind the usage of lower timeout for \corpussodium
