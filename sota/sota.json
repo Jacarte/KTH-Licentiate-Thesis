@@ -1,0 +1,541 @@
+[
+    {
+        "cite": "cohen1993operating",
+        "title": "Operating system protection through program evolution",
+        "authors": "Cohen etal",
+        "seed": true,
+        "year": 1993,
+        "sum": "use of program evolution as a technique for defending against automated attacks on operating systems. The mentioned techniques can be applied in any sequence and recursively, providing a very rich environment for evolution. Increasing attack surface does not necesarilly has an impact on defence. For example, reordering instructions for code blocks that are never executed does not impact attacker.",
+        "features": [
+            {
+                "level": 1,
+                "id": "Natural Diversity",
+                "category": "manual+prexisting",
+                "description": "Use of prexisting programs or variants to build a resilient system. Meta compiler for example in the case of reliability. ",
+                "slug": "natural_diversity"
+            },
+            {
+                "level": 1,
+                "id": "Artificial Diversity",
+                "category": "automatic",
+                "description": "Create diversification using a program seed.",
+                "slug": "artificial_diversity"
+            },
+            {
+                "level": 2,
+                "id": "Equivalence checking",
+                "description": "Input output equivalence: two programs are equivalent if, given identical input sequences, they produce the identical output sequences",
+                "slug": "equivalence_checking"
+            },
+            {
+                "level": 3,
+                "id": "Equivalence arithmetic sequences",
+                "type": "static",
+                "category": "automatic",
+                "slug": "equivalence_arithmetic_sequences",
+                "description": "Complexity dramatically increases while the difficult of creating the evolution is minimal",
+                "overhead": {
+                    "time": 1,
+                    "space": 1,
+                    "reason": "If we use only space equivalent replacements, we may be severyly limited, while some evolutions may exchaange time with soace so as to maje the resulting programs either faster or slower."
+                }
+            },
+            {
+                "level": 3,
+                "id": "Instruction reordering",
+                "category": "automatic",
+                "slug": "instruction_reordering",
+                "description": "Requires no additional time or space while provides n! different variants, but this may not dive up the complexity attack in cases where specific instructions are being sought for bypass.",
+                "type": "static",
+                "overhead": {
+                    "time": 0,
+                    "space": 0
+                }
+            },
+            {
+                "level": 3,
+                "id": "Variable substitution",
+                "category": "automatic",
+                "slug": "variable_substitution",
+                "description": "Has lower effect on lower level programs unless compilers produce resorted symbol tables. It prevents static examination and analysis of parameters and alter memory locations without affecting program execution. This yield to n!v different configurations for v variables in n program locations.",
+                "type": "static",
+                "overhead": {
+                    "time": 0.5,
+                    "space": 0.5,
+                    "reason": "unclear"
+                }
+            },
+            {
+                "level": 3,
+                "id": "Adding and removing jumps",
+                "category": "automatic",
+                "slug": "adding_and_removing_jumps",
+                "description": "",
+                "type": "static",
+                "overhead": {
+                    "time": 1,
+                    "space": 1,
+                    "reason": "Programs are mainly lead by loops, adding arbitrary jumps might increase the execution time drastically."
+                }
+            },
+            {
+                "level": 3,
+                "id": "Adding and removing calls",
+                "slug": "adding_and_removing_calls",
+                "category": "automatic",
+                "description": "Change inline instructions to b wrapped into functions.",
+                "type": "static",
+                "overhead": {
+                    "time": 1,
+                    "space": 1,
+                    "reason": "New functions and the call stack is increased"
+                }
+            },
+            {
+                "level": 3,
+                "id": "Garbage insertion",
+                "slug": "garbage_insertion",
+                "category": "automatic",
+                "description": "Addin instructions that are independent from the in-line squence. This is similar to arithmetic equivalent sequences however, more instructions like random memory accesses can be added as well.",
+                "type": "static",
+                "overhead": {
+                    "time": 1,
+                    "space": 1,
+                    "reason": "New instructions are added, this is similar to arithmetic equivalent sequences"
+                }
+            },
+            {
+                "level": 4,
+                "id": "ISA randomization or program encodings",
+                "slug": "isa_randomization",
+                "category": "automatic",
+                "description": "Encoding the original program for example by using a simple XOR. This technique is strong against attacks involving examination of code. It uses alone is not sufficient for defending againts serious attacks.",
+                "type": "static+runtime",
+                "overhead": {
+                    "time": 0.5,
+                    "space": 0,
+                    "reason": "There is only one decoding operation at the begining or the receiving of the encoded program."
+                }
+            },
+            {
+                "level": 4,
+                "id": "Simulation",
+                "slug": "simulation",
+                "category": "automatic",
+                "description": "Interpretation mechanism. Similar to encoding but the execution is delegated to a custom intepreter instead of the traditional one after a simple decoding.",
+                "type": "static+runtime",
+                "overhead": {
+                    "time": 0,
+                    "space": 0,
+                    "reason": "In theory, after detecting the simulator, its execution should be the same along all program versions."
+                }
+            },
+            {
+                "level": 5,
+                "id": "Intermixing programs",
+                "category": "natural diversity",
+                "slug": "intermixing",
+                "description": "Complex to achieve because the integrity of the memory and stack needs to be ok. ",
+                "type": "static+runtime",
+                "overhead": {
+                    "time": 0,
+                    "space": 0,
+                    "reason": "In theory, after detecting the simulator, its execution should be the same along all program versions."
+                }
+            },
+            {
+                "level": 6,
+                "id": "Architecture",
+                "category": "means",
+                "slug": "architecture",
+                "description": "Target architecture or context, e.g. x86",
+                "type": "static"
+            },
+            {
+                "level": 6,
+                "id": "Method",
+                "category": "means",
+                "slug": "mean",
+                "description": "Use of tools, e.g. compiler",
+                "type": "static"
+            }
+        ]
+    },
+    {
+        "cite": "595185",
+        "title": "Building diverse computer systems",
+        "authors": "Forrest \\etal",
+        "seed": false,
+        "year": 1997,
+        "sum": "Diversity is an important source of robustness in biological systems. Computers, by contrast, are notable for their lack of diversity. Although homogeneous systems have many advantages, the beneficial effects of diversity in computing systems have been overlooked, specifically in the area of computer security. Several methods of achieving software diversity are discussed based on randomizations that respect the specified behavior of the program. Such randomization could potentially increase the robustness of software systems with minimal impact on convenience, usability, and efficiency. Randomization of the amount of memory allocated on a stack frame is shown to disrupt a simple buffer overflow attack.",
+        "features": [
+            {
+                "slug": "natural_diversity",
+                "description": null
+            }
+        ]
+    },
+    {
+        "cite": "homescu2013profile",
+        "title": "Compiler-generated software diversity",
+        "authors": "Homescu \\etal",
+        "seed": false,
+        "year": 2013,
+        "sum": "Proposed inserting NOP instruction directly in LLVM IR to generate a variant with a different code layout at each compilation.",
+        "features": [
+            {
+                "slug": "garbage_insertion",
+                "description": "Insert NOP operations"
+            },
+            {
+                "slug": "artificial_diversity"
+            },
+            {
+                "slug": "architecture",
+                "description": "all LLVM supported"
+            },
+            {
+                "slug": "mean",
+                "description": "compiler"
+            },
+            {
+                "slug": "equivalence_checking",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "cite": "jackson",
+        "title": "On the Design, Implications, and Effects of Implementing Software Diversity for Security",
+        "authors": "Jackson ",
+        "seed": false,
+        "year": 2012,
+        "sum": "Have explored how to use NOP operations inserted during compiling time to statically diversify programs.",
+        "features": [
+            {
+                "slug": "garbage_insertion",
+                "description": "Insert NOP operations"
+            },
+            {
+                "slug": "artificial_diversity"
+            },
+            {
+                "slug": "architecture",
+                "description": "\\todo{}"
+            },
+            {
+                "slug": "mean",
+                "description": "compiler"
+            },
+            {
+                "slug": "equivalence_checking"
+            }
+        ]
+    },
+
+    {
+        "cite": "coppens2013feedback",
+        "title": "Feedback-driven binary code diversification",
+        "authors": "Coppens \\etal ",
+        "seed": false,
+        "year": 2013,
+        "sum": "Have explored how to use NOP operations inserted during compiling time to statically diversify programs.",
+        "features": [
+            {
+                "slug": "artificial_diversity"
+            },
+            {
+                "slug": "architecture",
+                "description": "\\todo{}"
+            },
+            {
+                "slug": "mean",
+                "description": "compiler"
+            },
+            {
+                "slug": "equivalence_checking",
+                "description": "Hand written transformations"
+            }
+        ]
+    },
+    {
+        "cite": "amarilli2011can",
+        "title": "Can code polymorphism limit information leakage?",
+        "authors": "Amarilli \\etal ",
+        "seed": false,
+        "year": 2011,
+        "sum": "is the first to propose the generation of code variants against side-channel attacks..",
+        "features": [
+        ]
+    },
+    {
+        "cite": "agosta2015meet",
+        "title": "The MEET approach: Securing cryptographic embedded software against side channel attacks",
+        "authors": "Agosta \\etal ",
+        "seed": false,
+        "year": 2015,
+        "sum": "modify the LLVM toolchain to compile multiple functionally equivalent variants to randomize the control flow of software",
+        "features": [
+            {
+                "slug": "architecture",
+                "description": "all LLVM supported"
+            },
+            {
+                "slug": "mean",
+                "description": "compiler"
+            }
+        ]
+    },
+    {
+        "cite": "crane2015thwarting",
+        "title": "Thwarting Cache Side-Channel Attacks Through Dynamic Software Diversity.",
+        "authors": "Crane \\etal ",
+        "seed": false,
+        "year": 2015,
+        "sum": "modify the LLVM toolchain to compile multiple functionally equivalent variants to randomize the control flow of software",
+        "features": [
+            {
+                "slug": "architecture",
+                "description": "all LLVM supported"
+            },
+            {
+                "slug": "mean",
+                "description": "compiler"
+            }
+        ]
+    },
+    {
+        "cite": "courousse2016runtime",
+        "title": "Runtime code polymorphism as a protection against side channel attacks",
+        "authors": "Courouss{\\'e} \\etal ",
+        "seed": false,
+        "year": 2016,
+        "sum": "implement an assembly-like DSL to generate equivalent code at runtime in order to increase protection against side-channel attacks.",
+        "features": [
+            {
+                "slug": "architecture",
+                "description": "custom"
+            },
+            {
+                "slug": "mean",
+                "description": "custom virtual machine"
+            },
+            {
+                "slug": "simulation"
+            }
+        ]
+    },
+    {
+        "cite": "Kc03",
+        "title": "Countering code-injection attacks with instruction-set randomization",
+        "authors": "Kc \\etal ",
+        "seed": false,
+        "year": 2003,
+        "sum": "to create a unique mapping between artificial CPU instructions and real ones. This makes it very hard for an attacker to ignore the key to inject executable code. This breaks the predictability of program execution and mitigates certain exploits.",
+        "features": [
+        ]
+    },
+    {
+        "cite": "barrantes2003randomized",
+        "title": "Randomized instruction set emulation to disrupt binary code injection attacks",
+        "authors": "Barrantes \\etal ",
+        "seed": false,
+        "year": 2003,
+        "sum": "to create a unique mapping between artificial CPU instructions and real ones. This makes it very hard for an attacker to ignore the key to inject executable code. This breaks the predictability of program execution and mitigates certain exploits.",
+        "features": [
+        ]
+    },
+    {
+        "cite": "Chew02mitigatingbuffer",
+        "title": "Mitigating buffer overflows by operating system randomization",
+        "authors": "Chew and Song",
+        "seed": false,
+        "year": 2002,
+        "sum": "They randomize the interface between the operating system and the user applications: the system call numbers, the library entry points (memory addresses), and the stack placement. All those techniques are dynamic, done at runtime using load-time preprocessing and rewriting.",
+        "features": [
+        ]
+    },
+    {
+        "cite": "bhatkar03",
+        "title": "Address obfuscation: an efficient approach to combat a board range of memory error exploits",
+        "authors": "Bhatkar \\etal",
+        "seed": false,
+        "year": 2003,
+        "sum": "proposed three kinds of randomization transformations: randomizing the base addresses of applications and libraries  memory regions, random permutation of the order of variables and routines, and the random introduction of random gaps between objects. Dynamic randomization can address different kinds of problems. ",
+        "features": [
+        ]
+    },
+    {
+        "cite": "bhatkar2005efficient",
+        "title": "Efficient techniques for comprehensive protection from memory error exploits",
+        "authors": "Bhatkar \\etal",
+        "seed": false,
+        "year": 2005,
+        "sum": "proposed three kinds of randomization transformations: randomizing the base addresses of applications and libraries  memory regions, random permutation of the order of variables and routines, and the random introduction of random gaps between objects. Dynamic randomization can address different kinds of problems. ",
+        "features": [
+        ]
+    },
+    {
+        "cite": "aga2019smokestack",
+        "title": "Smokestack: thwarting DOP attacks with runtime stack layout randomization",
+        "authors": "Aga \\etal",
+        "seed": false,
+        "year": 2019,
+        "sum": "data-oriented programming \\cite{aga2019smokestack}, and memory safety violations \\cite{lee2021savior}, as well as a technique to reduce the exposure time of persistent memory objects to increase the frequency of address randomization ",
+        "features": [
+        ]
+    },
+    {
+        "cite": "lee2021savior",
+        "title": "SaVioR: Thwarting Stack-Based Memory Safety Violations by Randomizing Stack Layout",
+        "authors": "Lee \\etal",
+        "seed": false,
+        "year": 2021,
+        "sum": "data-oriented programming \\cite{aga2019smokestack}, and memory safety violations \\cite{lee2021savior}, as well as a technique to reduce the exposure time of persistent memory objects to increase the frequency of address randomization ",
+        "features": [
+        ]
+    },
+    {
+        "cite": "xu2020merr",
+        "title": "Merr: Improving security of persistent memory objects via efficient memory exposure reduction and randomization",
+        "authors": "Xu \\etal",
+        "seed": false,
+        "year": 2020,
+        "sum": "as well as a technique to reduce the exposure time of persistent memory objects to increase the frequency of address randomization",
+        "features": [
+        ]
+    }
+    ,
+    {
+        "cite": "10.1145/3318216.3363338",
+        "title": "A Moving Target Defense against Adversarial Machine Learning",
+        "authors": "Roi \\etal",
+        "seed": false,
+        "year": 2019,
+        "sum": "MTD can be implemented in different ways, including via dynamic runtime platforms",
+        "features": [
+        ]
+    }
+    ,
+    {
+        "cite": "10.5555/3091125.3091155",
+        "title": "A Game Theoretic Approach to Strategy Generation for Moving Target Defense in Web Applications",
+        "authors": "Sengupta \\etal",
+        "seed": false,
+        "year": 2017,
+        "sum": "MTD can be implemented in different ways, including via dynamic runtime platforms",
+        "features": [
+        ]
+    }
+    ,
+    {
+        "cite": "cox06",
+        "title": "N-variant systems: a secretless framework for security through diversity",
+        "authors": "Cox \\etal",
+        "seed": false,
+        "year": 2006,
+        "sum": "On the same topic, Multivariant Execution (MVE) can be seen as a Moving Target Defense strategy. In 2006, security researchers at University of Virginia laid the foundations of a novel approach to security that consists in executing multiple variants of the same program. They called this ''N-variant systems''",
+        "features": [
+        ]
+    },
+    {
+        "cite": "bruschi2007diversified",
+        "title": "Diversified process replic{\\ae} for defeating memory error exploits",
+        "authors": "Bruschi \\etal",
+        "seed": false,
+        "year": 2007,
+        "sum": "pioneered the idea of executing the variants in parallel.",
+        "features": [
+        ]
+    },
+    {
+        "cite": "salamat2007stopping",
+        "title": "Stopping Buffer Overflow Attacks at Run-Time: Simultaneous Multi-Variant Program Execution on a Multicore Processor",
+        "authors": "Salamat \\etal",
+        "seed": false,
+        "year": 2007,
+        "sum": "pioneered the idea of executing the variants in parallel.",
+        "features": [
+        ]
+    },
+    {
+        "cite": "lu2018stopping",
+        "title": "Stopping memory disclosures via diversification and replicated execution",
+        "authors": "Lu \\etal",
+        "seed": false,
+        "year": 2018,
+        "sum": "Subsequent techniques focus on Multivariant Execution (MVE) for mitigating memory vulnerabilities",
+        "features": [
+        ]
+    },
+    {
+        "cite": "osterlund2019kmvx",
+        "title": "kMVX: Detecting kernel information leaks with multi-variant execution",
+        "authors": "{\\\"O}sterlund \\etal",
+        "seed": false,
+        "year": 2019,
+        "sum": "A key design decision of MVE is whether it is achieved in kernel space ",
+        "features": [
+        ]
+    },
+    {
+        "cite": "salamat2009orchestra",
+        "title": "Orchestra: intrusion detection using parallel execution and monitoring of program variants in user-space",
+        "authors": "Salamat \\etal",
+        "seed": false,
+        "year": 2009,
+        "sum": " in user-space  ",
+        "features": [
+        ]
+    },
+    {
+        "cite": "koning2016secure",
+        "title": "Secure and efficient multi-variant execution using hardware-assisted process virtualization ",
+        "authors": "Koning \\etal",
+        "seed": false,
+        "year": 2016,
+        "sum": " in user-space  ",
+        "features": [
+        ]
+    },
+    {
+        "cite": "10.1145/3281662",
+        "title": "Automated Software Protection for the Masses Against Side-Channel Attacks",
+        "authors": "Belleville \\etal",
+        "seed": false,
+        "year": 2018,
+        "sum": " or even through code polymorphism  ",
+        "features": [
+        ]
+    },
+    {
+        "cite": "maurer2012tachyon",
+        "title": "TACHYON: Tandem execution for efficient live patch testing",
+        "authors": "Maurer \\etal",
+        "seed": false,
+        "year": 2012,
+        "sum": " Finally, one can neatly exploit the limit case of executing only two variant",
+        "features": [
+        ]
+    },
+    {
+        "cite": "davi2015isomeron",
+        "title": "Isomeron: Code Randomization Resilient to (Just-In-Time) Return-Oriented Programming",
+        "authors": "Davi \\etal",
+        "seed": false,
+        "year": 2015,
+        "sum": " an approach  for execution-path randomization. Isomeron simultaneously loads the original program and a variant. While the program is running, Isomeron continuously flips a coin to decide which copy of the program should be executed next at the level of function calls. With this strategy a potential attacker cannot predict whether the original or the variant of a program will execute.",
+        "features": [
+        ]
+    },
+    {
+        "cite": "voulimeneas2021dmvx",
+        "title": "dMVX: Secure and Efficient Multi-Variant Execution in a Distributed Setting",
+        "authors": "Voulimeneas \\etal",
+        "seed": false,
+        "year": 2021,
+        "sum": "proposed a multivariant execution system by parallelizing the execution of the variants in different machines ",
+        "features": [
+        ]
+    }
+]
