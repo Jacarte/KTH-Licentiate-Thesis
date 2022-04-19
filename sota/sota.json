@@ -9,27 +9,27 @@
         "features": [
             {
                 "level": 1,
-                "id": "Natural Diversity",
+                "id": "ND", 
                 "category": "manual+prexisting",
                 "description": "Use of prexisting programs or variants to build a resilient system. Meta compiler for example in the case of reliability. ",
                 "slug": "natural_diversity"
             },
             {
                 "level": 1,
-                "id": "Artificial Diversity",
+                "id": "AD",
                 "category": "automatic",
                 "description": "Create diversification using a program seed.",
                 "slug": "artificial_diversity"
             },
             {
                 "level": 2,
-                "id": "Equivalence checking",
+                "id": "ECh",
                 "description": "Input output equivalence: two programs are equivalent if, given identical input sequences, they produce the identical output sequences",
                 "slug": "equivalence_checking"
             },
             {
                 "level": 3,
-                "id": "Equivalence arithmetic sequences",
+                "id": "T1",
                 "type": "static",
                 "category": "automatic",
                 "slug": "equivalence_arithmetic_sequences",
@@ -42,7 +42,7 @@
             },
             {
                 "level": 3,
-                "id": "Instruction reordering",
+                "id": "T2",
                 "category": "automatic",
                 "slug": "instruction_reordering",
                 "description": "Requires no additional time or space while provides n! different variants, but this may not dive up the complexity attack in cases where specific instructions are being sought for bypass.",
@@ -54,7 +54,7 @@
             },
             {
                 "level": 3,
-                "id": "Variable substitution",
+                "id": "T3",
                 "category": "automatic",
                 "slug": "variable_substitution",
                 "description": "Has lower effect on lower level programs unless compilers produce resorted symbol tables. It prevents static examination and analysis of parameters and alter memory locations without affecting program execution. This yield to n!v different configurations for v variables in n program locations.",
@@ -67,7 +67,7 @@
             },
             {
                 "level": 3,
-                "id": "Adding and removing jumps",
+                "id": "T4",
                 "category": "automatic",
                 "slug": "adding_and_removing_jumps",
                 "description": "",
@@ -80,7 +80,7 @@
             },
             {
                 "level": 3,
-                "id": "Adding and removing calls",
+                "id": "T5",
                 "slug": "adding_and_removing_calls",
                 "category": "automatic",
                 "description": "Change inline instructions to b wrapped into functions.",
@@ -93,7 +93,7 @@
             },
             {
                 "level": 3,
-                "id": "Garbage insertion",
+                "id": "T6",
                 "slug": "garbage_insertion",
                 "category": "automatic",
                 "description": "Addin instructions that are independent from the in-line squence. This is similar to arithmetic equivalent sequences however, more instructions like random memory accesses can be added as well.",
@@ -106,7 +106,7 @@
             },
             {
                 "level": 4,
-                "id": "ISA randomization or program encodings",
+                "id": "T7",
                 "slug": "isa_randomization",
                 "category": "automatic",
                 "description": "Encoding the original program for example by using a simple XOR. This technique is strong against attacks involving examination of code. It uses alone is not sufficient for defending againts serious attacks.",
@@ -132,7 +132,7 @@
             },
             {
                 "level": 5,
-                "id": "Intermixing programs",
+                "id": "MVE",
                 "category": "natural diversity",
                 "slug": "intermixing",
                 "description": "Complex to achieve because the integrity of the memory and stack needs to be ok. ",
@@ -145,7 +145,7 @@
             },
             {
                 "level": 6,
-                "id": "Architecture",
+                "id": "Arch",
                 "category": "means",
                 "slug": "architecture",
                 "description": "Target architecture or context, e.g. x86",
@@ -534,6 +534,16 @@
         "authors": "Voulimeneas \\etal",
         "seed": false,
         "year": 2021,
+        "sum": "proposed a multivariant execution system by parallelizing the execution of the variants in different machines ",
+        "features": [
+        ]
+    },
+    {
+        "cite": "jacob2008superdiversifier",
+        "title": "The superdiversifier: Peephole individualization for software protection",
+        "authors": "Jacob \\etal",
+        "seed": false,
+        "year": 2008,
         "sum": "proposed a multivariant execution system by parallelizing the execution of the variants in different machines ",
         "features": [
         ]
