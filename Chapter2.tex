@@ -25,6 +25,10 @@ We select the discussed works by their novelty and critical insights to provide 
 
 \input{sota/wasm.tex}
 
+\input{sota/sota.tex}
+
+\begin{comment}
+
 \section{Diversification and Superdiversification}
 \label{sota:diversification}
 %\todo{https://www.sciencedirect.com/science/article/pii/S0950584918301484?via\%3Dihub Diversification and obfuscation techniques for software security: A systematic literature review}
@@ -46,16 +50,11 @@ Their approach continuously applies a random selection of predefined transformat
 A downside of their method is that attackers are, in theory, able to identify the type of transformations applied and find a way to ignore or reverse them.
 
 % Runtime diversification
-Previous works have attempted to generate diversified variants that are alternated during execution.
-It has been shown to drastically increase the number of execution traces required by a side-channel attack.
-Amarilli \etal~\cite{amarilli2011can} is the first to propose the generation of code variants against side-channel attacks.
-Agosta \etal~\cite{agosta2015meet} and Crane \etal~\cite{crane2015thwarting}
-modify the LLVM toolchain to compile multiple functionally equivalent variants to randomize the control flow of software,
-while Courouss{\'e} \etal~\cite{courousse2016runtime} implement an assembly-like DSL to generate equivalent code at runtime in order to increase protection against side-channel attacks. 
+
 
 
 % How to use the compiler
-Jackson \etal \cite{jackson} have explored how to use NOP operations inserted during compiling time to statically diversify programs. Another idea \todo{Jackson} is to use the optimization flags of several compilers to generate semantically equivalent binaries out of the same source code. These techniques place the compiler at the core of the diversification technique. However, this approach is limited by the number of available flags in the compiler implementation and because the optimization is applied in all possible places in the code at the same time.
+
 
 
 \subsection*{Superoptimization}
@@ -94,15 +93,6 @@ Fastly acknowledged our work as part of a technical blog post
 In this section, we highlight past works on runtime strategy for diversification. Besides, we describe and discuss the foundation that supports the composition of diverse yet semantically equivalent programs to enforce security. Finally, we describe our contribution to the field.
 
 
-A randomization technique creates a set of unique executions for the very same program \cite{bhatkar03}. Seminal works include instruction-set randomization \cite{Kc03,barrantes2003randomized}
-to create a unique mapping between artificial CPU instructions and real ones. This makes it very hard for an attacker to ignore the key to inject executable code. This breaks the predictability of program execution and mitigates certain exploits.
-
-
-Chew, and Song \cite{Chew02mitigatingbuffer} target operating system randomization. They randomize the interface between the operating system and the user applications:
-the system call numbers, the library entry points (memory addresses), and the stack placement. All those techniques are dynamic, done at runtime using load-time preprocessing and rewriting. 
-Bathkar et al. \cite{bhatkar03,bhatkar2005efficient} proposed three kinds of randomization transformations: randomizing the base addresses of applications and libraries  memory regions, random permutation of the order of variables and routines, and the random introduction of random gaps between objects. 
-Dynamic randomization can address different kinds of problems. In particular, it mitigates an extensive range of memory error exploits. 
-Recent work in this field includes stack layout randomization against data-oriented programming \cite{aga2019smokestack}, and memory safety violations \cite{lee2021savior}, as well as a technique to reduce the exposure time of persistent memory objects to increase the frequency of address randomization \cite{xu2020merr}.
 
 
 
@@ -113,26 +103,10 @@ Recent work in this field includes stack layout randomization against data-orien
 \label{sota:multivariantex}
 
 % Intro and benefits
-Moving Target Defense (MTD) for software was first proposed as a collection of techniques that aim to improve the security of a system by constantly moving its vulnerable components \cite{MTDNationalCyberLaep}.
-Usually, MTD techniques revolve around changing system inputs and configurations to reduce attack surfaces. 
-This increases uncertainty for attackers and makes their attacks more difficult. 
-Ultimately, potential attackers cannot hit what they cannot see. 
-MTD can be implemented in different ways, including via dynamic runtime platforms \cite{10.1145/3318216.3363338}. 
-Segupta \etal illustrated how a dynamic MTD system \cite{10.5555/3091125.3091155} can be applied to different technology stacks.
-Using this technique, the authors illustrated that some CVE related to specific database engines could be avoided.
-
-On the same topic, Multivariant Execution (MVE) can be seen as a Moving Target Defense strategy. In 2006, security researchers at University of Virginia laid the foundations of a novel approach to security that consists in executing multiple variants of the same program. They called this ''N-variant systems'' \cite{cox06}. Bruschi et al. \cite{bruschi2007diversified} and Salamat et al. \cite{salamat2007stopping} pioneered the idea of executing the variants in parallel. Subsequent techniques focus on Multivariant Execution (MVE) for mitigating memory vulnerabilities \cite{lu2018stopping} and other specific security problems incl. return-oriented programming attacks \cite{volckaert2015cloning} and code injection \cite{SalamatJWWF11}.A key design decision of MVE is whether it is achieved in kernel space \cite{osterlund2019kmvx}, in user-space \cite{salamat2009orchestra}, with exploiting hardware features \cite{koning2016secure}, or even through code polymorphism \cite{10.1145/3281662}. Finally, one can neatly exploit the limit case of executing only two variants \cite{maurer2012tachyon,,Kim2015}. Notably,  Davi \etal proposed Isomeron \cite{davi2015isomeron}, an approach  for execution-path randomization. Isomeron simultaneously loads the original program and a variant. While the program is running, Isomeron continuously flips a coin to decide which copy of the program should be executed next at the level of function calls. With this strategy a potential attacker cannot predict whether the original or the variant of a program will execute.
 
 
 \subsection*{Statement of novelty}
 \label{sota:contribs}
-
-
-Researching on MVE in a distributed setting like the Edge \citationneeded has been less researched. Voulimeneas \etal proposed a multivariant execution system by parallelizing the execution of the variants in different machines \cite{voulimeneas2021dmvx} for the sake of efficiency. Since CROW offers static and runtime diversity for \wasm and its adoption for the Edge and backend executions are becoming security-sensitive fields, we propose an original kind of MVE, MEWE. We generate multiple program variants, which we execute on edge computing nodes. We use the natural redundancy of Edge-Cloud computing architectures to deploy an internet-based MVE.
-
-With MEWE, We contribute to the field of randomization at two stages. First, we automatically generate variants of a given program with CROW, which have different \wasm code and still behave the same. Second, we randomly select which variant is executed at runtime, creating a multivariant execution scheme that randomizes the observable behaviors at each run of the program.
-
-
 
 \section{Conclusions}
 \label{sota:conclusions}
@@ -140,6 +114,7 @@ With MEWE, We contribute to the field of randomization at two stages. First, we 
 Software Diversification has been widely researched, not being the case in the \wasm context. With this dissertation, we aim to settle down the foundation to study automatic diversification for \wasm. We contribute to the field of artificial diversity by extending the superdiversifier idea of Jacob \etal \cite{jacob2008superdiversifier}. We empirically demonstrate that CROW provides robust program diversification. Finally, we propose a novel approach of merging program variants to provide multivariant execution. Our
 contributions are obtained by following the methodology described in \autoref{chapter:method}. 
 
+\end{comment}
 %\todo{Wasm and portable code}
 %    \todo{How => Why: Motivation, security, reliability}
 %\todo{Diversification, Superoptimization and Superdiversification.}

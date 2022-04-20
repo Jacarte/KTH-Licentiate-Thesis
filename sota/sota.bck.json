@@ -205,30 +205,6 @@
                 "slug": "mean",
                 "description": "Use of tools, e.g. compiler",
                 "type": "static"
-            },
-            {
-                "level": 7,
-                "id": "\\autoref{usage:n-version}",
-                "category": "usage",
-                "slug": "nversion",
-                "description": "Target architecture or context, e.g. x86",
-                "type": "usage"
-            },
-            {
-                "level": 7,
-                "id": "\\autoref{usage:randomization}",
-                "category": "usage",
-                "slug": "srand",
-                "description": "Target architecture or context, e.g. x86",
-                "type": "usage"
-            },
-            {
-                "level": 7,
-                "id": "\\autoref{usage:mve}",
-                "category": "usage",
-                "slug": "mveu",
-                "description": "Target architecture or context, e.g. x86",
-                "type": "mve"
             }
         ]
     },
@@ -966,9 +942,6 @@
             },
             {
                 "slug": "dynamic"
-            },
-            {
-                "slug": "mveu"
             }
         ]
     },
@@ -1000,9 +973,6 @@
         "year": 2016,
         "sum": " in user-space  ",
         "features": [
-            {
-                "slug": "srand"
-            }
         ]
     },
     {
@@ -1013,9 +983,6 @@
         "year": 2018,
         "sum": " or even through code polymorphism  ",
         "features": [
-            {
-                "slug": "srand"
-            }
         ]
     },
     {
@@ -1026,9 +993,6 @@
         "year": 2012,
         "sum": " Finally, one can neatly exploit the limit case of executing only two variant",
         "features": [
-            {
-                "slug": "srand"
-            }
         ]
     },
     {
@@ -1056,9 +1020,6 @@
             {
                 "slug": "dynamic",
                 "description": "Execution path randomization"
-            },
-            {
-                "slug": "srand"
             }
         ]
     },
@@ -1082,9 +1043,6 @@
             {
                 "slug": "number_of_variants",
                 "description": "N"
-            },
-            {
-                "slug": "mveu"
             }
         ]
     },
@@ -1117,9 +1075,6 @@
             {
                 "slug": "architecture",
                 "description": "x86"
-            },
-            {
-                "slug": "nversion"
             }
         ]
     }

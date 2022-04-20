@@ -1,0 +1,19 @@
+{
+    \renewcommand{\arraystretch}{1.6}
+    \newcolumntype{M}{>{\begin{varwidth}{3cm}}l<{\end{varwidth}}} %M is for Maximal column
+    \begin{table}[h]
+        %\small
+        %\begin{sidewaystable}
+        \centering
+    %\setlength\minrowclearance{1.0pt}
+    \resizebox{\textwidth}{!}{
+
+        %\begin{adjustbox}{angle=90}
+                \input{sota/table.tex}
+        %\end{adjustbox}
+    }
+        \caption{Comparison table of related work.}
+        \label{table:sota:comparison}
+\end{table}
+        %\end{sidewaystable}
+}

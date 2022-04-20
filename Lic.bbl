@@ -7,12 +7,6 @@ Voulimeneas,A., Song,D., Larsen,P., Franz,M., and Volckaert,S. (2021).
 \newblock In {\em Proceedings of the 14th European Workshop on Systems
   Security}, pages 41--47.
 
-\bibitem[{Shypula} et~al., 2021]{2021arXiv210913498S}
-{Shypula},A., {Yin},P., {Lacomis},J., {Le Goues},C., {Schwartz},E., and
-  {Neubig},G. (2021).
-\newblock {Learning to Superoptimize Real-world Programs}.
-\newblock {\em arXiv e-prints}, page arXiv:2109.13498.
-
 \bibitem[Narayan et~al., 2021]{Narayan2021Swivel}
 Narayan,S., Disselkoen,C., Moghimi,D., Cauligi,S., Johnson,E., Gang,Z.,
   Vahldiek-Oberwagner,A., Sahita,R., Shacham,H., Tullsen,D., et~al. (2021).
@@ -149,11 +143,6 @@ Haas,A., Rossberg,A., Schuff,D.~L., Schuff,D.~L., Titzer,B.~L., Holman,M.,
 \newblock Bringing the web up to speed with webassembly.
 \newblock {\em PLDI}.
 
-\bibitem[Churchill et~al., 2017]{churchill_sound_nodate}
-Churchill,B., Sharma,R., Bastien,J., and Aiken,A. (2017).
-\newblock Sound loop superoptimization for google native client.
-\newblock {\em SIGPLAN Not.}, 52(4):313–326.
-
 \bibitem[Van~Es et~al., 2016]{EsAsm.js}
 Van~Es,N., Nicolay,J., Stievenart,Q., D'Hondt,T., and De~Roover,C. (2016).
 \newblock A performant scheme interpreter in asm.js.
@@ -175,12 +164,6 @@ Courouss{\'e},D., Barry,T., Robisson,B., Jaillon,P., Potin,O., and Lanet,J.-L.
   attacks.
 \newblock In {\em IFIP International Conference on Information Security Theory
   and Practice}, pages 136--152. Springer.
-
-\bibitem[{Bunel} et~al., 2016]{bunel_learning_2017}
-{Bunel},R., {Desmaison},A., {Pawan Kumar},M., {Torr},P.~H., and {Kohli},P.
-  (2016).
-\newblock {Learning to superoptimize programs}.
-\newblock {\em arXiv e-prints}, 1(1):arXiv:1611.01787.
 
 \bibitem[Volckaert et~al., 2015]{volckaert2015cloning}
 Volckaert,S., Coppens,B., and De~Sutter,B. (2015).
@@ -245,17 +228,18 @@ Maurer,M. and Brumley,D. (2012).
 \newblock In {\em 21st USENIX Security Symposium (USENIX Security 12)}, pages
   617--630.
 
-\bibitem[Kulkarni and Cavazos, 2012]{phase-ordering-problem}
-Kulkarni,S. and Cavazos,J. (2012).
-\newblock Mitigating the compiler optimization phase-ordering problem using
-  machine learning.
-\newblock {\em SIGPLAN Not.}, 47(10):147–162.
-
 \bibitem[Jackson, 2012]{jackson}
 Jackson,T. (2012).
 \newblock {\em On the Design, Implications, and Effects of Implementing
   Software Diversity for Security}.
 \newblock PhD thesis, University of California, Irvine.
+
+\bibitem[Sidiroglou-Douskos et~al., 2011]{10.1145/2025113.2025133}
+Sidiroglou-Douskos,S., Misailovic,S., Hoffmann,H., and Rinard,M. (2011).
+\newblock Managing performance vs. accuracy trade-offs with loop perforation.
+\newblock In {\em Proceedings of the 19th ACM SIGSOFT Symposium and the 13th
+  European Conference on Foundations of Software Engineering}, ESEC/FSE '11,
+  page 124–134, New York, NY, USA. Association for Computing Machinery.
 
 \bibitem[Salamat et~al., 2011]{SalamatJWWF11}
 Salamat,B., Jackson,T., Wagner,G., Wimmer,C., and Franz,M. (2011).
@@ -269,6 +253,11 @@ Amarilli,A., M{\"u}ller,S., Naccache,D., Page,D., Rauzy,P., and Tunstall,M.
 \newblock Can code polymorphism limit information leakage?
 \newblock In {\em IFIP International Workshop on Information Security Theory
   and Practices}, pages 1--21. Springer.
+
+\bibitem[Chen et~al., 2010]{Chen2010AdaptiveRT}
+Chen,T.~Y., Kuo,F.-C., Merkel,R.~G., and Tse,T.~H. (2010).
+\newblock Adaptive random testing: The art of test case diversity.
+\newblock {\em J. Syst. Softw.}, 83:60--66.
 
 \bibitem[Salamat et~al., 2009]{salamat2009orchestra}
 Salamat,B., Jackson,T., Gal,A., and Franz,M. (2009).
@@ -292,13 +281,6 @@ Jacob,M., Jakubowski,M.~H., Naldurg,P., Saw,C. W.~N., and Venkatesan,R. (2008).
 \newblock In {\em International Workshop on Security}, pages 100--120.
   Springer.
 
-\bibitem[de~Moura and Bj{\o}rner, 2008]{SMT_solver}
-de~Moura,L. and Bj{\o}rner,N. (2008).
-\newblock Z3: An efficient smt solver.
-\newblock In Ramakrishnan,C.~R. and Rehof,J., editors, {\em Tools and
-  Algorithms for the Construction and Analysis of Systems}, pages 337--340,
-  Berlin, Heidelberg. Springer Berlin Heidelberg.
-
 \bibitem[Salamat et~al., 2007]{salamat2007stopping}
 Salamat,B., Gal,A., Jackson,T., Manivannan,K., Wagner,G., and Franz,M. (2007).
 \newblock Stopping buffer overflow attacks at run-time: Simultaneous
@@ -319,13 +301,11 @@ Cox,B., Evans,D., Filipi,A., Rowanhill,J., Hu,W., Davidson,J., Knight,J.,
   diversity.
 \newblock In {\em Proc. of USENIX Security Symposium}, USENIX-SS'06.
 
-\bibitem[Bansal and Aiken, 2006]{bansal_automatic_nodate}
-Bansal,S. and Aiken,A. (2006).
-\newblock Automatic generation of peephole superoptimizers.
-\newblock In {\em Proceedings of the 12th International Conference on
-  Architectural Support for Programming Languages and Operating Systems},
-  ASPLOS XII, page 394–403, New York, NY, USA. Association for Computing
-  Machinery.
+\bibitem[Pohl et~al., 2005]{pohl2005software}
+Pohl,K., B{\"o}ckle,G., and Van Der~Linden,F. (2005).
+\newblock {\em Software product line engineering: foundations, principles, and
+  techniques}, volume~1.
+\newblock Springer.
 
 \bibitem[Bhatkar et~al., 2005]{bhatkar2005efficient}
 Bhatkar,S., Sekar,R., and DuVarney,D.~C. (2005).
@@ -357,15 +337,21 @@ Chew,M. and Song,D. (2002).
 \newblock Mitigating buffer overflows by operating system randomization.
 \newblock Technical Report CS-02-197, Carnegie Mellon University.
 
+\bibitem[Forrest et~al., 1997]{595185}
+Forrest,S., Somayaji,A., and Ackley,D. (1997).
+\newblock Building diverse computer systems.
+\newblock In {\em Proceedings. The Sixth Workshop on Hot Topics in Operating
+  Systems (Cat. No.97TB100133)}, pages 67--72.
+
 \bibitem[Cohen, 1993]{cohen1993operating}
 Cohen,F.~B. (1993).
 \newblock Operating system protection through program evolution.
 \newblock {\em Computers \& Security}, 12(6):565--584.
 
-\bibitem[Henry, 1987]{Massalin1987}
-Henry,M. (1987).
-\newblock {Superoptimizer: a look at the smallest program}.
-\newblock {\em ACM SIGARCH Computer Architecture News}, 15(5):122--126.
+\bibitem[Avizienis and Kelly, 1984]{1659219}
+Avizienis and Kelly (1984).
+\newblock Fault tolerance by design diversity: Concepts and experiments.
+\newblock {\em Computer}, 17(8):67--80.
 
 \bibitem[Needleman and Wunsch, 1970]{NEEDLEMAN1970443}
 Needleman,S.~B. and Wunsch,C.~D. (1970).

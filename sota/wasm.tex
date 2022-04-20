@@ -156,45 +156,7 @@ Several proposals for extending \wasm in the current roadmap could address some 
 We see in \wasm a monoculture problem, if one environment is vulnerable, all the others are vulnerable in the same manner as the same \wasm binary is replicated. 
 On the other hand, the \wasm environment lacks natural diversity \cite{natural_diversity}. Compared to the work of Harrand \etal \citationneeded, in WebAssembly, one could not use preexisting and different program versions to provide diversification. The current limitations on security and the lack of preexisting diversity motivate our work on software diversification as one preemptive mitigation among a wide range of security countermeasures. 
 
+
+\todo{Add Swivel, SFI papers}
+
 % In fact, according to the work of Hilbig \etal \cite{Hilbig2021AnES}, the artificial variants created with one of our works contribute to the half of executable and available \wasm binaries in the wild.
-
-\begin{comment}
-
-%\todo{Add example...}
-\todo{Go slow...}
-\todo{Toolchain, explain frontends, general pipeline...}
-
-In this section, we introduce an overview of the motivation for \wasm and its usage. 
-\todo{Jumps to fast, avoid !. Sentece 2} Besides, we describe the process to obtain Wasm programs and how this novel technology evolves from being only-browser-based to standalone executions in the backend. Nevertheless, we describe its significant limitations regarding security, that is our main motivation for our research.
-
-\todo{Why Wasm, asm.js, from source to Wasm, mention benchmarks and examples, photoshop, games, etc, data types, memory model, stack modeling, from Wasm to execution, finalize with security, benefits and limitations. Add diagram}
-\todo{The need of a virtual machine or a compiler.}
-\todo{Why backend, why WASI as an extension not an essential part of Wasm for the browser.}
-
-\todo{Add diagram, for obtaining Wasm and executing them, with references}
-% What is Wasm
-
-
-% How to generate Wasm code
-\wasm binaries are obtained from source code like C/C++ or Rust \cite{Hilbig2021AnES}. The \wasm code is further interpreted or compiled ahead of time into machine code by engines such as the browsers. Since version 8, LLVM supports Wasm as a backend opening the door for its vast collection of frontend languages. The LLVM support was encouraged by the seminal work of Zakai \etal with Emscripten.
-Emscripten is an open-source tool for compiling C/C++ to the \wasm. It uses LLVM to create Wasm, but it provides support for faster linking to the object files. Instead of all the IR being compiled by LLVM, the object file is prelinked with Wasm in a faster way. 
-
-\subsection*{\wasm for backend execution}
-
-
-
-% Why is important to study Wasm
-\subsection*{\wasm security and our motivation for diversification}
-
-
-\wasm is characterized by a robust security model~\cite{WebAssemblySecurity}. It should run inside a sandboxed execution environment that provides protection against common security issues such as data corruption, code injection, and return-oriented programming (ROP). However, WebAssembly is vulnerable under certain conditions, at the execution engine's level \cite{ChromeZero} or the binary itself ~\cite{usenixWasm2020}.
-Implementations in both browsers and standalone runtimes~\cite{Narayan2021Swivel} are vulnerable.
-This means that if one environment is vulnerable, all the others are vulnerable in the same manner as the same \wasm binary is replicated, turning it into a monoculture problem.
-
-
-On the other hand, the \wasm environment lacks natural diversity \cite{natural_diversity}. Compared to the work of Harrand \etal \citationneeded, in WebAssembly, one could not use preexisting and different program versions to provide diversification for monoculture solving. In fact, according to the work of Hilbig \etal \cite{Hilbig2021AnES}, the artificial variants created with one of our works contribute to the half of executable and available \wasm binaries in the wild. 
-
-
-The current limitations on security and the lack of preexisting diversity motivate our work on software diversification as one possible mitigation among the wide range of security countermeasures. 
-
-\end{comment}

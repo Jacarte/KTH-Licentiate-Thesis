@@ -2,27 +2,41 @@ import json
 import sys
 import os
 
+BLACKLIST = ['number_of_variants', 'architecture', 'mean', 'dynamic', 'static']
+SIZES = {
+    'architecture': 'p{3cm}',
+    'mean': 'p{3cm}',
+    'security': 'l',
+    'fault_tolerance': 'l'
+}
+
 def print_table_end(fd):
     fd.write("\n\\end{tabular}")
 
 def write_paper(fd, paper, slugs, positions):
-    fd.write(f"{paper['authors']} \\cite{{{paper['cite']}}} & {paper['title']} & {paper['year']} &")
+    fd.write(f"{paper['authors']} \\cite{{{paper['cite']}}} &")
     
     # Replace the features from this paper to the positions template
     t1 = positions
     CP = {}
     for k in slugs.keys():
-        CP[k] = True
+        if k not in BLACKLIST:
+            CP[k] = True
     for f in paper['features']:
         slug = f['slug']
+        if slug in BLACKLIST:
+            continue
         if f.get("description", None):
             desc = f['description']
             #print(slug)
-            t1 = t1.replace(f"{slug}", f"{desc}")
+            t1 = t1.replace(f"{slug}", f"\\checkmark")
         else:
             #print(slug)
-            t1 = t1.replace(f"{slug}", "X")
-        del CP[f['slug']]
+            t1 = t1.replace(f"{slug}", "\\checkmark")
+        try:
+            del CP[f['slug']]
+        except:
+            pass
 
     for f in CP.keys():
         
@@ -39,27 +53,32 @@ def print_table_header(fd, map, pre="", features = []):
     #fd.write("\\centering\n")
 
     # Table layout, Authors, Title, Features
-    fd.write("\\begin{tabular}[t]{ l  p{3cm} l |")
+    fd.write("\\begin{tabular}[t]{ l |")
 
     for group in features:
-        for _ in group:
-            fd.write("p{2cm}")
+        for k in group:
+            if k not in BLACKLIST:
+                if k in SIZES:
+                    fd.write(f"{SIZES[k]}")
+                else:   
+                    fd.write("l")
         fd.write("|")
 
     fd.write("}\n")
 
     # Write Column Names
 
-    fd.write("Authors & Title & Year &")
+    fd.write("Authors &")
     
     index = 2
     positions = ""
     R = ""
     for group in features:
         for f in group:
-            R += f" \\textbf{{{map[f]['id']}}} &"
-            positions += f"{f} &"
-            index += 1
+            if f not in BLACKLIST:
+                R += f" \\textbf{{{map[f]['id']}}} &"
+                positions += f"{f} &"
+                index += 1
     fd.write(f"{R[:-1]}\\\\\n\\hline\n") # Erase last character '&'
     fd.flush()
 
