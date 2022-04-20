@@ -287,6 +287,9 @@
             {
                 "slug": "equivalence_checking",
                 "description": ""
+            },
+            {
+                "slug": "nvariant"
             }
         ]
     },
@@ -318,6 +321,9 @@
             },
             {
                 "slug": "equivalence_checking"
+            },
+            {
+                "slug": "nvariant"
             }
         ]
     },
@@ -347,6 +353,9 @@
             {
                 "slug": "equivalence_checking",
                 "description": "Prexisting versions of the same program source code."
+            },
+            {
+                "slug": "nvariant"
             }
         ]
     },
@@ -373,6 +382,9 @@
             },
             {
                 "slug": "simulation"
+            },
+            {
+                "slug": "srand"
             }
         ]
     },
@@ -399,6 +411,12 @@
             {
                 "slug": "natural_diversity",
                 "description": "The semantically equivalent transformations need to be created beforehand"
+            },
+            {
+                "slug": "mveu"
+            },
+            {
+                "slug": "nvariant"
             }
         ]
     },
@@ -446,6 +464,12 @@
             },
             {
                 "slug": "garbage_insertion"
+            },
+            {
+                "slug": "nvariant"
+            },
+            {
+                "slug": "mveu"
             }
         ]
     },
@@ -490,6 +514,9 @@
             },
             {
                 "slug": "simulation"
+            },
+            {
+                "slug": "srand"
             }
         ]
     },
@@ -529,6 +556,9 @@
             },
             {
                 "slug": "security"
+            },
+            {
+                "slug": "nvariant"
             }
         ]
     },
@@ -562,6 +592,9 @@
             },
             {
                 "slug": "security"
+            },
+            {
+                "slug": "srand"
             }
         ]
     },
@@ -590,6 +623,9 @@
             },
             {
                 "slug": "dynamic"
+            },
+            {
+                "slug": "srand"
             }
         ]
     },
@@ -635,6 +671,9 @@
             },
             {
                 "slug": "security"
+            },
+            {
+                "slug": "srand"
             }
         ]
     },
@@ -677,6 +716,9 @@
             },
             {
                 "slug": "security"
+            },
+            {
+                "slug": "srand"
             }
         ]
     },
@@ -708,6 +750,9 @@
             },
             {
                 "slug": "static"
+            },
+            {
+                "slug": "srand"
             }
         ]
     },
@@ -739,6 +784,9 @@
             },
             {
                 "slug": "static"
+            },
+            {
+                "slug": "srand"
             }
         ]
     },
@@ -770,6 +818,9 @@
             {
                 "slug": "dynamic",
                 "description": "attaching and detaching memory between memory accesses"
+            },
+            {
+                "slug": "srand"
             }
         ]
     }
@@ -800,6 +851,12 @@
             {
                 "slug": "dynamic",
                 "description": ""
+            },
+            {
+                "slug": "nvariant"
+            },
+            {
+                "slug": "mveu"
             }
         ]
     }
@@ -829,6 +886,12 @@
             },
             {
                 "slug": "dynamic"
+            },
+            {
+                "slug": "nvariant"
+            },
+            {
+                "slug": "mveu"
             }
         ]
     }
@@ -858,6 +921,9 @@
             },
             {
                 "slug": "dynamic"
+            },
+            {
+                "slug": "mveu"
             }
         ]
     },
@@ -888,6 +954,9 @@
             },
             {
                 "slug": "dynamic"
+            },
+            {
+                "slug": "srand"
             }
         ]
     },
@@ -931,6 +1000,9 @@
             {
                 "slug": "mean",
                 "description": "Modified version of the GNU compiler"
+            },
+            {
+                "slug": "mveu"
             }
         ]
     },
@@ -966,6 +1038,9 @@
             },
             {
                 "slug": "dynamic"
+            },
+            {
+                "slug": "mveu"
             },
             {
                 "slug": "mveu"
@@ -1120,6 +1195,93 @@
             },
             {
                 "slug": "nversion"
+            }
+        ]
+    },
+    {
+        "cite": "CROW",
+        "title": "",
+        "authors": "Cabrera Arteaga \\etal",
+        "seed": false,
+        "year": 12021,
+        "sum": " ",
+        "features": [
+            {
+                "slug": "artificial_diversity"
+            },
+            {
+                "slug": "garbage_insertion"
+            },
+            {
+                "slug": "equivalence_arithmetic_sequences"
+            },
+            {
+                "slug": "variable_substitution"
+            },
+            {
+                "slug": "instruction_reordering"
+            },
+            {
+                "slug": "adding_and_removing_jumps"
+            },
+            {
+                "slug": "security"
+            },
+            {
+                "slug": "reliability"
+            },
+            {
+                "slug": "nversion"
+            },
+            {
+                "slug": "srand",
+                "special": "-"
+            }
+        ]
+    },
+    {
+        "cite": "MEWE",
+        "title": "",
+        "authors": "Cabrera Arteaga \\etal",
+        "seed": false,
+        "year": 12022,
+        "sum": "",
+        "features": [
+            {
+                "slug": "artificial_diversity"
+            },
+            {
+                "slug": "garbage_insertion"
+            },
+            {
+                "slug": "equivalence_arithmetic_sequences"
+            },
+            {
+                "slug": "variable_substitution"
+            },
+            {
+                "slug": "instruction_reordering"
+            },
+            {
+                "slug": "adding_and_removing_calls"
+            },
+            {
+                "slug": "adding_and_removing_jumps"
+            },
+            {
+                "slug": "intermixing"
+            },
+            {
+                "slug": "security"
+            },
+            {
+                "slug": "reliability"
+            },
+            {
+                "slug": "mveu"
+            },
+            {
+                "slug": "srand"
             }
         ]
     }

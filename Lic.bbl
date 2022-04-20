@@ -1,5 +1,12 @@
 \begin{thebibliography}{}
 
+\bibitem[Romano et~al., 2022]{wobfuscator}
+Romano,A., Lehmann,D., Pradel,M., and Wang,W. (2022).
+\newblock Wobfuscator: Obfuscating javascript malware via opportunistic
+  translation to webassembly.
+\newblock In {\em 2022 2022 IEEE Symposium on Security and Privacy (SP) (SP)},
+  pages 1101--1116, Los Alamitos, CA, USA. IEEE Computer Society.
+
 \bibitem[Voulimeneas et~al., 2021]{voulimeneas2021dmvx}
 Voulimeneas,A., Song,D., Larsen,P., Franz,M., and Volckaert,S. (2021).
 \newblock dmvx: Secure and efficient multi-variant execution in a distributed
@@ -19,16 +26,33 @@ Lee,S., Kang,H., Jang,J., and Kang,B.~B. (2021).
   stack layout.
 \newblock {\em IEEE Transactions on Dependable and Secure Computing}.
 
+\bibitem[Johnson et~al., 2021]{johnson2021}
+Johnson,E., Thien,D., Alhessi,Y., Narayan,S., Brown,F., Lerner,S., McMullen,T.,
+  Savage,S., and Stefan,D. (2021).
+\newblock Sfi safety for native-compiled wasm.
+\newblock {\em NDSS. Internet Society}.
+
 \bibitem[Hilbig et~al., 2021]{Hilbig2021AnES}
 Hilbig,A., Lehmann,D., and Pradel,M. (2021).
 \newblock An empirical study of real-world webassembly binaries: Security,
   languages, use cases.
 \newblock {\em Proceedings of the Web Conference 2021}.
 
-\bibitem[{Cabrera Arteaga} et~al., 2021]{2021arXiv210808125C}
-{Cabrera Arteaga},J., {Laperdrix},P., {Monperrus},M., and {Baudry},B. (2021).
+\bibitem[{Cabrera Arteaga} et~al., 2021b]{2021arXiv210808125C}
+{Cabrera Arteaga},J., {Laperdrix},P., {Monperrus},M., and {Baudry},B. (2021b).
 \newblock {Multi-Variant Execution at the Edge}.
 \newblock {\em arXiv e-prints}, page arXiv:2108.08125.
+
+\bibitem[{Cabrera Arteaga} et~al., 2021a]{MEWE}
+{Cabrera Arteaga},J., {Laperdrix},P., {Monperrus},M., and {Baudry},B. (2021a).
+\newblock {Multi-Variant Execution at the Edge}.
+\newblock {\em arXiv e-prints}, page arXiv:2108.08125.
+
+\bibitem[Cabrera~Arteaga et~al., 2021]{CROW}
+Cabrera~Arteaga,J., Floros,O., Vera~Perez,O., Baudry,B., and Monperrus,M.
+  (2021).
+\newblock Crow: code diversification for webassembly.
+\newblock In {\em MADWeb, NDSS 2021}.
 
 \bibitem[MTD, 2021]{MTDNationalCyberLaep}
  (2021).
@@ -209,6 +233,13 @@ Agosta,G., Barenghi,A., Pelosi,G., and Scandale,M. (2015).
   side channel attacks.
 \newblock {\em IEEE Transactions on Computer-Aided Design of Integrated
   Circuits and Systems}, 34(8):1320--1333.
+
+\bibitem[Okhravi et~al., 2013]{okhravi2013survey}
+Okhravi,H., Rabe,M., Mayberry,T., Leonard,W., Hobson,T., Bigelow,D., and
+  Streilein,W. (2013).
+\newblock Survey of cyber moving targets.
+\newblock {\em Massachusetts Inst of Technology Lexington Lincoln Lab, No.
+  MIT/LL-TR-1166}.
 
 \bibitem[Homescu et~al., 2013]{homescu2013profile}
 Homescu,A., Neisius,S., Larsen,P., Brunthaler,S., and Franz,M. (2013).

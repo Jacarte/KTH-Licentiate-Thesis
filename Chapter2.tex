@@ -1,131 +1,17 @@
 \chapter{Background \& State of the art}
 
-This chapter discusses state of the art in the areas of \emph{\wasm}, \emph{Diversification} and \emph{Runtime Randomization}. We present a summary of the relevant related work and the key concepts and background that we use along with this writing. 
-We select the discussed works by their novelty and critical insights to provide automatic diversification. 
+This chapter discusses state of the art in the areas of \emph{\wasm} and \emph{Software Diversification}. In \autoref{sota:wasm} we discuss the \wasm language, its motivation, how \wasm binaries are generated, language specification and security related issues. In \autoref{sota:sota}, we present a summary of Software Diversification and its foundational concepts. In addition, we compare and locate our contributions againts state of the art related works.  
+We select the discussed works by their novelty, critical insights and representativeness of their used techniques. 
+We finalize the chapter by stating our novel contributions. 
 
 
-\todo{Description of Wasm section}
 %In \autoref{sota:wasm} we describe the context in which this dissertation is based, \wasm. We include both usage scenarios for Wasm and its main security issues. In \autoref{sota:diversification} we discuss the main diversification techniques in the wild, we introduce the concept of superoptimization used in this work, and we end the section by highlighting superdiversification as the cornerstone of our contributions are based. In \autoref{sota:randomization} we mention close works to runtime diversification and how diversification can be used to construct resilient binaries. 
-
-
-\begin{comment}
-
-\todo{Motivate Wasm here}
-
-\todo{Our area is on wasm, compilers, etc}
-
-\todo{The key related work are in the area of X and Y}
-
-\todo{Wasm is not the context ! Define what the context is : compilers, machine code, portable code, Wasm, interpreters, backend, etc. Use background instead of context. Put everythin that is related to the thesis, concepts. }
-
-\todo{Portable code to be distributed}
-
-\end{comment}
-
 
 \input{sota/wasm.tex}
 
 \input{sota/sota.tex}
 
-\begin{comment}
-
-\section{Diversification and Superdiversification}
-\label{sota:diversification}
-%\todo{https://www.sciencedirect.com/science/article/pii/S0950584918301484?via\%3Dihub Diversification and obfuscation techniques for software security: A systematic literature review}
-
-
-\todo{Draw landscape. Emphasis on why for security, sidechannels, etc.}
-
-\todo{Check nicos How to in background related to diversity.}
-
-Program diversification approaches can be applied at different stages of the development pipeline. This section analyzes the related works for both static and dynamic diversification. Besides, we motivate superoptimization strategies to provide a "superdiversifier" that uses intermediate solutions to search for optimal programs to provide program variants. Finally, we describe our contribution to the field.
-
-\todo{Searching for software diversity: attaining artificial diversity through program synthesis}
-
-Static diversification consists in synthesizing, building, and distributing different, functionally equivalent binaries to end-users. This aims at increasing the complexity and applicability of an attack against a large population of users~\cite{cohen1993operating}. \todo{Take a look to Building diverse computer systems }
-Dealing with code-reuse attacks, Homescu \etal~\cite{homescu2013profile} propose inserting NOP instruction directly in LLVM IR to generate a variant with a different code layout at each compilation. 
-In this area, Coppens \etal~\cite{coppens2013feedback} use compiler transformations to iteratively diversify software.
-Their work aims to prevent reverse engineering of security patches for attackers targeting vulnerable programs.
-Their approach continuously applies a random selection of predefined transformations using a binary diffing tool as feedback \citationneeded.
-A downside of their method is that attackers are, in theory, able to identify the type of transformations applied and find a way to ignore or reverse them.
-
-% Runtime diversification
-
-
-
-% How to use the compiler
-
-
-
-\subsection*{Superoptimization}
-
-The search for optimal algorithms to compute a function is as older as of the first compiler. This problem is commonly solved by using human-written heuristics inside the compiler implementations. However, this solution has limitations. First, the optimizations are applied to small pieces of code and do not consider more complex processes like instruction selections, register allocation, and target-dependent optimizations. Second, the well-known phase ordering problem \cite{phase-ordering-problem}. To solve this problem, Massalin \etal \cite{Massalin1987} proposed a superoptimizer, a statistical method to exhaustively explore all possible program constructions to find the smallest program.
-Given an input program, code superoptimization focuses on \emph{searching} for a new program variant that is faster or smaller than the original code while preserving its correctness \cite{bunel_learning_2017}.
-The search space for the optimal program is defined by choosing a subset of the machine's instruction set and generating combinations of optimized programs, sorted by length in ascending order. If any of these programs are found to perform the same function as the source program, the search halts. However, the exhaustive exploration approach becomes virtually impossible for larger instruction sets.
-Because of this, the paper proposes a pruning method over the search space and a fast probabilistic test to check programs' equivalence.
-
-Apart from recent works in the area of Machine Learning \cite{2021arXiv210913498S}, to the best of our knowledge, there are two main implementations for superoptimizers using two completely different strategies.
-Churchill et al. \cite{churchill_sound_nodate} implement STOKE to superoptimize large programs for the  Google Native Client stack. They use a bounded verifier to ensure that every generated optimization goes through all the checks for semantic equivalence. STOKE uses a probabilistic approach, following a Monte-Carlo-Markov-Chain strategy to select code transformations that lead to smaller programs.
-On the other hand, Souper \cite{bansal_automatic_nodate} automatically generates smaller programs for LLVM following an exhaustive enumerative synthesis. Souper finds subexpressions at the LLVM function level and builds all possible expressions from all the instructions that are no larger than the original subexpression. When Souper finds a replacement, it uses an SMT solver \cite{SMT_solver} to verify the semantic equivalence with the original program. 
-Superoptimization is more expensive than traditional optimization heuristics in compilers yet, provides more profound and more robust code transformations.
-
-
-\subsection*{Superdiversification and statement of novelty}
-
-While finding optimized code, the idea and the implementations of superoptimization discard intermediate solutions that are semantically equivalent to the original program. The discarding of intermediate solutions follows the principle of optimization, finding the best possible program. Jacob \etal~\cite{jacob2008superdiversifier} propose the use of a ''superdiversification'' technique, inspired by superoptimization,
-to synthesize individualized versions of programs, their main idea is to keep the intermediate solutions finding the optimal program.
-The tool developed by Jacob \etal does not output only the optimal instruction sequence but any semantically equivalent sequences.
-Their work focuses on a specific subset of x86 instructions.
-
-In this research, we contribute to the state of the art in artificially creating diversity. While the number of related work for software diversity is enormous, no approach has been applied to the context of \wasm. One of our contributions, CROW, extrapolates the idea of superdiversification for \wasm. CROW works directly with LLVM IR, enabling it to generalize to more languages and CPU architectures, something not possible with the x86-specific approach of previous works.
-Furthermore, we conducted a sanity check for diversification preservation, researching to what extent browser compilers do not remove our introduced diversity.
-
-CROW focuses on the static diversification of software. However, because of the specificities of code execution in the browser, this is not far from being a dynamic approach. For example, since \wasm is served at each page refreshment, every time a user asks for a \wasm binary, she can be served a different variant provided by CROW.
-It also can be used in fuzzing campaigns \citationneeded to provide reliability. The diversification created by CROW can unleash hidden behaviors in compilers and interpreters.
-By generating several functionally equivalent and yet different variants, deeper bugs can be discovered. 
-Thanks to CROW, a bug was discovered in the Lucet compiler \footnote{\url{REPO}}.
-Fastly acknowledged our work as part of a technical blog post 
-\footnote{\url{https://www.fastly.com/blog/defense-in-depth-stopping-a-wasm-compiler-bug-before-it-became-a-problem}} that describes the bug and the patch. 
-
-\section{Runtime diversification}
-\label{sota:randomization}
-
-In this section, we highlight past works on runtime strategy for diversification. Besides, we describe and discuss the foundation that supports the composition of diverse yet semantically equivalent programs to enforce security. Finally, we describe our contribution to the field.
-
-
-
-
-
-
-
-
-\subsection*{Moving Target Defense and Multivariant execution}
-\label{sota:multivariantex}
-
-% Intro and benefits
-
-
-\subsection*{Statement of novelty}
-\label{sota:contribs}
-
-\section{Conclusions}
-\label{sota:conclusions}
-
-Software Diversification has been widely researched, not being the case in the \wasm context. With this dissertation, we aim to settle down the foundation to study automatic diversification for \wasm. We contribute to the field of artificial diversity by extending the superdiversifier idea of Jacob \etal \cite{jacob2008superdiversifier}. We empirically demonstrate that CROW provides robust program diversification. Finally, we propose a novel approach of merging program variants to provide multivariant execution. Our
-contributions are obtained by following the methodology described in \autoref{chapter:method}. 
-
-\end{comment}
-%\todo{Wasm and portable code}
-%    \todo{How => Why: Motivation, security, reliability}
-%\todo{Diversification, Superoptimization and Superdiversification.}
-%    \todo{Prexisting => Artificial}
-%    \todo{How => Why: Motivation, security, reliability}
-%    \todo{Fuzzing (CVE)}
-%\todo{Randomization (runtime).}
-%    \todo{N-version, Isomeron eg}
-%    \todo{How => Why: Motivation, security, reliability}
-%\todo{1 - page MEWE and << CROW (Our contributions)}
-%    \todo{n-variant}
-
-%\section{CROW}
-%\label{section:crow}
+\subsection*{Conclusions}
+In this chapter we presented the background on the \wasm language including our motivation on its security issues and related work enforcing its security.
+Software Diversification has been widely researched, not being the case for \wasm. In this chapter, we aim to settle down the foundation to study automatic diversification for \wasm. We stated our contributions to the field of artificial diversity by extending current state of the art. 
+Our contributions are obtained by following the methodology described in \autoref{chapter:method}. 

@@ -1,5 +1,5 @@
 \section{Software Diversification}
-
+\label{sota:sota}
 %Checkmarck symbol
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
 
@@ -37,7 +37,7 @@ Software Diversification has been widely studied in the past decades. This secti
 % What is Software diversity
 Software diversification consists in synthesizing, reusing, distributing and executing different, functionally equivalent programs. We use the concept of functional equivalence defined in the seminal work of Cohen \etal \cite{cohen1993operating} as input output equivalence. Two programs are equivalent if, given identical input, they produce the identical output.
 % Why to do Software diversity
-According to the survey of Baudry and Monperrus \cite{natural_diversity}, the motivation for software diversification can be separated in five categories: reusability \cite{pohl2005software}, software testing \cite{Chen2010AdaptiveRT}, performance \cite{10.1145/2025113.2025133}, fault tolerance \cite{1659219} and security \cite{cohen1993operating}. Our work lies on the latter two categories \todo{Why?}: 
+According to the survey of Baudry and Monperrus \cite{natural_diversity}, the motivation for software diversification can be separated in five categories: reusability \cite{pohl2005software}, software testing \cite{Chen2010AdaptiveRT}, performance \cite{10.1145/2025113.2025133}, fault tolerance \cite{1659219} and security \cite{cohen1993operating}. Our work contributes to the latter two categories: 
 
 \begin{goal}{Fault tolerance and reliability:}
     \label{goal:reliability}
@@ -64,7 +64,7 @@ According to the survey of Baudry and Monperrus \cite{natural_diversity}, the mo
 
 \subsection*{Software diversification sources.}
 
-There are two main sources of software diversification: natural(ND) and artificial diversity(AD). Natural diversity can be controlled or an unpredicted consequence of developing processes. Controlled natural diversity is usually called Design Diversity or N-Version Diversity. It is addressed as engineering decisions \cite{1659219}, encouraging and controlling software diversity. In practice, it consists of providing N development teams with the same requirements. The teams develop N independent versions, using different approaches. On the other hand, Natural Diversity can emerge from the spontaneous software development processes. Let us illustrate the phenomenon with an example, CodeForces\footnote{\url{https://codeforces.com/contest/1667/status/page/2?order=BY_PROGRAM_LENGTH_ASC}} shows more than 350 different and successful solutions in C++ for a single requirements based problem in a single programming contest. 
+There are two main sources of software diversification: natural(ND) and artificial diversity(AD). Natural diversity can be controlled or can be an unpredicted consequence of developing processes. Controlled natural diversity is usually called Design Diversity or N-Version Diversity. It is addressed using engineering decisions \cite{1659219}, encouraging and controlling the software diversity. In practice, it consists of providing N development teams with the same requirements. The teams develop N independent versions, using different approaches. On the other hand, Natural Diversity can emerge from the spontaneous software development processes. Let us illustrate the phenomenon with an example, CodeForces\footnote{\url{https://codeforces.com/contest/1667/status/page/2?order=BY_PROGRAM_LENGTH_ASC}} shows more than 350 different and successful solutions in C++ for a single requirements based problem in a single programming contest. 
 Software market is an expected source of natural diversity. Sengupta \etal \cite{10.5555/3091125.3091155} used this fact to reach the Security goal (\autoref{goal:security}).
 
 
@@ -72,12 +72,12 @@ Software market is an expected source of natural diversity. Sengupta \etal \cite
 Notice that Natural Diversity can rely on itself to escalate, and it is coped by the preexistence of software. This can be seen as a limitation. For example, in the context o this work, the natural diversity for \wasm programs is nearly inexistence \cite{Hilbig2021AnES}. When natural diversity is not enough, it is innate to think that the source for diversification needs to be artificial. Automated software diversification consists on artificially synthesize software.
 
 % Classification by Cohen
-According to the seminal work of Cohen \etal \cite{cohen1993operating} automatic software diversification can be reached by mutation strategies. A mutation strategy is a set of rules to define how a specific piece of software should be changed to provide a different, yet functionally equivalent, variant. A mutation can be appplied at different layers of software lifecycle, from compilation to execution and from source code to executable binary. We have found that the foundation for automatic software diversity has barely changed since Cohen in 1993. Complemented with the work of Baudry and Monperrus \cite{natural_diversity}, we enumerate the strategies for automatic software diversification. Along this section we will use the same foundation to classify and place related works.
+According to the seminal work of Cohen \etal \cite{cohen1993operating} automatic software diversification can be reached by mutation strategies. A mutation strategy is a set of rules to define how a specific piece of software should be changed to provide a different, yet functionally equivalent, variant. A mutation can be appplied at different layers of software lifecycle, from compilation to execution and from source code to executable binary. We have found that the foundation for automatic software diversity has barely changed since Cohen in 1993. Complemented with the work of Baudry and Monperrus \cite{natural_diversity}, we enumerate the strategies for automatic software diversification. 
 
 \begin{strategy}{Equivalent arithmetic instructions}
     \label{strategy:S1}
     \normalfont
-    Numeric calculations can be expressed theoretically in an infinite number of ways. This mutation is simple but powerful since the complexity of program variants dramatically increases. In terms of overhead, the size of the program variant increases with the size of the replacement. 
+    Numeric calculations can be expressed theoretically in an infinite number of ways. This strategy is simple but powerful since the complexity of program variants dramatically increases. In terms of overhead, the size of the program variant increases with the size of the replacement. 
     
 \end{strategy}
 
@@ -85,119 +85,144 @@ According to the seminal work of Cohen \etal \cite{cohen1993operating} automatic
 \begin{strategy}{Instruction reordering}
     \label{strategy:S2}
     \normalfont
-    This mutation reorder instructions or entire program blocks if they are independent to each other. This mutation generates program variants without affecting its size and execution time. \todo{Example}
+    This strategy reorder instructions or entire program blocks if they are independent to each other. This strategy generates program variants without affecting its size and execution time. 
 
 \end{strategy}
 
 \begin{strategy}{Variable substitution}
     \label{strategy:S3}
     \normalfont
-    This mutation changes the location of variable declarations. It has lower impact on low level programs unless compilers resort symbol tables. This mutation prevents static examination an analysis of parameters and alter memory locations. It should not affect the size of program variants neither their execution time.
+    This strategy changes the location of variable declarations. It has lower impact on low level programs unless compilers resort symbol tables. It prevents static examination an analysis of parameters and alter memory locations. The strategy should not affect the size of program variants neither their execution time.
 \end{strategy}
 
 
 \begin{strategy}{Adding, changing, removing jumps}
     \label{strategy:S4}
     \normalfont
-    This mutation creates program variants by adding, changing or removing jumps inside the original program. At high level, this can be reached by loop splitting or the insertion of arbitrary branching. This mutation increases the execution time of variants.
+    This strategy creates program variants by adding, changing or removing jumps inside the original program. At high level, this can be reached by loop splitting or by inserting arbitrary branching. This strategy increases the execution time of variants.
 \end{strategy}
 
 
 \begin{strategy}{Adding, changing, removing calls}
     \label{strategy:S5}
     \normalfont
-    This mutation is similar to the previous one (\autoref{strategy:S4}). It extends the same idea by adding function calls inside the stack. This mutation is mainly implemented by inlining and de-inlining expressions inside the program.
+    This strategy is similar to the previous one (\autoref{strategy:S4}). It extends the same idea by adding function calls inside the stack. It is mainly implemented by inlining and de-inlining expressions inside the program. When an expression is inlined, then its original instruction is replaced by a function call that perform the same calculation of the original subexpression.
 \end{strategy}
 
 
 \begin{strategy}{Garbage insertion}
     \label{strategy:S6}
     \normalfont
-    This mutation adds instructions to the program that are independent of the original sequence of instructions. This mutation extends \autoref{strategy:S1} by supporting more instructions like random memory accesses.
+    This strategy adds instructions to the program that are independent of the original sequence of instructions. It extends \autoref{strategy:S1} by supporting more instructions like random memory accesses.
     Dealing with code-reuse attacks, Homescu \etal~\cite{homescu2013profile} propose inserting garbage NOP instructions directly in LLVM IR to generate a variant with a different code layout at each compilation. 
-    Jackson \etal \cite{jackson} have explored how to use NOP operations inserted during compiling time to statically diversify programs. Another idea \todo{Jackson} is to use the optimization flags of several compilers to generate semantically equivalent binaries out of the same source code. These techniques place the compiler at the core of the diversification technique. However, this approach is limited by the number of available flags in the compiler implementation and because the optimization is applied in all possible places in the code at the same time.
+    Jackson \etal \cite{jackson} have explored how to use NOP operations inserted during compiling time to statically diversify programs. Jackson \etal \cite{jackson} used  the optimization flags of several compilers to generate semantically equivalent binaries out of the same source code. These techniques place the compiler at the core of the diversification technique. %However, this approach is limited by the number of available flags in the compiler implementation and because the optimization is applied in all possible places in the code at the same time.
 \end{strategy}
 
 \begin{strategy}{Program layout randomization in memory and stack}
     \label{strategy:S7}
     \normalfont
-    This mutation is usually implemented over compilers. The generation of the final binary and how it operates its memory is randomized. \todo{Example}.
-    Seminal works include instruction-set randomization \cite{Kc03,barrantes2003randomized}
-    to create a unique mapping between artificial CPU instructions and real ones.  %This makes it very hard for an attacker to ignore the key to inject executable code. This breaks the predictability of program execution and mitigates certain exploits. 
+    This strategy is usually implemented over compilers. The generation of the final binary and how it operates its memory is randomized.  %This makes it very hard for an attacker to ignore the key to inject executable code. This breaks the predictability of program execution and mitigates certain exploits. 
 \end{strategy}
 
 
 \begin{strategy}{ISA randomization}
     \label{strategy:S8}
     \normalfont
-    This mutation encodes the original program, for example by using a simple XOR operation over its binary bytestream. This technique is strong against attacks involving the examination of code. It should not affect the size of program variants or their execution times. The encoding/decoding operations are performed only once.
+    This strategy encodes the original program, for example by using a simple XOR operation over its binary bytestream. This technique is strong against attacks involving the examination of code. It should not affect the size of program variants or their execution times. The encoding/decoding operations are performed only once. 
+    Seminal works include instruction-set randomization \cite{Kc03,barrantes2003randomized}
+    to create a unique mapping between artificial CPU instructions and real ones.
 \end{strategy}
 
 
 \begin{strategy}{Simulation}
     \label{strategy:S9}
     \normalfont
-    Interpretation mechanism similar to encoding (\autoref{strategy:S9}) but the execution is delegated to a custom interpreter instead of the traditional one after a simple decoding. The program is decoded at runtime every time it is invoked.
+    It is an interpretation mechanism similar to encoding (\autoref{strategy:S9}) but the execution of programs is delegated to a custom interpreter instead of using preexisting execution hosts. The program is decoded at runtime every time it is invoked. 
+    Chew, and Song \cite{Chew02mitigatingbuffer} target operating system randomization. They randomize the interface between the operating system and the user applications:
+    the system call numbers, the library entry points (memory addresses), and the stack placement. All those techniques are dynamic, done at runtime using load-time preprocessing and rewriting. 
 \end{strategy}
 
 
 \begin{strategy}{Intermixing}
     \label{strategy:S10}
     \normalfont
-    With the existence of more than one program variant their execution can be mixed. The decision of which variant executes is decided at runtime. This concept is the precursor of multivariant execution and the execution by consensus defined in \autoref{goal:reliability}. This strategy is 
+    With the existence of more than one program variant their execution can be mixed. The decision of which variant executes is decided at runtime. This strategy is the core for randomization, multivariant execution and the execution by consensus defined in \autoref{goal:reliability}. This strategy is 
     complex to implement because the integrity of the memory and stack needs to be stable between programs.
 \end{strategy}
 
 \subsection*{Usages of Software Diversity}
 
-We categorize the applications of software diversity in four main fields.
+We categorize the applications of software diversity in three main usages.
 
 \begin{usage}{N-Version:}
     \label{usage:n-version}
     \normalfont
-    More than one independent program variant executed in one single machine. For example, the work of Sengupta \etal \cite{10.5555/3091125.3091155} proposed to change indistinctly between database engines and backend server implementations in a monolitic web application. Their approach decreases the reach of exploitable CVEs from request to request.
+    More than one independent program variant executed in one single machine. For example, the work of Sengupta \etal \cite{10.5555/3091125.3091155} proposed to change indistinctly between database engines and backend server implementations in a monolitic web application. Their approach decreases the reach of exploitable CVEs from request to request. 
+    In this area, Coppens \etal~\cite{coppens2013feedback} use compiler transformations to iteratively diversify software. Their work aims to prevent reverse engineering of security patches for attackers targeting vulnerable programs.
+    Their approach continuously applies a random selection of predefined transformations using a binary diffing tool as feedback \citationneeded. 
+    A downside of their method is that attackers are, in theory, able to identify the type of transformations applied and find a way to ignore or reverse them.
+    Bathkar et al. \cite{bhatkar03,bhatkar2005efficient} proposed three kinds of randomization transformations: randomizing the base addresses of applications and libraries  memory regions, random permutation of the order of variables and routines, and the random introduction of random gaps between objects. 
+    Dynamic randomization can address different kinds of problems. In particular, it mitigates an extensive range of memory error exploits. 
+    Recent work in this field includes stack layout randomization against data-oriented programming \cite{aga2019smokestack}, and memory safety violations \cite{lee2021savior}, as well as a technique to reduce the exposure time of persistent memory objects to increase the frequency of address randomization \cite{xu2020merr}.
 \end{usage}
 
 
 \begin{usage}{Randomization:}
     \label{usage:randomization}
     \normalfont
-    One program variant execution per machine configuration. 
+    One program that decides at runtime which of its variants to execute, this is usually called dynamic diversification. Courouss{\'e} \etal~\cite{courousse2016runtime} implement an assembly-like DSL to generate equivalent code at runtime in order to increase protection against side-channel attacks. 
     A randomization technique creates a set of unique executions for the very same program \cite{bhatkar03}. 
     Previous works have attempted to generate diversified variants that are alternated during execution.
     It has been shown to drastically increase the number of execution traces required by a side-channel attack as
     Amarilli \etal~\cite{amarilli2011can} has shown. On the same topic,
     Agosta \etal~\cite{agosta2015meet} and Crane \etal~\cite{crane2015thwarting}
-    modify the LLVM toolchain to compile multiple functionally equivalent variants to randomize the control flow of software at runtime,
-    while Courouss{\'e} \etal~\cite{courousse2016runtime} implement an assembly-like DSL to generate equivalent code at runtime in order to increase protection against side-channel attacks. 
+    modify the LLVM toolchain to compile multiple functionally equivalent variants to randomize the control flow of software at runtime.
 \end{usage}
 
 \begin{usage}{Multivariant Execution(MVE):}
     \label{usage:mve}
     \normalfont
-    Multiple program variants composed in one single binary. In 2006, security researchers at University of Virginia laid the foundations of a novel approach to security that consists in executing multiple variants of the same program, \cite{cox06}. Bruschi et al. \cite{bruschi2007diversified} and Salamat et al. \cite{salamat2007stopping} pioneered the idea of executing the variants in parallel. Subsequent techniques focus on Multivariant Execution for mitigating memory vulnerabilities \cite{lu2018stopping} and other specific security problems incl. return-oriented programming attacks \cite{volckaert2015cloning} and code injection \cite{SalamatJWWF11}. A key design decision of MVE is whether it is achieved in kernel space \cite{osterlund2019kmvx}, in user-space \cite{salamat2009orchestra}, with exploiting hardware features \cite{koning2016secure}, or even through code polymorphism \cite{10.1145/3281662}. Finally, one can neatly exploit the limit case of executing only two variants \cite{maurer2012tachyon,Kim2015}. Notably,  Davi \etal proposed Isomeron \cite{davi2015isomeron}, an approach  for execution-path randomization. Isomeron simultaneously loads the original program and a variant. While the program is running, Isomeron continuously flips a coin to decide which copy of the program should be executed next at the level of function calls. With this strategy a potential attacker cannot predict whether the original or the variant of a program will execute.
+    Multiple program variants composed in one single binary that can execute either separately depending on external configuration or in parallel for consensus computation. In 2006, security researchers at University of Virginia laid the foundations of a novel approach to security that consists in executing multiple variants of the same program, \cite{cox06}. Bruschi et al. \cite{bruschi2007diversified} and Salamat et al. \cite{salamat2007stopping} pioneered the idea of executing the variants in parallel. Subsequent techniques focus on Multivariant Execution for mitigating memory vulnerabilities \cite{lu2018stopping} and other specific security problems incl. return-oriented programming attacks \cite{volckaert2015cloning} and code injection \cite{SalamatJWWF11}. A key design decision of MVE is whether it is achieved in kernel space \cite{osterlund2019kmvx}, in user-space \cite{salamat2009orchestra}, with exploiting hardware features \cite{koning2016secure}, or even through code polymorphism \cite{10.1145/3281662}. Finally, one can neatly exploit the limit case of executing only two variants \cite{maurer2012tachyon,Kim2015}. Notably,  Davi \etal proposed Isomeron \cite{davi2015isomeron}, an approach  for execution-path randomization. Isomeron simultaneously loads the original program and a variant. While the program is running, Isomeron continuously flips a coin to decide which copy of the program should be executed next at the level of function calls. With this strategy a potential attacker cannot predict whether the original or the variant of a program will execute.
+    Researching on MVE in a distributed setting like the Edge \citationneeded has been less researched. Voulimeneas \etal proposed a multivariant execution system by parallelizing the execution of the variants in different machines \cite{voulimeneas2021dmvx} for the sake of efficiency. 
+    
+    %
 \end{usage}
 
 
-\begin{usage}{Moving Target Defense(MTD):}
-    \label{usage:mtd}
-    \normalfont
-    Moving Target Defense for software was first proposed as a collection of techniques that aim to improve the security of a system by constantly moving its vulnerable components \cite{MTDNationalCyberLaep}. Usually, MTD techniques revolve around changing system inputs and configurations to reduce attack surfaces. 
-    This increases uncertainty for attackers and makes their attacks more difficult. \autoref{usage:n-version}, \autoref{usage:randomization} and \autoref{usage:mve} can be categorized as Moving Target Defense usages. Ultimately, potential attackers cannot hit what they cannot see. 
-    MTD can be implemented in different ways, including via dynamic runtime platforms \cite{10.1145/3318216.3363338}. 
-\end{usage}
+%\begin{usage}{Moving Target Defense(MTD):}
+%    \label{usage:mtd}
+%    \normalfont
+\autoref{usage:n-version}, \autoref{usage:randomization} and \autoref{usage:mve} can be categorized as Moving Target Defense strategies. Moving Target Defense for software was first proposed as a collection of techniques that aim to improve the security of a system by constantly moving its vulnerable components \cite{MTDNationalCyberLaep, okhravi2013survey}. Usually, MTD techniques revolve around changing system inputs and configurations to reduce attack surfaces. 
+This increases uncertainty for attackers and makes their attacks more difficult.  Ultimately, potential attackers cannot hit what they cannot see. 
+MTD can be implemented in different ways, including via dynamic runtime platforms \cite{10.1145/3318216.3363338}. 
+%\end{usage}
 
 
 
 
-\subsection*{Our contributions and statement of Novelty}
+\subsection*{Statement of Novelty}
 
 
 
-In \autoref{table:sota:comparison} we listed a sample of the Software Diversification related work. The table is composed by the authors and the reference to the work, the source of diversitication (natural or artificial), followed by one column for each motivation and strategy (\autoref{goal:reliability},  \autoref{goal:security},  \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5},  \autoref{strategy:S6},  \autoref{strategy:S7},  \autoref{strategy:S8},  \autoref{strategy:S9} and, \autoref{strategy:S10}). Each cell in the table contains a checkmark if the strategy or the motivation for the work match the previously mentioned criteria. The rows are sorted by the year of the work in ascending order.
+We contribute to Software Diversification for \wasm using Artificial Diversification, for N-Version, Randomization and Multivariant Execution usages (\autoref{usage:n-version}, \autoref{usage:randomization}, \autoref{usage:mve}) for the sake of reliability and security ( \autoref{goal:reliability} and \autoref{goal:security}). In \autoref{table:sota:comparison} we listed related work on Software Diversification that support our work. The table is composed by the authors and the reference to their work, the source of diversification (natural or artificial), followed by one column for each motivation, strategy and usage (\autoref{goal:reliability},  \autoref{goal:security},  \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5},  \autoref{strategy:S6},  \autoref{strategy:S7},  \autoref{strategy:S8},  \autoref{strategy:S9}, \autoref{strategy:S10}, \autoref{usage:n-version}, \autoref{usage:randomization} and \autoref{usage:mve}). Each cell in the table contains a checkmark if the strategy, the motivation or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. The last two rows locate our contributions. 
 
 \input{sota/sota_table.tex}
 
+As the table illustrates, we push the state of the art on Software Diversification. Our first contribution, CROW \cite{CROW} generates multiple program variants for \wasm using the LLVM pipeline.
+It contributes to the state of the art in artificially creating diversity for \wasm. While the number of related work for software diversity is large, only one approach has been applied to the context of \wasm. To the best of our knowledge, the closest diversification work on the browsers involving \wasm is the work of Romano \etal \cite{wobfuscator}. They proposed to de-inline JavaScript (\autoref{strategy:S5}) subexpressions and replace them with function calls to \wasm counterparts. The presence of two different engines, one for JS and another for \wasm in the majority of the browser vendors motivated their work. They empirically demonstrated that malware classifiers could be evaded with this diversification technique. On the other hand, \wasm is a novel technology and the adoption of defenses in for it are still under development \cite{Narayan2021Swivel, johnson2021}.
+
+% How CROW works
+CROW, extrapolates the idea of superdiversification \cite{jacob2008superdiversifier} for \wasm. CROW works directly with LLVM IR, enabling it to generalize to more languages and CPU architectures, something not possible with the x86-specific approach of previous works.
+%Furthermore, we conducted a sanity check for diversification preservation, researching to what extent browser compilers do not remove our introduced diversity.
+CROW focuses on the static diversification of software. However, because of the specificities of code execution in the browser, this is not far from being a randomization approach. For example, since \wasm is served at each page refreshment, every time a user asks for a \wasm binary, she can be served a different variant provided by CROW.
+It also can be used in fuzzing campaigns \citationneeded to provide reliability. The diversification created by CROW can unleash hidden behaviors in compilers and interpreters. Thanks to CROW, a bug was discovered in the Lucet compiler \footnote{\url{https://www.fastly.com/blog/defense-in-depth-stopping-a-wasm-compiler-bug-before-it-became-a-problem}} 
+
+
+Secondly, with MEWE \cite{MEWE}, we contribute to the field of randomization at two stages. First, we automatically generate variants of a given program with CROW \cite{CROW}. Second, we randomly select which variant is executed at runtime, creating a multivariant execution scheme that randomizes the observable behaviors at each run of the program. We use the natural redundancy of Edge-Cloud computing architectures to deploy an internet-based MVE.
+
+
+
+\begin{comment}
 
 \subsubsection{Automatically}
     Compilers, source -> bin transformation
@@ -210,9 +235,6 @@ In \autoref{table:sota:comparison} we listed a sample of the Software Diversific
     compiler flags
 
 
-    In this area, Coppens \etal~\cite{coppens2013feedback} use compiler transformations to iteratively diversify software. Their work aims to prevent reverse engineering of security patches for attackers targeting vulnerable programs.
-    Their approach continuously applies a random selection of predefined transformations using a binary diffing tool as feedback \citationneeded. 
-    A downside of their method is that attackers are, in theory, able to identify the type of transformations applied and find a way to ignore or reverse them.
 
     source -> source 
 
@@ -237,16 +259,10 @@ In \autoref{table:sota:comparison} we listed a sample of the Software Diversific
 
 \todo{Check this, it is the same as the survey paper}
 
-Chew, and Song \cite{Chew02mitigatingbuffer} target operating system randomization. They randomize the interface between the operating system and the user applications:
-the system call numbers, the library entry points (memory addresses), and the stack placement. All those techniques are dynamic, done at runtime using load-time preprocessing and rewriting. 
 
 
 \todo{Add wasmfuscator}
 
-
-Bathkar et al. \cite{bhatkar03,bhatkar2005efficient} proposed three kinds of randomization transformations: randomizing the base addresses of applications and libraries  memory regions, random permutation of the order of variables and routines, and the random introduction of random gaps between objects. 
-Dynamic randomization can address different kinds of problems. In particular, it mitigates an extensive range of memory error exploits. 
-Recent work in this field includes stack layout randomization against data-oriented programming \cite{aga2019smokestack}, and memory safety violations \cite{lee2021savior}, as well as a technique to reduce the exposure time of persistent memory objects to increase the frequency of address randomization \cite{xu2020merr}.
 
 
 
@@ -269,8 +285,6 @@ s
 
 
 
-Researching on MVE in a distributed setting like the Edge \citationneeded has been less researched. Voulimeneas \etal proposed a multivariant execution system by parallelizing the execution of the variants in different machines \cite{voulimeneas2021dmvx} for the sake of efficiency. Since CROW offers static and runtime diversity for \wasm and its adoption for the Edge and backend executions are becoming security-sensitive fields, we propose an original kind of MVE, MEWE. We generate multiple program variants, which we execute on edge computing nodes. We use the natural redundancy of Edge-Cloud computing architectures to deploy an internet-based MVE.
-
-With MEWE, We contribute to the field of randomization at two stages. First, we automatically generate variants of a given program with CROW, which have different \wasm code and still behave the same. Second, we randomly select which variant is executed at runtime, creating a multivariant execution scheme that randomizes the observable behaviors at each run of the program.
 
 
+\end{comment}

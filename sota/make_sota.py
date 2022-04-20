@@ -26,10 +26,10 @@ def write_paper(fd, paper, slugs, positions):
         slug = f['slug']
         if slug in BLACKLIST:
             continue
-        if f.get("description", None):
-            desc = f['description']
+        if f.get("special", None):
+            desc = f['special']
             #print(slug)
-            t1 = t1.replace(f"{slug}", f"\\checkmark")
+            t1 = t1.replace(f"{slug}", f"{desc}")
         else:
             #print(slug)
             t1 = t1.replace(f"{slug}", "\\checkmark")
