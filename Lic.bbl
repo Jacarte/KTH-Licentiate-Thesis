@@ -82,6 +82,11 @@ Lehmann,D., Kinder,J., and Pradel,M. (2020).
 \newblock In {\em 29th USENIX Security Symposium (USENIX Security 20)}. USENIX
   Association.
 
+\bibitem[Harrand et~al., 2020]{harrand2020java}
+Harrand,N., Soto-Valero,C., Monperrus,M., and Baudry,B. (2020).
+\newblock Java decompiler diversity and its application to meta-decompilation.
+\newblock {\em Journal of Systems and Software}, 168:110645.
+
 \bibitem[Gadepalli et~al., 2020]{Sledge}
 Gadepalli,P.~K., McBride,S., Peach,G., Cherkasova,L., and Parmer,G. (2020).
 \newblock Sledge: A serverless-first, light-weight wasm runtime for the edge.

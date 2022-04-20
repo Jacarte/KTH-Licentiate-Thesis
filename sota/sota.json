@@ -637,6 +637,7 @@
         "year": 2003,
         "sum": "proposed three kinds of randomization transformations: randomizing the base addresses of applications and libraries  memory regions, random permutation of the order of variables and routines, and the random introduction of random gaps between objects. Dynamic randomization can address different kinds of problems. ",
         "features": [
+            
             {
                 "slug": "artificial_diversity"
             },
@@ -660,10 +661,6 @@
             },
             {
                 "slug": "gap_insertion"
-            },
-            {
-                "slug": "architecture",
-                "description": "all supported by LEEL binary editing tool"
             },
             {
                 "slug": "mean",
@@ -1055,6 +1052,15 @@
         "year": 2019,
         "sum": "A key design decision of MVE is whether it is achieved in kernel space ",
         "features": [
+            {
+                "slug": "mveu"
+            },
+            {
+                "slug": "aslr"
+            },
+            {
+                "slug": "artificial_diversity"
+            }
         ]
     },
     {
@@ -1065,6 +1071,19 @@
         "year": 2009,
         "sum": " in user-space  ",
         "features": [
+            {
+                "slug": "mveu"
+            },
+            {
+                "slug": "aslr"
+            },
+            {
+                "slug": "artificial_diversity"
+            },
+            {
+                "slug": "number_of_variants",
+                "description": "2"
+            }
         ]
     },
     {
@@ -1076,7 +1095,16 @@
         "sum": " in user-space  ",
         "features": [
             {
-                "slug": "srand"
+                "slug": "mveu"
+            },
+            {
+                "slug": "aslr"
+            },
+            {
+                "slug": "artificial_diversity"
+            },
+            {
+                "slug": "security"
             }
         ]
     },
@@ -1090,6 +1118,21 @@
         "features": [
             {
                 "slug": "srand"
+            },
+            {
+                "slug": "artificial_diversity"
+            },
+            {
+                "slug": "garbage_insertion"
+            },
+            {
+                "slug": "aslr"
+            },
+            {
+                "slug": "equivalence_arithmetic_sequences"
+            },
+            {
+                "slug": "security"
             }
         ]
     },
@@ -1097,12 +1140,32 @@
         "cite": "maurer2012tachyon",
         "title": "TACHYON: Tandem execution for efficient live patch testing",
         "authors": "Maurer \\etal",
-        "seed": false,
+        "seed": true,
         "year": 2012,
         "sum": " Finally, one can neatly exploit the limit case of executing only two variant",
         "features": [
+            
+        ]
+    },
+    {
+        "cite": "harrand2020java",
+        "title": "Java decompiler diversity and its application to meta-decompilation",
+        "authors": "Harrand \\etal",
+        "seed": false,
+        "year": 2020,
+        "sum": "",
+        "features": [
             {
-                "slug": "srand"
+                "slug": "nvariant"
+            },
+            {
+                "slug": "natural_diversity"
+            },
+            {
+                "slug": "reliability"
+            },
+            {
+                "slug": "intermixing"
             }
         ]
     },

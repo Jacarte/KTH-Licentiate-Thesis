@@ -14,7 +14,10 @@ def print_table_end(fd):
     fd.write("\n\\end{tabular}")
 
 def write_paper(fd, paper, slugs, positions):
-    fd.write(f"{paper['authors']} \\cite{{{paper['cite']}}} &")
+    if paper['cite']:
+        fd.write(f"{paper['authors']} \\cite{{{paper['cite']}}} &")
+    else:
+        fd.write(f"{paper['authors']} &")
     
     # Replace the features from this paper to the positions template
     t1 = positions
@@ -68,7 +71,7 @@ def print_table_header(fd, map, pre="", features = []):
 
     # Write Column Names
 
-    fd.write("Authors &")
+    fd.write("\\textbf{Authors} &")
     
     index = 2
     positions = ""
@@ -79,7 +82,7 @@ def print_table_header(fd, map, pre="", features = []):
                 R += f" \\textbf{{{map[f]['id']}}} &"
                 positions += f"{f} &"
                 index += 1
-    fd.write(f"{R[:-1]}\\\\\n\\hline\n") # Erase last character '&'
+    fd.write(f"{R[:-1]}\\\\\n\\hline\\hline\n") # Erase last character '&'
     fd.flush()
 
     return positions
@@ -107,10 +110,11 @@ if __name__ == "__main__":
     slugs = {}
     for seed in seeds:
         for f in seed['features']:
-            if f['level'] not in features:
-                features[f['level']] = []
-            features[f['level']].append(f)
-            slugs[f['slug']] = f
+            if f['slug'] not in BLACKLIST:
+                if f['level'] not in features:
+                    features[f['level']] = []
+                features[f['level']].append(f)
+                slugs[f['slug']] = f
 
     # Print table header
     positions = print_table_header(fd,slugs, features = [
@@ -123,6 +127,47 @@ if __name__ == "__main__":
 
     print(len(papers))
     for paper in papers:
+        # Remove features based on BlackList
+        for i, f in enumerate(paper['features']):
+            if f['slug'] in BLACKLIST:
+                del paper['features'][i]
+    # Group by features
+    groups = {}
+
+    for paper in papers:
+        features = [f['slug'] for f in paper['features']]
+        features = tuple(features)
+        if features not in groups:
+            groups[features] = []
+        groups[features].append(paper)
+
+    grouped_papers = []
+    for f, papers in groups.items():
+        cites = [ p['cite'] for p in papers ]
+        authors = [p['authors'] for p in papers]
+
+        all_ = zip(authors, cites)
+
+        all_ = [f"{a} \\cite{{{c}}}" for a, c in all_]
+        if len(all_) > 1:
+            print(all_)
+            head = ",".join(all_[:-1])
+            head = f"{head} and {all_[-1]}"
+        else:
+            head  = all_[-1]
+
+        grouped_papers.append(
+            dict(
+                cite=f"",
+                features = [{ "slug": s} for s in f],
+                seed=False,
+                authors=head
+            )
+        )
+
+    print(grouped_papers)
+
+    for paper in grouped_papers:
         if not paper.get("seed"): # It is a regular paper
             write_paper(fd, paper, slugs, positions)
     #print(positions)
