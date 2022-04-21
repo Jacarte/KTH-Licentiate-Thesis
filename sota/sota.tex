@@ -33,13 +33,28 @@
 \providecommand*{\definitionautorefname}{\Unospace}
 \newcommand{\usageautorefname}{\Unospace}
 
+\todo{Esta muy regado ahora.}
+
+\todo{Stress input-output equivalence in the artificial diversification.}
+
+\todo{Mention concrete objective and achievement when citing.}
+
+\todo{emove some strategies, just cite some papers and thats it. Reduce to five transformations. Stick to U2 andd U3. Add techincal stack in the table.}
+
+\todo{Add level of transformation as a dimension. Hoigh level, fine-grained transofmrations, etc}
+
+\todo{Start with COhen, then go form high level to fine granied and from technologies to LLVM and Wasm.}
+
+
+\todo{Given a collection of pgorams, then enumerate the usages. Second approach, multiple encapsulation in one single program.}
+
 The low presence of defenses implementations for \wasm motivates our work on Software Diversification as a preemptive technique that can help against known and yet unknown vulnerabilities.
 Software Diversification has been widely studied in the past decades. This section discusses its state of the art.
 % What is Software diversity
-Software diversification consists in synthesizing, reusing, distributing, and executing different, functionally equivalent programs. We use the concept of functional equivalence defined in the seminal work of Cohen \etal \cite{cohen1993operating} as input-output equivalence. Two programs are equivalent if, given identical input, they produce the identical output.
+Software diversification consists in synthesizing, reusing, distributing, and executing different, functionally equivalent programs. 
+According to the survey of Baudry and Monperrus \cite{natural_diversity}, the motivation for software diversification can be separated in five categories: reusability \cite{pohl2005software}, software testing \cite{Chen2010AdaptiveRT}, performance \cite{10.1145/2025113.2025133}, fault tolerance \cite{1659219} and security \cite{cohen1993operating}. Our work contributes to the latter two categories. 
 
-% Why to do Software diversity
-According to the survey of Baudry and Monperrus \cite{natural_diversity}, the motivation for software diversification can be separated in five categories: reusability \cite{pohl2005software}, software testing \cite{Chen2010AdaptiveRT}, performance \cite{10.1145/2025113.2025133}, fault tolerance \cite{1659219} and security \cite{cohen1993operating}. Our work contributes to the latter two categories: 
+\begin{comment}
 
 \begin{goal}{Fault tolerance and reliability:}
     \label{goal:reliability}
@@ -52,6 +67,8 @@ According to the survey of Baudry and Monperrus \cite{natural_diversity}, the mo
     \normalfont
     Mainly refers to break code reuse attacks \cite{595185} by using diverse functional programs. The main idea is to change the observable behavior of a program by changing its version every time is invoked. Thus, attackers cannot get the same information from a different source. For example, Crane \etal \cite{crane2015thwarting} hardened power side-channels by using diversification of software. On the same topic, Roy \etal \cite{10.1145/3318216.3363338} use preexisting machine learning algorithms to defeat adversarial-like attackers.
 \end{goal} 
+\end{comment}
+
 
 %\emph{Testing}(G3) is similar to fault tolerance. The main idea is to use the failures of tests in a collection of similar programs to detect failure patterns \cite{1659219}.
 %\emph{Reusability}(G4) refers to reliability in terms of extended functionality.
@@ -64,7 +81,7 @@ According to the survey of Baudry and Monperrus \cite{natural_diversity}, the mo
 
 %\subsubsection{For security}
 
-\subsection*{Software diversification sources.}
+\subsection*{Artificial Software Diversity.}
 
 There are two primary sources of software diversification: natural(ND) and artificial diversity(AD) \cite{natural_diversity}. Natural diversity can be controlled or an unpredicted consequence of developing processes. Controlled natural diversity is usually called Design Diversity or N-Version Diversity. It is addressed using engineering decisions \cite{1659219}. In practice, it consists of providing N development teams with the exact requirements. The teams develop N independent versions using different approaches. On the other hand, Natural Diversity can emerge from spontaneous software development processes. To illustrate the Natural Diversity phenomenon, CodeForces\footnote{\url{https://codeforces.com/contest/1667/status/page/2?order=BY_PROGRAM_LENGTH_ASC}} shows more than 350 different and successful solutions in C++ for a single requirements based problem in a single programming contest. 
 The software market is an expected source of natural diversity. Sengupta \etal \cite{10.5555/3091125.3091155} used this fact to reach the security goal (\autoref{goal:security}).
@@ -76,6 +93,8 @@ Notice that Natural Diversity can rely on itself to escalate, and it is coped by
 
 % Classification by Cohen
 According to the seminal work of Cohen \etal \cite{cohen1993operating} automatic software diversification can be reached by mutation strategies. A mutation strategy is a set of rules to define how a specific piece of software should be changed to provide a different yet functionally equivalent variant. A mutation can be applied at different layers of software lifecycle, from compilation to execution and from source code to executable binary. We have found that the foundation for automatic software diversity has barely changed since Cohen in 1993. Complemented with the work of Baudry and Monperrus \cite{natural_diversity}, we enumerate the strategies for automatic software diversification. 
+
+We use the concept of functional equivalence defined in the seminal work of Cohen \etal \cite{cohen1993operating} as input-output equivalence. Two programs are equivalent if, given identical input, they produce the identical output.
 
 \begin{strategy}{Equivalent arithmetic instructions}
     \label{strategy:S1}
@@ -195,10 +214,11 @@ We categorize the applications of software diversity in three main usages.
 %\begin{usage}{Moving Target Defense(MTD):}
 %    \label{usage:mtd}
 %    \normalfont
-\autoref{usage:n-version}, \autoref{usage:randomization} and \autoref{usage:mve} can be categorized as Moving Target Defense strategies. Moving Target Defense for software was first proposed as a collection of techniques that aim to improve the security of a system by constantly moving its vulnerable components \cite{MTDNationalCyberLaep, okhravi2013survey}. Usually, MTD techniques revolve around changing system inputs and configurations to reduce attack surfaces. 
+\autoref{usage:randomization} and \autoref{usage:mve} can be categorized as Moving Target Defense strategies. Moving Target Defense for software was first proposed as a collection of techniques that aim to improve the security of a system by constantly moving its vulnerable components \cite{MTDNationalCyberLaep, okhravi2013survey}. Usually, MTD techniques revolve around changing system inputs and configurations to reduce attack surfaces. 
 This increases uncertainty for attackers and makes their attacks more difficult. Ultimately, potential attackers cannot hit what they cannot see. 
 MTD can be implemented in different ways, including via dynamic runtime platforms \cite{10.1145/3318216.3363338}. 
- 
+In the case of \autoref{usage:n-version}, this usage lacks of the time dimension, \ie program variants are not changed from time to time. 
+
 %\end{usage}
 
 

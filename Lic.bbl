@@ -373,12 +373,6 @@ Chew,M. and Song,D. (2002).
 \newblock Mitigating buffer overflows by operating system randomization.
 \newblock Technical Report CS-02-197, Carnegie Mellon University.
 
-\bibitem[Forrest et~al., 1997]{595185}
-Forrest,S., Somayaji,A., and Ackley,D. (1997).
-\newblock Building diverse computer systems.
-\newblock In {\em Proceedings. The Sixth Workshop on Hot Topics in Operating
-  Systems (Cat. No.97TB100133)}, pages 67--72.
-
 \bibitem[Cohen, 1993]{cohen1993operating}
 Cohen,F.~B. (1993).
 \newblock Operating system protection through program evolution.
