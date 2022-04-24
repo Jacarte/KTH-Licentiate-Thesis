@@ -54,10 +54,6 @@ Cabrera~Arteaga,J., Floros,O., Vera~Perez,O., Baudry,B., and Monperrus,M.
 \newblock Crow: code diversification for webassembly.
 \newblock In {\em MADWeb, NDSS 2021}.
 
-\bibitem[MTD, 2021]{MTDNationalCyberLaep}
- (2021).
-\newblock {National Cyber Leap Year}.
-
 \bibitem[Xu et~al., 2020]{xu2020merr}
 Xu,Y., Solihin,Y., and Shen,X. (2020).
 \newblock Merr: Improving security of persistent memory objects via efficient
@@ -194,21 +190,10 @@ Courouss{\'e},D., Barry,T., Robisson,B., Jaillon,P., Potin,O., and Lanet,J.-L.
 \newblock In {\em IFIP International Conference on Information Security Theory
   and Practice}, pages 136--152. Springer.
 
-\bibitem[Volckaert et~al., 2015]{volckaert2015cloning}
-Volckaert,S., Coppens,B., and De~Sutter,B. (2015).
-\newblock Cloning your gadgets: Complete rop attack immunity with multi-variant
-  execution.
-\newblock {\em IEEE Transactions on Dependable and Secure Computing}, 13(4).
-
 \bibitem[Morgan and Morgan, 2015]{morgan2015web}
 Morgan,T.~D. and Morgan,J.~W. (2015).
 \newblock Web timing attacks made practical.
 \newblock {\em Black Hat}.
-
-\bibitem[Kim et~al., 2015]{Kim2015}
-Kim,D., Kwon,Y., Sumner,W.~N., Zhang,X., and Xu,D. (2015).
-\newblock Dual execution for on the fly fine grained execution comparison.
-\newblock {\em SIGPLAN Not.}
 
 \bibitem[Davi et~al., 2015]{davi2015isomeron}
 Davi,L., Liebchen,C., Sadeghi,A.-R., Snow,K.~Z., and Monrose,F. (2015).
@@ -239,13 +224,6 @@ Agosta,G., Barenghi,A., Pelosi,G., and Scandale,M. (2015).
 \newblock {\em IEEE Transactions on Computer-Aided Design of Integrated
   Circuits and Systems}, 34(8):1320--1333.
 
-\bibitem[Okhravi et~al., 2013]{okhravi2013survey}
-Okhravi,H., Rabe,M., Mayberry,T., Leonard,W., Hobson,T., Bigelow,D., and
-  Streilein,W. (2013).
-\newblock Survey of cyber moving targets.
-\newblock {\em Massachusetts Inst of Technology Lexington Lincoln Lab, No.
-  MIT/LL-TR-1166}.
-
 \bibitem[Homescu et~al., 2013]{homescu2013profile}
 Homescu,A., Neisius,S., Larsen,P., Brunthaler,S., and Franz,M. (2013).
 \newblock Profile-guided automated software diversity.
@@ -257,12 +235,6 @@ Coppens,B., De~Sutter,B., and Maebe,J. (2013).
 \newblock Feedback-driven binary code diversification.
 \newblock {\em ACM Transactions on Architecture and Code Optimization (TACO)},
   9(4):1--26.
-
-\bibitem[Maurer and Brumley, 2012]{maurer2012tachyon}
-Maurer,M. and Brumley,D. (2012).
-\newblock Tachyon: Tandem execution for efficient live patch testing.
-\newblock In {\em 21st USENIX Security Symposium (USENIX Security 12)}, pages
-  617--630.
 
 \bibitem[Jackson, 2012]{jackson}
 Jackson,T. (2012).
@@ -276,12 +248,6 @@ Sidiroglou-Douskos,S., Misailovic,S., Hoffmann,H., and Rinard,M. (2011).
 \newblock In {\em Proceedings of the 19th ACM SIGSOFT Symposium and the 13th
   European Conference on Foundations of Software Engineering}, ESEC/FSE '11,
   page 124–134, New York, NY, USA. Association for Computing Machinery.
-
-\bibitem[Salamat et~al., 2011]{SalamatJWWF11}
-Salamat,B., Jackson,T., Wagner,G., Wimmer,C., and Franz,M. (2011).
-\newblock Runtime defense against code injection attacks using replicated
-  execution.
-\newblock {\em {IEEE} Trans. Dependable Secur. Comput.}, 8(4):588--601.
 
 \bibitem[Amarilli et~al., 2011]{amarilli2011can}
 Amarilli,A., M{\"u}ller,S., Naccache,D., Page,D., Rauzy,P., and Tunstall,M.

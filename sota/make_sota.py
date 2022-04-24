@@ -2,7 +2,7 @@ import json
 import sys
 import os
 
-BLACKLIST = ['number_of_variants', 'architecture', 'mean', 'dynamic', 'static']
+BLACKLIST = ['natural_diversity']
 SIZES = {
     'architecture': 'p{3cm}',
     'mean': 'p{3cm}',
@@ -29,8 +29,8 @@ def write_paper(fd, paper, slugs, positions):
         slug = f['slug']
         if slug in BLACKLIST:
             continue
-        if f.get("special", None):
-            desc = f['special']
+        if f.get("description", None):
+            desc = f['description']
             #print(slug)
             t1 = t1.replace(f"{slug}", f"{desc}")
         else:
@@ -38,7 +38,8 @@ def write_paper(fd, paper, slugs, positions):
             t1 = t1.replace(f"{slug}", "\\checkmark")
         try:
             del CP[f['slug']]
-        except:
+        except Exception as e:
+            print(e)
             pass
 
     for f in CP.keys():
@@ -132,42 +133,43 @@ if __name__ == "__main__":
             if f['slug'] in BLACKLIST:
                 del paper['features'][i]
     # Group by features
-    groups = {}
+    #groups = {}
+
+    #for paper in papers:
+    #    features = [f['slug'] for f in paper['features']]
+    #    features = tuple(features)
+    #    if features not in groups:
+    #        groups[features] = []
+    #    groups[features].append(paper)
+
+    #grouped_papers = []
+
+    #for f, papers in groups.items():
+    #    cites = [ p['cite'] for p in papers ]
+    #    authors = [p['authors'] for p in papers]
+
+    #    all_ = zip(authors, cites)
+
+    #    all_ = [f"{a} \\cite{{{c}}}" for a, c in all_]
+    #    if len(all_) > 1:
+    #        print(all_)
+    #        head = ",".join(all_[:-1])
+    #        head = f"{head} and {all_[-1]}"
+    #    else:
+    #        head  = all_[-1]
+
+    #    grouped_papers.append(
+    #        dict(
+    #            cite=f"",
+    #            features = [{ "slug": s} for s in f],
+    #            seed=False,
+    #            authors=head
+    #        )
+    #    )
+
+    print(papers)
 
     for paper in papers:
-        features = [f['slug'] for f in paper['features']]
-        features = tuple(features)
-        if features not in groups:
-            groups[features] = []
-        groups[features].append(paper)
-
-    grouped_papers = []
-    for f, papers in groups.items():
-        cites = [ p['cite'] for p in papers ]
-        authors = [p['authors'] for p in papers]
-
-        all_ = zip(authors, cites)
-
-        all_ = [f"{a} \\cite{{{c}}}" for a, c in all_]
-        if len(all_) > 1:
-            print(all_)
-            head = ",".join(all_[:-1])
-            head = f"{head} and {all_[-1]}"
-        else:
-            head  = all_[-1]
-
-        grouped_papers.append(
-            dict(
-                cite=f"",
-                features = [{ "slug": s} for s in f],
-                seed=False,
-                authors=head
-            )
-        )
-
-    print(grouped_papers)
-
-    for paper in grouped_papers:
         if not paper.get("seed"): # It is a regular paper
             write_paper(fd, paper, slugs, positions)
     #print(positions)
