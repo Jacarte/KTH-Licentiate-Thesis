@@ -2,10 +2,10 @@ import json
 import sys
 import os
 
-BLACKLIST = ['natural_diversity', 'static', 'dynamic', 'security', 'reliability', 'fault_tolerance', 'nversion', 'number_of_variants', 'architecture']
+BLACKLIST = ['artificial_diversity', 'natural_diversity', 'static', 'dynamic', 'security', 'reliability', 'fault_tolerance', 'nversion', 'number_of_variants', 'architecture', 'intermixing']
 SIZES = {
     'architecture': 'p{3cm}',
-    'mean': 'p{3cm}',
+    'mean': 'p{5cm}',
     'security': 'l',
     'fault_tolerance': 'l'
 }

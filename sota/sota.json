@@ -32,7 +32,6 @@
         "year": 1993,
         "sum": "use of program evolution as a technique for defending against automated attacks on operating systems. The mentioned techniques can be applied in any sequence and recursively, providing a very rich environment for evolution. Increasing attack surface does not necesarilly has an impact on defence. For example, reordering instructions for code blocks that are never executed does not impact attacker.",
         "features": [
-            
             {
                 "level": 1,
                 "id": "ND", 
@@ -66,7 +65,7 @@
                 "id": "\\autoref{strategy:S1}",
                 "type": "static",
                 "category": "automatic",
-                "slug": "equivalence_arithmetic_sequences",
+                "slug": "equivalence_sequences",
                 "description": "Complexity dramatically increases while the difficult of creating the evolution is minimal",
                 "overhead": {
                     "time": 1,
@@ -90,19 +89,6 @@
                 "level": 3,
                 "id": "\\autoref{strategy:S3}",
                 "category": "automatic",
-                "slug": "variable_substitution",
-                "description": "Has lower effect on lower level programs unless compilers produce resorted symbol tables. It prevents static examination and analysis of parameters and alter memory locations without affecting program execution. This yield to n!v different configurations for v variables in n program locations.",
-                "type": "static",
-                "overhead": {
-                    "time": 0.5,
-                    "space": 0.5,
-                    "reason": "unclear"
-                }
-            },
-            {
-                "level": 3,
-                "id": "\\autoref{strategy:S4}",
-                "category": "automatic",
                 "slug": "adding_and_removing_jumps",
                 "description": "",
                 "type": "static",
@@ -114,33 +100,7 @@
             },
             {
                 "level": 3,
-                "id": "\\autoref{strategy:S5}",
-                "slug": "adding_and_removing_calls",
-                "category": "automatic",
-                "description": "Change inline instructions to b wrapped into functions.",
-                "type": "static",
-                "overhead": {
-                    "time": 1,
-                    "space": 1,
-                    "reason": "New functions and the call stack is increased"
-                }
-            },
-            {
-                "level": 3,
-                "id": "\\autoref{strategy:S6}",
-                "slug": "garbage_insertion",
-                "category": "automatic",
-                "description": "Addin instructions that are independent from the in-line squence. This is similar to arithmetic equivalent sequences however, more instructions like random memory accesses can be added as well.",
-                "type": "static",
-                "overhead": {
-                    "time": 1,
-                    "space": 1,
-                    "reason": "New instructions are added, this is similar to arithmetic equivalent sequences"
-                }
-            },
-            {
-                "level": 11,
-                "id": "\\autoref{strategy:S7}",
+                "id": "\\autoref{strategy:S4}",
                 "slug": "aslr",
                 "category": "automatic",
                 "description": "Memory layout randomization.",
@@ -152,7 +112,7 @@
                 }
             },
             {
-                "level": 4,
+                "level": 3,
                 "id": "\\autoref{strategy:S5}",
                 "slug": "isa_randomization",
                 "category": "automatic",
@@ -162,19 +122,6 @@
                     "time": 0.5,
                     "space": 0,
                     "reason": "There is only one decoding operation at the begining or the receiving of the encoded program."
-                }
-            },
-            {
-                "level": 4,
-                "id": "\\autoref{strategy:S9}",
-                "slug": "simulation",
-                "category": "automatic",
-                "description": "Interpretation mechanism. Similar to encoding but the execution is delegated to a custom intepreter instead of the traditional one after a simple decoding.",
-                "type": "static+runtime",
-                "overhead": {
-                    "time": 0,
-                    "space": 0,
-                    "reason": "In theory, after detecting the simulator, its execution should be the same along all program versions."
                 }
             },
             {
@@ -267,7 +214,7 @@
         "sum": "Proposed inserting NOP instruction directly in LLVM IR to generate a variant with a different code layout at each compilation.",
         "features": [
             {
-                "slug": "garbage_insertion",
+                "slug": "equivalence_sequences",
                 "description": "Insert NOP operations"
             },
             {
@@ -302,7 +249,7 @@
         "sum": "Have explored how to use NOP operations inserted during compiling time to statically diversify programs.",
         "features": [
             {
-                "slug": "garbage_insertion",
+                "slug": "equivalence_sequences",
                 "description": "Insert NOP operations"
             },
             {
@@ -371,6 +318,9 @@
                 "slug": "artificial_diversity"
             },
             {
+                "slug": "equivalence_sequences"
+            },
+            {
                 "slug": "static"
             },
             {
@@ -404,6 +354,9 @@
                 "slug": "static"
             },
             {
+                "slug": "aslr"
+            },
+            {
                 "slug": "architecture",
                 "description": "\\todo{}"
             },
@@ -429,6 +382,12 @@
         "features": [
             {
                 "slug": "artificial_diversity"
+            },
+            {
+                "slug": "instruction_reordering"
+            },
+            {
+                "slug": "aslr"
             },
             {
                 "slug": "static"
@@ -458,14 +417,14 @@
                 "slug": "security"
             },
             {
-                "slug": "equivalence_arithmetic_sequences"
+                "slug": "equivalence_sequences"
             },
             {
                 "slug": "mean",
                 "special": "ARM"
             },
             {
-                "slug": "simulation"
+                "slug": "isa_randomization"
             },
             {
                 "slug": "srand"
@@ -510,13 +469,13 @@
                 "special": "x86 backend for LLVM"
             },
             {
-                "slug": "adding_and_removing_calls"
+                "slug": "adding_and_removing_jumps"
             },
             {
                 "slug": "instruction_reordering"
             },
             {
-                "slug": "garbage_insertion"
+                "slug": "equivalence_sequences"
             },
             {
                 "slug": "nvariant"
@@ -548,7 +507,7 @@
                 "slug": "instruction_reordering"
             },
             {
-                "slug": "garbage_insertion"
+                "slug": "equivalence_sequences"
             },
             {
                 "slug": "intermixing"
@@ -566,7 +525,7 @@
                 "special": "custom GCC targeting microcontrollers"
             },
             {
-                "slug": "simulation"
+                "slug": "isa_randomization"
             },
             {
                 "slug": "srand"
@@ -585,13 +544,13 @@
                 "slug": "artificial_diversity"
             },
             {
-                "slug": "simulation"
+                "slug": "isa_randomization"
             },
             {
                 "slug": "isa_randomization"
             },
             {
-                "slug": "simulation"
+                "slug": "isa_randomization"
             },
             {
                 "slug": "static"
@@ -660,7 +619,7 @@
         "sum": "They randomize the interface between the operating system and the user applications: the system call numbers, the library entry points (memory addresses), and the stack placement. All those techniques are dynamic, done at runtime using load-time preprocessing and rewriting.",
         "features": [
             {
-                "slug": "adding_and_removing_calls",
+                "slug": "adding_and_removing_jumps",
                 "description": "change the table of system calls and recompile the kernel. Besides, randomization of the program stack placement."
             },
             {
@@ -698,7 +657,7 @@
                 "slug": "dynamic"
             },
             {
-                "slug": "garbage_insertion"
+                "slug": "equivalence_sequences"
             },
             {
                 "slug": "security"
@@ -707,7 +666,7 @@
                 "slug": "aslr"
             },
             {
-                "slug": "variable_substitution"
+                "slug": "instruction_reordering"
             },
             {
                 "slug": "instruction_reordering"
@@ -743,7 +702,7 @@
                 "slug": "dynamic"
             },
             {
-                "slug": "garbage_insertion"
+                "slug": "equivalence_sequences"
             },
             {
                 "slug": "security"
@@ -752,7 +711,7 @@
                 "slug": "aslr"
             },
             {
-                "slug": "variable_substitution"
+                "slug": "instruction_reordering"
             },
             {
                 "slug": "instruction_reordering"
@@ -944,7 +903,7 @@
                 "slug": "architecture"
             },
             {
-                "slug": "adding_and_removing_calls"
+                "slug": "adding_and_removing_jumps"
             },
             {
                 "slug": "mean",
@@ -1066,13 +1025,13 @@
                 "special": "LLVM 3.8.0 for C code"
             },
             {
-                "slug": "garbage_insertion"
+                "slug": "equivalence_sequences"
             },
             {
                 "slug": "aslr"
             },
             {
-                "slug": "equivalence_arithmetic_sequences"
+                "slug": "equivalence_sequences"
             },
             {
                 "slug": "security"
@@ -1140,13 +1099,13 @@
                 "slug": "artificial_diversity"
             },
             {
-                "slug": "garbage_insertion"
+                "slug": "equivalence_sequences"
             },
             {
-                "slug": "equivalence_arithmetic_sequences"
+                "slug": "equivalence_sequences"
             },
             {
-                "slug": "variable_substitution"
+                "slug": "instruction_reordering"
             },
             {
                 "slug": "static"
@@ -1172,13 +1131,13 @@
                 "slug": "artificial_diversity"
             },
             {
-                "slug": "garbage_insertion"
+                "slug": "equivalence_sequences"
             },
             {
-                "slug": "equivalence_arithmetic_sequences"
+                "slug": "equivalence_sequences"
             },
             {
-                "slug": "variable_substitution"
+                "slug": "instruction_reordering"
             },
             {
                 "slug": "instruction_reordering"
@@ -1221,19 +1180,19 @@
                 "special": "any frontend and backend language for LLVM version 12.0.0"
             },
             {
-                "slug": "garbage_insertion"
+                "slug": "equivalence_sequences"
             },
             {
-                "slug": "equivalence_arithmetic_sequences"
-            },
-            {
-                "slug": "variable_substitution"
+                "slug": "equivalence_sequences"
             },
             {
                 "slug": "instruction_reordering"
             },
             {
-                "slug": "adding_and_removing_calls"
+                "slug": "instruction_reordering"
+            },
+            {
+                "slug": "adding_and_removing_jumps"
             },
             {
                 "slug": "adding_and_removing_jumps"
