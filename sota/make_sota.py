@@ -2,7 +2,7 @@ import json
 import sys
 import os
 
-BLACKLIST = ['natural_diversity']
+BLACKLIST = ['natural_diversity', 'static', 'dynamic', 'security', 'reliability', 'fault_tolerance', 'nversion', 'number_of_variants', 'architecture']
 SIZES = {
     'architecture': 'p{3cm}',
     'mean': 'p{3cm}',
@@ -29,8 +29,8 @@ def write_paper(fd, paper, slugs, positions):
         slug = f['slug']
         if slug in BLACKLIST:
             continue
-        if f.get("description", None):
-            desc = f['description']
+        if f.get("special", None):
+            desc = f['special']
             #print(slug)
             t1 = t1.replace(f"{slug}", f"{desc}")
         else:

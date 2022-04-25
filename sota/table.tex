@@ -1,36 +1,32 @@
-\begin{tabular}[t]{ l |ll|l|ll|llllll|l|lll|p{3cm}p{3cm}|lll|l|}
-\textbf{Authors} & \textbf{Dynamic} & \textbf{Static} & \textbf{AD} & \textbf{\autoref{goal:reliability}} & \textbf{\autoref{goal:security}} & \textbf{\autoref{strategy:S1}} & \textbf{\autoref{strategy:S2}} & \textbf{\autoref{strategy:S3}} & \textbf{\autoref{strategy:S4}} & \textbf{\autoref{strategy:S5}} & \textbf{\autoref{strategy:S6}} & \textbf{\autoref{strategy:S7}} & \textbf{\autoref{strategy:S8}} & \textbf{\autoref{strategy:S9}} & \textbf{\autoref{strategy:S10}} & \textbf{Arch} & \textbf{Method} & \textbf{\autoref{usage:n-version}} & \textbf{\autoref{usage:randomization}} & \textbf{\autoref{usage:mve}} & \textbf{Number of variants} \\
+\begin{tabular}[t]{ l |l|llllll|l|lll|ll|p{3cm}|}
+\textbf{Authors} & \textbf{AD} & \textbf{\autoref{strategy:S1}} & \textbf{\autoref{strategy:S2}} & \textbf{\autoref{strategy:S3}} & \textbf{\autoref{strategy:S4}} & \textbf{\autoref{strategy:S5}} & \textbf{\autoref{strategy:S6}} & \textbf{\autoref{strategy:S7}} & \textbf{\autoref{strategy:S5}} & \textbf{\autoref{strategy:S9}} & \textbf{\autoref{strategy:S10}} & \textbf{\autoref{usage:randomization}} & \textbf{\autoref{usage:mve}} & \textbf{Main technical contribution} \\
 \hline\hline
-Chew and Song \cite{Chew02mitigatingbuffer} &\checkmark & &\checkmark & & & & & & &change the table of system calls and recompile the kernel. Besides, randomization of the program stack placement. & & & & & &Linux Kernel &Linux Kernel recompilation. & &\checkmark & & \\
-Kc \etal  \cite{Kc03} &\checkmark &\checkmark &\checkmark & &\checkmark & & & & & & & &\checkmark &\checkmark & &x86 &Linux kernel recompilation. & & & & \\
-Barrantes \etal  \cite{barrantes2003randomized} &\checkmark &\checkmark &\checkmark & &\checkmark & & & & & & & &\checkmark & & &x86 &Virtual machine implementationbased on Valgrind & &\checkmark & & \\
-Bhatkar \etal \cite{bhatkar03} &\checkmark & &\checkmark & &\checkmark & &\checkmark &\checkmark & & &\checkmark &\checkmark & & & & &Binary to binary transformation & &\checkmark & & \\
-Bhatkar \etal \cite{bhatkar2005efficient} &\checkmark & &\checkmark & &\checkmark & &\checkmark &\checkmark & & &\checkmark &\checkmark & & & & &Binary to binary transformation & &\checkmark & & \\
-Cox \etal \cite{cox06} &\checkmark & & & &mitigate known CVEs in backend technologies & & & & & & & & & &\checkmark & &N-Version programming & & &\checkmark & \\
-Bruschi \etal \cite{bruschi2007diversified} &\checkmark & &\checkmark & &\checkmark & & & & & & &\checkmark & & &\checkmark & &\checkmark & &\checkmark & & \\
-Salamat \etal \cite{salamat2007stopping} &\checkmark & &\checkmark & &mitigate known vulnerabilities through moving target defence. & & & & &\checkmark & & & & &\checkmark &all suppoted by the GNU compiler &\checkmark & & &\checkmark &N \\
-Jacob \etal \cite{jacob2008superdiversifier} & &\checkmark &\checkmark & & &\checkmark & &\checkmark & & &\checkmark & & & & &x86 & &\checkmark & & & \\
-Salamat \etal \cite{salamat2009orchestra} & & &\checkmark & & & & & & & & &\checkmark & & & & & & & &\checkmark &2 \\
-Amarilli \etal  \cite{amarilli2011can} &\checkmark & & & &\checkmark &\checkmark & & & & & & & &\checkmark & &arm & & &\checkmark & & \\
-Jackson  \cite{jackson} & &\checkmark &\checkmark & & & & & & & &Insert NOP operations & & & & &\todo{} &compiler & & & & \\
-Homescu \etal \cite{homescu2013profile} & &\checkmark &\checkmark & & & & & & & &Insert NOP operations & & & & &all LLVM supported &compiler & & & & \\
-Coppens \etal  \cite{coppens2013feedback} & &\checkmark & & & & & & & & & & & & & &All &compiler & & & & \\
-Agosta \etal  \cite{agosta2015meet} & & & & &power side-channel mitigation & & & & & & & & & & &all LLVM supported &modified LVM compiler with hardcoded in transformation passes. & & &\checkmark & \\
-Crane \etal  \cite{crane2015thwarting} &\checkmark &\checkmark &\checkmark & &power side-channel mitigation & &\checkmark & & &\checkmark &\checkmark & & & &\checkmark &all LLVM supported &compiler & & &\checkmark &N \\
-Davi \etal \cite{davi2015isomeron} &Execution path randomization & &\checkmark & &to mitigate JIT-ROP attacks & & & & & & & & & &\checkmark & & & &\checkmark & &2 \\
-Courouss{\'e} \etal  \cite{courousse2016runtime} &\checkmark &\checkmark & & &power side-channel mitigation & &\checkmark & & & &\checkmark & & &\checkmark &\checkmark &microcontrollers &GCC recompilation & &\checkmark & &N \\
-Koning \etal \cite{koning2016secure} & & &\checkmark & &\checkmark & & & & & & &\checkmark & & & & & & & &\checkmark & \\
-Sengupta \etal \cite{10.5555/3091125.3091155} &\checkmark & & & &mitigate known CVEs in backend technologies & & & & & & & & & &\checkmark & &Usage of prexisting engines such as backend databases & & &\checkmark & \\
-Lu \etal \cite{lu2018stopping} &\checkmark & &\checkmark & &mitigate memory vulnerabilities & & & & & & &\checkmark & & &\checkmark & &\checkmark & & &\checkmark &N \\
-Belleville \etal \cite{10.1145/3281662} & & &\checkmark & &\checkmark &\checkmark & & & & &\checkmark &\checkmark & & & & & & &\checkmark & & \\
-Aga \etal \cite{aga2019smokestack} & &\checkmark &\checkmark & &DOP gadget mitigation & & & & & & &\checkmark & & & &all supported by LLVM version 3.9 &custom LLVM implementation selecting a random stack layout at compiling & &\checkmark & & \\
-Roi \etal \cite{10.1145/3318216.3363338} &\checkmark & & & &method to tackle adversarial based attackers & & & & & & & & & &\checkmark & &Usage of prexisting ML algorithms & & &\checkmark & \\
-{\"O}sterlund \etal \cite{osterlund2019kmvx} & & &\checkmark & & & & & & & & &\checkmark & & & & & & & &\checkmark & \\
-Xu \etal \cite{xu2020merr} &attaching and detaching memory between memory accesses & &\checkmark & &stack protection mechanism & & & & & & &\checkmark & & & &\checkmark &kernel module in Linux OS & &\checkmark & & \\
-Harrand \etal \cite{harrand2020java} & & & & & & & & & & & & & & &\checkmark & & & & & & \\
-Lee \etal \cite{lee2021savior} & &\checkmark &\checkmark & &stack protection mechanism & & & & & & &\checkmark & & & &all supported by LLVM version \todo{XXX} &custom LLVM implementation selecting a random stack layout at compiling & &\checkmark & & \\
-Voulimeneas \etal \cite{voulimeneas2021dmvx} &\checkmark & &\checkmark & & & & & & & & & & & &\checkmark & & & & &\checkmark &N \\
-Cabrera Arteaga \etal \cite{CROW} & & &\checkmark & &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark & &\checkmark & & & & & & &\checkmark &\checkmark & & \\
-Cabrera Arteaga \etal \cite{MEWE} & & &\checkmark & &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark & & & &\checkmark & & & &\checkmark &\checkmark & \\
+Pettis and Hansen \cite{pettisochhansen} &\checkmark & & & & & & & & & & & & &PA-RISC architecture \\
+Chew and Song \cite{Chew02mitigatingbuffer} &\checkmark & & & & &\checkmark & & & & & &\checkmark & &Linux Kernel recompilation. \\
+Kc \etal  \cite{Kc03} &\checkmark & & & & & & & &\checkmark &\checkmark & & & &Linux kernel recompilation. \\
+Barrantes \etal  \cite{barrantes2003randomized} &\checkmark & & & & & & & &\checkmark & & &\checkmark & &x86 \\
+Bhatkar \etal \cite{bhatkar03} &\checkmark & &\checkmark &\checkmark & & &\checkmark &\checkmark & & & &\checkmark & &ELF binaries \\
+El-Khalil and Keromytis  \cite{ElKhalil2004} &\checkmark & & & & & & & & & & & & &x86 \\
+Bhatkar \etal \cite{bhatkar2005efficient} &\checkmark & &\checkmark &\checkmark & & &\checkmark &\checkmark & & & &\checkmark & &C/C++ source transformations and ELF binary transformations \\
+Younan \etal  \cite{Younan2006} &\checkmark & & & & & & & & & & & & &GCC 4.1 \\
+Bruschi \etal \cite{bruschi2007diversified} &\checkmark & & & & & & &\checkmark & & &\checkmark &\checkmark & &ELF binaries \\
+Salamat \etal \cite{salamat2007stopping} &\checkmark & & & & &\checkmark & & & & &\checkmark & &\checkmark &custom GNU compiler \\
+Jacob \etal \cite{jacob2008superdiversifier} &\checkmark &\checkmark & &\checkmark & & &\checkmark & & & & & & &x86 \\
+Salamat \etal \cite{salamat2009orchestra} &\checkmark & & & & & & &\checkmark & & & & &\checkmark &x86 \\
+Amarilli \etal  \cite{amarilli2011can} & &\checkmark & & & & & & & &\checkmark & &\checkmark & &ARM \\
+Jackson  \cite{jackson} &\checkmark & & & & & &\checkmark & & & & & & &compiler LLVM backend for x86 \\
+Cleemput \etal  \cite{ElKhalil2004} &\checkmark & & & & & & & & & & & & &x86 \\
+Homescu \etal \cite{homescu2013profile} &\checkmark & & & & & &\checkmark & & & & & & &all LLVM supported, version 3.1 \\
+Crane \etal  \cite{crane2015thwarting} &\checkmark & &\checkmark & & &\checkmark &\checkmark & & & &\checkmark & &\checkmark &x86 backend for LLVM \\
+Davi \etal \cite{davi2015isomeron} &\checkmark & & & & & & & & & &\checkmark &\checkmark & &Windows DLL instrumentation \\
+Courouss{\'e} \etal  \cite{courousse2016runtime} & & &\checkmark & & & &\checkmark & & &\checkmark &\checkmark &\checkmark & &custom GCC targeting microcontrollers \\
+Lu \etal \cite{lu2018stopping} &\checkmark & & & & & & &\checkmark & & &\checkmark & &\checkmark &GNU assembler for Linux kernel \\
+Belleville \etal \cite{10.1145/3281662} &\checkmark &\checkmark & & & & &\checkmark &\checkmark & & & &\checkmark & &LLVM 3.8.0 for C code \\
+Aga \etal \cite{aga2019smokestack} &\checkmark & & & & & & &\checkmark & & & &\checkmark & &LLVM version 3.9 \\
+{\"O}sterlund \etal \cite{osterlund2019kmvx} &\checkmark & & & & & & &\checkmark & & & & &\checkmark &Linux kernel \\
+Xu \etal \cite{xu2020merr} &\checkmark & & & & & & &\checkmark & & & &\checkmark & &custom kernel module in Linux OS \\
+Lee \etal \cite{lee2021savior} &\checkmark & & & & & & &\checkmark & & & &\checkmark & &LLVM 12.0.0 backend for x86 \\
+Cabrera Arteaga \etal \cite{CROW} &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark & &\checkmark & & & & &- & &any frontend language for LLVM version 12.0.0, changes to the Wasm backend \\
+Cabrera Arteaga \etal \cite{MEWE} &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark &\checkmark & & & &\checkmark &\checkmark &\checkmark &any frontend and backend language for LLVM version 12.0.0 \\
 
 \end{tabular}

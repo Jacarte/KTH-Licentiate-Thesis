@@ -1,19 +1,5 @@
 \begin{thebibliography}{}
 
-\bibitem[Romano et~al., 2022]{wobfuscator}
-Romano,A., Lehmann,D., Pradel,M., and Wang,W. (2022).
-\newblock Wobfuscator: Obfuscating javascript malware via opportunistic
-  translation to webassembly.
-\newblock In {\em 2022 2022 IEEE Symposium on Security and Privacy (SP) (SP)},
-  pages 1101--1116, Los Alamitos, CA, USA. IEEE Computer Society.
-
-\bibitem[Voulimeneas et~al., 2021]{voulimeneas2021dmvx}
-Voulimeneas,A., Song,D., Larsen,P., Franz,M., and Volckaert,S. (2021).
-\newblock dmvx: Secure and efficient multi-variant execution in a distributed
-  setting.
-\newblock In {\em Proceedings of the 14th European Workshop on Systems
-  Security}, pages 41--47.
-
 \bibitem[Narayan et~al., 2021]{Narayan2021Swivel}
 Narayan,S., Disselkoen,C., Moghimi,D., Cauligi,S., Johnson,E., Gang,Z.,
   Vahldiek-Oberwagner,A., Sahita,R., Shacham,H., Tullsen,D., et~al. (2021).
@@ -181,13 +167,6 @@ Van~Es,N., Nicolay,J., Stievenart,Q., D'Hondt,T., and De~Roover,C. (2016).
   Computing}, SAC '16, page 1944–1951, New York, NY, USA. Association for
   Computing Machinery.
 
-\bibitem[Koning et~al., 2016]{koning2016secure}
-Koning,K., Bos,H., and Giuffrida,C. (2016).
-\newblock Secure and efficient multi-variant execution using hardware-assisted
-  process virtualization.
-\newblock In {\em 2016 46th Annual IEEE/IFIP International Conference on
-  Dependable Systems and Networks (DSN)}, pages 431--442. IEEE.
-
 \bibitem[Courouss{\'e} et~al., 2016]{courousse2016runtime}
 Courouss{\'e},D., Barry,T., Robisson,B., Jaillon,P., Potin,O., and Lanet,J.-L.
   (2016).
@@ -200,6 +179,11 @@ Courouss{\'e},D., Barry,T., Robisson,B., Jaillon,P., Potin,O., and Lanet,J.-L.
 Morgan,T.~D. and Morgan,J.~W. (2015).
 \newblock Web timing attacks made practical.
 \newblock {\em Black Hat}.
+
+\bibitem[Kim et~al., 2015]{Kim2015}
+Kim,D., Kwon,Y., Sumner,W.~N., Zhang,X., and Xu,D. (2015).
+\newblock Dual execution for on the fly fine grained execution comparison.
+\newblock {\em SIGPLAN Not.}
 
 \bibitem[Davi et~al., 2015]{davi2015isomeron}
 Davi,L., Liebchen,C., Sadeghi,A.-R., Snow,K.~Z., and Monrose,F. (2015).
@@ -236,11 +220,11 @@ Homescu,A., Neisius,S., Larsen,P., Brunthaler,S., and Franz,M. (2013).
 \newblock In {\em Proceedings of the 2013 IEEE/ACM International Symposium on
   Code Generation and Optimization (CGO)}, pages 1--11. IEEE.
 
-\bibitem[Coppens et~al., 2013]{coppens2013feedback}
-Coppens,B., De~Sutter,B., and Maebe,J. (2013).
-\newblock Feedback-driven binary code diversification.
-\newblock {\em ACM Transactions on Architecture and Code Optimization (TACO)},
-  9(4):1--26.
+\bibitem[Maurer and Brumley, 2012]{maurer2012tachyon}
+Maurer,M. and Brumley,D. (2012).
+\newblock Tachyon: Tandem execution for efficient live patch testing.
+\newblock In {\em 21st USENIX Security Symposium (USENIX Security 12)}, pages
+  617--630.
 
 \bibitem[Jackson, 2012]{jackson}
 Jackson,T. (2012).
