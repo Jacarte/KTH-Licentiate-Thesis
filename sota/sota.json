@@ -229,7 +229,10 @@
             },
             {
                 "slug": "mean",
-                "special": "all LLVM supported, version 3.1"
+                "special": "LLVM 3.1.0$^\\dagger$"
+            },
+            {
+                "slug": "srand"
             },
             {
                 "slug": "equivalence_checking",
@@ -263,8 +266,14 @@
                 "description": "\\todo{}"
             },
             {
+                "slug": "srand"
+            },
+            {
+                "slug": "mveu"
+            },
+            {
                 "slug": "mean",
-                "special": "compiler LLVM backend for x86"
+                "special": "LLVM compiler, only backend for x86 architecture"
             },
             {
                 "slug": "equivalence_checking"
@@ -290,12 +299,15 @@
                 "slug": "static"
             },
             {
+                "slug": "srand"
+            },
+            {
                 "slug": "architecture",
                 "description": "\\todo{}"
             },
             {
                 "slug": "mean",
-                "special": "x86"
+                "special": "custom GCC compiler for x86 architecture"
             },
             {
                 "slug": "equivalence_checking"
@@ -324,12 +336,15 @@
                 "slug": "static"
             },
             {
+                "slug": "srand"
+            },
+            {
                 "slug": "architecture",
                 "description": "\\todo{}"
             },
             {
                 "slug": "mean",
-                "special": "x86"
+                "special": "x86 to x86 transformations"
             },
             {
                 "slug": "equivalence_checking"
@@ -362,7 +377,7 @@
             },
             {
                 "slug": "mean",
-                "special": "GCC 4.1"
+                "special": "custom GCC compiler"
             },
             {
                 "slug": "equivalence_checking"
@@ -387,6 +402,9 @@
                 "slug": "instruction_reordering"
             },
             {
+                "slug": "srand"
+            },
+            {
                 "slug": "aslr"
             },
             {
@@ -394,11 +412,11 @@
             },
             {
                 "slug": "architecture",
-                "description": "PA-RISC"
+                "description": "Custom Pascal compiler for PA-RISC architecture"
             },
             {
                 "slug": "mean",
-                "special": "PA-RISC architecture"
+                "special": "Custom Pascal compiler for PA-RISC architecture"
             }
         ]
     },
@@ -421,7 +439,7 @@
             },
             {
                 "slug": "mean",
-                "special": "ARM"
+                "special": "Polymorphic code generator for ARM architecture"
             },
             {
                 "slug": "isa_randomization"
@@ -466,7 +484,7 @@
             },
             {
                 "slug": "mean",
-                "special": "x86 backend for LLVM"
+                "special": "LLVM, only backend for x86 architecture"
             },
             {
                 "slug": "adding_and_removing_jumps"
@@ -522,7 +540,7 @@
             },
             {
                 "slug": "mean",
-                "special": "custom GCC targeting microcontrollers"
+                "special": "Custom GCC compiler targeting microcontrollers"
             },
             {
                 "slug": "isa_randomization"
@@ -564,7 +582,7 @@
             },
             {
                 "slug": "mean",
-                "special": "Linux kernel recompilation."
+                "special": "Linux Kernel recompilation."
             },
             {
                 "slug": "security"
@@ -596,11 +614,11 @@
             },
             {
                 "slug": "architecture",
-                "description": "x86"
+                "description": "x86 to x86 transformations"
             },
             {
                 "slug": "mean",
-                "special": "x86"
+                "special": "x86 to x86 transformations using Valgrind"
             },
             {
                 "slug": "security"
@@ -676,7 +694,7 @@
             },
             {
                 "slug": "mean",
-                "special": "ELF binaries"
+                "special": "ELF binary transformations"
             },
             {
                 "slug": "security"
@@ -721,7 +739,7 @@
             },
             {
                 "slug": "mean",
-                "special": "C/C++ source transformations and ELF binary transformations"
+                "special": "C/C++ source to source transformations and ELF binary transformations"
             },
             {
                 "slug": "security"
@@ -755,7 +773,7 @@
             },
             {
                 "slug": "mean",
-                "special": "LLVM version 3.9"
+                "special": "Data layout randomization, LLVM 3.9$^\\dagger$"
             },
             {
                 "slug": "static"
@@ -822,7 +840,7 @@
             },
             {
                 "slug": "mean",
-                "special": "custom kernel module in Linux OS"
+                "special": "Custom kernel module in Linux OS"
             },
             {
                 "slug": "dynamic",
@@ -858,7 +876,7 @@
             },
             {
                 "slug": "mean",
-                "special": "ELF binaries"
+                "special": "ELF binary transformations."
             },
             {
                 "slug": "dynamic"
@@ -894,7 +912,7 @@
             },
             {
                 "slug": "mean",
-                "special": "custom GNU compiler"
+                "special": "Custom GNU compiler"
             },
             {
                 "slug": "dynamic"
@@ -972,7 +990,7 @@
             },
             {
                 "slug": "mean",
-                "special": "Linux kernel"
+                "special": "Linux Kernel recompilation."
             },
             {
                 "slug": "artificial_diversity"
@@ -992,7 +1010,7 @@
             },
             {
                 "slug": "mean",
-                "special": "x86"
+                "special": "x86 to x86 transformations"
             },
             {
                 "slug": "aslr"
@@ -1022,7 +1040,7 @@
             },
             {
                 "slug": "mean",
-                "special": "LLVM 3.8.0 for C code"
+                "special": "Only C language frontend, LLVM 3.8.0$^\\dagger$"
             },
             {
                 "slug": "equivalence_sequences"
@@ -1112,7 +1130,7 @@
             },
             {
                 "slug": "mean",
-                "special": "x86"
+                "special": "x86 to x86 transformations"
             },
             {
                 "slug": "nversion"
@@ -1152,15 +1170,17 @@
                 "slug": "reliability"
             },
             {
+                "slug": "aslr"
+            },
+            {
                 "slug": "nversion"
             },
             {
                 "slug": "mean",
-                "special": "any frontend language for LLVM version 12.0.0, changes to the Wasm backend"
+                "special": "Any frontend language for LLVM version 12.0.0 targeting Wasm backend"
             },
             {
-                "slug": "srand",
-                "special": "-"
+                "slug": "srand"
             }
         ]
     },
@@ -1177,7 +1197,7 @@
             },
             {
                 "slug": "mean",
-                "special": "any frontend and backend language for LLVM version 12.0.0"
+                "special": "Any frontend and backend language for LLVM version 12.0.0"
             },
             {
                 "slug": "equivalence_sequences"
@@ -1196,6 +1216,9 @@
             },
             {
                 "slug": "adding_and_removing_jumps"
+            },
+            {
+                "slug": "aslr"
             },
             {
                 "slug": "intermixing"
@@ -1208,9 +1231,6 @@
             },
             {
                 "slug": "mveu"
-            },
-            {
-                "slug": "srand"
             }
         ]
     }
