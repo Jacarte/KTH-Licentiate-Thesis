@@ -278,7 +278,7 @@
             },
             {
                 "slug": "architecture",
-                "description": "all LLVM supported"
+                "description": "all LLVM supported, version 3.1"
             },
             {
                 "slug": "mean",
@@ -317,7 +317,7 @@
             },
             {
                 "slug": "mean",
-                "description": "compiler"
+                "description": "compiler LLVM backend for x86"
             },
             {
                 "slug": "equivalence_checking"
@@ -327,7 +327,122 @@
             }
         ]
     },
-
+    {
+        "cite": "ElKhalil2004",
+        "title": "Hydan: Hiding Information in Program Binaries",
+        "authors": "El-Khalil and Keromytis ",
+        "seed": false,
+        "year": 2004,
+        "sum": "modified a version of GCC 4.1 to separate a conventional stack into several component parts, called multistacks.",
+        "features": [
+            
+            {
+                "slug": "artificial_diversity"
+            },
+            {
+                "slug": "static"
+            },
+            {
+                "slug": "architecture",
+                "description": "\\todo{}"
+            },
+            {
+                "slug": "mean",
+                "description": "x86"
+            },
+            {
+                "slug": "equivalence_checking"
+            },
+            {
+                "slug": "nvariant"
+            }
+        ]
+    },
+    {
+        "cite": "ElKhalil2004",
+        "title": "Compiler mitigations for time attacks on modern x86 processors",
+        "authors": "Cleemput \\etal ",
+        "seed": false,
+        "year": 2012,
+        "sum": "Cleemput et al. [30] suggest inserting NOP instructions be tween dependent store and load instructions to prevent pipeline stalls. Their analysis shows that in order to prevent leakage of any information about the encryption key, at least six NOP instructions need to be inserted. This work can be adapted to a diversifying compiler, but at significant performance overhead. Cleemput et al. suggested a minimum of six NOP instructions for an overhead of 1.85x. A diversifying compiler would have to randomly add more NOPs",
+        "features": [
+            
+            {
+                "slug": "artificial_diversity"
+            },
+            {
+                "slug": "static"
+            },
+            {
+                "slug": "architecture",
+                "description": "\\todo{}"
+            },
+            {
+                "slug": "mean",
+                "description": "x86"
+            },
+            {
+                "slug": "equivalence_checking"
+            },
+            {
+                "slug": "nvariant"
+            }
+        ]
+    },{
+        "cite": "Younan2006",
+        "title": "Extended Protection against Stack Smashing Attacks without Performance Loss",
+        "authors": "Younan \\etal ",
+        "seed": false,
+        "year": 2006,
+        "sum": "Younan et al. [120] modified a version of GCC 4.1 to separate a conventional stack into several component parts, called multistacks. Each part contains a particular class of stack data. Their implementation is incompatible with many ASLR implementations, but can be modified. Multistacks were later ported to ARM [109]",
+        "features": [
+            
+            {
+                "slug": "artificial_diversity"
+            },
+            {
+                "slug": "static"
+            },
+            {
+                "slug": "architecture",
+                "description": "\\todo{}"
+            },
+            {
+                "slug": "mean",
+                "description": "C/C++ for gcc4.1"
+            },
+            {
+                "slug": "equivalence_checking"
+            },
+            {
+                "slug": "nvariant"
+            }
+        ]
+    },
+    {
+        "cite": "pettisochhansen",
+        "title": "Profile guided code positioning",
+        "authors": "Pettis and Hansen",
+        "seed": false,
+        "year": 1990,
+        "sum": "investigated rearranging both functions and basic blocks as well as splitting functions for performance purposes on the PA-RISC architecture",
+        "features": [
+            {
+                "slug": "artificial_diversity"
+            },
+            {
+                "slug": "static"
+            },
+            {
+                "slug": "architecture",
+                "description": "PA-RISC"
+            },
+            {
+                "slug": "mean",
+                "description": ""
+            }
+        ]
+    },
     {
         "cite": "coppens2013feedback",
         "title": "Feedback-driven binary code diversification",
@@ -446,7 +561,7 @@
             },
             {
                 "slug": "security",
-                "description": "power side-channel mitigation"
+                "description": "mitigation"
             },
             {
                 "slug": "architecture",
@@ -664,7 +779,7 @@
             },
             {
                 "slug": "mean",
-                "description": "Binary to binary transformation"
+                "description": "Binary to binary transformation, ELF"
             },
             {
                 "slug": "security"
@@ -709,7 +824,7 @@
             },
             {
                 "slug": "mean",
-                "description": "Binary to binary transformation"
+                "description": "Binary to binary transformation, ELF"
             },
             {
                 "slug": "security"
@@ -765,7 +880,7 @@
                 "slug": "aslr"
             },
             {
-                "slug": "security",
+                "slug": "secuaga2019smokestackrity",
                 "description": "stack protection mechanism"
             },
             {

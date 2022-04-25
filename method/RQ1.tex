@@ -99,7 +99,7 @@ Beyond the program's population, we also want to compare how many program varian
 
 
 \subsection*{Protocol}
-\todo{text sounding like "background text": To generate program variants, we synthesize program variants with an enumerative strategy, checking each synthesis for equivalence modulo input \cite{Li2018} against the original program. An enumerative synthesis is a brute-force approach to generate program variants. With a maximum number of instructions, it constructs and checks all possible programs up to that limit. For a simplified instance, with a maximum code size of 2 instructions in a programming language with $L$ possible constructions, an enumerative synthesizer builds all $L\times L$ combinations finding program variants.} For obvious reasons, this space is nearly impossible to explore in a reasonable time as soon as the limit of instructions increases.
+To generate program variants, we synthesize program variants with an enumerative strategy, checking each synthesis for equivalence modulo input \cite{Li2018} against the original program. \todo{link with SOTA}. For obvious reasons, this space is nearly impossible to explore in a reasonable time as soon as the limit of instructions increases.
 Therefore, we use two parameters to control the size of the search space and hence the time required to traverse it.
 On the one hand, one can limit the size of the variants. On the other hand, one can limit the set of instructions used for the synthesis. In our experiments for RQ1, we use all the $60$ supported instructions in our synthesizer.
 

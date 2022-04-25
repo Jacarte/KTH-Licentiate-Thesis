@@ -60,6 +60,12 @@ Xu,Y., Solihin,Y., and Shen,X. (2020).
   memory exposure reduction and randomization.
 \newblock In {\em Proc. of ASPLOS}, pages 987--1000.
 
+\bibitem[Tsoupidi et~al., 2020]{Tsoupidi2020ConstraintBasedSD}
+Tsoupidi,R.~M., Lozano,R.~C., and Baudry,B. (2020).
+\newblock Constraint-based software diversification for efficient mitigation of
+  code-reuse attacks.
+\newblock {\em ArXiv}, abs/2007.08955.
+
 \bibitem[Shillaker and Pietzuch, 2020]{shillaker2020faasm}
 Shillaker,S. and Pietzuch,P. (2020).
 \newblock Faasm: Lightweight isolation for efficient stateful serverless
@@ -242,12 +248,23 @@ Jackson,T. (2012).
   Software Diversity for Security}.
 \newblock PhD thesis, University of California, Irvine.
 
+\bibitem[Cleemput et~al., 2012]{Cleemput2012}
+Cleemput,J.~V., Coppens,B., and De~Sutter,B. (2012).
+\newblock Compiler mitigations for time attacks on modern x86 processors.
+\newblock {\em ACM Trans. Archit. Code Optim.}, 8(4).
+
 \bibitem[Sidiroglou-Douskos et~al., 2011]{10.1145/2025113.2025133}
 Sidiroglou-Douskos,S., Misailovic,S., Hoffmann,H., and Rinard,M. (2011).
 \newblock Managing performance vs. accuracy trade-offs with loop perforation.
 \newblock In {\em Proceedings of the 19th ACM SIGSOFT Symposium and the 13th
   European Conference on Foundations of Software Engineering}, ESEC/FSE '11,
   page 124–134, New York, NY, USA. Association for Computing Machinery.
+
+\bibitem[Jackson et~al., 2011]{jackson2011compiler}
+Jackson,T., Salamat,B., Homescu,A., Manivannan,K., Wagner,G., Gal,A.,
+  Brunthaler,S., Wimmer,C., and Franz,M. (2011).
+\newblock Compiler-generated software diversity.
+\newblock In {\em Moving Target Defense}, pages 77--98. Springer.
 
 \bibitem[Amarilli et~al., 2011]{amarilli2011can}
 Amarilli,A., M{\"u}ller,S., Naccache,D., Page,D., Rauzy,P., and Tunstall,M.
@@ -296,6 +313,13 @@ Bruschi,D., Cavallaro,L., and Lanzi,A. (2007).
 \newblock In {\em Proc. of the Int. Performance, Computing, and Communications
   Conference}.
 
+\bibitem[Younan et~al., 2006]{Younan2006}
+Younan,Y., Pozza,D., Piessens,F., and Joosen,W. (2006).
+\newblock Extended protection against stack smashing attacks without
+  performance loss.
+\newblock In {\em 2006 22nd Annual Computer Security Applications Conference
+  (ACSAC'06)}, pages 429--438.
+
 \bibitem[Cox et~al., 2006]{cox06}
 Cox,B., Evans,D., Filipi,A., Rowanhill,J., Hu,W., Davidson,J., Knight,J.,
   Nguyen-Tuong,A., and Hiser,J. (2006).
@@ -315,6 +339,13 @@ Bhatkar,S., Sekar,R., and DuVarney,D.~C. (2005).
   exploits.
 \newblock In {\em Proceedings of the USENIX Security Symposium}, pages
   271--286.
+
+\bibitem[El-Khalil and Keromytis, 2004]{ElKhalil2004}
+El-Khalil,R. and Keromytis,A.~D. (2004).
+\newblock Hydan: Hiding information in program binaries.
+\newblock In Lopez,J., Qing,S., and Okamoto,E., editors, {\em Information and
+  Communications Security}, pages 187--199, Berlin, Heidelberg. Springer Berlin
+  Heidelberg.
 
 \bibitem[Kc et~al., 2003]{Kc03}
 Kc,G.~S., Keromytis,A.~D., and Prevelakis,V. (2003).
@@ -343,6 +374,13 @@ Chew,M. and Song,D. (2002).
 Cohen,F.~B. (1993).
 \newblock Operating system protection through program evolution.
 \newblock {\em Computers \& Security}, 12(6):565--584.
+
+\bibitem[Pettis and Hansen, 1990]{pettisochhansen}
+Pettis,K. and Hansen,R.~C. (1990).
+\newblock Profile guided code positioning.
+\newblock In {\em Proceedings of the ACM SIGPLAN 1990 Conference on Programming
+  Language Design and Implementation}, PLDI '90, page 16–27, New York, NY,
+  USA. Association for Computing Machinery.
 
 \bibitem[Avizienis and Kelly, 1984]{1659219}
 Avizienis and Kelly (1984).
