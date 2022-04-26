@@ -2,6 +2,11 @@ Lic.pdf
 Lic.toc
 Lic.log
 Lic.aux
+Licch2only.pdf
+Licch2only.toc
+Licch2only.log
+Licch2only.aux
+Licch2only.bbl
 *.gz
 *.xml
 ./*.pdf
@@ -20,3 +25,4 @@ pythonlogs.txt
 *.synctex*
 ./data/cmps/*
 papers
+Lic2only.pdf

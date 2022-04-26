@@ -1,5 +1,12 @@
 \begin{thebibliography}{}
 
+\bibitem[Romano et~al., 2022]{wobfuscator}
+Romano,A., Lehmann,D., Pradel,M., and Wang,W. (2022).
+\newblock Wobfuscator: Obfuscating javascript malware via opportunistic
+  translation to webassembly.
+\newblock In {\em 2022 2022 IEEE Symposium on Security and Privacy (SP) (SP)},
+  pages 1101--1116, Los Alamitos, CA, USA. IEEE Computer Society.
+
 \bibitem[Narayan et~al., 2021]{Narayan2021Swivel}
 Narayan,S., Disselkoen,C., Moghimi,D., Cauligi,S., Johnson,E., Gang,Z.,
   Vahldiek-Oberwagner,A., Sahita,R., Shacham,H., Tullsen,D., et~al. (2021).
