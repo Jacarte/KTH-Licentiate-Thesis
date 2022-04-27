@@ -5,61 +5,44 @@
 \newcommand{\repourl}{TODO}
 % Overview
 This section describes MEWE, our second contribution. 
-The core idea of \tool is to synthesize diversified function variants, using CROW, providing execution-path randomization. Thus, goal of \tool is to synthesize multivariant  \wasm binaries. %, according to the threat model presented in \autoref{sec:threat-model}. 
+MEWE is implemented in 942 lines of C++ code.
+The core idea of \tool is to synthesize diversified function variants, using CROW, providing execution-path randomization in an MVE. Thus, goal of \tool is to synthesize multivariant  \wasm binaries. %, according to the threat model presented in \autoref{sec:threat-model}. 
 The tool generates application-level multivariant binaries, without any change to the operating system or \wasm runtime.
+It uses the LLVM 12.0.0 libraries to extend the LLVM standard linker tool capability with the multivariant generation.
 %Per Crane et al. the execution-path randomization is made to hinder side-channel attacks \cite{crane2015thwarting}. 
 % All programs are diversified with behavior preservation guarantees according to the design of CROW (\autoref{section:crow}).
-MEWE has three core diversification strategies, one is a direct consequence of using CROW to generate variants and the remaining two are contributions of MEWE:
+
+MEWE has three core diversification strategies, one is a direct consequence of using CROW to generate variants and the remaining two are contributions of MEWE. The diversification strategies are:
 \begin{enumerate}
 % https://en.wikipedia.org/wiki/Constant_folding
-    \item \emph{Constant Inferring}. \tool identifies variables whose value can computed at compile time. This has an effect on program execution times \cite{brennan2020jit}. This strategy is a consequence of using CROW.
+    \item \emph{Constant Inferring}. \tool identifies variables whose value can inferred as constants. This strategy is a consequence of using CROW. The details of constant inferring is presented in \autoref{section:crow}.
 
-    \item \emph{Call Stack Randomization}. \tool introduces equivalent synthetic functions that are called randomly. This results in randomized call stacks, which complicates attacks based on call stack analysis \cite{liljestrand2021pacstack}. 
+    \item \emph{Call Stack Randomization}. \tool introduces equivalent synthetic functions that are called randomly. This results in randomized call stacks, which might complicate attacks based on call stack analysis \cite{liljestrand2021pacstack}. 
 
     \item \emph{Inlining and De-Inlining}. \tool inlines methods when appropriate. This also results in different call stacks, to hinder the same kind of attacks as for call stack randomization \cite{liljestrand2021pacstack}. On the other hand, the number of register spill/reload operations during machine code generation changes, affecting the measurement of memory side-channels \cite{rane2015raccoon}. 
     
 
 \end{enumerate}
 
-\subsection*{Overview}
-
 In \autoref{workflow}, we summarize the analysis and transformation pipeline of \tool.
 We pass a bitcode to be diversified, as an input to \tool.
 % Move this to the previous section
 %LLVM binaries can be obtained from any language with an LLVM frontend such as C/C++, Rust or Go, and they can easily be compiled to WebAssembly.
-In Step~\step{1}, the binary is passed to CROW, which is a superdiversifier for Wasm that generates a set of  variants for the functions in the binary. 
+In Step~\step{1}, the binary is passed to CROW. 
 Step~\step{2} packages all the variants in one single multivariant LLVM binary. 
 In Step~\step{3}, we use a special component, called a ``mixer``,  which augments the binary with a random generator, which is required for performing the execution-path randomization. 
-\todo{Talk about the tampering}
+Also at this stage, the multivariant binary is fixed with the entrypoint of the original binary. The diversification from CROW also diversifies the original entrypoint function in the binary, creating ambiguity for the multivariant binary that we need to correct. 
 %The harness is used to connect the program to its original execution environment while the generator provides support for random execution path at runtime.
 The final output of Step~\step{4} is a standalone multivariant \wasm binary that can be directly deployed. 
 
-The multivariant combination (Step \step{2}) is implemented in 942 lines of C++ code.
-Its uses the LLVM 12.0.0 libraries to extend the LLVM standard linker tool capability with the multivariant generation.
-\tool's Mixer (Step \step{3}) is implemented as an orchestration of the rustc and the \wasm backend provided by CROW.
-For sake of open science and for fostering research on this important topic, the code of \tool is made publicly available on GitHub: \repourl.
-
-\subsection*{Key design choices}
-\label{sec:design}
-
-With \tool, we aim to defend against an attacker that wants to leak private and sensitive information by learning about the state of the system and its characteristics.
-These attacks include but are not limited to timing specific operations \cite{bernstein2005cache,aciiccmez2007cache}, counting register spill/reload operations to study and attack memory side-channels \cite{rane2015raccoon} and performing call stack analysis.
-%\subsubsection*{Dangers related to Edge Computing}
-To benefit from the performance improvements offered by edge computing,  Fastly and Cloudflare modularize their services into a set of \wasm functions, which are deployed on all the edge nodes provided by the edge computing platforms. Then, these services are spawned on demand. This model of distributing the exact same \wasm binary on hundreds of computation nodes around the world is a serious risk for the infrastructure: a malicious developer who manages to exploit one vulnerability in the binary can exploit all the compute nodes with the same attack vector \cite{o2004achieving}.
-
-
+%For sake of open science and for fostering research on this important topic, the code of \tool is made publicly available on GitHub: \repourl.
 
 \begin{figure*}
   \centering
-  \includegraphics[width=0.8\linewidth]{diagrams/Fastly2.0.drawio.pdf}
-  \caption{Overview of \tool. It takes as input the LLVM binary representation of a service composed of multiple functions. It first generates a set of functionally equivalent variants for each function in the binary and then generates a LLVM multivariant binary composed of all the function variants as well as dispatcher functions in charge of selecting a variant when a function is invoked. The \tool mixer composes the LLVM multivariant binary with a random number generation library and an edge specific HTTP harness, in order to produce a \wasm multivariant binary accessible through an HTTP endpoint and ready to be deployed to the edge. }
+  \includegraphics[width=\linewidth]{diagrams/MEWE.pdf}
+  \caption{Overview of \tool. It takes as input an LLVM binary. It first generates a set of functionally equivalent variants for each function in the binary and then generates a LLVM multivariant binary composed of all the function variants. Also, it includes the dispatcher functions in charge of selecting a variant when a function is invoked. The \tool mixer composes the LLVM multivariant binary with a random number generation library and a tampering of the original application entrypoint, in order to produce a \wasm multivariant binary ready to be deployed. }
   \label{workflow}
 \end{figure*}
-
-\todo{Replace HTTP harnessing here.}
-
-
-\todo{Stress the variant generation in the previous section.}
 
 \begin{comment}
 
@@ -134,7 +117,6 @@ The goal is to support execution-path randomization at runtime.
 % General idea
 The core idea is to introduce one dispatcher function per original function for which we generate variants.
 A dispatcher function is a synthetic function that is in charge of choosing a variant at random, every time the original function is invoked during the execution.
-The random invocation of different variants at runtime is a known randomization technique, for example used by Lettner et al. with sanitizers \cite{lettner2018partisan}.
 With the introduction of dispatcher function,  \tool turns the original call graph into a multivariant call graph, defined as follows. 
 
 \begin{definition}{Multivariant Call Graph (MCG):}\label{def:EP}
@@ -163,14 +145,6 @@ In  \autoref{listing:multivariant_template}, we illustrate the LLVM construction
 % General logic of a multivartiant function
 It first calls the random generator, which returns a value that is then used to invoke a specific function variant. It should be noted that the dispatcher function is constructed using the same signature as the original function. 
 
-% Why a linear based switch
-We implement the dispatchers with a switch-case structure to avoid indirect calls that can be susceptible to speculative execution based attacks \cite{Narayan2021Swivel}. 
-The choice of a switch-case also avoids having multiple function definitions with the same signature, which could increase the attack surface in case the function signature is vulnerable \cite{johnson2021}.
-This also allows \tool to inline function variants inside the dispatcher, instead of defining them again.
-Here we trade security over performance, since dispatcher functions  that perform indirect calls, instead of a switch-case,  could improve the performance  of the dispatchers as indirect calls have constant time.
-
-
-
 
 \lstset{
     language=llvm,
@@ -188,7 +162,7 @@ Here we trade security over performance, since dispatcher functions  that perfor
 \noindent\begin{minipage}[b]{\linewidth}
     \begin{minipage}[t]{1\linewidth}
         \begin{lstlisting}[escapeinside={(*}{*)}]
-define internal i32 @b64_byte2urlsafe_char(i32 %0) {
+define internal i32 @foo(i32 %0) {
     entry:
       %1 = call i32 @discriminate(i32 3)
       switch i32 %1, label %end [
@@ -196,39 +170,45 @@ define internal i32 @b64_byte2urlsafe_char(i32 %0) {
         i32 1, label %case_44_
       ]
     case_43_:                ; preds = %entry ;
-      %2 = call i32 @b64_byte_to_urlsafe_char_43_(%0)
+      %2 = call i32 @foo_43_(%0)
       ret i32 %2
     case_44_:                ; preds = %entry ;
-      %3 = call i32 @b64_byte_to_urlsafe_char_44_(%0)
+      %3 = call i32 @foo_44_(%0)
       ret i32 %3
     end:                                              ; preds = %entry ;
-      %4 = call i32 @b64_byte2urlsafe_char_original(%0)
+      %4 = call i32 @foo_original(%0)
       ret i32 %4
 }
         \end{lstlisting}
     \end{minipage}%
     
     \noindent\rule{\linewidth}{0.4pt}
-    \captionof{lstlisting}{Dispatcher function embedded in the multivariant binary of the original function in \todo{} program, which corresponds to the rightmost green node in \autoref{multivariant}.}\label{listing:multivariant_template}
+    \captionof{lstlisting}{Dispatcher function embedded in the multivariant binary of the original function in the rightmost green node in \autoref{multivariant}.}\label{listing:multivariant_template}
 \end{minipage}
 \end{code}
 
-\todo{Add some words on the soundness of memory and data because of the artificial character of the generation.}
+% Why a linear based switch
+We implement the dispatchers with a switch-case structure to avoid indirect calls that can be susceptible to speculative execution based attacks \cite{Narayan2021Swivel}. 
+The choice of a switch-case also avoids having multiple function definitions with the same signature, which could increase the attack surface in case the function signature is vulnerable \cite{johnson2021}.
+This also allows \tool to inline function variants inside the dispatcher, instead of defining them again.
+Here we trade security over performance, since dispatcher functions  that perform indirect calls, instead of a switch-case,  could improve the performance  of the dispatchers as indirect calls have constant time.
 
-\subsection*{Tampering programs entrypoints}
+
+\subsection*{MEWE's Mixer}
 
 The \tool mixer has four specific objectives: tamper the entrypoint of the application, link the LLVM multivariant binary, inject a random generator and merge all these components into a multivariant \wasm binary.
-
-
 % Implementation
 We use the Rustc compiler\footnote{\url{https://doc.rust-lang.org/rustc/what-is-rustc.html}} to orchestrate the mixing because Rustc is a compiler able to merge custom Rust source code with arbitratry-compatible LLVM binary producing a final Wasm binary.
 % The random number generation
 For the generator, we rely on WASI's specification \cite{WASI} for the random behavior of the dispatchers. Its exact implementation is dependent on the platform on which the binary is deployed.
 
-\todo{REDO on tampering instead of HTTP harnesses}
 % How to turn function into endpoints
-For the HTTP harnesses, since our edge computing use case is based on the Fastly infrastructure, we rely on the Fastly API\footnote{\url{https://docs.rs/crate/fastly/0.7.3}} to transform our Wasm binaries into HTTP endpoints. The harness enables a function to be called as an HTTP request and to return a HTTP response.
-Throughout this paper, we refer to an endpoint as the closure of invoked functions when the entry point of the \wasm binary is executed.
+The diversification process of CROW does not differentiate between functions that cannot exist in the same global namespace. For example, if an LLVM binary is passed to it as an input, the main function of the binary can be also diversified, creating several entrypoints. We see this phenomenon separately than other functions in the original binary because dispatchers for entrypoint variants make the multivariant invalid to be directly executed. 
+The \tool mixer creates a new entrypoint for the binary called \emph{entrypoint tampering}.
+It simply wraps the dispatcher for the entrypoint variants as a new function for the final Wasm binary that is declared as the application entrypoint. 
+
+%Throughout this paper, we refer to an endpoint as the closure of invoked functions when the entry point of the \wasm binary is executed.
+
 
 
 \begin{comment}

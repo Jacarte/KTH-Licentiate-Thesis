@@ -54,14 +54,30 @@ Software diversification consists in synthesizing, reusing, distributing, and ex
 According to the survey of Baudry and Monperrus \cite{natural_diversity}, the motivation for software diversification can be separated in five categories: reusability \cite{pohl2005software}, software testing \cite{Chen2010AdaptiveRT}, performance \cite{10.1145/2025113.2025133}, fault tolerance \cite{1659219} and security \cite{cohen1993operating}. Our work contributes to the latter two categories. In this section we discuss related works by highlighting how they generate diversification and how they use the generated diversification. 
 %We finalize by comparing our contributions with the related work.
 
-\subsection*{Artificial Software Diversity.}
+\todo{Do not talk about complexity of replacements, stress them in the other chapters. Stress the comparison between techniques.}
+
+\todo{ Important things  }
+
+\todo{ Remove impact sentences. }
+
+\todo{Rework hard sentences.}
+
+\todo{One section on semantically equivalence and checking...}
+
+\todo{Split sentences by ideas.}
+
+%\subsection*{Artificial Software Diversity.}
 
 There are two primary sources of software diversification: Natural and Artificial Diversity \cite{natural_diversity}. This work contributes to the state of the art of Artificial Diversity, which consists of artificially synthesizing software. 
 % Intro to Cohen and that functional/semantic equivalence is 
 We have found that the foundation for artificial software diversity has barely changed since Cohen in 1993 \cite{cohen1993operating}. Therefore, the work of Cohen is the cornerstone of this dissertation.
+
+\subsection*{Variants' equivalence}
+
 According to their seminal work, whatever two programs are equal if they are semantically equivalent, thus, one program can be considered a diversified version of the other. 
 We use their definition on semantic/functional equivalence as input-output equivalence. Two programs are equivalent if, given identical input, they produce the identical output. 
 
+\subsection*{Variants' generation}
 % Mutation strategy
 Cohen \etal proposed to generate artificial software diversification through mutation strategies.
 A mutation strategy is a set of rules to define how a specific component of software development should be changed to provide a different yet functionally equivalent program. Cohen \etal proposed 10 concrete transformation strategies that can be applied at coarse-grained or fine-grained scales. We summarize them, complemented with the work of Baudry and Monperrus \cite{natural_diversity} and the work of Jackson \etal \cite{jackson}, in 5 strategies.
@@ -149,12 +165,15 @@ A mutation strategy is a set of rules to define how a specific component of soft
 
 %\subsection*{Vertical Software Diversification}
 
-The mentioned techniques can be applied at any layer of the software lifecycle, at coarse-grained or fine-grained levels.
-At high-level, Harrand \etal  \cite{harrand2020java}, propose to merge several Java decompiler variants to provide an extended and improved meta-decompiler. On the same topic, Sengupta \etal \cite{10.5555/3091125.3091155} shift several database engines and backends for web applications. Their idea makes known CVEs to be available only in certain time window, making potential attackers to not always success. Moreover, Roi \etal \cite{10.1145/3318216.3363338} proposed to use several machine learning algorithms with the same task to tackle adversarial attackers, using a different algorithm every time the system is queried.
-These works used preexisting software diversity to provide improved systems, both for reliability and security.
+%\todo{Architecture level, remark these works but not in our scope.}
+%The mentioned techniques can be applied at any layer of the software lifecycle, at coarse-grained or fine-grained levels.
+%At high-level, Harrand \etal  \cite{harrand2020java}, propose to merge several Java decompiler variants to provide an extended and improved meta-decompiler. On the same topic, Sengupta \etal \cite{10.5555/3091125.3091155} shift several database engines and backends for web applications. Their idea makes known CVEs to be available only in certain time window, making potential attackers to not always success. Moreover, Roi \etal \cite{10.1145/3318216.3363338} proposed to use several machine learning algorithms with the same task to tackle adversarial attackers, using a different algorithm every time the system is queried.
+%These works used preexisting software diversity to provide improved systems, both for reliability and security.
 
-For fine-grained diversification, the before mentioned mutation strategies can be applied directly to the basecode at the instruction level, during the compilation of programs or directly to the generated binaries. As we previously mentioned Homescu \etal \cite{homescu2013profile}, Jackson \etal \cite{jackson, jackson2011compiler}, Jacob \etal \cite{jacob2008superdiversifier}, Crane \etal \cite{crane2015thwarting}, Aga \etal \cite{aga2019smokestack} and Tsoupidi \etal \cite{Tsoupidi2020ConstraintBasedSD} placed compilers in their diversification techniques. Similarly, Bathkar \etal \cite{bhatkar03,bhatkar2005efficient}, Chew and Song \cite{Chew02mitigatingbuffer}, El-Khalil and Keromytis \cite{ElKhalil2004}, and Cohen \cite{cohen1993operating} itself mostly proposed binary to binary transformations. 
-We have observed that fine-grained techniques are mainly motivated because they provide more robust diversification in terms of preservation. For example, to apply diversification techniques closer to the final execution avoid removing of code transformations by later optimization or compilation stages. Our contributions are fine-grained based. 
+
+%\todo{Remove}
+%For fine-grained diversification, the before mentioned mutation strategies can be applied directly to the basecode at the instruction level, during the compilation of programs or directly to the generated binaries. As we previously mentioned Homescu \etal \cite{homescu2013profile}, Jackson \etal \cite{jackson, jackson2011compiler}, Jacob \etal \cite{jacob2008superdiversifier}, Crane \etal \cite{crane2015thwarting}, Aga \etal \cite{aga2019smokestack} and Tsoupidi \etal \cite{Tsoupidi2020ConstraintBasedSD} placed compilers in their diversification techniques. Similarly, Bathkar \etal \cite{bhatkar03,bhatkar2005efficient}, Chew and Song \cite{Chew02mitigatingbuffer}, El-Khalil and Keromytis \cite{ElKhalil2004}, and Cohen \cite{cohen1993operating} itself mostly proposed binary to binary transformations. 
+%We have observed that fine-grained techniques are mainly motivated because they provide more robust diversification in terms of preservation. For example, to apply diversification techniques closer to the final execution avoid removing of code transformations by later optimization or compilation stages. Our contributions are fine-grained based. 
 
 %Superdiversifier, all the others, and then finish with that we contribute to fine-grained.
 
@@ -186,7 +205,9 @@ After program variants are generated, they can be used in two main scenarios: Ra
     \caption{Software Diversification usages. }
 \end{figure}
 
+\todo{Split in what and how?}
 
+\todo{Improvement figure, remove "ramdom rotation" and explain how it works in terms of "Deplyment".}
 
 \begin{usage}{Randomization:}
     \label{usage:randomization}
