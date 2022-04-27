@@ -161,6 +161,12 @@ Sengupta,S., Vadlamudi,S.~G., Kambhampati,S., Doup\'{e},A., Zhao,Z.,
 \newblock In {\em Proceedings of the 16th Conference on Autonomous Agents and
   MultiAgent Systems}, page 178–186.
 
+\bibitem[Sasnauskas et~al., 2017]{Sasnauskas2017Souper:Superoptimizer}
+Sasnauskas,R., Chen,Y., Collingbourne,P., Ketema,J., Lup,G., Taneja,J., and
+  Regehr,J. (2017).
+\newblock {Souper: A Synthesizing Superoptimizer}.
+\newblock {\em arXiv preprint 1711.04422}.
+
 \bibitem[Haas et~al., 2017]{Haas_2017}
 Haas,A., Rossberg,A., Schuff,D.~L., Schuff,D.~L., Titzer,B.~L., Holman,M.,
   Gohman,D., Wagner,L., Zakai,A., and Bastien,J.~F. (2017).
@@ -372,6 +378,12 @@ Pettis,K. and Hansen,R.~C. (1990).
 \newblock In {\em Proceedings of the ACM SIGPLAN 1990 Conference on Programming
   Language Design and Implementation}, PLDI '90, page 16–27, New York, NY,
   USA. Association for Computing Machinery.
+
+\bibitem[Aho et~al., 1986]{ahodragonbook}
+Aho,A.~V., Sethi,R., and Ullman,J.~D. (1986).
+\newblock {\em Compilers: Principles, Techniques, and Tools}, chapter~1, pages
+  28--31.
+\newblock Addison-Wesley Longman Publishing Co., Inc., USA.
 
 \bibitem[Avizienis and Kelly, 1984]{1659219}
 Avizienis and Kelly (1984).

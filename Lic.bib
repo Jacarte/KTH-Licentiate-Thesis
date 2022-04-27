@@ -936,126 +936,155 @@
 
 
 @article{johnson2021,
-  title={SFI safety for native-compiled Wasm},
-  author={Johnson, Evan and Thien, David and Alhessi, Yousef and Narayan, Shravan and Brown, Fraser and Lerner, Sorin and McMullen, Tyler and Savage, Stefan and Stefan, Deian},
-  journal={NDSS. Internet Society},
-  year={2021}
+  title   = {SFI safety for native-compiled Wasm},
+  author  = {Johnson, Evan and Thien, David and Alhessi, Yousef and Narayan, Shravan and Brown, Fraser and Lerner, Sorin and McMullen, Tyler and Savage, Stefan and Stefan, Deian},
+  journal = {NDSS. Internet Society},
+  year    = {2021}
 }
 
 
 
-@ARTICLE{MEWE,
-       author = {{Cabrera Arteaga}, Javier and {Laperdrix}, Pierre and {Monperrus}, Martin and {Baudry}, Benoit},
-        title = "{Multi-Variant Execution at the Edge}",
-      journal = {arXiv e-prints},
-     keywords = {Computer Science - Software Engineering},
-         year = 2021,
-        month = aug,
-          eid = {arXiv:2108.08125},
-        pages = {arXiv:2108.08125},
-archivePrefix = {arXiv},
-       eprint = {2108.08125},
- primaryClass = {cs.SE},
-       adsurl = {https://ui.adsabs.harvard.edu/abs/2021arXiv210808125C},
-      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+@article{MEWE,
+  author        = {{Cabrera Arteaga}, Javier and {Laperdrix}, Pierre and {Monperrus}, Martin and {Baudry}, Benoit},
+  title         = {{Multi-Variant Execution at the Edge}},
+  journal       = {arXiv e-prints},
+  keywords      = {Computer Science - Software Engineering},
+  year          = 2021,
+  month         = aug,
+  eid           = {arXiv:2108.08125},
+  pages         = {arXiv:2108.08125},
+  archiveprefix = {arXiv},
+  eprint        = {2108.08125},
+  primaryclass  = {cs.SE},
+  adsurl        = {https://ui.adsabs.harvard.edu/abs/2021arXiv210808125C},
+  adsnote       = {Provided by the SAO/NASA Astrophysics Data System}
 }
 
 @inproceedings{CROW,
-  title={CROW: code diversification for webassembly},
-  author={Cabrera Arteaga, Javier and Floros, Orestis and Vera Perez, Oscar and Baudry, Benoit and Monperrus, Martin},
-  booktitle={MADWeb, NDSS 2021},
-  year={2021}
+  title     = {CROW: code diversification for webassembly},
+  author    = {Cabrera Arteaga, Javier and Floros, Orestis and Vera Perez, Oscar and Baudry, Benoit and Monperrus, Martin},
+  booktitle = {MADWeb, NDSS 2021},
+  year      = {2021}
 }
 
 @article{harrand2020java,
-  title={Java decompiler diversity and its application to meta-decompilation},
-  author={Harrand, Nicolas and Soto-Valero, C{\'e}sar and Monperrus, Martin and Baudry, Benoit},
-  journal={Journal of Systems and Software},
-  volume={168},
-  pages={110645},
-  year={2020},
-  publisher={Elsevier}
+  title     = {Java decompiler diversity and its application to meta-decompilation},
+  author    = {Harrand, Nicolas and Soto-Valero, C{\'e}sar and Monperrus, Martin and Baudry, Benoit},
+  journal   = {Journal of Systems and Software},
+  volume    = {168},
+  pages     = {110645},
+  year      = {2020},
+  publisher = {Elsevier}
 }
 @article{Tsoupidi2020ConstraintBasedSD,
-  title={Constraint-Based Software Diversification for Efficient Mitigation of Code-Reuse Attacks},
-  author={Rodothea Myrsini Tsoupidi and Roberto Casta{\~n}eda Lozano and Beno{\^i}t Baudry},
-  journal={ArXiv},
-  year={2020},
-  volume={abs/2007.08955}
+  title   = {Constraint-Based Software Diversification for Efficient Mitigation of Code-Reuse Attacks},
+  author  = {Rodothea Myrsini Tsoupidi and Roberto Casta{\~n}eda Lozano and Beno{\^i}t Baudry},
+  journal = {ArXiv},
+  year    = {2020},
+  volume  = {abs/2007.08955}
 }
 @article{10.1145/93548.93550,
-author = {Pettis, Karl and Hansen, Robert C.},
-title = {Profile Guided Code Positioning},
-year = {1990},
-issue_date = {Jun. 1990},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-volume = {25},
-number = {6},
-issn = {0362-1340},
-url = {https://doi.org/10.1145/93548.93550},
-doi = {10.1145/93548.93550},
-abstract = {This paper presents the results of our investigation of code positioning techniques using execution profile data as input into the compilation process. The primary objective of the positioning is to reduce the overhead of the instruction memory hierarchy.After initial investigation in the literature, we decided to implement two prototypes for the Hewlett-Packard Precision Architecture (PA-RISC). The first, built on top of the linker, positions code based on whole procedures. This prototype has the ability to move procedures into an order that is determined by a “closest is best” strategy.The second prototype, built on top of an existing optimizer package, positions code based on basic blocks within procedures. Groups of basic blocks that would be better as straight-line sequences are identified as chains. These chains are then ordered according to branch heuristics. Code that is never executed during the data collection runs can be physically separated from the primary code of a procedure by a technique we devised called procedure splitting.The algorithms we implemented are described through examples in this paper. The performance improvements from our work are also summarized in various tables and charts.},
-journal = {SIGPLAN Not.},
-month = {jun},
-pages = {16–27},
-numpages = {12}
+  author     = {Pettis, Karl and Hansen, Robert C.},
+  title      = {Profile Guided Code Positioning},
+  year       = {1990},
+  issue_date = {Jun. 1990},
+  publisher  = {Association for Computing Machinery},
+  address    = {New York, NY, USA},
+  volume     = {25},
+  number     = {6},
+  issn       = {0362-1340},
+  url        = {https://doi.org/10.1145/93548.93550},
+  doi        = {10.1145/93548.93550},
+  abstract   = {This paper presents the results of our investigation of code positioning techniques using execution profile data as input into the compilation process. The primary objective of the positioning is to reduce the overhead of the instruction memory hierarchy.After initial investigation in the literature, we decided to implement two prototypes for the Hewlett-Packard Precision Architecture (PA-RISC). The first, built on top of the linker, positions code based on whole procedures. This prototype has the ability to move procedures into an order that is determined by a “closest is best” strategy.The second prototype, built on top of an existing optimizer package, positions code based on basic blocks within procedures. Groups of basic blocks that would be better as straight-line sequences are identified as chains. These chains are then ordered according to branch heuristics. Code that is never executed during the data collection runs can be physically separated from the primary code of a procedure by a technique we devised called procedure splitting.The algorithms we implemented are described through examples in this paper. The performance improvements from our work are also summarized in various tables and charts.},
+  journal    = {SIGPLAN Not.},
+  month      = {jun},
+  pages      = {16–27},
+  numpages   = {12}
 }
 
 @inproceedings{pettisochhansen,
-author = {Pettis, Karl and Hansen, Robert C.},
-title = {Profile Guided Code Positioning},
-year = {1990},
-isbn = {0897913647},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/93542.93550},
-doi = {10.1145/93542.93550},
-abstract = {This paper presents the results of our investigation of code positioning techniques using execution profile data as input into the compilation process. The primary objective of the positioning is to reduce the overhead of the instruction memory hierarchy.After initial investigation in the literature, we decided to implement two prototypes for the Hewlett-Packard Precision Architecture (PA-RISC). The first, built on top of the linker, positions code based on whole procedures. This prototype has the ability to move procedures into an order that is determined by a “closest is best” strategy.The second prototype, built on top of an existing optimizer package, positions code based on basic blocks within procedures. Groups of basic blocks that would be better as straight-line sequences are identified as chains. These chains are then ordered according to branch heuristics. Code that is never executed during the data collection runs can be physically separated from the primary code of a procedure by a technique we devised called procedure splitting.The algorithms we implemented are described through examples in this paper. The performance improvements from our work are also summarized in various tables and charts.},
-booktitle = {Proceedings of the ACM SIGPLAN 1990 Conference on Programming Language Design and Implementation},
-pages = {16–27},
-numpages = {12},
-location = {White Plains, New York, USA},
-series = {PLDI '90}
+  author    = {Pettis, Karl and Hansen, Robert C.},
+  title     = {Profile Guided Code Positioning},
+  year      = {1990},
+  isbn      = {0897913647},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/93542.93550},
+  doi       = {10.1145/93542.93550},
+  abstract  = {This paper presents the results of our investigation of code positioning techniques using execution profile data as input into the compilation process. The primary objective of the positioning is to reduce the overhead of the instruction memory hierarchy.After initial investigation in the literature, we decided to implement two prototypes for the Hewlett-Packard Precision Architecture (PA-RISC). The first, built on top of the linker, positions code based on whole procedures. This prototype has the ability to move procedures into an order that is determined by a “closest is best” strategy.The second prototype, built on top of an existing optimizer package, positions code based on basic blocks within procedures. Groups of basic blocks that would be better as straight-line sequences are identified as chains. These chains are then ordered according to branch heuristics. Code that is never executed during the data collection runs can be physically separated from the primary code of a procedure by a technique we devised called procedure splitting.The algorithms we implemented are described through examples in this paper. The performance improvements from our work are also summarized in various tables and charts.},
+  booktitle = {Proceedings of the ACM SIGPLAN 1990 Conference on Programming Language Design and Implementation},
+  pages     = {16–27},
+  numpages  = {12},
+  location  = {White Plains, New York, USA},
+  series    = {PLDI '90}
 }
 
 
-@InProceedings{ElKhalil2004,
-author="El-Khalil, Rakan
-and Keromytis, Angelos D.",
-editor="Lopez, Javier
-and Qing, Sihan
-and Okamoto, Eiji",
-title="Hydan: Hiding Information in Program Binaries",
-booktitle="Information and Communications Security",
-year="2004",
-publisher="Springer Berlin Heidelberg",
-address="Berlin, Heidelberg",
-pages="187--199",
-abstract="We present a scheme to steganographically embed information in x86 program binaries. We define sets of functionally-equivalent instructions, and use a key-derived selection process to encode information in machine code by using the appropriate instructions from each set. Such a scheme can be used to watermark (or fingerprint) code, sign executables, or simply create a covert communication channel. We experimentally measure the capacity of the covert channel by determining the distribution of equivalent instructions in several popular operating system distributions. Our analysis shows that we can embed only a limited amount of information in each executable (approximately {\$}{\backslash}frac{\{}1{\}}{\{}110{\}}{\$}bit encoding rate), although this amount is sufficient for some of the potential applications mentioned. We conclude by discussing potential improvements to the capacity of the channel and other future work.",
-isbn="978-3-540-30191-2"
+@inproceedings{ElKhalil2004,
+  author    = {El-Khalil, Rakan
+               and Keromytis, Angelos D.},
+  editor    = {Lopez, Javier
+               and Qing, Sihan
+               and Okamoto, Eiji},
+  title     = {Hydan: Hiding Information in Program Binaries},
+  booktitle = {Information and Communications Security},
+  year      = {2004},
+  publisher = {Springer Berlin Heidelberg},
+  address   = {Berlin, Heidelberg},
+  pages     = {187--199},
+  abstract  = {We present a scheme to steganographically embed information in x86 program binaries. We define sets of functionally-equivalent instructions, and use a key-derived selection process to encode information in machine code by using the appropriate instructions from each set. Such a scheme can be used to watermark (or fingerprint) code, sign executables, or simply create a covert communication channel. We experimentally measure the capacity of the covert channel by determining the distribution of equivalent instructions in several popular operating system distributions. Our analysis shows that we can embed only a limited amount of information in each executable (approximately {\$}{\backslash}frac{\{}1{\}}{\{}110{\}}{\$}bit encoding rate), although this amount is sufficient for some of the potential applications mentioned. We conclude by discussing potential improvements to the capacity of the channel and other future work.},
+  isbn      = {978-3-540-30191-2}
 }
 
 
 
 @article{Cleemput2012,
-  author = {Cleemput, Jeroen V. and Coppens, Bart and De Sutter, Bjorn},
-  title = {Compiler Mitigations for Time Attacks on Modern X86 Processors},
-  year = {2012},
+  author     = {Cleemput, Jeroen V. and Coppens, Bart and De Sutter, Bjorn},
+  title      = {Compiler Mitigations for Time Attacks on Modern X86 Processors},
+  year       = {2012},
   issue_date = {January 2012},
-  publisher = {Association for Computing Machinery},
-  address = {New York, NY, USA},
-  volume = {8},
-  number = {4},
-  issn = {1544-3566},
-  url = {https://doi.org/10.1145/2086696.2086702},
-  doi = {10.1145/2086696.2086702},
-  abstract = {This paper studies and evaluates the extent to which automated compiler techniques can defend against timing-based side channel attacks on modern x86 processors. We study how modern x86 processors can leak timing information through side channels that relate to data flow. We study the efficiency, effectiveness, portability, predictability and sensitivity of several mitigating code transformations that eliminate or minimize key-dependent execution time variations. Furthermore, we discuss the extent to which compiler backends are a suitable tool to provide automated support for the proposed mitigations.},
-  journal = {ACM Trans. Archit. Code Optim.},
-  month = {jan},
-  articleno = {23},
-  numpages = {20},
-  keywords = {variable latency instructions, Time-based side channels, x86 architecture}
+  publisher  = {Association for Computing Machinery},
+  address    = {New York, NY, USA},
+  volume     = {8},
+  number     = {4},
+  issn       = {1544-3566},
+  url        = {https://doi.org/10.1145/2086696.2086702},
+  doi        = {10.1145/2086696.2086702},
+  abstract   = {This paper studies and evaluates the extent to which automated compiler techniques can defend against timing-based side channel attacks on modern x86 processors. We study how modern x86 processors can leak timing information through side channels that relate to data flow. We study the efficiency, effectiveness, portability, predictability and sensitivity of several mitigating code transformations that eliminate or minimize key-dependent execution time variations. Furthermore, we discuss the extent to which compiler backends are a suitable tool to provide automated support for the proposed mitigations.},
+  journal    = {ACM Trans. Archit. Code Optim.},
+  month      = {jan},
+  articleno  = {23},
+  numpages   = {20},
+  keywords   = {variable latency instructions, Time-based side channels, x86 architecture}
 }
 
-@INPROCEEDINGS{Younan2006,  author={Younan, Yves and Pozza, Davide and Piessens, Frank and Joosen, Wouter},  booktitle={2006 22nd Annual Computer Security Applications Conference (ACSAC'06)},   title={Extended Protection against Stack Smashing Attacks without Performance Loss},   year={2006},  volume={},  number={},  pages={429-438},  doi={10.1109/ACSAC.2006.27}}
+@inproceedings{Younan2006,
+  author    = {Younan, Yves and Pozza, Davide and Piessens, Frank and Joosen, Wouter},
+  booktitle = {2006 22nd Annual Computer Security Applications Conference (ACSAC'06)},
+  title     = {Extended Protection against Stack Smashing Attacks without Performance Loss},
+  year      = {2006},
+  volume    = {},
+  number    = {},
+  pages     = {429-438},
+  doi       = {10.1109/ACSAC.2006.27}
+}
+
+
+
+@inbook{ahodragonbook,
+  author    = {Aho, Alfred V. and Sethi, Ravi and Ullman, Jeffrey D.},
+  title     = {Compilers: Principles, Techniques, and Tools},
+  year      = {1986},
+  isbn      = {0201100886},
+  chapter   = {1},
+  pages     = {28-31},
+  publisher = {Addison-Wesley Longman Publishing Co., Inc.},
+  address   = {USA}
+}
+
+@article{Sasnauskas2017Souper:Superoptimizer,
+	title   = {{Souper: A Synthesizing Superoptimizer}},
+	year    = {2017},
+	author  = {Sasnauskas, Raimondas and Chen, Yang and Collingbourne, Peter and Ketema, Jeroen and Lup, Gratian and Taneja, Jubi and Regehr, John},
+	journal = {arXiv preprint 1711.04422}
+}
