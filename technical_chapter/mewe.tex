@@ -5,24 +5,14 @@
 \newcommand{\repourl}{TODO}
 % Overview
 This section describes MEWE, our second contribution. 
-MEWE is implemented in 942 lines of C++ code.
-The core idea of \tool is to synthesize diversified function variants, using CROW, providing execution-path randomization in an MVE. Thus, goal of \tool is to synthesize multivariant  \wasm binaries. %, according to the threat model presented in \autoref{sec:threat-model}. 
+%MEWE is implemented in 942 lines of C++ code.
+The core idea of \tool is to synthesize diversified function variants, using CROW, providing execution-path randomization in an MVE. Thus, the goal of \tool is to synthesize multivariant  \wasm binaries. %, according to the threat model presented in \autoref{sec:threat-model}. 
 The tool generates application-level multivariant binaries, without any change to the operating system or \wasm runtime.
-It uses the LLVM 12.0.0 libraries to extend the LLVM standard linker tool capability with the multivariant generation.
+%It uses the LLVM 12.0.0 libraries to extend the LLVM standard linker tool capability with the multivariant generation.
 %Per Crane et al. the execution-path randomization is made to hinder side-channel attacks \cite{crane2015thwarting}. 
 % All programs are diversified with behavior preservation guarantees according to the design of CROW (\autoref{section:crow}).
-
-MEWE has three core diversification strategies, one is a direct consequence of using CROW to generate variants and the remaining two are contributions of MEWE. The diversification strategies are:
-\begin{enumerate}
-% https://en.wikipedia.org/wiki/Constant_folding
-    \item \emph{Constant Inferring}. \tool identifies variables whose value can inferred as constants. This strategy is a consequence of using CROW. The details of constant inferring is presented in \autoref{section:crow}.
-
-    \item \emph{Call Stack Randomization}. \tool introduces equivalent synthetic functions that are called randomly. This results in randomized call stacks, which might complicate attacks based on call stack analysis \cite{liljestrand2021pacstack}. 
-
-    \item \emph{Inlining and De-Inlining}. \tool inlines methods when appropriate. This also results in different call stacks, to hinder the same kind of attacks as for call stack randomization \cite{liljestrand2021pacstack}. On the other hand, the number of register spill/reload operations during machine code generation changes, affecting the measurement of memory side-channels \cite{rane2015raccoon}. 
-    
-
-\end{enumerate}
+MEWE creates an MVE by intermixing functions for which CROW generates variants.
+CROW generates each one of these variants with fine-grained diversification at instruction level, applying the majority of the strategies discussed in \autoref{sota:sota} and \emph{constant inferring}. Besides, \tool inlines function variants when appropriate, also resulting in call stack diversification at runtime.
 
 In \autoref{workflow}, we summarize the analysis and transformation pipeline of \tool.
 We pass a bitcode to be diversified, as an input to \tool.
@@ -31,9 +21,10 @@ We pass a bitcode to be diversified, as an input to \tool.
 In Step~\step{1}, the binary is passed to CROW. 
 Step~\step{2} packages all the variants in one single multivariant LLVM binary. 
 In Step~\step{3}, we use a special component, called a ``mixer``,  which augments the binary with a random generator, which is required for performing the execution-path randomization. 
-Also at this stage, the multivariant binary is fixed with the entrypoint of the original binary. The diversification from CROW also diversifies the original entrypoint function in the binary, creating ambiguity for the multivariant binary that we need to correct. 
+Also at this stage, the multivariant binary is fixed with the entrypoint of the original binary.
 %The harness is used to connect the program to its original execution environment while the generator provides support for random execution path at runtime.
 The final output of Step~\step{4} is a standalone multivariant \wasm binary that can be directly deployed. 
+The source code of MEWE can be found at \todo{}.
 
 %For sake of open science and for fostering research on this important topic, the code of \tool is made publicly available on GitHub: \repourl.
 
@@ -112,7 +103,7 @@ This means that, after Step \step{1}, the variant is necessarily equivalent to t
 
 \subsection*{Combining variants into multivariant functions}
 
-Step~\step{2} of \tool consists in combining the variants generated for the original functions, into a single binary.
+The key component of \tool consists in combining the variants generated for the original functions, into a single binary.
 The goal is to support execution-path randomization at runtime.
 % General idea
 The core idea is to introduce one dispatcher function per original function for which we generate variants.
@@ -126,7 +117,7 @@ With the introduction of dispatcher function,  \tool turns the original call gra
 
 \begin{figure}
     \centering
-  \includegraphics[width=.9\linewidth]{diagrams/CFG.pdf}
+  \includegraphics[width=.8\linewidth]{diagrams/CFG.pdf}
   \caption{Example of two static call graphs. At the top, the original call graph, at the bottom, the multivariant call graph, which includes nodes that represent function variants (in grey), dispatchers (in green), and original functions  (in yellow).
 }
   \label{multivariant}
@@ -169,13 +160,13 @@ define internal i32 @foo(i32 %0) {
         i32 0, label %case_43_
         i32 1, label %case_44_
       ]
-    case_43_:                ; preds = %entry ;
+    case_43_:                 
       %2 = call i32 @foo_43_(%0)
       ret i32 %2
-    case_44_:                ; preds = %entry ;
-      %3 = call i32 @foo_44_(%0)
+    case_44_:                
+      %3 = <body of foo_44_ inlined>
       ret i32 %3
-    end:                                              ; preds = %entry ;
+    end:                                             
       %4 = call i32 @foo_original(%0)
       ret i32 %4
 }
@@ -193,19 +184,22 @@ The choice of a switch-case also avoids having multiple function definitions wit
 This also allows \tool to inline function variants inside the dispatcher, instead of defining them again.
 Here we trade security over performance, since dispatcher functions  that perform indirect calls, instead of a switch-case,  could improve the performance  of the dispatchers as indirect calls have constant time.
 
+\begin{comment}
 
 \subsection*{MEWE's Mixer}
 
 The \tool mixer has four specific objectives: tamper the entrypoint of the application, link the LLVM multivariant binary, inject a random generator and merge all these components into a multivariant \wasm binary.
 % Implementation
-We use the Rustc compiler\footnote{\url{https://doc.rust-lang.org/rustc/what-is-rustc.html}} to orchestrate the mixing because Rustc is a compiler able to merge custom Rust source code with arbitratry-compatible LLVM binary producing a final Wasm binary.
+We use the Rustc compiler\footnote{\url{https://doc.rust-lang.org/rustc/what-is-rustc.html}} to orchestrate the mixing.
 % The random number generation
-For the generator, we rely on WASI's specification \cite{WASI} for the random behavior of the dispatchers. Its exact implementation is dependent on the platform on which the binary is deployed.
+For the random generator, we rely on WASI's specification \cite{WASI} for the random behavior of the dispatchers. Its exact implementation is dependent on the platform on which the binary is deployed.
 
-% How to turn function into endpoints
-The diversification process of CROW does not differentiate between functions that cannot exist in the same global namespace. For example, if an LLVM binary is passed to it as an input, the main function of the binary can be also diversified, creating several entrypoints. We see this phenomenon separately than other functions in the original binary because dispatchers for entrypoint variants make the multivariant invalid to be directly executed. 
 The \tool mixer creates a new entrypoint for the binary called \emph{entrypoint tampering}.
-It simply wraps the dispatcher for the entrypoint variants as a new function for the final Wasm binary that is declared as the application entrypoint. 
+It simply wraps the dispatcher for the entrypoint variants as a new function for the final Wasm binary and is declared as the application entrypoint. %This fixes an issue with  
+
+\end{comment}
+% How to turn function into endpoints
+%The entrypoint tampering is needed for binariess passed to MEWE. We refer to the entrypoint as the entering main function of the original binary passed to MEWE. The tampering is needed because dispatchers for entrypoint variants make the multivariant invalid to be directly executed after it is compiled to Wasm.
 
 %Throughout this paper, we refer to an endpoint as the closure of invoked functions when the entry point of the \wasm binary is executed.
 

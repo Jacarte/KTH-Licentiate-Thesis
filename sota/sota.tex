@@ -54,17 +54,15 @@ Software diversification consists in synthesizing, reusing, distributing, and ex
 According to the survey of Baudry and Monperrus \cite{natural_diversity}, the motivation for software diversification can be separated in five categories: reusability \cite{pohl2005software}, software testing \cite{Chen2010AdaptiveRT}, performance \cite{10.1145/2025113.2025133}, fault tolerance \cite{1659219} and security \cite{cohen1993operating}. Our work contributes to the latter two categories. In this section we discuss related works by highlighting how they generate diversification and how they use the generated diversification. 
 %We finalize by comparing our contributions with the related work.
 
-\todo{Do not talk about complexity of replacements, stress them in the other chapters. Stress the comparison between techniques.}
+%\todo{Do not talk about complexity of replacements, stress them in the other chapters. Stress the comparison between techniques.}
 
-\todo{ Important things  }
+%\todo{ Important things  }
 
-\todo{ Remove impact sentences. }
+%\todo{Rework hard sentences.}
 
-\todo{Rework hard sentences.}
+%\todo{One section on semantically equivalence and checking...}
 
-\todo{One section on semantically equivalence and checking...}
-
-\todo{Split sentences by ideas.}
+% \todo{Split sentences by ideas.}
 
 %\subsection*{Artificial Software Diversity.}
 
@@ -72,15 +70,14 @@ There are two primary sources of software diversification: Natural and Artificia
 % Intro to Cohen and that functional/semantic equivalence is 
 We have found that the foundation for artificial software diversity has barely changed since Cohen in 1993 \cite{cohen1993operating}. Therefore, the work of Cohen is the cornerstone of this dissertation.
 
-\subsection*{Variants' equivalence}
 
-According to their seminal work, whatever two programs are equal if they are semantically equivalent, thus, one program can be considered a diversified version of the other. 
-We use their definition on semantic/functional equivalence as input-output equivalence. Two programs are equivalent if, given identical input, they produce the identical output. 
+
+% Why we use their approach
 
 \subsection*{Variants' generation}
 % Mutation strategy
 Cohen \etal proposed to generate artificial software diversification through mutation strategies.
-A mutation strategy is a set of rules to define how a specific component of software development should be changed to provide a different yet functionally equivalent program. Cohen \etal proposed 10 concrete transformation strategies that can be applied at coarse-grained or fine-grained scales. We summarize them, complemented with the work of Baudry and Monperrus \cite{natural_diversity} and the work of Jackson \etal \cite{jackson}, in 5 strategies.
+A mutation strategy is a set of rules to define how a specific component of software development should be changed to provide a different yet functionally equivalent program. Cohen \etal proposed 10 concrete transformation strategies that can be applied at fine-grained level. We summarize them, complemented with the work of Baudry and Monperrus \cite{natural_diversity} and the work of Jackson \etal \cite{jackson}, in 5 strategies.
 
 % A mutation can be applied at different layers of software lifecycle, from compilation to execution and from source code to executable binary.
 
@@ -101,13 +98,10 @@ A mutation strategy is a set of rules to define how a specific component of soft
 \begin{strategy}{Equivalent instructions replacement}
     \label{strategy:S1}
     \normalfont 
-    Pieces of programs can be replaced by semantically equivalent code such as equivalent arithmetic expressions, including the adding of garbage instructions, \ie instructions that do not affect the computation result. This strategy is simple but powerful since the complexity of program variants dramatically increases. In terms of overhead, the size of the program variant increases with the size of the replacement. Usually, the replacement rules are written by hand as code templates representing a piece of code and a valid replacement for it, similar to compiler optimization rules. For example, Jackson \etal \cite{jackson2011compiler} highlighted the usage of  the optimization flags of several compilers to generate program variants. On the same topic, Cleemput \etal \cite{Cleemput2012} and Homescu \etal~\cite{homescu2013profile} introduce the usage of inserting NOP instructions to generate statically different variants out of the compilation process. 
-
-
-    %Jackson \etal \cite{jackson} have explored how to use NOP operations inserted during compiling time to diversify programs \todo{which stack, if LLVM merge with the previous one}. 
-    % However, this approach is limited by the number of available flags in the compiler implementation and because the optimization is applied in all possible places in the code at the same time.
-    Exhaustive Exploration is another approach to generate equivalent instructions. This technique is based on sampling or constructing all possible programs for a specific language. Once a program is found, it is checked for semantically equivalence against the original program, reporting it as a variant if is the case.
-     Jacob \etal \cite{jacob2008superdiversifier} proposed the technique called superdiversification for x86 binaries. They generate semantically equivalent transformations at basic block level that outperform transformations written by human experts. Similarly, Tsoupidi \etal \cite{Tsoupidi2020ConstraintBasedSD} introduced Diversity by Construction, a constraint-based compiler to generate software diversity for MIPS32 architecture. Their technique relies in using a constraint solver to generate program variants that by construction are semantically equivalent. Compared to other techniques, the works of Jacob \etal and Tsoupidi \etal do not need the writing of transformation strategies by hand, but they are limited by the reach of theorem solvers and the generation of variants can only be static. 
+    Semantically equivalent code can replace pieces of programs. For example, it replaces the original code with equivalent arithmetic expressions or injects instructions that do not affect the computation result(garbage instructions). There are two main approaches for generating equivalent code: rewriting rules and exhaustive searching. The replacement strategies are written by hand as rewriting rules for the first one. A rewriting rule is a tuple composed of a piece of code and a semantic equivalent replacement. For example, Cleemput \etal \cite{Cleemput2012} and Homescu \etal~\cite{homescu2013profile} introduce the usage of inserting NOP instructions to generate statically different variants. In their works, the rewriting rule is defined as \texttt{instr => (nop instr)}, meaning that \texttt{nop} operation followed by the instruction is a valid replacement .
+    On the other hand, exhaustive searching samples or constructs all possible programs for a specific language. Then, a theorem solver checks each found replacement for semantic equivalence. In this topic, Jacob \etal \cite{jacob2008superdiversifier} proposed the technique called superdiversification for x86 binaries. Similarly, Tsoupidi \etal \cite{Tsoupidi2020ConstraintBasedSD} introduced Diversity by Construction, a constraint-based compiler to generate software diversity for MIPS32 architecture.  
+     %Their technique relies in using a constraint solver to generate program variants that by construction are semantically equivalent.
+    %Compared to other techniques, the works of Jacob \etal and Tsoupidi \etal do not need the writing of replacement strategies by hand, but they are limited by the reach of theorem solvers and the generation of variants can only be static. 
     %An enumerative synthesis is a brute-force approach to generate program variants. With a maximum number of instructions, it constructs and checks all possible programs up to that limit. For a simplified instance, with a maximum code size of 2 instructions in a programming language with $L$ possible constructions, an enumerative synthesizer builds and checks all $L\times L$ combinations of programs. 
     %
 \end{strategy}
@@ -117,7 +111,7 @@ A mutation strategy is a set of rules to define how a specific component of soft
     \label{strategy:S2}
     \normalfont
     This strategy reorders instructions or entire program blocks if they are independent.
-    The location of variable declarations might change as well if compilers resort them in the symbol tables. It prevents static examination and analysis of parameters and alters memory locations. The strategy should not affect the size of program variants neither their execution time. In this field, Bhatkar \etal \cite{bhatkar03, bhatkar2005efficient} proposed the random permutation of the order of variables and routines for ELF binaries.
+    The location of variable declarations might change as well if compilers resort them in the symbol tables. It prevents static examination and analysis of parameters and alters memory locations. In this field, Bhatkar \etal \cite{bhatkar03, bhatkar2005efficient} proposed the random permutation of the order of variables and routines for ELF binaries.
 \end{strategy}
 
 \begin{strategy}{Adding, changing, removing jumps and calls}
@@ -142,7 +136,7 @@ A mutation strategy is a set of rules to define how a specific component of soft
 \begin{strategy}{ISA randomization and simulation}
     \label{strategy:S5}
     \normalfont
-    This strategy encodes the original program binary. Once encoded, the program can be decoded only once at the target client, or it can be interpreted in the encoded form using a custom virtual machine implementation. This technique is strong against attacks involving the examination of code. It does not affect the size of program variants or their execution times.
+    This strategy encodes the original program binary. Once encoded, the program can be decoded only once at the target client, or it can be interpreted in the encoded form using a custom virtual machine implementation. This technique is strong against attacks involving the examination of code. 
     Kc \etal \cite{Kc03} and Barrantes \etal \cite{barrantes2003randomized} proposed seminal works on instruction-set randomization 
     to create a unique mapping between artificial CPU instructions and real ones.
     On the same topic, Chew and Song \cite{Chew02mitigatingbuffer} target operating system randomization. They randomize the interface between the operating system and the user applications.
@@ -163,6 +157,29 @@ A mutation strategy is a set of rules to define how a specific component of soft
 \end{strategy}
 \end{comment}
 
+All described strategies can be mixed together. They can be applied in any sequence and recursively, providing a richer diversity environment. The main limitation is that at some point the code of the variant cannot be differentiated by the mutation strategy.  However, this is the same issues that want to create for potential attackers. 
+
+
+\subsection*{Variants' equivalence}
+
+Equivalence checking between program variants is an essential component for any program transformation task, from checking compiler optimizations \cite{LeCompilers} to the artificial synthesis of programs discussed in this chapter. 
+Equivalence checking proves that two pieces of code or programs are semantically equivalent.
+This process is undecidable; still, some approaches approximate it \cite{churchill2019}. % Why is important
+Cohen \cite{cohen1993operating} simplifies this process by enunciating the following property: two programs are variants of the same program if given identical input, they produce the identical output. We use this same enunciation as the definition of \emph{semantic/functional equivalence} along with this dissertation. 
+
+% The relaxation of the equivalence checking
+Notice that this property is relaxed. Two programs can be statically different but still provide the same semantic output. For example, the work of Sengupta \etal \cite{sengupta} uses the rotation of different database engines for reliability. In this case, all database engines provide the same input/output property for creating, updating, and adding new data. Their solution has input/output equivalent programs provided by statically different binaries with different observable behaviors during runtime. On the contrary, the best example of restricted equivalence checking is the one followed by most antivirus applications. In practice, most of them check for the presence of the same binary in an enormous database, \ie if two programs are exactly the same binary, they are also semantically equivalent.
+
+
+% Using the test suite and equivalence by construction
+The easiest way to guarantee the equivalence property is by construction. For example, in the case illustrated in \autoref{strategy:S1} for Cleemput \etal \cite{Cleemput2012} and Homescu \etal \cite{homescu2013profile}, the transformation strategy is constructed to be semantically equivalent since the beginning. However, this process is prone to developer errors, and better checking is needed. For example, the test suite of the original program can be used to check the variant. If the test suite passes for the program variant \cite{harrand2020java}, it is equivalent to the original. However, it is limited due to the need for a preexisting test suite. When program variants are artificially created, another technique is needed to check for equivalence.
+
+% Automatic equivalence checking
+The majority of the previously mentioned works use theorem solvers (SMT solvers) \cite{SMT_solver} or fuzzers \citationneeded to prove equivalence. For SMT solvers, the main idea is to turn the two codes into math expressions. The SMT solver checks for counter-examples. When the SMT solver finds a counter-example, there exists an input for which the two math expressions return a different output. The main limitation of this technique is that all algorithms cannot be translated to a math expression, for example, loops. Yet, this technique tends to be the most used for no-branching-programs checking like basic block and peephole replacements \citationneeded.
+On the other hand, fuzzers look randomly for inputs that provide different observable behavior. If two inputs provide a different output in the variant, the variant and the original program are not semantically equivalent. The main limitation for fuzzers is that the process is remarkably time-expensive and requires the introduction of oracles by hand. In practice,  a fuzzer needs a significant amount of time to check two programs, and this time takes hours at the minimum. 
+
+% Why SMT solvers
+We have found that SMT solvers are the best option for checking most of the fine-grained transformations previously mentioned for two main reasons. First, the field of SMT is mature and provides battle-tested tooling \cite{SMT_solver, SMTGupta}. Second, the existing SMT tooling is configurable and flexible, making the checking of program variants feasible in terms of the SMT solver execution time. In \autoref{chapter:technical} we describe how we apply SMT solvers in our contributions for equivalence checking.
 %\subsection*{Vertical Software Diversification}
 
 %\todo{Architecture level, remark these works but not in our scope.}
@@ -205,14 +222,16 @@ After program variants are generated, they can be used in two main scenarios: Ra
     \caption{Software Diversification usages. }
 \end{figure}
 
-\todo{Split in what and how?}
-
-\todo{Improvement figure, remove "ramdom rotation" and explain how it works in terms of "Deplyment".}
+% \todo{Split in what and how?}
 
 \begin{usage}{Randomization:}
     \label{usage:randomization}
     \normalfont
-    In the first scenario, a program is selected from the collection of variants (program's variant pool) and at each deployment it is assigned to a random client. This strategy prevents the usage of one variant to exploit another clients. When clients run two program variants, a potential attacker must create one attack for each variant. Therefore, the attacker must spend more time and effort to get the same return on reward for an attack. Jackson \etal \cite{jackson} call this a herd inmunity, in their work they demonstrated that this usage can prevent against ROP and JIT-ROP attacks \citationneeded. Similarly, Amarilli \etal~\cite{amarilli2011can} drastically increase the number of execution traces required by a side-channel attack
+    In the first scenario \autoref{diagrams:sota:randomization}, a program is selected from the collection of variants (program's variant pool) and at each deployment it is assigned to a random client. Jackson \etal \cite{jackson} call this a herd inmunity scenario since vulnerable binaries can affect only part of the client's community. For an instance, the Polyverse company \footnote{\url{https://polyverse.com/}} uses this scenario in real life. They deliver a unique Linux distribution compilation for each one of its clients by scrambling the Linux packages at source code level. 
+    %This strategy prevents the usage of one variant to exploit another clients. When clients run two program variants, a potential attacker must create one attack for each variant. 
+    %Therefore, the attacker must spend more time and effort to get the same return on reward for an attack. 
+    %in their work they demonstrated that this usage can prevent against ROP and JIT-ROP attacks \citationneeded. Similarly, 
+    % Amarilli \etal~\cite{amarilli2011can} drastically increase the number of execution traces required by a side-channel attack
     %To illustrate the impact of this usage, the Polyverse company \footnote{\url{https://polyverse.com/}} is able to provide unique Linux distributions to each one of their clients. 
 
     
@@ -222,12 +241,12 @@ After program variants are generated, they can be used in two main scenarios: Ra
 \begin{usage}{Multivariant Execution(MVE):}
     \label{usage:mve}
     \normalfont
-    In the second scenario, multiple program variants are composed in one single binary (multivariant binary) that is randomly deployed to a client. Once in the client, the multivariant binary executes program variants during runtime, either in parallel to check for inconsistencies or a single program to randomize execution paths \cite{bhatkar03}.
-    In 2006, security researchers at the University of Virginia laid the foundations of a novel approach to security that consists in executing multiple variants of the same program, \cite{cox06}. Bruschi et al. \cite{bruschi2007diversified} extended the idea of executing the variants in parallel. Simultaneously, Salamat \etal \cite{salamat2007stopping} created a C compiler and modified a standard library that generates 32-bit Intel variants where the stack grows in the opposite direction. Their approach prevents against memory corruption. 
-    
+    In the second scenario \autoref{diagrams:sota:mve}, multiple program variants are composed in one single binary (multivariant binary). The University of Virginia laid the foundations of this approach \cite{cox06}. Each multivariant binary is randomly deployed to a client. Once in the client, the multivariant binary executes its embedded program variants at runtime. The execution of the embedded variants can be either in parallel to check for inconsistencies or a single program to randomize execution paths \cite{bhatkar03}. Bruschi et al. \cite{bruschi2007diversified} extended the idea of executing two variants in parallel with not-overlapping and randomized memory layouts. Simultaneously, Salamat \etal \cite{salamat2007stopping} modified a standard library that generates 32-bit Intel variants where the stack grows in the opposite direction checking for memory inconsistencies. Notably, Davi \etal proposed Isomeron \cite{davi2015isomeron}, an approach  for execution-path randomization. Isomeron simultaneously loads the original program and a variant. While the program is running, Isomeron continuously flips a coin to decide which copy of the program should be executed next at the level of function calls. 
+    %With Davi \etal approach, a potential attacker cannot predict whether the original or the variant of a program will execute.
+    % Their approach prevents against memory corruption. 
     %Also, this system can be reached dynamically, like the work of Courouss{\'e} \etal, creating an MVE through code polymorphism \cite{10.1145/3281662}.  
-    Neatly exploiting the limit case of executing only two variants has demonstrated to harden systems against attackers \cite{salamat2009orchestra, maurer2012tachyon,Kim2015, lu2018stopping}. Notably, Davi \etal proposed Isomeron \cite{davi2015isomeron}, an approach  for execution-path randomization. Isomeron simultaneously loads the original program and a variant. While the program is running, Isomeron continuously flips a coin to decide which copy of the program should be executed next at the level of function calls. With Davi \etal approach, a potential attacker cannot predict whether the original or the variant of a program will execute. On the same topic,
-    Agosta \etal~\cite{agosta2015meet} and Crane \etal~\cite{crane2015thwarting} used more than two generated programs, to randomize software control flow at runtime, trackling power side-channels.  
+    Neatly exploiting the limit case of executing only two variants in a multivariant binary has demonstrated to harden systems \cite{salamat2009orchestra, maurer2012tachyon,Kim2015, lu2018stopping, davi2015isomeron}.  Further two variants per multivariant binary,
+    Agosta \etal~\cite{agosta2015meet} and Crane \etal~\cite{crane2015thwarting} used more than two generated programs in the multivariant composition, randomizing software control flow at runtime.  
     %Besides, . 
     
 
@@ -236,6 +255,7 @@ After program variants are generated, they can be used in two main scenarios: Ra
     %
 \end{usage}
 
+Both scenarios have demonstrated to harden security by tackling know vulnerabilities such as (JIT)ROP attacks \cite{jackson2011compiler} and power side-channels \cite{amarilli2011can}. Moreover, Artificial Software Diversification can be seen as a preemptive technique for yet unknown vulnerabilities \cite{jackson}. In \autoref{table:sota:comparison} we annotate the related works with the defined usage scenarios. Our work contributes to both scenarios as a preemptive technique for hardening \wasm.
 
 %\begin{usage}{Moving Target Defense(MTD):}
 %    \label{usage:mtd}
@@ -263,14 +283,15 @@ In \autoref{table:sota:comparison} we listed related work on Artificial Software
 %Besides, the \wasm environment lacks natural diversity \cite{natural_diversity}. Compared to the work of Harrand \etal \citationneeded, in WebAssembly, one could not use preexisting and different program versions to provide diversification. On the other hand, while the number of related work for software diversity is large, only one approach has been applied to the context of \wasm. 
 % Move to the table
 %To the best of our knowledge, the closest diversification work on the browsers involving \wasm is the work of Romano \etal \cite{wobfuscator}. They proposed to de-inline JavaScript subexpressions and replace them with function calls to \wasm counterparts.  They empirically demonstrated that malware classifiers could be evaded with this diversification technique. 
-\wasm is a novel technology, and the adoption of defenses for it is still under development \cite{Narayan2021Swivel, johnson2021}. The current limitations on security and the lack of software diversity approaches for \wasm motivate our work.
+%\wasm is a novel technology, and the adoption of defenses for it is still under development \cite{Narayan2021Swivel, johnson2021}. The current limitations on security and the lack of software diversity approaches for \wasm motivate our work.
 % CROW
 Our first contribution, CROW \cite{CROW} generates multiple program variants for \wasm using the LLVM pipeline.
 It contributes to state of the art in artificially creating randomization for \wasm (\autoref{usage:randomization}). Because of the specificities of code execution in the browser (mentioned in \autoref{sota:wasm}), this can be considered a randomization approach. For example, since \wasm is served at each page refreshment, every time a user asks for a \wasm binary, she can be served a different variant provided by CROW. 
 % Move to intro
 %Besides, our contribution can be used in fuzzing campaigns \citationneeded to provide reliability. The diversification created by CROW can unleash hidden behaviors in compilers and interpreters. Thanks to CROW, a bug was discovered in the Lucet compiler \footnote{\url{https://www.fastly.com/blog/defense-in-depth-stopping-a-wasm-compiler-bug-before-it-became-a-problem}}.
 %MEWE
-Notably, researching on MVE in a distributed setting like the Edge \citationneeded has been less researched. With MEWE \cite{MEWE}, our second contribution, we randomly select from several variants at runtime, creating a multivariant execution scheme(\autoref{usage:mve}) that randomizes the observable behaviors at each run of the program. %We use the natural redundancy of Edge-Cloud computing architectures to deploy an internet-based MVE.
+%Notably, researching on MVE in a distributed setting like the Edge \citationneeded has been less researched. 
+With MEWE \cite{MEWE}, our second contribution, we randomly select from several variants at runtime, creating a multivariant execution scheme(\autoref{usage:mve}) that randomizes the observable behaviors at each run of the multivariant binary. %We use the natural redundancy of Edge-Cloud computing architectures to deploy an internet-based MVE.
 
 % Move to intro
 % Only Voulimeneas \etal recently proposed a multivariant execution system by parallelizing the execution of the variants in different machines \cite{voulimeneas2021dmvx} for the sake of efficiency. 

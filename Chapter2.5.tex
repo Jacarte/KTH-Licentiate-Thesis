@@ -2,11 +2,10 @@
 \label{chapter:technical}
 
 In the artifacts implemented with our contributions, we assume that the \wasm programs are generated through the LLVM compilation pipeline. This assumption is supported by the work of Hilbig et al. \cite{Hilbig2021AnES} in 2021 and the fact that LLVM-based compilers created the 70\% of \wasm binaries in the wild. Therefore,
-our contributions diversify Wasm programs at the LLVM level. Other solutions would have been to diversify at the source code level, or at the native binary level. However, the former would limit the applicability of our work. 
+our contributions diversify Wasm programs at the LLVM level. Other solutions would have been to diversify at the source code level, or at the \wasm binary level. However, the former would limit the applicability of our work. 
 %Besides, as we discussed previously, our intention is also to study the impact of our contributions in edge computing and distributed systems and the top edge computing execution platforms, e.g. Cloudflare and Fastly, mostly take \wasm binaries as input. 
-LLVM, on the contrary, does not suffer from those limitations: 1) it supports different languages, with a rich ecosystem of frontends 2) it can reliably be retargeted to \wasm, thanks to the corresponding mature component in the LLVM toolchain. In addition, the LLVM ecosystem as a whole is very active, providing us with many different tools to facilitate our research endeavour.
-
-In this chapter we summarize the technical details for our two contributions. \autoref{section:crow} we dissect the main components CROW \cite{CROW} implementation. Later, in \autoref{section:mewe}, we describe the technical details of our second contribution, MEWE \cite{MEWE}.
+LLVM, on the contrary, supports different languages, with a rich ecosystem of frontends it it can reliably be retargeted to \wasm, thanks to the corresponding mature component in the LLVM toolchain. In addition, the LLVM ecosystem as a whole is very active, providing us with many different tools to facilitate our research endeavour.
+In this chapter we summarize the technical details for our two contributions. \autoref{section:crow} we dissect the main components CROW \cite{CROW} implementation. Finally, in \autoref{section:mewe}, we describe the technical details of our second contribution, MEWE \cite{MEWE}.
 
 
 \input{technical_chapter/crow.tex}
@@ -18,4 +17,7 @@ In this chapter we summarize the technical details for our two contributions. \a
 \section*{Conclusions}
 
 This chapter discusses the technical details for the artifacts implemented for our two contributions.
+We describe how CROW generates program variants.
+We introduce a new mutation strategy that is a consequence of retargeting a superoptimizer for LLVM as a superdiversifier.
+Besides, we dissect MEWE and how it creates an MVE system.
 In \autoref{chapter:method} we discuss the methodology we follow to evaluate the impact of CROW and MEWE.
