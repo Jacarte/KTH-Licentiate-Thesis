@@ -1,5 +1,10 @@
-\chapter{Technical details}
+\chapter{Technical contributions/ Automatic Diversity for Wasm/ }
 \label{chapter:technical}
+
+\todo{Make a real introduction, the paragraphs below is too fast}
+
+\todo{Create a new section from this, with a new figure as a high level architecture}
+
 
 In the artifacts implemented with our contributions, we assume that the \wasm programs are generated through the LLVM compilation pipeline. This assumption is supported by the work of Hilbig et al. \cite{Hilbig2021AnES} in 2021 and the fact that LLVM-based compilers created the 70\% of \wasm binaries in the wild. Therefore,
 our contributions diversify Wasm programs at the LLVM level. Other solutions would have been to diversify at the source code level, or at the \wasm binary level. However, the former would limit the applicability of our work. 
