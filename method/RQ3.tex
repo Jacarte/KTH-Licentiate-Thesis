@@ -17,24 +17,24 @@
 
 \todo{Motivate the usage of Edge based platforms...}
 
-In the last research question, we study whether the created variants can be used in real-world applications and what properties offer the composition of the variants as multivariant binaries. We build multivariant binaries (according to \autoref{def:multivariant_binary}), and we deploy and execute them at the Edge. The process of \emph{mixing} multiple variants into one multivariant binary is an essential contribution of the thesis that is presented in details in \cite{2021arXiv210808125C}. RQ3 focuses on analyzing the impact of this contribution on execution times and timing side-channels. To answer RQ3, we use the variants generated for the programs of \corpussodium and \corpusqrcode corpora, we take $2 + 5$ programs interconnecting the LLVM bitcode modules (mentioned in \autoref{table:corpora}). We illustrate the protocol to answer RQ3 in \autoref{diagrams:protocol:rq3} starting from the creation of the programs' population.
+In the last research question, we study whether the created variants can be used in real-world applications and what properties offer the composition of the variants as \termidx{multivariant }binaries. We build multivariant binaries (according to \autoref{def:multivariant_binary}), and we deploy and execute them at the Edge. The process of \emph{mixing} multiple variants into one \termidx{multivariant }binary is an essential contribution of the thesis that is presented in details in \cite{2021arXiv210808125C}. RQ3 focuses on analyzing the impact of this contribution on execution times and timing side-channels. To answer RQ3, we use the variants generated for the programs of \corpussodium and \corpusqrcode corpora, we take $2 + 5$ programs interconnecting the LLVM bitcode modules (mentioned in \autoref{table:corpora}). We illustrate the protocol to answer RQ3 in \autoref{diagrams:protocol:rq3} starting from the creation of the programs' population.
 
 
 
-%The workflow starts by using the programs' population of each program generated in RQ1 to create the multivariant binaries. We deploy the multivariant binaries at the Edge, and we collect their execution times. We measure the differences for the execution times on the edge. Then, we discuss how multivariant binaries contribute to less predictable timing side-channels.
+%The workflow starts by using the programs' population of each program generated in RQ1 to create the \termidx{multivariant }binaries. We deploy the \termidx{multivariant }binaries at the Edge, and we collect their execution times. We measure the differences for the execution times on the edge. Then, we discuss how \termidx{multivariant }binaries contribute to less predictable timing side-channels.
 
 \subsection*{Metrics}
 
-To answer RQ3, we build multivariant \wasm binaries meant to provide path execution diversification. In the following we define what a multivariant binary is. 
+To answer RQ3, we build \termidx{multivariant }\wasm binaries meant to provide path execution diversification. In the following we define what a \termidx{multivariant }binary is. 
 
 \begin{definition}{Multivariant binary:}
     \label{def:multivariant_binary}
     \normalfont
-    Given a program $P$ with functions $\{F_1, F_2, ..., F_n\}$ for which we generate function's populations (according to \autoref{def:rq1:programspopulation}) $\{M(F_1), M(F_2), ..., M(F_n)\}$. A multivariant binary $B$ is the composition of the functions populations following the function call graph of $P$ where each call $F_i \rightarrow F_j$ is replaced by a call $f \rightarrow g $, where $f\in M(F_i)$ and $g \in M(F_j)$ are function variants randomly selected at runtime. 
+    Given a program $P$ with functions $\{F_1, F_2, ..., F_n\}$ for which we generate function's populations (according to \autoref{def:rq1:programspopulation}) $\{M(F_1), M(F_2), ..., M(F_n)\}$. A \termidx{multivariant }binary $B$ is the composition of the functions populations following the function call graph of $P$ where each call $F_i \rightarrow F_j$ is replaced by a call $f \rightarrow g $, where $f\in M(F_i)$ and $g \in M(F_j)$ are function variants randomly selected at runtime. 
 
 \end{definition}
 
-We use the execution time of the multivariant binaries to answer RQ3. We use the same metric defined in \autoref{metric:time} for the execution time of multivariant binaries.
+We use the execution time of the \termidx{multivariant }binaries to answer RQ3. We use the same metric defined in \autoref{metric:time} for the execution time of \termidx{multivariant }binaries.
 
 \subsection*{Protocol}
 
@@ -42,11 +42,11 @@ We use the execution time of the multivariant binaries to answer RQ3. We use the
 We answer RQ3 by analyzing a real-world scenario. Since Wasm binaries are currently adopted for Edge computing,
 we run our experiments for RQ3 on the Edge. 
 Edge applications are designed to be deployed as isolated HTTP services, having one single responsibility that is executed at every HTTP request. This development model is known as serverless computing, or function-as-a-service \cite{shillaker2020faasm,Narayan2021Swivel}. 
-We deploy and execute the multivariant binaries as end-to-end HTTP services on the Edge and we collect their execution times.
+We deploy and execute the \termidx{multivariant }binaries as end-to-end HTTP services on the Edge and we collect their execution times.
 To remove the natural jitter in the network, the execution times are measured at the backend space, \ie we collect the execution times inside the Edge node and not from the client computer. 
 Therefore, we instrument the binaries to return the execution time as an HTTP header. 
 
-We do this process twice, for the original program and its multivariant binary. We deploy and execute the original and the multivariant binaries on 64 edge nodes located around the world. In \autoref{diagrams:protocol:rq3:map} we illustrate the word wide location of the edges nodes.
+We do this process twice, for the original program and its \termidx{multivariant }binary. We deploy and execute the original and the \termidx{multivariant }binaries on 64 edge nodes located around the world. In \autoref{diagrams:protocol:rq3:map} we illustrate the word wide location of the edges nodes.
 
 
 \begin{figure}[h]
@@ -58,6 +58,6 @@ We do this process twice, for the original program and its multivariant binary. 
 
 
 
-We collect 100k execution times for each binary, both the original and multivariant binaries. The number of execution time samples is motivated by the seminal work of Morgan \etal \cite{morgan2015web}. 
+We collect 100k execution times for each binary, both the original and \termidx{multivariant }binaries. The number of execution time samples is motivated by the seminal work of Morgan \etal \cite{morgan2015web}. 
 We perform a Mann-Withney U test \cite{mann1947} to compare both execution time distributions. 
 If the P-value is lower than 0.05, the two compared distributions are different.

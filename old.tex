@@ -22,7 +22,7 @@ Program optimization during compiling can be seen as a subproblem, \ie given a p
 This process is then followed with the result foundlings until no it cannot find another smaller program. 
 
 
-All this said, the very first premise to find program variants is that the found variants should be semantically equivalent, \ie every time a program variant is executed with the same input as the original program, both should return the same result. In terms of wording, we can say that the programs are not created, but they are found in the large space of all possible programs. 
+All this said, the very first premise to find program variants is that the found variants should be semantically equivalent, \ie every time a \termidx{program variant }is executed with the same input as the original program, both should return the same result. In terms of wording, we can say that the programs are not created, but they are found in the large space of all possible programs. 
 
 
 \begin{definition}{Program variant:}
@@ -59,7 +59,7 @@ With the previous definitions we enunciate what a diversifier should be in \auto
 
 \end{algorithm}
 
-A program variant can be created by transforming the original program. This transformation must be consequent with the defined functional equivalence rule. 
+A \termidx{program variant }can be created by transforming the original program. This transformation must be consequent with the defined functional equivalence rule. 
 XXX and YYY proposed to solve this issue by using the optimization options already available in the compilers. For example, by applying a set of the compiler optimizations during the compilation of the original program, the variants are created by changing out code that it not the best in terms of performance. The result of the transformations is a program that behaves as the original program but faster. 
 
 % Extend this into a paragraph
@@ -68,10 +68,10 @@ The main limitation with this approach is that the number of programs that can b
 
 \section{A superdiversifier}
 
-Given a program, code superoptimization produces new program variant, functionally equivalent to the original but better according to a concrete criterion. For example, a superoptimizer would try to generate a program variant with fewer instructions or that produces a smaller compiled binary \cite{1987_Massalin_Sueroptimizer}. Superoptimizers first detect all \emph{optimizations}. Optimizations are the pieces of code that could be replaced by a functionally equivalent code fragment, ensuring an improvement of the criterion. A \emph{superoptimized} program will result from applying all these replacements or optimizations at once. Thus, this process could be defined in the algorthm proposed in \autoref{gen:algorthm}
+Given a program, code superoptimization produces new program variant, functionally equivalent to the original but better according to a concrete criterion. For example, a superoptimizer would try to generate a \termidx{program variant }with fewer instructions or that produces a smaller compiled binary \cite{1987_Massalin_Sueroptimizer}. Superoptimizers first detect all \emph{optimizations}. Optimizations are the pieces of code that could be replaced by a functionally equivalent code fragment, ensuring an improvement of the criterion. A \emph{superoptimized} program will result from applying all these replacements or optimizations at once. Thus, this process could be defined in the algorthm proposed in \autoref{gen:algorthm}
 
 
-We leverage the search strategy of superoptimizers to generate several variants of a given program. Our main idea is to generate a new program variant by applying a subset of the optimizations found by a superoptimizer. Our proposal is summarized in \autoref{alg:generation}. We consider the superoptimization search strategy to be a function that takes as input a program, and returns the set of all possible optimizations for a concrete criterion. Once the superoptimizer has detected all possible optimizations, we build the \emph{power set} of all these replacements. Then, we apply, in turn, all the optimization subsets in this power set. The application of the optimizations in the subset will generate a new program variant. Notice that, applying the empty subset produces the original program and applying the set of all optimizations is equivalent to \emph{superoptimizing} the original program. Thus, these two variants are also produced by our strategy.
+We leverage the search strategy of superoptimizers to generate several variants of a given program. Our main idea is to generate a new \termidx{program variant }by applying a subset of the optimizations found by a superoptimizer. Our proposal is summarized in \autoref{alg:generation}. We consider the superoptimization search strategy to be a function that takes as input a program, and returns the set of all possible optimizations for a concrete criterion. Once the superoptimizer has detected all possible optimizations, we build the \emph{power set} of all these replacements. Then, we apply, in turn, all the optimization subsets in this power set. The application of the optimizations in the subset will generate a new program variant. Notice that, applying the empty subset produces the original program and applying the set of all optimizations is equivalent to \emph{superoptimizing} the original program. Thus, these two variants are also produced by our strategy.
 
 
 %In this section, we discuss key concepts and we enumerate the definitions used along this chapter. 
@@ -100,22 +100,22 @@ In this section, we define and discuss the concept of functional equivalence, co
 \subsection{Dynamic}
 \subsection{Preservation}
 
-We translate each \wasm multivariant binary with Lucet, to determine the impact of this translation to machine code on the function variants and the diversity of paths in the multivariant call graph. 
+We translate each \wasm \termidx{multivariant }binary with Lucet, to determine the impact of this translation to machine code on the function variants and the diversity of paths in the \termidx{multivariant }call graph. 
 
 % Description of the table and general stats
-The 'x86 code' section of \autoref{table:CFG1} summarizes the key data to answer RQ2. Column \#Variants shows the number of preserved variants in the x86 code of each endpoint, column \#Paths shows the number of possible paths in the x86 multivariant binary. The last two columns show  the ratio of paths (PP) and variants (PV) preserved in x86. 
-Note that the path preservation ratio metric is a projection of the variant preservation and the call graph in the multivariant binary.
+The 'x86 code' section of \autoref{table:CFG1} summarizes the key data to answer RQ2. Column \#Variants shows the number of preserved variants in the x86 code of each endpoint, column \#Paths shows the number of possible paths in the x86 \termidx{multivariant }binary. The last two columns show  the ratio of paths (PP) and variants (PV) preserved in x86. 
+Note that the path preservation ratio metric is a projection of the variant preservation and the call graph in the \termidx{multivariant }binary.
 
  
 % Previous works and why some functions have several preserved transformations
-In all cases, more than 77\% of the individual function variants present in the multivariant Wasm binary are preserved in the x86 multivariant. This high preservation rate for function variants allows to preserve a large ratio of possible paths in the multivariant call graph.
-In 4 out of 7 cases, more than 83\% of the possible execution paths in the multivariant Wasm  binary are preserved.
+In all cases, more than 77\% of the individual function variants present in the \termidx{multivariant }Wasm binary are preserved in the x86 multivariant. This high preservation rate for function variants allows to preserve a large ratio of possible paths in the \termidx{multivariant }call graph.
+In 4 out of 7 cases, more than 83\% of the possible execution paths in the \termidx{multivariant }Wasm  binary are preserved.
 The translation to machine code preserves 21\% and 17\% of the possible paths for \texttt{qr\_str} and \texttt{qr\_image}. Yet, the x86 version of the multiversion call graph for these endpoints still includes millions of possible paths, with 17 and 15 randomization points. The translation to machine drastically reduces the potential for randomized execution paths only for \texttt{bin2base64}, for which it preserves only 25\% of the possible paths, for a total of 41 paths.
 
 % Population's compression
 We have identified why some variants are not preserved the translation from Wasm to x86. Lucet performs optimization passes before generating machine code. 
 In some cases, this can annihilate the effect of CROW's diversification transformation. 
-For example, in \autoref{mul:prevalence_example}, CROW synthesizes a variant in the right column by splitting it in two  multiplications relying on the integer overflow mechanism. 
+For example, in \autoref{mul:prevalence_example}, \termidx{CROW }synthesizes a variant in the right column by splitting it in two  multiplications relying on the integer overflow mechanism. 
 A  constant merging optimization pass could remove the constant multiplications by performing it at compilation time. 
 The other transformation cases that we have observed have the same property, the transformations are simple enough to be quickly verified at compilation time.
 
@@ -166,15 +166,15 @@ Moreover, the last three endpoints have a path preservation ratio that is less t
 
 The example in \autoref{diag:preservation}  illustrates this phenomenon.
 Suppose an original binary composed of three functions with the call graph illustrated at the top of the figure. Here, we count 2 possible paths (one with no iteration, and one with a single iteration).
-\tool generates 2 variants for $f2$ and 4 variants for $f3$, the multivariant wasm call graph is illustrated at the center of the figure. The number of possible execution paths increases to 40.
+\tool generates 2 variants for $f2$ and 4 variants for $f3$, the \termidx{multivariant }wasm call graph is illustrated at the center of the figure. The number of possible execution paths increases to 40.
 In the translation process, Lucet transforms the two \wasm function variants for $f2$ into the same x86 function.
-In this case, the number of possible execution paths in the x86 multivariant call graph is reduced by a factor of 2, from 40 to 20.
+In this case, the number of possible execution paths in the x86 \termidx{multivariant }call graph is reduced by a factor of 2, from 40 to 20.
 However, the number of variants is decreased only in 1. 
 The complexity of the call graph has a major impact on the number of possible execution paths. 
 
 
-	The translation from \wasm to machine code through Lucet preserves a high ratio of function variants. This leads to the preservation of high numbers of possible execution paths in the multivariant binaries. 
-	Our multivariant execution scheme is appropriate for the state-of-the-art runtime of edge computing nodes.
+	The translation from \wasm to machine code through Lucet preserves a high ratio of function variants. This leads to the preservation of high numbers of possible execution paths in the \termidx{multivariant }binaries. 
+	Our \termidx{multivariant }execution scheme is appropriate for the state-of-the-art runtime of edge computing nodes.
 
 
 \section{Conclusions}
@@ -188,16 +188,16 @@ The complexity of the call graph has a major impact on the number of possible ex
 
 
 \begin{comment}
-    This section describes CROW, a tool tailored to create semantically equivalent variants out of a single program, either C/C++ code or LLVM bitcode. We assume that the \wasm programs are generated through the LLVM compilation pipeline to implement CROW. This assumption is supported by the work of Lehman et al. \cite{}; the fact that LLVM-based compilers are the most popular compilers to build \wasm programs \cite{usenixWASM2020} and the availability of source code (typically C/C++; and LLVM for \wasm) that provides a structure to perform code analysis and produce code replacements that is richer than the binary code. CROW is part of the contributions of this thesis.
-    In \autoref{diagrams:crow}, we describe the workflow of CROW to create program variants.
+    This section describes CROW, a tool tailored to create semantically equivalent variants out of a single program, either C/C++ code or LLVM bitcode. We assume that the \wasm programs are generated through the LLVM compilation pipeline to implement CROW. This assumption is supported by the work of Lehman et al. \cite{}; the fact that LLVM-based compilers are the most popular compilers to build \wasm programs \cite{usenixWASM2020} and the availability of source code (typically C/C++; and LLVM for \wasm) that provides a structure to perform code analysis and produce code replacements that is richer than the binary code. \termidx{CROW }is part of the contributions of this thesis.
+    In \autoref{diagrams:crow}, we describe the workflow of \termidx{CROW }to create program variants.
     
     \begin{figure*}[h]
         \includegraphics[width=\linewidth]{diagrams/generation/crow.drawio.pdf}
-        \caption{CROW workflow to generate program variants. CROW takes C/C++ source codes or LLVM bitcodes to look for code blocks that can be replaced by semantically equivalent code and generates program variants by combining them.}
+        \caption{\termidx{CROW }workflow to generate program variants. \termidx{CROW }takes C/C++ source codes or LLVM bitcodes to look for code blocks that can be replaced by semantically equivalent code and generates program variants by combining them.}
         \label{diagrams:crow}
     \end{figure*}
     
-    Figure \ref{diagrams:crow} highlights the main two stages of the CROW's workflow, \textit{exploration} and \textit{combining}. The workflow starts by compiling the input program into the LLVM bitcode using clang from the source code. During the \emph{exploration} stage, CROW takes an LLVM bitcode and, for its code blocks, produces a collection of code replacements that are functionally equivalent to the original program. In the following, we enunciate the definitions we use along with this work for a code block, functional equivalence, and code replacement. 
+    Figure \ref{diagrams:crow} highlights the main two stages of the CROW's workflow, \textit{exploration} and \textit{combining}. The workflow starts by compiling the input program into the LLVM bitcode using clang from the source code. During the \emph{exploration} stage, \termidx{CROW }takes an LLVM bitcode and, for its code blocks, produces a collection of code replacements that are functionally equivalent to the original program. In the following, we enunciate the definitions we use along with this work for a code block, functional equivalence, and code replacement. 
     
     
     \begin{definition}{Block (based on Aho \etal \cite{10.5555/6448}):}\label{def:code-block}
@@ -213,17 +213,17 @@ The complexity of the call graph has a major impact on the number of possible ex
     \begin{definition}{Code replacement:}
         \label{def:code-replacement}
         Let $P$ be a program and $T$ a pair of code blocks $(B_1, B_2)$. $T$ is a candidate code replacement if $B_1$ and $B_2$ are both functionally equivalent as defined in \autoref{def:functional-equivalence}.
-        Applying $T$ to $P$ means replacing $B_1$ by $B_2$. The application of $T$ to $P$ produces a program variant $P'$ which consequently is functionally equivalent to $P$.     
+        Applying $T$ to $P$ means replacing $B_1$ by $B_2$. The application of $T$ to $P$ produces a \termidx{program variant }$P'$ which consequently is functionally equivalent to $P$.     
     \end{definition}
     
-    We implement the \emph{exploration} stage by retargeting a superoptimizer for  LLVM, using its subset of the LLVM intermediate representation. CROW operates at the code block level, taking them from the functions defined inside the input LLVM bitcode module. In addition, the retargeted superoptimizer is in charge of finding the potential places in the original code blocks where a replacement can be applied. Finally, we use the enumerative synthesis strategy of the retargeted superoptimizer to generate code replacements.
+    We implement the \emph{exploration} stage by retargeting a superoptimizer for  LLVM, using its subset of the LLVM intermediate representation. \termidx{CROW }operates at the code block level, taking them from the functions defined inside the input LLVM bitcode module. In addition, the retargeted superoptimizer is in charge of finding the potential places in the original code blocks where a replacement can be applied. Finally, we use the enumerative synthesis strategy of the retargeted superoptimizer to generate code replacements.
     The code replacements generated through synthesis are verified, according to \autoref{def:functional-equivalence}, by internally using a theorem prover. 
     
     Moreover, we prevent the superoptimizer from synthesizing instructions that have no correspondence in \wasm for the sake of reducing the searching space for equivalent program variants. Besides, we disable all optimizations in the \wasm LLVM backend that could reverse the superoptimizer transformations, such as constant folding and instructions normalization.
     
     %\todo{We disable cost restrictions and the LLVM backend optimizations...maybe for the assesment RQ ?}
     
-    In the \emph{combining} stage, CROW combines the candidate code replacements to generate different LLVM bitcode variants, selecting and merging the code replacements. 
-    Then for each combination, a variant bitcode is compiled into a \wasm binary if requested. Finally, CROW generates the variants from all possible combinations of code replacements as the power set of all code replacements.  
+    In the \emph{combining} stage, \termidx{CROW }combines the candidate code replacements to generate different LLVM bitcode variants, selecting and merging the code replacements. 
+    Then for each combination, a variant bitcode is compiled into a \wasm binary if requested. Finally, \termidx{CROW }generates the variants from all possible combinations of code replacements as the power set of all code replacements.  
     
     \end{comment}
