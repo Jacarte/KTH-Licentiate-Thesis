@@ -2,13 +2,12 @@ import os
 import re
 
 TERMS = [
-    'CROW ', 'MEWE ', 'program variant ', 'multivariant ' , 'program variant '
+    'CROW ', 'MEWE ', 'program variant ', 'multivariant ' , 'program variant ', 'WebAssembly ', 'Wasm ', 'Software Diversification '
 ]
 DIR = os.path.dirname(__file__)
 DISTANCE = 20
 BLACKLIST = ["termidx", 'cite', '{diagrams', 'fromjson']
-
-
+AUTO = True
 
 if __name__ == '__main__':
 
@@ -32,7 +31,10 @@ if __name__ == '__main__':
                         chunk = content[max(idx - DISTANCE, 0): idx + DISTANCE]
                         if all([t not in chunk for t in BLACKLIST]):
                             print(chunk)
-                            answer = input()
+                            if not AUTO:
+                                answer = input()
+                            else:
+                                answer = 'y'
 
                             if answer.lower() == 'y':
                                 newc += f"\\termidx{{{term}}}"

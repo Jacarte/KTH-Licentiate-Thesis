@@ -7,3 +7,6 @@ Superoptimization
 Superdiversification
 superoptimization
 cartesian
+superoptimizer
+superdiversifier
+MEWE

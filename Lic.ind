@@ -4,19 +4,34 @@
 
   \indexspace
 
-  \item CROW , \hyperpage{18, 19}, \hyperpage{21--24}, \hyperpage{27}, 
-		\hyperpage{31}, \hyperpage{39, 40}
+  \item CROW , \hyperpage{18--24}, \hyperpage{27}, \hyperpage{31}, 
+		\hyperpage{39, 40}
 
   \indexspace
 
   \item MEWE , \hyperpage{18}, \hyperpage{24}, \hyperpage{27}
   \item multivariant , \hyperpage{12, 13}, \hyperpage{18}, 
-		\hyperpage{24--26}, \hyperpage{29}, \hyperpage{36--38}, 
+		\hyperpage{24--27}, \hyperpage{29}, \hyperpage{36--38}, 
 		\hyperpage{45--47}
 
   \indexspace
 
-  \item program variant , \hyperpage{10--12}, \hyperpage{24}, 
+  \item program variant , \hyperpage{10--12}, \hyperpage{23}, 
 		\hyperpage{39}
+
+  \indexspace
+
+  \item Software Diversification , \hyperpage{1}, \hyperpage{8}, 
+		\hyperpage{10}, \hyperpage{12--14}, \hyperpage{21}
+
+  \indexspace
+
+  \item Wasm , \hyperpage{4--9}, \hyperpage{15}, \hyperpage{18}, 
+		\hyperpage{20}, \hyperpage{22}, \hyperpage{24}, 
+		\hyperpage{27}, \hyperpage{37}
+  \item WebAssembly , \hyperpage{1}, \hyperpage{3--5}, \hyperpage{7, 8}, 
+		\hyperpage{13--15}, \hyperpage{17--20}, \hyperpage{22}, 
+		\hyperpage{24--26}, \hyperpage{29--31}, 
+		\hyperpage{35--40}, \hyperpage{43}, \hyperpage{46}
 
 \end{theindex}

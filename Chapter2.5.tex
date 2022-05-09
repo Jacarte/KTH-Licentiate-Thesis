@@ -2,7 +2,28 @@
 \label{chapter:technical}
 % / Automatic Diversity for Wasm/ 
 
-\todo{Make a real introduction, the paragraphs below is too fast}
+
+% The need for technical contributions...
+We aim to create Artificial Software Diversity for \wasm, by providing tools to make the process easier and feasible for developers and researchers. As far as we know, there is no software that provides Artificial Software Diversification for WebAssembly. Therefore, we need to enunciate the engineering foundation to implement the strategies in \autoref{sota:sota}. Our implementations are part of the contributions of this thesis. Concretely, we provide two software artifacts that complement this work. Our approaches generate \wasm program variants statically at compile time to provide randomization. Besides, it also provides the tooling to generate MVE binaries for WebAssembly.
+
+
+In this chapter we describe our technical contributions. In \autoref{tech:generic} we enunciate how the current state-of-the-art lead us to contribute with Software Diversification through LLVM. We follow by describing our two contributions and their main technical insights in \autoref{section:crow} and \autoref{section:mewe}. Besides, we describe a new transformation strategy as part of our contributions. 
+
+
+% What does it solve ?
+% The aim of massive-scale software diversity is to make it 
+
+% . However, 
+
+% In this chapter, we describe our threat model, return- and jump-oriented program- ming (see Section 4.2), new classes of code-reuse attacks. Code-reuse attacks are an attack class that is growing in popularity in response to other host-based defenses.
+% Then we describe several compiler-based transformations (Section 4.3) and their im- plementation (Section 4.4) in the LLVM 2.9 compiler toolchain. We also provide some metrics (Section 4.5) for evaluating the effectiveness of these techniques for preventing wide-scale deployment of code-reuse attacks
+
+%\todo{Make a real introduction, the paragraphs below is too fast}
+
+
+
+
+
 
 \input{technical_chapter/generic.tex}
 

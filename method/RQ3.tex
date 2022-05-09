@@ -17,7 +17,7 @@
 
 \todo{Motivate the usage of Edge based platforms...}
 
-In the last research question, we study whether the created variants can be used in real-world applications and what properties offer the composition of the variants as \termidx{multivariant }binaries. We build multivariant binaries (according to \autoref{def:multivariant_binary}), and we deploy and execute them at the Edge. The process of \emph{mixing} multiple variants into one \termidx{multivariant }binary is an essential contribution of the thesis that is presented in details in \cite{2021arXiv210808125C}. RQ3 focuses on analyzing the impact of this contribution on execution times and timing side-channels. To answer RQ3, we use the variants generated for the programs of \corpussodium and \corpusqrcode corpora, we take $2 + 5$ programs interconnecting the LLVM bitcode modules (mentioned in \autoref{table:corpora}). We illustrate the protocol to answer RQ3 in \autoref{diagrams:protocol:rq3} starting from the creation of the programs' population.
+In the last research question, we study whether the created variants can be used in real-world applications and what properties offer the composition of the variants as \termidx{multivariant }binaries. We build \termidx{multivariant }binaries (according to \autoref{def:multivariant_binary}), and we deploy and execute them at the Edge. The process of \emph{mixing} multiple variants into one \termidx{multivariant }binary is an essential contribution of the thesis that is presented in details in \cite{2021arXiv210808125C}. RQ3 focuses on analyzing the impact of this contribution on execution times and timing side-channels. To answer RQ3, we use the variants generated for the programs of \corpussodium and \corpusqrcode corpora, we take $2 + 5$ programs interconnecting the LLVM bitcode modules (mentioned in \autoref{table:corpora}). We illustrate the protocol to answer RQ3 in \autoref{diagrams:protocol:rq3} starting from the creation of the programs' population.
 
 
 
@@ -39,7 +39,7 @@ We use the execution time of the \termidx{multivariant }binaries to answer RQ3. 
 \subsection*{Protocol}
 
 %\todo{too fast. tell the reader why you need HTTP now}
-We answer RQ3 by analyzing a real-world scenario. Since Wasm binaries are currently adopted for Edge computing,
+We answer RQ3 by analyzing a real-world scenario. Since \termidx{Wasm }binaries are currently adopted for Edge computing,
 we run our experiments for RQ3 on the Edge. 
 Edge applications are designed to be deployed as isolated HTTP services, having one single responsibility that is executed at every HTTP request. This development model is known as serverless computing, or function-as-a-service \cite{shillaker2020faasm,Narayan2021Swivel}. 
 We deploy and execute the \termidx{multivariant }binaries as end-to-end HTTP services on the Edge and we collect their execution times.
