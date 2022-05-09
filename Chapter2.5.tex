@@ -1,17 +1,10 @@
-\chapter{Technical contributions/ Automatic Diversity for Wasm/ }
+\chapter{Technical contributions}
 \label{chapter:technical}
+% / Automatic Diversity for Wasm/ 
 
 \todo{Make a real introduction, the paragraphs below is too fast}
 
-\todo{Create a new section from this, with a new figure as a high level architecture}
-
-
-In the artifacts implemented with our contributions, we assume that the \wasm programs are generated through the LLVM compilation pipeline. This assumption is supported by the work of Hilbig et al. \cite{Hilbig2021AnES} in 2021 and the fact that LLVM-based compilers created the 70\% of \wasm binaries in the wild. Therefore,
-our contributions diversify Wasm programs at the LLVM level. Other solutions would have been to diversify at the source code level, or at the \wasm binary level. However, the former would limit the applicability of our work. 
-%Besides, as we discussed previously, our intention is also to study the impact of our contributions in edge computing and distributed systems and the top edge computing execution platforms, e.g. Cloudflare and Fastly, mostly take \wasm binaries as input. 
-LLVM, on the contrary, supports different languages, with a rich ecosystem of frontends it it can reliably be retargeted to \wasm, thanks to the corresponding mature component in the LLVM toolchain. In addition, the LLVM ecosystem as a whole is very active, providing us with many different tools to facilitate our research endeavour.
-In this chapter we summarize the technical details for our two contributions. \autoref{section:crow} we dissect the main components CROW \cite{CROW} implementation. Finally, in \autoref{section:mewe}, we describe the technical details of our second contribution, MEWE \cite{MEWE}.
-
+\input{technical_chapter/generic.tex}
 
 \input{technical_chapter/crow.tex}
 

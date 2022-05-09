@@ -7,7 +7,7 @@
   (func $main (type 2) (result i32)(*@\label{func1}@*)
     (local i32 i32)
     i32.const -1000
-    local.set 0 ;loop iteration counter;
+    local.set 0
     block  ;label = @1; (*@\label{block1}@*)
       loop  ;label = @2; (*@\label{block2}@*)
         i32.const 0
@@ -16,7 +16,7 @@
         i32.load (*@\label{load}@*)
         local.tee 1
         i32.const 101
-        i32.ge_s ;loop iteration condition;
+        i32.ge_s
         br_if 1 ;@1; (*@\label{break1}@*)
         local.get 0
         i32.const 4
@@ -27,7 +27,7 @@
       i32.const 0
       return
     end (*@\label{end2}@*)
-    f32.const 0x1.9147aep+3 ;=12.54;
+    f32.const 0x1.9147aep+3
     call $ftoi (*@\label{call}@*) (*@\tikzmarkMap{2}{}{-21.5}{1}{2.0cm}@*)
     local.get 1
     i32.add) (*@\label{result}@*)

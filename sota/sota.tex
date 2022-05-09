@@ -162,10 +162,20 @@ All described strategies can be mixed together. They can be applied in any seque
 
 \subsection*{Variants' equivalence}
 
+\todo{Check}
+
 Equivalence checking between program variants is an essential component for any program transformation task, from checking compiler optimizations \cite{LeCompilers} to the artificial synthesis of programs discussed in this chapter. 
 Equivalence checking proves that two pieces of code or programs are semantically equivalent.
 This process is undecidable; still, some approaches approximate it \cite{churchill2019}. % Why is important
 Cohen \cite{cohen1993operating} simplifies this process by enunciating the following property: two programs equivalent if given identical input, they produce the identical output. We use this same enunciation as the definition of \emph{functional equivalence} along with this dissertation. 
+Equivalence in Software Diversification aims to preserve the original functionality or programs while changing observable behaviors. For example, two programs can be statically different or have different execution times and provide the same computation. 
+
+
+
+Humans, different DNA but similar as humans?
+The same feeling, the same performance, but some engine room parts and their connections are to some extent different.
+
+
 
 % The relaxation of the equivalence checking
 %Notice that this property is relaxed. Two programs can be statically different but still provide the same semantic output. For example, the work of Sengupta \etal \cite{sengupta} uses the rotation of different database engines for reliability. In this case, all database engines provide the same input/output property for creating, updating, and adding new data. Their solution has input/output equivalent programs provided by statically different binaries with different observable behaviors during runtime. On the contrary, the best example of restricted equivalence checking is the one followed by most antivirus applications. In practice, most of them check for the presence of the same binary in an enormous database, \ie if two programs are exactly the same binary, they are also semantically equivalent.

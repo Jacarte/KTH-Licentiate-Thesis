@@ -1,24 +1,25 @@
 
-\section{CROW}
+\section{CROW: Code Randomization Of WebAssembly}
 \label{section:crow}
 
-\todo{Really bad explanation.}
+%\todo{Really bad explanation.}
 
-This section describes CROW \cite{CROW}, our first contribution. CROW is a tool tailored to create semantically equivalent \wasm variants out of a single program, either C/C++ and Rust code or LLVM bitcode.
-In \autoref{diagrams:crow}, we describe the workflow of CROW to create program variants.
-The figure highlights the main two stages of the CROW's workflow, \textit{exploration} and \textit{combining}. The workflow starts by compiling the input program into the LLVM bitcode using clang from the source code. During the \emph{exploration} stage, CROW takes an LLVM bitcode and, for its code blocks, produces a collection of code replacements that are functionally equivalent to the original program. 
+This section describes CROW \cite{CROW}, our first contribution. Following the workflow in \autoref{diagrams:generic}, CROW is a tool tailored to create semantically equivalent \wasm variants out of LLVM bitcode passed throurgh the LLVM frontend to be compiled as \wasm code.
+In \autoref{diagrams:crow}, we describe the architecture of CROW to create program variants.
+The figure highlights the main two stages of the CROW's workflow, \textit{exploration} and \textit{combining}. Both together composed the Diversifier. The workflow starts by passing the input LLVM bitcode for \emph{exploration}. During the \emph{exploration} stage, at the instruction level for each function in the input LLVM bitcode, CROW produces a collection of functionally equivalent code replacements.  
 %In the following, we enunciate the definitions we use along with this work for a code block, functional equivalence, and code replacement. 
-In the \emph{combining} stage, CROW combines the code replacements to generate different LLVM bitcode variants. 
-Then, a variant bitcode is compiled into a \wasm binary if requested. Finally, CROW generates the variants from all possible combinations of code replacements as the power set of all code replacements.  
+In the \emph{combining} stage, CROW assembles the code replacements to generate different LLVM bitcode variants. 
+Then, the bitcode variants are compiled into \wasm binaries with the corresponding backend. 
+
+In the following, we describe our engineering decisions. All our implementation choices asre based on one premise: each implementation decision should increase the number of \wasm variants that CROW creates.
 
 %\subsection*{Overview}
 
 \begin{figure*}[h]
     \includegraphics[width=\linewidth]{diagrams/generation/crow.drawio.pdf}
-    \caption{CROW workflow to generate program variants. CROW takes C/C++ source codes or LLVM bitcodes to look for code blocks that can be replaced by semantically equivalent code and generates program variants by combining them.}
+    \caption{CROW workflow to generate program variants following \step{3} in \autoref{diagrams:generic}. CROW takes LLVM bitcodes to look for functionally equivalent code replacements and generates program variants by combining them.}
     \label{diagrams:crow}
 \end{figure*}
-
 
 
 %CROW operates at the code block level, taking them from the functions defined inside the input LLVM bitcode module. 
@@ -45,19 +46,32 @@ Then, a variant bitcode is compiled into a \wasm binary if requested. Finally, C
 \end{definition}
 \end{comment}
 
-\subsection*{Variants' generation}
 
-CROW is based on the work of Jacob \etal \cite{jacob2008superdiversifier}. Their work uses code superoptimization to generate software diversification with an approach called superdiversification. 
+\subsection*{Exploration}
+
+%\subsection*{Variants' generation}
+
+The key component of CROW if its code replacements generation strategy. The diversifier implemented in CROW is based on the work of Jacob \etal \cite{jacob2008superdiversifier}. Their work uses code superoptimization to generate software diversification with an approach called superdiversification. 
 % How a superoptimizer works
 Code superoptimization focuses on \emph{searching} for a new program which is faster or smaller than the original code, while preserving its functionality.
-The concept of superoptimizing a program dates back to 1987, with the seminal work of Massalin \cite{Massalin1987} which proposes an exhaustive exploration of the solution space. The search space is defined by choosing a subset of the machine's instruction set and generating combinations of optimized programs, sorted by length in ascending order. If any of these programs are found to perform the same function as the source program, the search halts. The main difference between the superoptimization process and a superdiversifier it that the latter keeps intermediate search results for the sake of diversification. 
+The concept of superoptimizing a program dates back to 1987, with the seminal work of Massalin \cite{Massalin1987} which proposes an exhaustive exploration of the solution space. The search space is defined by choosing a subset of the machine's instruction set and generating combinations of optimized programs, sorted by length in ascending order. If any of these programs are found to perform the same function as the source program, the search halts. The main difference between the superoptimization process and a superdiversifier it that the latter keeps all intermediate search results despite their performance. 
 
+% Why and main change
 We use the seminal work of Jacob and colleagues to implement CROW because of two main reasons.
 First, the code replacements generated by this technique outperform diversification strategies based on hand-written rules. Besides, this technique is fully automatic.
-Second, there is a battle tested superoptimizer for LLVM, Souper \cite{Sasnauskas2017Souper:Superoptimizer}. It dates from 2017 and has an active community of maintainers. By extending Souper with superdiversification, it allows us to contribute with a new mutation strategy, \emph{constant inferring} (in addition to the before mentioned strategies in \autoref{sota:sota}) to artificially generate diversification. We modify it to keep the intermediate solutions in their searching algorithm to generate program variants. Besides, 
-we prevent Souper from synthesizing instructions that have no correspondence in the \wasm backend to reduce the searching space for variants. In addition, we disable the majority of the pruning strategies of Souper for the sake of more variants. Our modified version of Souper can be found at \todo{}.
+Second, there is a battle tested superoptimizer for LLVM, Souper \cite{Sasnauskas2017Souper:Superoptimizer}. 
+
+% How Souper works and why we can modify if
+We modify Souper to keep all possible solutions in their searching algorithm. The searching algorithm of Souper is based on inferring the smallest Data Flow Graph(DFG) for all integer returning instructions in the input LLVM IR. For all integer returning instructions, it constructs it Data Flow Graph (DFG) and starts to build all possible expressions out of synthesizing all possible expression from a subset of the LLVM IR language. Each syntactically correct expression in the search space is semantically checked versus the original. The search halts when a semantically equivalent expression is found. Souper synthesizes the replacements in increasing size, thus, the first found equivalent transformation that is smaller than the original, is the best and is the result of the searching. Instead of stopping the process as soon the first equivalent transformation is found, we remove it, keeping more equivalent replacements during the search.
+
+% Additional changes, not needed instructions
+Besides, we prevent Souper from synthesizing instructions that have no correspondence in the \wasm backend to reduce the searching space for variants. As we mentioned, Souper uses a subset of the LLVM IR. Some of the instructions of this subset are not suitable for Wasm. For example, creating expression having the  \texttt{freeze} instructions will increase the searching space for an instruction without a Wasm suitable opcode.
+% removal or pruning strategies
+Moreover, we disable the majority of the pruning strategies of Souper for the sake of more variants. For example, Souper avoids to construct redundant expressions such as commutative operations. We disable strategies like this for the sake of more programs.  %Our modified version of Souper can be found at \todo{}.
 
 \subsection*{Variant's equivalence}
+
+As we discussed in \autoref{sota:sota}, the equivalence checking is an important part of any program transformation process. In the case of CROW, we quarantee the equivalence property for program variants through Souper as well. Souper mainly uses Z3 \citationneeded, an SMT solver, to check for programs equivalence.  Besides, as a sanity check, it uses KLEE and Alive to double-check that the generated LLVM IR binary out of the code replacement is sound.
 
 \todo{}
 % Souper
@@ -68,37 +82,86 @@ we prevent Souper from synthesizing instructions that have no correspondence in 
 
 \subsection*{Constant inferring}
 
-As we previously mentioned, extending Souper as a superdiversifier contributes with a new mutation strategy called \emph{constant inferring}. 
+By extending Souper as a superdiversifier, we contribute with a new mutation strategy, \emph{constant inferring} (in addition to the before mentioned strategies in \autoref{sota:sota}).  
 The main component of Souper infers pieces of code as a single constant assignment particularly for boolean valued variables that are used to control branches.
 If a program branching is removed due to a constant inferring, the generated program is considerably different to the original program, statically and dynamically.
+
 Let us illustrate the case with an example.
-The Babbage problem code is composed of a loop which stops when it discovers the smaller number that fits with the Babbage condition below.
-\begin{center}
-\begin{tabular}{c}
+The Babbage problem code in \autoref{babbage} is composed of a loop which stops when it discovers the smaller number that fits with the Babbage condition in Line 4.
 
-\lstset{language=C++,
-                    style=CStyle,
-                    basicstyle=\small\ttfamily,
-                    columns=fullflexible,
-                    breaklines=true, 
-                    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}}
-\begin{lstlisting}[]
-while((n * n) % 1000000 != 269696) n++;
-\end{lstlisting}
-\end{tabular}
-\end{center}
+
+{
+
+
+\begin{minipage}[t]{0.5\linewidth}
+        \lstset{
+        language=C,
+        style=CStyle,
+        columns=fullflexible,
+        breaklines=true,
+        belowcaptionskip=30pt,
+        abovecaptionskip=1pt,
+        columns=fullflexible,
+        breaklines=true, 
+        caption={Babbage problem.},
+        label=babbage,
+        postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+    } 
+    \begin{lstlisting}[numbers=left]
+    int babbage() {
+        int current = 0,
+            square;
+        while ((square=current*current) % 1000000 != 269696) {
+            current++;
+        }
+        printf ("The number is %d\n", current);
+        return 0 ;
+    }
+    \end{lstlisting}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}
+        \lstset{
+        language=C,
+        style=CStyle,
+        columns=fullflexible,
+        breaklines=true,
+        belowcaptionskip=3pt,
+        abovecaptionskip=1pt,
+        columns=fullflexible,
+        breaklines=true, 
+        caption={Constant inferring transformation over the original Babbage problem in \autoref{babbage}.},
+        label=inferring,
+        postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+    } 
+    \begin{lstlisting}[]
+int babbage() {
+    @int current = 25264;@
+    
+    
+
+
+    printf ("The number is %d\n", current);
+    return 0 ;
+}
+    \end{lstlisting}
+\end{minipage}
+}
 % llvm-opt: rool unroll
-In theory, this value can also be inferred by unrolling the loop the correct number of times with traditional tools like llvm-opt.
-However, llvm-opt cannot unroll a \texttt{\textbf{while}}-loop because the loop count is too large.
+In theory, this value can also be inferred by unrolling the loop the correct number of times with the LLVM toolchain.
+However, it cannot unroll the \texttt{\textbf{while}}-loop because the loop count is too large.
 % Souper
-On the other hand, Souper can deal with this case, inferring the value of $n$ such that the Babbage condition is reached. Therefore, since the condition in the loop will always be false, the loop is dead code, and is removed in the final compilation. It is clear that the new program is remarkably different, smaller and faster than the original code.
+On the other hand, Souper can deal with this case, inferring the value of \texttt{current} in Line 2 such that the Babbage condition is reached. Therefore, since the condition in the loop will always be false, the loop is dead code, and is removed in the final compilation. It is clear that the new program in \autoref{inferring} is remarkably smaller and faster than the original code. Notice that for the sake of illustration, we show both codes in C language, this process inside CROW is performed in LLVM IR.
 
-When we retarget Souper we recombine all found replacements to create new programs, including those for which a constant inferring was performed.
-This allows to create variants that are also better than the original program in terms of size and performance.
+\subsection*{Combining replacements}
+
+When we retarget Souper we recombine all instruction level replacements to create new programs, including those for which a constant inferring was performed.
+This allows to create variants that are also better than the original program in terms of size and performance. Most of the Artificial Software Diversification works generate variants that are as performant or iller than the original program. By using a superdiversifier, we could be able to generate variants that are  better, in terms of performance, than the original program.
+
+On the other hand, one key characteristic of Souper is that as soon a replacement is found, it is applied to all equal instructions in the original LLVM binary. This idea makes the creation of optimized programs better. In our implementation, we apply the transformation only to the instruction for which it was found in the first place. For example, if we find a replacement that is suitable for $N$ instructions in the original program, we generate $N$ different programs by applying the transformation in only one of the $N$ places at a time. Notice that this strategy provides a combinatorial explosion of program variants.
 
 \subsection*{Removing latter optimizations for LLVM}
 
-During the implementation of CROW we have the premise of removing all builtin optimizations in the LLVM compiler that could reverse Wasm variants.
+During the implementation of CROW we have the premise of removing all builtin optimizations in the LLVM backend that could reverse Wasm variants.
 Therefore, in addition to the extension of Souper, we modify the LLVM compiler and the \wasm backend.
 We disable all optimizations in the \wasm backend that could reverse the superoptimizer transformations, such as constant folding and instructions normalization.
 
