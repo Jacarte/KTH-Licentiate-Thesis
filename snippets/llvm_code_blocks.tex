@@ -37,15 +37,15 @@ int f(int x) {
 
 \begin{code}
     \centering
-    \captionof{lstlisting}{LLVM's intermediate representation program, its extracted code blocks and replacement candidates. Gray highlighted lines represent original code block, green for candidate code replacements. }\label{example:crow:original:llvm}
+    \captionof{lstlisting}{LLVM's intermediate representation program, its extracted instructions and replacement candidates. Gray highlighted lines represent original code, green for code replacements. }\label{example:crow:original:llvm}
     \lstset{numbers=none}
     \noindent\begin{minipage}[t]{.33\linewidth}
     \centering
     \begin{lstlisting}[xleftmargin=1em,escapechar=?]
     define i32 @f(i32) {
 
-    ?\tikzmarkWS{2}{code block 2}{11.5}{10}{3.5cm}?
-    ?\tikzmarkWS{1}{code block 1}{11.5}{3.5}{3.0cm}?
+    ?\tikzmarkWS{2}{code 2}{11.5}{10}{3.5cm}?
+    ?\tikzmarkWS{1}{code 1}{11.5}{3.5}{3.0cm}?
     %2 = mul nsw i32 %0,2
     %3 = add nsw i32 %0,%2 
 
@@ -60,7 +60,7 @@ int f(int x) {
     \end{minipage}%\hfill%
     \begin{minipage}[t]{.32\linewidth}
         \begin{lstlisting}[xleftmargin=1em,escapechar=?]
-?Replacement candidates for code\_block\_1?
+?Replacement candidates for code\_1?
 
 `%2 = mul nsw i32 %0,2`
 
@@ -87,7 +87,7 @@ int f(int x) {
             abovecaptionskip=1pt,
         } 
         \begin{lstlisting}[name={B},escapechar=?]
-?Replacement candidates for code\_block\_2?
+?Replacement candidates for code\_2?
 
 `%3 = add nsw i32 %0,%2`
 

@@ -17,6 +17,7 @@
 \usepackage{varwidth} %for the varwidth minipage environment
 \usepackage[listings,skins]{tcolorbox}
 \usepackage{csquotes}
+\usepackage{makeidx} 
 \usepackage{enumitem}
 %\usepackage{graphics}
 %\usepackage{amssymb}
@@ -72,6 +73,8 @@
 \newcommand{\wasm}{WebAssembly\xspace}
 \newcommand{\ie}{\textit{i.e.,}\xspace}
 \newcommand{\etal}{et al.\xspace}
+
+\newcommand{\termidx}[1]{#1\index{#1}}
 
 \newcommand*\badge[1]{ \colorbox{red}{\color{white}#1}}
 \newcommand*\badget[1]{\colorbox{red}{\color{white}#1}}
@@ -290,7 +293,7 @@
 \pretolerance=8000
 \tolerance=2000 
 \emergencystretch=10pt
-
+\makeindex 
 \begin{document}
 
 %\addcontentsline{toc}{chapter}{Note: \\ It is not allowed to "copy and paste" from your papers to your dissertation.} % these are notes and they are not a part of the thesis
@@ -343,6 +346,8 @@
 
 %\addcontentsline{toc}{chapter}{Appended papers} % for template purposes
 %\input{Contributions}
+
+\printindex 
 
 \end{document}
 \endinput

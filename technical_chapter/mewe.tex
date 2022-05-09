@@ -1,10 +1,10 @@
-\section{MEWE: }
+\section{MEWE: Multi-variant Execution for WEbAssembly}
 \label{section:mewe}
 
 \newcommand{\tool}{MEWE\xspace}
 \newcommand{\repourl}{TODO}
 % Overview
-This section describes MEWE, our second contribution. 
+This section describes MEWE \cite{MEWE}, our second contribution. 
 %MEWE is implemented in 942 lines of C++ code.
 The core idea of \tool is to synthesize diversified function variants, using CROW, providing execution-path randomization in an MVE. Thus, the goal of \tool is to synthesize multivariant  \wasm binaries. %, according to the threat model presented in \autoref{sec:threat-model}. 
 
@@ -12,7 +12,7 @@ The tool generates application-level multivariant binaries, without any change t
 %It uses the LLVM 12.0.0 libraries to extend the LLVM standard linker tool capability with the multivariant generation.
 %Per Crane et al. the execution-path randomization is made to hinder side-channel attacks \cite{crane2015thwarting}. 
 % All programs are diversified with behavior preservation guarantees according to the design of CROW (\autoref{section:crow}).
-MEWE creates an MVE by intermixing functions for which CROW generates variants.
+MEWE creates an MVE by intermixing functions for which CROW generates variants, as \step{2} in \autoref{diagrams:generic} shows.
 CROW generates each one of these variants with fine-grained diversification at instruction level, applying the majority of the strategies discussed in \autoref{sota:sota} and \emph{constant inferring}. Besides, \tool inlines function variants when appropriate, also resulting in call stack diversification at runtime.
 
 In \autoref{workflow}, we summarize the analysis and transformation pipeline of \tool.

@@ -6,3 +6,4 @@ multivariant
 Superoptimization
 Superdiversification
 superoptimization
+cartesian
