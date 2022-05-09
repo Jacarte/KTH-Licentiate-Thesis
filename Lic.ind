@@ -27,8 +27,8 @@
   \indexspace
 
   \item Wasm , \hyperpage{4--9}, \hyperpage{15}, \hyperpage{18}, 
-		\hyperpage{20}, \hyperpage{22}, \hyperpage{24}, 
-		\hyperpage{27}, \hyperpage{37}
+		\hyperpage{20}, \hyperpage{22--24}, \hyperpage{27}, 
+		\hyperpage{37}
   \item WebAssembly , \hyperpage{1}, \hyperpage{3--5}, \hyperpage{7, 8}, 
 		\hyperpage{13--15}, \hyperpage{17--20}, \hyperpage{22}, 
 		\hyperpage{24--26}, \hyperpage{29--31}, 

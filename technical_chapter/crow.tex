@@ -54,7 +54,7 @@ In the following, we describe our engineering decisions. All our implementation 
 
 The key component of \termidx{CROW }if its code replacements generation strategy. The diversifier implemented in \termidx{CROW }is based on the work of Jacob \etal \cite{jacob2008superdiversifier}. Their work uses code superoptimization to generate software diversification for x86 with an approach called superdiversification. 
 % How a superoptimizer works
-Code superoptimization focuses on \emph{searching} for a new program which is faster or smaller than the original code, while preserving its functionality.
+Jacob and colleagues cornerstone, code superoptimization, focuses on \emph{searching} for a new program which is faster or smaller than the original code, while preserving its functionality.
 The concept of superoptimizing a program dates back to 1987, with the seminal work of Massalin \cite{Massalin1987} which proposes an exhaustive exploration of the solution space. The search space is defined by choosing a subset of the machine's instruction set and generating combinations of optimized programs, sorted by length in ascending order. If any of these programs are found to perform the same function as the source program, the search halts. The main difference between the superoptimization process and a superdiversifier it that the latter keeps all intermediate search results despite their performance. 
 
 % Why and main change
@@ -65,12 +65,13 @@ Second, there is a battle tested superoptimizer for LLVM, Souper \cite{Sasnauska
 % This paragraph is hard to read
 % How Souper works and why we can modify if
 We modify Souper to keep all possible solutions in their searching algorithm. The searching algorithm of Souper is based on inferring the smallest Data Flow Graph for all integer returning instructions in the input LLVM IR. For a given integer returning instruction, it exhaustively builds all possible expressions from a subset of the LLVM IR language.
-Each syntactically correct expression in the search space is semantically checked versus the original. The search halts when a semantically equivalent expression is found. Souper synthesizes the replacements in increasing size, thus, the first found equivalent transformation is the best and is the result of the searching. Instead of stopping the process as soon the first equivalent transformation is found, we remove it, keeping more equivalent replacements during the searching. Notice that the searching space exponentially increases with the size of the LLVM IR language subset.
+Each syntactically correct expression in the search space is semantically checked versus the original. The search halts when a semantically equivalent expression is found. Souper synthesizes the replacements in increasing size, thus, the first found equivalent transformation is the best and is the result of the searching. Instead of stopping the process as soon the first equivalent transformation is found, we remove it, keeping more equivalent replacements during the searching. 
 
+Notice that the searching space exponentially increases with the size of the LLVM IR language subset. Thus,
 % Additional changes, not needed instructions
-We prevent Souper from synthesizing instructions that have no correspondence in the \wasm backend to reduce the searching space for variants. As we mentioned, Souper uses a subset of the LLVM IR. Some of the instructions of this subset are not suitable for Wasm. For example, creating expression having the  \texttt{freeze} instructions will increase the searching space for an instruction without a \termidx{Wasm }suitable opcode.
+we prevent Souper from synthesizing instructions that have no correspondence in the \wasm backend. This decision reduces the searching space. For example, creating expression having the  \texttt{freeze} LLVM instructions will increase the searching space for an instruction without a \termidx{Wasm }suitable opcode in the end.
 % removal or pruning strategies
-Moreover, we disable the majority of the pruning strategies of Souper for the sake of more variants. For example, Souper avoids to construct redundant expressions such as commutative operations. We disable strategies like this for the sake of more programs.  %Our modified version of Souper can be found at \todo{}.
+Moreover, we disable the majority of the pruning strategies of Souper for the sake of more variants. For example, Souper avoids to construct redundant expressions such as commutative operations. We disable strategies like this for the sake of more statically different programs.  %Our modified version of Souper can be found at \todo{}.
 
 %\subsection*{Variant's equivalence}
 
@@ -152,14 +153,14 @@ int babbage() {
 In theory, this value can also be inferred by unrolling the loop the correct number of times with the LLVM toolchain.
 However, standard LLVM tools cannot unroll the \texttt{\textbf{while}}-loop because the loop count is too large.
 % Souper
-Souper can deal with this case, generating the program in \autoref{inferring}. It infers the value of \texttt{current} in Line 2 such that the Babbage condition is reached. Therefore, since the condition in the loop will always be false. Then, the loop is dead code, and is removed in the final compilation. It is clear that the new program in \autoref{inferring} is remarkably smaller and faster than the original code. Notice that for the sake of illustration, we show both codes in C language, this process inside \termidx{CROW }is performed directly in LLVM IR.
+Souper can deal with this case, generating the program in \autoref{inferring}. It infers the value of \texttt{current} in Line 2 such that the Babbage condition is reached. Therefore, the condition in the loop will always be false. Then, the loop is dead code, and is removed in the final compilation. It is clear that the new program in \autoref{inferring} is remarkably smaller and faster than the original code. Notice that for the sake of illustration, we show both codes in C language, this process inside \termidx{CROW }is performed directly in LLVM IR. Also notice that the two programs in the example follow the definition of \emph{functional equivalence} discussed in \autoref{sota:sota}.
 
 \subsection*{Combining replacements}
 
 When we retarget Souper, to create variants, we recombine all code replacements, including those for which a constant inferring was performed.
-This allows us to create variants that are also better than the original program in terms of size and performance. Most of the Artificial \termidx{Software Diversification }works generate variants that are as performant or iller than the original program. By using a superdiversifier, we could be able to generate variants that are better, in terms of performance, than the original program.
+This allows us to create variants that are also better than the original program in terms of size and performance. Most of the Artificial \termidx{Software Diversification }works generate variants that are as performant or iller than the original program. By using a superdiversifier, we could be able to generate variants that are better, in terms of performance, than the original program. This will give the option to developers to decide between performance and diversification without sacrificing the former. 
 
-On the other hand, when Souper finds a replacement, it is applied to all equal instructions in the original LLVM binary. In our implementation, we apply the transformation only to the instruction for which it was found in the first place. For example, if we find a replacement that is suitable for $N$ instructions in the original program, we generate $N$ different programs by applying the transformation in only one of the $N$ places at a time. Notice that this strategy provides a combinatorial explosion of program variants as soon as the number of replacements and suitable instructions increase.
+On the other hand, when Souper finds a replacement, it is applied to all equal instructions in the original LLVM binary. In our implementation, we apply the transformation only to the instruction for which it was found in the first place. For example, if we find a replacement that is suitable for $N$ difference places in the original program, we generate $N$ different programs by applying the transformation in only one place at a time. Notice that this strategy provides a combinatorial explosion of program variants as soon as the number of replacements increases.
 
 \subsection*{Removing latter optimizations for LLVM}
 

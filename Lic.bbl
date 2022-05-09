@@ -429,4 +429,10 @@ Mann,H.~B. and Whitney,D.~R. (1947).
   larger than the other.
 \newblock {\em Ann. Math. Statist.}, 18(1):50--60.
 
+\bibitem[Cox, 1893]{cox1893cinderella}
+Cox,M.~R. (1893).
+\newblock {\em Cinderella: Three hundred and forty-five variants of Cinderella,
+  Catskin, and Cap o'Rushes}.
+\newblock Number~31. Folk-lore Society.
+
 \end{thebibliography}

@@ -162,18 +162,16 @@ All described strategies can be mixed together. They can be applied in any seque
 
 \subsection*{Variants' equivalence}
 
-\todo{Check}
-
 Equivalence checking between program variants is an essential component for any program transformation task, from checking compiler optimizations \cite{LeCompilers} to the artificial synthesis of programs discussed in this chapter. 
 Equivalence checking proves that two pieces of code or programs are semantically equivalent.
 This process is undecidable; still, some approaches approximate it \cite{churchill2019}. % Why is important
-Cohen \cite{cohen1993operating} simplifies this process by enunciating the following property: two programs equivalent if given identical input, they produce the identical output. We use this same enunciation as the definition of \emph{functional equivalence} along with this dissertation. 
-Equivalence in \termidx{Software Diversification }aims to preserve the original functionality or programs while changing observable behaviors. For example, two programs can be statically different or have different execution times and provide the same computation. 
+Cohen \cite{cohen1993operating} simplifies this process by enunciating the following property: two programs are equivalent if given identical input, they produce the identical output. We use this same enunciation as the definition of \emph{functional equivalence} along with this dissertation. 
+Equivalence checking in \termidx{Software Diversification }aims to preserve the original functionality for programs while changing observable behaviors. For example, two programs can be statically different or have different execution times and provide the same computation. 
 
 
 
-Humans, different DNA but similar as humans?
-The same feeling, the same performance, but some engine room parts and their connections are to some extent different.
+% Humans, different DNA but similar as humans?
+% The same feeling, the same performance, but some engine room parts and their connections are to some extent different.
 
 
 
@@ -182,10 +180,10 @@ The same feeling, the same performance, but some engine room parts and their con
 
 
 % Using the test suite and equivalence by construction
-The easiest way to guarantee the equivalence property is by construction. For example, in the case illustrated in \autoref{strategy:S1} for Cleemput \etal \cite{Cleemput2012} and Homescu \etal \cite{homescu2013profile}, the transformation strategy is designed to generate semantically equivalent program variants. However, this process is prone to developer errors, and more checking is needed. For example, the test suite of the original program can be used to check the variant. If the test suite passes for the \termidx{program variant }\cite{harrand2020java}, it is equivalent to the original. However, it is limited due to the need for a preexisting test suite. When the test suite does not exist, another technique is needed to check for equivalence.
+The easiest way to guarantee the equivalence property is by construction. For example, in the case illustrated in \autoref{strategy:S1} for Cleemput \etal \cite{Cleemput2012} and Homescu \etal \cite{homescu2013profile}, the transformation strategy is designed to generate semantically equivalent program variants. However, this process is prone to developer errors, and further validation is needed. For example, the test suite of the original program can be used to check the variant. If the test suite passes for the \termidx{program variant }\cite{harrand2020java}, it is equivalent to the original. However, it is limited due to the need for a preexisting test suite. When the test suite does not exist, another technique is needed to check for equivalence.
 
 % Automatic equivalence checking
-The majority of the previously mentioned works use theorem solvers (SMT solvers) \cite{SMT_solver} or fuzzers \citationneeded to prove equivalence. For SMT solvers, the main idea is to turn the two code variants into mathematical expressions. The SMT solver checks for counter-examples. When the SMT solver finds a counter-example, there exists an input for which the two math expressions return a different output. The main limitation of this technique is that all algorithms cannot be translated to a math expression, for example, loops. Yet, this technique tends to be the most used for no-branching-programs checking like basic block and peephole replacements \citationneeded.
+If there is no test suite or the technique does not inherently implement the equivalence property, the previously mentioned works use theorem solvers (SMT solvers) \cite{SMT_solver} or fuzzers \citationneeded to prove equivalence. For SMT solvers, the main idea is to turn the two code variants into mathematical expressions. The SMT solver checks for counter-examples. When the SMT solver finds a counter-example, there exists an input for which the two math expressions return a different output. The main limitation of this technique is that all algorithms cannot be translated to a math expression, for example, loops. Yet, this technique tends to be the most used for no-branching-programs checking like basic block and peephole replacements \citationneeded.
 On the other hand, fuzzers look randomly for inputs that provide different observable behavior. If two inputs provide a different output in the variant, the variant and the original program are not semantically equivalent. The main limitation for fuzzers is that the process is remarkably time-expensive and requires the introduction of oracles by hand. In practice,  a fuzzer needs a significant amount of time to check two programs, and this time takes hours at the minimum. 
 
 % Why SMT solvers
