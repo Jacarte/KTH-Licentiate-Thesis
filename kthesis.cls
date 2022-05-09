@@ -72,7 +72,9 @@
 \ExecuteOptions{g5paper}
 \ProcessOptions\relax
 \LoadClass[a4paper]{memoir}
-\AtBeginDocument{\RequirePackage{graphics}}
+\AtBeginDocument{
+  \RequirePackage{graphics}
+}
 \@nameuse{@kthesis@setpapersize@\kthesis@trimmedsize}
 \setlrmargins{*}{*}{*}
 \setulmargins{*}{*}{*}

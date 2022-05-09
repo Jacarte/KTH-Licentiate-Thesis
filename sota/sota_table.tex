@@ -1,0 +1,25 @@
+{
+    \renewcommand{\arraystretch}{1.6}
+    \newcolumntype{M}{>{\begin{varwidth}{3cm}}l<{\end{varwidth}}} %M is for Maximal column
+    \begin{table}[h]
+        %\small
+        %\begin{sidewaystable}
+        \centering
+    %\setlength\minrowclearance{1.0pt}
+    \resizebox{\textwidth}{!}{
+
+        %\begin{adjustbox}{angle=90}
+                \input{sota/table.tex}
+        %\end{adjustbox}
+    }
+
+        {
+            \scriptsize
+            $^\dagger$ Notice that LLVM only supports \wasm backend from version 8.0.0
+        }
+
+        \caption{The table is composed by the authors and the reference to their work, followed by one column for each strategy and usage ( \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5}, \autoref{usage:randomization} and \autoref{usage:mve}). The last column of the table summarize their technical contribution. Each cell in the table contains a checkmark if the strategy or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. The last two rows locate our contributions.}
+        \label{table:sota:comparison}
+\end{table}
+        %\end{sidewaystable}
+}

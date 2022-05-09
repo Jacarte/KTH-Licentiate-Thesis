@@ -1,0 +1,248 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: collect-traces-
+
+spec:
+  entrypoint: slumps-distributed
+  parallelism: 40
+  templates:
+  - name: slumps-distributed
+    steps:
+    - - name: list-folders
+        template: list-folders-template
+    - - name: list-programs
+        template: list-programs-template
+        arguments:
+          parameters:
+          - name: folder
+            value: "{{item}}"
+        withParam: "{{steps.list-folders.outputs.parameters.folders}}"
+        continueOn:
+          failed: true
+    
+  
+  - name: list-programs-template
+    inputs:
+      parameters:
+        - name: folder
+    steps:
+      - - name: generate-program-names
+          template: generate-program-names-template
+          arguments:
+            parameters:
+              - name: folder
+                value: "{{ inputs.parameters.folder }}"
+      - - name: execute-program
+          template: verify-template
+          arguments:
+            parameters:
+            - name: program
+              value: "{{item}}"
+            - name: folder
+              value: "{{ inputs.parameters.folder }}"
+          withParam: "{{steps.generate-program-names.outputs.parameters.programs}}"
+          continueOn:
+            failed: true
+      - - name: execute-program4time
+          template: execute-time
+          arguments:
+            parameters:
+            - name: program
+              value: "{{item}}"
+            - name: folder
+              value: "{{ inputs.parameters.folder }}"
+          withParam: "{{steps.generate-program-names.outputs.parameters.programs}}"
+          continueOn:
+            failed: true
+      # - - name: count-programs
+      #    template: count-programs-template
+      #    arguments:
+      ##      parameters:
+      #        - name: folder
+      #          value: "{{ inputs.parameters.folder }}"
+
+  - name: count-programs-template
+    script:
+      image: madshansen/docker-git-ftp
+      command: [bash]
+      source: |
+        ls "/traces/traces_{{workflow.name}}/{{inputs.parameters.folder}}" | wc -l > /count.txt
+
+    inputs:
+      parameters:
+        - name: folder
+      artifacts:
+        - name: to_analyze
+          path: /traces
+          s3:
+            bucket: my-bucket
+            key: /traces_{{workflow.name}} #{{workflow.parameters.folder}}
+    outputs:
+      artifacts:
+        - name: meta
+          path: /count.txt
+          archive:
+            # prevent compression
+            none: { }
+          s3:
+            key: /traces_{{workflow.name}}/{{inputs.parameters.folder}}/meta.txt
+  - name: list-folders-template
+    script:
+      image: madshansen/docker-git-ftp
+      command: [bash]
+      source: |
+
+        apt-get update
+        apt-get install -y python wget unzip 
+
+        python -c "import json,os;  print(json.dumps(os.listdir('/all4/all4')))" > /out.txt 
+        cat "/out.txt"
+    outputs:
+      parameters:
+        - name: folders
+          valueFrom: 
+            path: "/out.txt"
+    inputs:
+      artifacts:
+        - name: to_analyze
+          path: /all4
+          s3:
+            bucket: my-bucket
+            key: /all4 #{{workflow.parameters.folder}}
+  - name: generate-program-names-template
+    script:
+      image: madshansen/docker-git-ftp 
+      command: [bash]
+      source: |
+        apt-get update
+        apt-get install -y python wget unzip 
+
+        echo "Copying only Wasm from /all4/all4/{{inputs.parameters.folder}}"
+        mkdir -p /wasms
+        for l in $(find /all4/all4/{{inputs.parameters.folder}} -type f)
+        do
+          HEADER="$(tr -d '\0'<$l | head -c 4 $l)"
+          if [[ $HEADER  == "asm" ]]
+          then
+            cp $l /wasms/$(basename $l)
+          fi
+        done
+        
+        
+        ls -l "/wasms" | wc -l 
+        python -c "import json,os;  print(json.dumps(os.listdir('/wasms')))" > /out.txt 
+        cat /out.txt
+    outputs:
+      parameters:
+        - name: programs
+          valueFrom: 
+            path: "/out.txt"
+    inputs:
+      parameters:
+        - name: folder
+      artifacts:
+        - name: to_analyze
+          path: /all4
+          s3:
+            bucket: my-bucket
+            key: "/all4/{{inputs.parameters.folder}}" #{{workflow.parameters.folder}}
+  - name: verify-template
+    inputs:
+      parameters:
+        - name: program
+        - name: folder
+      artifacts:
+        - name: to_analyze
+          path: /program
+          s3:
+            bucket: my-bucket
+            key: /all4/{{inputs.parameters.folder}}/{{inputs.parameters.program}} #{{workflow.parameters.folder}}
+        
+        - name: swam
+          path: /swam.jar
+          s3:
+            bucket: my-bucket
+            key: /swam.jar #{{workflow.parameters.folder}}
+    outputs:
+      artifacts:
+        - name: logs
+          path: /traces_{{workflow.name}}/{{inputs.parameters.folder}}/{{inputs.parameters.program}}.swam.txt
+          archive:
+            # prevent compression
+            none: { }
+          s3:
+            key: /traces_{{workflow.name}}/{{inputs.parameters.folder}}/{{inputs.parameters.program}}.swam.txt
+    #  - name: logs
+    #    path: /slumps/crow/logs
+    script:
+      image: openjdk:11.0.7
+      command: [bash]
+      
+      source: |
+         mkdir -p /out
+         mkdir -p /traces_{{workflow.name}}/{{inputs.parameters.folder}}
+         apt-get update && apt-get install -y python wget unzip 
+         ls -la "/program" 
+         
+         # Save out as well ?
+         timeout 60 java -jar /swam.jar run --wasi -t /program 2> /traces_{{workflow.name}}/{{inputs.parameters.folder}}/{{inputs.parameters.program}}.swam.txt || true
+         
+         ls /traces_{{workflow.name}}/{{inputs.parameters.folder}}
+  - name: execute-time
+    inputs:
+      parameters:
+        - name: program
+        - name: folder
+      artifacts:
+        - name: to_analyze
+          path: /program
+          s3:
+            bucket: my-bucket
+            key: "/all4/{{inputs.parameters.folder}}/{{inputs.parameters.program}}" #{{workflow.parameters.folder}}
+        
+        - name: swam
+          path: /swam.jar
+          s3:
+            bucket: my-bucket
+            key: /swam.jar #{{workflow.parameters.folder}}
+    outputs:
+      artifacts:
+        - name: logs
+          path: /times.txt
+          archive:
+            # prevent compression
+            none: { }
+          s3:
+            key: /traces_{{workflow.name}}/{{inputs.parameters.folder}}/{{inputs.parameters.program}}.times.txt
+    #  - name: logs
+    #    path: /slumps/crow/logs
+    #activeDeadlineSeconds: 9100 # 1 hour max for each variant
+    script:
+      image: openjdk:11.0.7
+      command: [bash]
+      
+      source: |
+         mkdir -p /out
+         mkdir -p /traces_{{workflow.name}}/{{inputs.parameters.folder}}
+         apt-get update && apt-get install -y python wget unzip bc
+         ls -l "/program" 
+         
+
+         for i in $(seq 1 100)
+         do
+          
+          start="$(date +'%s.%N')"
+          timeout 30 java -jar /swam.jar run --wasi /program > /dev/null || true
+          echo "$(date +"%s.%N - ${start}" | bc)" >> /times.txt
+
+         done
+
+         cat /times.txt
+      #resources:
+      #  requests:
+      #    memory: 2G
+      #    cpu: 2
+      #  limits:
+      #    memory: 4G
+      #    cpu: 4

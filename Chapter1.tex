@@ -1,31 +1,82 @@
 \chapter{Introduction}
 
-Write a short introduction here...
+\todo{Two references per paragraph}
 
-\section{Background}
 
-Write here...
+\todo{Base paragraph by the papers}
 
-\section{Motivation}
 
-Write here... 
 
-\section{Research Objectives/Research Questions, Research Methodology}
+\newcommand{\subscript}[2]{$#1 _ #2$}
 
-Write here...
+\newcommand{\rqone}{RQ1. To what extent can we artifically generate program variants for \wasm?}
 
-\section{Research Contributions}
+\newcommand{\rqtwo}{RQ2. To what extent are the generated variants dynamically different?}
+\newcommand{\rqthree}{RQ3. To what extent do the artificial variants exhibit different execution times on Edge-Cloud platforms?}
 
-Write here...
 
-\section{Thesis Organization}
+\section*{Internet of Software Monoculture}
 
-This thesis is organized in four chapters as follows:
+\section*{Software Diversification as a solution}
 
-$\bullet $ Chapter 1 ...  
+\todo{Moved from Chapter 2}
+The low presence of defenses implementations for \wasm motivates our work on Software Diversification as a preemptive technique that can help against known and yet unknown vulnerabilities.
 
-$\bullet $ Chapter 2 ...
+\section*{Artificial Software Diversification}
 
-$\bullet $ Chapter 3 ... 
 
-$\bullet $ Chapter 4 ...
+\section*{Fine-grained Diversification}
+
+\section{Thesis Statement}
+
+%\section{Motivation}
+
+%\subsection{Why variants ?}
+
+\section{Research questions}
+\label{intro:definition:rq}
+
+
+\begin{enumerate}
+    \item \rqone
+    \todo{Motivation}
+
+    \item \rqtwo
+    \todo{Motivation}
+    
+    \item \rqthree
+    \todo{Motivation}
+    
+\end{enumerate}
+
+%T%he main motivation for this research question is that \wasm was adopted in 2017, and it lacks of natural diversity \citationneeded. Moreover, compared to the work of Harrand \etal \citationneeded, in WebAssembly, we cannot use preexisting and different programs to provide diversification. In fact, according to the work of Hilbig \etal \citationneeded, the artificial variants created with one of our works contributes to the half of executable and available \wasm binaries in the wild. 
+
+\section{Contributions}
+
+The contributions of this thesis are:
+
+\begin{enumerate}[label=(\subscript{C}{{\arabic*}})]
+    \item Methodological contribution: \todo{}
+    \item Experimental contribution: \todo{}
+    \item Theoretical contribution: \todo{}
+    \item Technical contribution: \todo{} \todo{Point to chapter 3}
+\end{enumerate}
+
+\section{Publications}
+
+\begin{enumerate}[label=(\subscript{P}{{\arabic*}})]
+    \item Bytecode analysis for V8 and DTW: \todo{}
+    \item Superoptimization: \todo{}
+    \item CROW: \todo{}
+    \item MEWE: \todo{}
+\end{enumerate}
+
+\subsection*{Origin of contributions ?}
+
+\subsection*{Other publications and talks}
+
+\begin{enumerate}
+    \item wasm-mutate: \todo{}
+\end{enumerate}
+
+\section*{Thesis layout}

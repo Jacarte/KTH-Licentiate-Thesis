@@ -1,0 +1,285 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: compare-traces-
+spec:
+  entrypoint: slumps-distributed
+  parallelism: 50
+  arguments:
+    parameters:
+    - name: folder
+  templates:
+  - name: slumps-distributed
+    steps:
+    - - name: list-folders
+        template: list-folders-template
+    - - name: pair-programs
+        template: pair-programs-template
+        arguments:
+          parameters:
+          - name: folder
+            value: "{{item}}"
+        withParam: "{{steps.list-folders.outputs.parameters.folders}}"
+        continueOn:
+          failed: true
+    
+  
+  - name: pair-programs-template
+    inputs:
+      parameters:
+        - name: folder
+    steps:
+      - - name: pair-program-names
+          template: pair-program-names-template
+          arguments:
+            parameters:
+              - name: folder
+                value: "{{ inputs.parameters.folder }}"
+      - - name: wrap-pair
+          template: wrap-pair-template
+          arguments:
+            parameters:
+              - name: index
+                value: "{{item}}"
+              - name: folder
+                value: "{{inputs.parameters.folder}}"
+          withSequence: 
+            count: "{{steps.pair-program-names.outputs.parameters.count}}"
+
+      
+      - - name: merge-values
+          template: merge-values-template
+          arguments:
+            parameters:
+              - name: folder
+                value: "{{ inputs.parameters.folder }}"
+  #######
+  - name: wrap-pair-template
+    inputs:
+      parameters:
+        - name: folder
+        - name: index
+    steps:
+      - - name: read-pair
+          template: read-pair-template
+          arguments:
+            parameters:
+              - name: index
+                value: "{{inputs.parameters.index}}" 
+              - name: folder
+                value: "{{inputs.parameters.folder}}" 
+      - - name: compare-pair
+          template: compare-template
+          arguments:
+            parameters:
+            - name: trace1
+              value: "{{ steps.read-pair.outputs.parameters.trace1 }}"
+            - name: trace2
+              value: "{{ steps.read-pair.outputs.parameters.trace2 }}"
+            - name: folder
+              value: "{{ inputs.parameters.folder }}"
+          continueOn:
+            failed: true
+  ###########
+  - name: read-pair-template
+    script:
+      image: python:3.9-alpine
+      command: [python]
+      source: |
+        import json
+        data = json.load(open("/traces/pairs.json", "r"))
+        item = data[{{inputs.parameters.index}}]
+
+        open("/trace1.txt","w").write(item['trace1'])
+        open("/trace2.txt","w").write(item['trace2'])
+    outputs:
+      parameters:
+        - name: trace1
+          valueFrom: 
+            path: "/trace1.txt"
+        - name: trace2
+          valueFrom: 
+            path: "/trace2.txt"
+    inputs:
+      parameters:
+        - name: folder
+        - name: index
+      artifacts:
+        - name: pairs
+          path: /traces/pairs.json
+          s3:
+            bucket: my-bucket
+            key: /traces_{{workflow.name}}/{{inputs.parameters.folder}}/pairs.json
+  ###########
+  - name: list-folders-template
+    script:
+      image: madshansen/docker-git-ftp
+      command: [bash]
+      source: |
+
+        apt-get update
+        apt-get install -y python wget unzip 
+
+        python -c "import json,os;  print(json.dumps(os.listdir('/traces/{{workflow.parameters.folder}}')))" > /out.txt 
+        cat "/out.txt"
+    outputs:
+      parameters:
+        - name: folders
+          valueFrom: 
+            path: "/out.txt"
+    inputs:
+      artifacts:
+        - name: to_analyze
+          path: /traces
+          s3:
+            bucket: my-bucket
+            key: "/{{workflow.parameters.folder}}" #{{workflow.parameters.folder}}
+  #############          
+  - name: pair-program-names-template
+    script:
+      image: python:3.9-alpine
+      command: [python]
+      source: |
+        import json
+        import os
+
+        files = os.listdir("/traces/{{workflow.parameters.folder}}/{{inputs.parameters.folder}}")
+        files = [f for f in files if f.endswith(".swam.txt")]
+        out = []
+
+        for f in range(len(files)):
+          for f2 in range(f, len(files)):
+            if f2 != f:
+              out.append(dict(trace1=files[f], trace2=files[f2]))
+        open("/pairs.json", "w").write(json.dumps(out))
+        open("/count.txt", "w").write(f"{len(out)}")
+    outputs:
+      artifacts:
+        - name: pairs
+          path:  "/pairs.json"
+          archive:
+            # prevent compression
+            none: { }
+          s3:
+            key: /traces_{{workflow.name}}/{{inputs.parameters.folder}}/pairs.json
+      parameters:
+        - name: count
+          valueFrom: 
+            path: "/count.txt"
+    inputs:
+      parameters:
+        - name: folder
+      artifacts:
+        - name: to_analyze
+          path: /traces
+          s3:
+            bucket: my-bucket
+            key: "/{{workflow.parameters.folder}}/{{inputs.parameters.folder}}" #{{workflow.parameters.folder}}
+
+  ###### 
+  - name: compare-template
+    inputs:
+      parameters:
+        - name: trace1
+        - name: trace2
+        - name: folder
+      artifacts:
+        - name: trace1
+          path: /trace1
+          s3:
+            bucket: my-bucket
+            key: /{{workflow.parameters.folder}}/{{inputs.parameters.folder}}/{{inputs.parameters.trace1}} #{{workflow.parameters.folder}}
+        
+        - name: trace2
+          path: /trace2
+          s3:
+            bucket: my-bucket
+            key: /{{workflow.parameters.folder}}/{{inputs.parameters.folder}}/{{inputs.parameters.trace2}}
+            
+    outputs:
+      artifacts:
+        - name: logs
+          path: /traces_{{workflow.name}}/{{inputs.parameters.folder}}/{{inputs.parameters.trace1}}.{{inputs.parameters.trace2}}.val.txt
+          archive:
+            # prevent compression
+            none: { }
+          s3:
+            key: /traces_{{workflow.name}}/{{inputs.parameters.folder}}/{{inputs.parameters.trace1}}.{{inputs.parameters.trace2}}.val.txt
+        - name: trace1_stack
+          path: /trace1.stack.txt
+          archive:
+            # prevent compression
+            none: { }
+          s3:
+            key: /traces_{{workflow.name}}/{{inputs.parameters.folder}}/{{inputs.parameters.trace1}}.stack.txt
+        - name: trace2_stack
+          path: /trace2.stack.txt
+          archive:
+            # prevent compression
+            none: { }
+          s3:
+            key: /traces_{{workflow.name}}/{{inputs.parameters.folder}}/{{inputs.parameters.trace2}}.stack.txt
+    #  - name: logs
+    #    path: /slumps/crow/logs
+    script:
+      image: openjdk:11.0.7
+      command: [bash]
+      
+      source: |
+
+         apt-get update
+         apt-get install -y python wget unzip bc
+         mkdir -p /traces_{{workflow.name}}/{{inputs.parameters.folder}}
+         # Take out only the stack 
+         # custom diff ~ DTW
+          GAP=1
+          MISS=5
+
+          # get only stack traces
+          grep -E "spop|spush" /trace1 > /trace1.stack.txt
+          grep -E "spop|spush" /trace2 > /trace2.stack.txt
+
+          f1=/trace1.stack.txt
+          f2=/trace2.stack.txt
+          diff -y $f1 $f2 > /tmp/diff.txt
+          IN1=$(grep -cE '<' /tmp/diff.txt)
+          IN2=$(grep -cE '>' /tmp/diff.txt)
+          MISSC=$(grep -cE '\|' /tmp/diff.txt)
+
+          echo $(bc <<< "$GAP*($IN1 + $IN2) + $MISS*$MISSC") > /traces_{{workflow.name}}/{{inputs.parameters.folder}}/{{inputs.parameters.trace1}}.{{inputs.parameters.trace2}}.val.txt
+  ###############
+  - name: merge-values-template
+    script:
+      image: python:3.9-alpine
+      command: [python]
+      source: |
+        import json
+        import os
+
+        files = os.listdir("/traces/traces_{{workflow.name}}/{{inputs.parameters.folder}}")
+        files = [f for f in files if f.endswith(".val.txt")]
+        out = {}
+
+        for f in files:
+          c = open("/traces/traces_{{workflow.name}}/{{inputs.parameters.folder}}" + f"/{f}", 'r').read()
+          out[f] = float(c)
+
+        open("/values.json", "w").write(json.dumps(out))
+    outputs:
+      artifacts:
+        - name: values
+          path: "/values.json"
+          archive:
+            none: {}
+          s3:
+            key: /traces_{{workflow.name}}/{{inputs.parameters.folder}}/pairwise.json
+    
+    inputs:
+      parameters:
+        - name: folder
+      artifacts:
+        - name: to_analyze
+          path: /traces
+          s3:
+            bucket: my-bucket
+            key: "/traces_{{workflow.name}}/{{inputs.parameters.folder}}" #{{workflow.parameters.folder}}
