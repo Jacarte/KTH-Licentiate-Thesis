@@ -1,220 +1,163 @@
-\indexentry{Software Diversification |hyperpage}{1}
-\indexentry{WebAssembly |hyperpage}{1}
-\indexentry{Software Diversification |hyperpage}{1}
-\indexentry{WebAssembly |hyperpage}{1}
-\indexentry{WebAssembly |hyperpage}{3}
-\indexentry{WebAssembly |hyperpage}{3}
-\indexentry{WebAssembly |hyperpage}{3}
-\indexentry{WebAssembly |hyperpage}{3}
-\indexentry{WebAssembly |hyperpage}{4}
-\indexentry{WebAssembly |hyperpage}{4}
-\indexentry{WebAssembly |hyperpage}{4}
-\indexentry{Wasm |hyperpage}{4}
-\indexentry{WebAssembly |hyperpage}{4}
-\indexentry{Wasm |hyperpage}{4}
-\indexentry{WebAssembly |hyperpage}{4}
-\indexentry{Wasm |hyperpage}{4}
-\indexentry{Wasm |hyperpage}{4}
-\indexentry{Wasm |hyperpage}{4}
-\indexentry{Wasm |hyperpage}{4}
-\indexentry{Wasm |hyperpage}{4}
-\indexentry{Wasm |hyperpage}{4}
-\indexentry{Wasm |hyperpage}{4}
-\indexentry{Wasm |hyperpage}{5}
-\indexentry{Wasm |hyperpage}{5}
-\indexentry{WebAssembly |hyperpage}{5}
-\indexentry{Wasm |hyperpage}{5}
-\indexentry{WebAssembly |hyperpage}{5}
-\indexentry{WebAssembly |hyperpage}{5}
-\indexentry{Wasm |hyperpage}{5}
-\indexentry{WebAssembly |hyperpage}{5}
-\indexentry{WebAssembly |hyperpage}{5}
-\indexentry{WebAssembly |hyperpage}{5}
-\indexentry{Wasm |hyperpage}{5}
-\indexentry{Wasm |hyperpage}{5}
-\indexentry{Wasm |hyperpage}{6}
-\indexentry{Wasm |hyperpage}{6}
-\indexentry{Wasm |hyperpage}{6}
-\indexentry{Wasm |hyperpage}{6}
-\indexentry{Wasm |hyperpage}{6}
-\indexentry{Wasm |hyperpage}{6}
-\indexentry{Wasm |hyperpage}{6}
-\indexentry{Wasm |hyperpage}{6}
-\indexentry{Wasm |hyperpage}{6}
-\indexentry{Wasm |hyperpage}{6}
-\indexentry{WebAssembly |hyperpage}{7}
-\indexentry{Wasm |hyperpage}{7}
-\indexentry{WebAssembly |hyperpage}{8}
-\indexentry{Wasm |hyperpage}{8}
-\indexentry{Wasm |hyperpage}{8}
-\indexentry{WebAssembly |hyperpage}{8}
-\indexentry{Wasm |hyperpage}{8}
-\indexentry{Wasm |hyperpage}{8}
-\indexentry{WebAssembly |hyperpage}{8}
-\indexentry{WebAssembly |hyperpage}{8}
-\indexentry{Software Diversification |hyperpage}{8}
-\indexentry{Wasm |hyperpage}{9}
-\indexentry{program variant |hyperpage}{10}
-\indexentry{Software Diversification |hyperpage}{10}
-\indexentry{program variant |hyperpage}{11}
-\indexentry{program variant |hyperpage}{12}
-\indexentry{multivariant |hyperpage}{12}
-\indexentry{multivariant |hyperpage}{12}
-\indexentry{multivariant |hyperpage}{12}
-\indexentry{Software Diversification |hyperpage}{12}
-\indexentry{multivariant |hyperpage}{12}
-\indexentry{multivariant |hyperpage}{12}
-\indexentry{multivariant |hyperpage}{13}
-\indexentry{multivariant |hyperpage}{13}
-\indexentry{multivariant |hyperpage}{13}
-\indexentry{Software Diversification |hyperpage}{13}
-\indexentry{WebAssembly |hyperpage}{13}
-\indexentry{Software Diversification |hyperpage}{13}
-\indexentry{WebAssembly |hyperpage}{13}
-\indexentry{Software Diversification |hyperpage}{13}
-\indexentry{WebAssembly |hyperpage}{13}
-\indexentry{WebAssembly |hyperpage}{13}
-\indexentry{WebAssembly |hyperpage}{13}
-\indexentry{WebAssembly |hyperpage}{13}
-\indexentry{multivariant |hyperpage}{13}
-\indexentry{multivariant |hyperpage}{13}
-\indexentry{WebAssembly |hyperpage}{13}
-\indexentry{WebAssembly |hyperpage}{13}
-\indexentry{WebAssembly |hyperpage}{14}
-\indexentry{Software Diversification |hyperpage}{14}
-\indexentry{Wasm |hyperpage}{15}
-\indexentry{WebAssembly |hyperpage}{15}
-\indexentry{WebAssembly |hyperpage}{17}
-\indexentry{WebAssembly |hyperpage}{17}
-\indexentry{WebAssembly |hyperpage}{17}
-\indexentry{WebAssembly |hyperpage}{17}
-\indexentry{WebAssembly |hyperpage}{17}
-\indexentry{WebAssembly |hyperpage}{17}
-\indexentry{Wasm |hyperpage}{18}
-\indexentry{WebAssembly |hyperpage}{18}
-\indexentry{WebAssembly |hyperpage}{18}
-\indexentry{Wasm |hyperpage}{18}
-\indexentry{WebAssembly |hyperpage}{18}
-\indexentry{CROW |hyperpage}{18}
-\indexentry{WebAssembly |hyperpage}{18}
-\indexentry{CROW |hyperpage}{18}
-\indexentry{WebAssembly |hyperpage}{18}
-\indexentry{CROW |hyperpage}{18}
-\indexentry{MEWE |hyperpage}{18}
-\indexentry{multivariant |hyperpage}{18}
-\indexentry{WebAssembly |hyperpage}{18}
-\indexentry{MEWE |hyperpage}{18}
-\indexentry{CROW |hyperpage}{19}
-\indexentry{WebAssembly |hyperpage}{19}
-\indexentry{WebAssembly |hyperpage}{19}
-\indexentry{CROW |hyperpage}{19}
-\indexentry{CROW |hyperpage}{19}
-\indexentry{CROW |hyperpage}{19}
-\indexentry{WebAssembly |hyperpage}{19}
-\indexentry{WebAssembly |hyperpage}{19}
-\indexentry{CROW |hyperpage}{19}
-\indexentry{CROW |hyperpage}{19}
-\indexentry{CROW |hyperpage}{19}
-\indexentry{CROW |hyperpage}{19}
-\indexentry{CROW |hyperpage}{19}
+\indexentry{Software!Diversification|hyperpage}{vi}
+\indexentry{Software!Diversification|hyperpage}{1}
+\indexentry{JavaScript!Programming language|hyperpage}{5}
+\indexentry{JavaScript!Programming language|hyperpage}{5}
+\indexentry{JavaScript!Programming language|hyperpage}{5}
+\indexentry{JavaScript!Programming language|hyperpage}{5}
+\indexentry{JavaScript!Programming language|hyperpage}{6}
+\indexentry{JavaScript!Programming language|hyperpage}{6}
+\indexentry{JavaScript!Programming language|hyperpage}{6}
+\indexentry{JavaScript!Programming language|hyperpage}{6}
+\indexentry{WebAssembly!Programming language|hyperpage}{6}
+\indexentry{JavaScript!Programming language|hyperpage}{6}
+\indexentry{WebAssembly!Programming language|hyperpage}{6}
+\indexentry{WebAssembly!Programming language|hyperpage}{6}
+\indexentry{WebAssembly!Programming language|hyperpage}{6}
+\indexentry{WebAssembly!Programming language|hyperpage}{6}
+\indexentry{WebAssembly!Programming language|hyperpage}{6}
+\indexentry{WebAssembly!Programming language|hyperpage}{6}
+\indexentry{JavaScript!Programming language|hyperpage}{6}
+\indexentry{WebAssembly!Programming language|hyperpage}{6}
+\indexentry{WebAssembly!Programming language|hyperpage}{6}
+\indexentry{JavaScript!Programming language|hyperpage}{6}
+\indexentry{WebAssembly!Programming language|hyperpage}{7}
+\indexentry{JavaScript!Programming language|hyperpage}{7}
+\indexentry{WebAssembly!Programming language|hyperpage}{7}
+\indexentry{WebAssembly|hyperpage}{7}
+\indexentry{WebAssembly!Programming language|hyperpage}{7}
+\indexentry{WebAssembly|hyperpage}{7}
+\indexentry{WebAssembly!Programming language|hyperpage}{7}
+\indexentry{WebAssembly|hyperpage}{7}
+\indexentry{WebAssembly!Programming language|hyperpage}{7}
+\indexentry{WebAssembly!Programming language|hyperpage}{7}
+\indexentry{WebAssembly!Programming language|hyperpage}{8}
+\indexentry{WebAssembly!Programming language|hyperpage}{8}
+\indexentry{WebAssembly!Programming language|hyperpage}{8}
+\indexentry{WebAssembly!Programming language|hyperpage}{8}
+\indexentry{WebAssembly!Programming language|hyperpage}{8}
+\indexentry{WebAssembly!Programming language|hyperpage}{8}
+\indexentry{WebAssembly!Programming language|hyperpage}{8}
+\indexentry{WebAssembly!Programming language|hyperpage}{8}
+\indexentry{WebAssembly!Programming language|hyperpage}{8}
+\indexentry{WebAssembly!Programming language|hyperpage}{8}
+\indexentry{WebAssembly!Programming language|hyperpage}{9}
+\indexentry{WebAssembly!Security|hyperpage}{10}
+\indexentry{WebAssembly!Programming language|hyperpage}{10}
+\indexentry{WebAssembly!Programming language|hyperpage}{10}
+\indexentry{WebAssembly|hyperpage}{10}
+\indexentry{WebAssembly!Programming language|hyperpage}{10}
+\indexentry{WebAssembly!Programming language|hyperpage}{10}
+\indexentry{Software!Diversification|hyperpage}{10}
+\indexentry{Software!Diversification|hyperpage}{10}
+\indexentry{Software!Natural diversity|hyperpage}{10}
+\indexentry{Software!Artificial Diversity|hyperpage}{10}
+\indexentry{Software!Mutation strategies|hyperpage}{11}
+\indexentry{JavaScript!Programming language|hyperpage}{11}
+\indexentry{WebAssembly!Programming language|hyperpage}{11}
+\indexentry{Software!Variant|hyperpage}{12}
+\indexentry{Software!Diversification|hyperpage}{12}
+\indexentry{Software!Variant|hyperpage}{13}
+\indexentry{Software!Variant|hyperpage}{14}
+\indexentry{Software!Multivariant|hyperpage}{14}
+\indexentry{Software!Multivariant|hyperpage}{14}
+\indexentry{Software!Multivariant|hyperpage}{14}
+\indexentry{Software!Diversification|hyperpage}{14}
+\indexentry{Software!Multivariant|hyperpage}{14}
+\indexentry{Software!Multivariant|hyperpage}{14}
+\indexentry{Software!Multivariant|hyperpage}{15}
+\indexentry{Software!Multivariant|hyperpage}{15}
+\indexentry{Software!Multivariant|hyperpage}{15}
+\indexentry{Software!Diversification|hyperpage}{15}
+\indexentry{Software!Diversification|hyperpage}{15}
+\indexentry{Software!Diversification|hyperpage}{15}
+\indexentry{Software!Multivariant|hyperpage}{15}
+\indexentry{Software!Multivariant|hyperpage}{15}
+\indexentry{Software!Diversification|hyperpage}{16}
+\indexentry{WebAssembly!Programming language|hyperpage}{17}
+\indexentry{WebAssembly!Programming language|hyperpage}{20}
+\indexentry{WebAssembly!Programming language|hyperpage}{20}
 \indexentry{CROW |hyperpage}{20}
-\indexentry{WebAssembly |hyperpage}{20}
-\indexentry{Wasm |hyperpage}{20}
+\indexentry{CROW |hyperpage}{20}
+\indexentry{CROW |hyperpage}{20}
+\indexentry{MEWE |hyperpage}{20}
+\indexentry{Software!Multivariant|hyperpage}{20}
+\indexentry{MEWE |hyperpage}{20}
 \indexentry{CROW |hyperpage}{21}
-\indexentry{Software Diversification |hyperpage}{21}
+\indexentry{CROW |hyperpage}{21}
+\indexentry{CROW |hyperpage}{21}
+\indexentry{CROW |hyperpage}{21}
+\indexentry{CROW |hyperpage}{21}
+\indexentry{CROW |hyperpage}{21}
+\indexentry{CROW |hyperpage}{21}
+\indexentry{CROW |hyperpage}{21}
+\indexentry{CROW |hyperpage}{21}
 \indexentry{CROW |hyperpage}{22}
-\indexentry{Wasm |hyperpage}{22}
-\indexentry{WebAssembly |hyperpage}{22}
-\indexentry{WebAssembly |hyperpage}{22}
-\indexentry{CROW |hyperpage}{22}
-\indexentry{CROW |hyperpage}{22}
-\indexentry{CROW |hyperpage}{22}
-\indexentry{CROW |hyperpage}{22}
-\indexentry{CROW |hyperpage}{22}
-\indexentry{CROW |hyperpage}{22}
+\indexentry{WebAssembly!Programming language|hyperpage}{22}
 \indexentry{CROW |hyperpage}{23}
-\indexentry{Wasm |hyperpage}{23}
-\indexentry{CROW |hyperpage}{23}
-\indexentry{\emph  {code replacement overlapping}|hyperpage}{23}
-\indexentry{program variant |hyperpage}{23}
-\indexentry{CROW |hyperpage}{23}
-\indexentry{Wasm |hyperpage}{24}
-\indexentry{multivariant |hyperpage}{24}
-\indexentry{WebAssembly |hyperpage}{24}
-\indexentry{MEWE |hyperpage}{24}
+\indexentry{Software!Diversification|hyperpage}{23}
+\indexentry{CROW |hyperpage}{24}
+\indexentry{WebAssembly!Programming language|hyperpage}{24}
 \indexentry{CROW |hyperpage}{24}
 \indexentry{CROW |hyperpage}{24}
-\indexentry{multivariant |hyperpage}{24}
-\indexentry{multivariant |hyperpage}{24}
-\indexentry{WebAssembly |hyperpage}{24}
-\indexentry{MEWE |hyperpage}{24}
-\indexentry{multivariant |hyperpage}{25}
-\indexentry{multivariant |hyperpage}{25}
-\indexentry{WebAssembly |hyperpage}{25}
-\indexentry{multivariant |hyperpage}{25}
-\indexentry{multivariant |hyperpage}{25}
-\indexentry{multivariant |hyperpage}{25}
-\indexentry{multivariant |hyperpage}{25}
-\indexentry{multivariant |hyperpage}{26}
-\indexentry{multivariant |hyperpage}{26}
-\indexentry{multivariant |hyperpage}{26}
-\indexentry{WebAssembly |hyperpage}{26}
-\indexentry{multivariant |hyperpage}{27}
-\indexentry{Wasm |hyperpage}{27}
-\indexentry{CROW |hyperpage}{27}
-\indexentry{MEWE |hyperpage}{27}
-\indexentry{CROW |hyperpage}{27}
-\indexentry{WebAssembly |hyperpage}{29}
-\indexentry{multivariant |hyperpage}{29}
-\indexentry{WebAssembly |hyperpage}{30}
-\indexentry{WebAssembly |hyperpage}{31}
-\indexentry{CROW |hyperpage}{31}
-\indexentry{WebAssembly |hyperpage}{31}
-\indexentry{CROW |hyperpage}{31}
-\indexentry{WebAssembly |hyperpage}{31}
-\indexentry{CROW |hyperpage}{31}
-\indexentry{WebAssembly |hyperpage}{31}
-\indexentry{WebAssembly |hyperpage}{31}
-\indexentry{WebAssembly |hyperpage}{35}
-\indexentry{WebAssembly |hyperpage}{35}
-\indexentry{WebAssembly |hyperpage}{35}
-\indexentry{WebAssembly |hyperpage}{36}
-\indexentry{WebAssembly |hyperpage}{36}
-\indexentry{multivariant |hyperpage}{36}
-\indexentry{multivariant |hyperpage}{36}
-\indexentry{multivariant |hyperpage}{36}
-\indexentry{multivariant |hyperpage}{37}
-\indexentry{WebAssembly |hyperpage}{37}
-\indexentry{multivariant |hyperpage}{37}
-\indexentry{multivariant |hyperpage}{37}
-\indexentry{multivariant |hyperpage}{37}
-\indexentry{multivariant |hyperpage}{37}
-\indexentry{Wasm |hyperpage}{37}
-\indexentry{multivariant |hyperpage}{37}
-\indexentry{multivariant |hyperpage}{37}
-\indexentry{multivariant |hyperpage}{37}
-\indexentry{multivariant |hyperpage}{37}
-\indexentry{multivariant |hyperpage}{38}
-\indexentry{WebAssembly |hyperpage}{38}
-\indexentry{WebAssembly |hyperpage}{39}
-\indexentry{WebAssembly |hyperpage}{39}
-\indexentry{program variant |hyperpage}{39}
-\indexentry{CROW |hyperpage}{39}
-\indexentry{WebAssembly |hyperpage}{40}
-\indexentry{CROW |hyperpage}{40}
-\indexentry{WebAssembly |hyperpage}{43}
-\indexentry{multivariant |hyperpage}{45}
-\indexentry{multivariant |hyperpage}{45}
-\indexentry{multivariant |hyperpage}{45}
-\indexentry{multivariant |hyperpage}{45}
-\indexentry{multivariant |hyperpage}{46}
-\indexentry{multivariant |hyperpage}{46}
-\indexentry{multivariant |hyperpage}{46}
-\indexentry{multivariant |hyperpage}{46}
-\indexentry{multivariant |hyperpage}{46}
-\indexentry{multivariant |hyperpage}{46}
-\indexentry{multivariant |hyperpage}{46}
-\indexentry{multivariant |hyperpage}{46}
-\indexentry{multivariant |hyperpage}{46}
-\indexentry{WebAssembly |hyperpage}{46}
-\indexentry{multivariant |hyperpage}{47}
+\indexentry{CROW |hyperpage}{24}
+\indexentry{CROW |hyperpage}{24}
+\indexentry{CROW |hyperpage}{24}
+\indexentry{CROW |hyperpage}{24}
+\indexentry{CROW |hyperpage}{25}
+\indexentry{WebAssembly!Programming language|hyperpage}{25}
+\indexentry{CROW |hyperpage}{25}
+\indexentry{Software!Replacement overlapping|hyperpage}{25}
+\indexentry{Software!Variant|hyperpage}{25}
+\indexentry{CROW |hyperpage}{25}
+\indexentry{WebAssembly!Programming language|hyperpage}{26}
+\indexentry{Software!Multivariant|hyperpage}{26}
+\indexentry{MEWE |hyperpage}{26}
+\indexentry{CROW |hyperpage}{26}
+\indexentry{CROW |hyperpage}{26}
+\indexentry{Software!Multivariant|hyperpage}{26}
+\indexentry{Software!Multivariant|hyperpage}{26}
+\indexentry{MEWE |hyperpage}{26}
+\indexentry{Software!Multivariant|hyperpage}{27}
+\indexentry{Software!Multivariant|hyperpage}{27}
+\indexentry{Software!Multivariant|hyperpage}{27}
+\indexentry{Software!Multivariant|hyperpage}{27}
+\indexentry{Software!Multivariant|hyperpage}{27}
+\indexentry{Software!Multivariant|hyperpage}{27}
+\indexentry{Software!Multivariant|hyperpage}{28}
+\indexentry{Software!Multivariant|hyperpage}{28}
+\indexentry{Software!Multivariant|hyperpage}{28}
+\indexentry{Software!Multivariant|hyperpage}{29}
+\indexentry{WebAssembly!Programming language|hyperpage}{29}
+\indexentry{CROW |hyperpage}{29}
+\indexentry{MEWE |hyperpage}{29}
+\indexentry{CROW |hyperpage}{29}
+\indexentry{Software!Multivariant|hyperpage}{31}
+\indexentry{CROW |hyperpage}{33}
+\indexentry{CROW |hyperpage}{33}
+\indexentry{Software!Multivariant|hyperpage}{39}
+\indexentry{Software!Multivariant|hyperpage}{39}
+\indexentry{Software!Multivariant|hyperpage}{39}
+\indexentry{Software!Multivariant|hyperpage}{39}
+\indexentry{Software!Multivariant|hyperpage}{39}
+\indexentry{Software!Multivariant|hyperpage}{39}
+\indexentry{Software!Multivariant|hyperpage}{39}
+\indexentry{Software!Multivariant|hyperpage}{39}
+\indexentry{Software!Multivariant|hyperpage}{39}
+\indexentry{Software!Multivariant|hyperpage}{40}
+\indexentry{Software!Variant|hyperpage}{41}
+\indexentry{CROW |hyperpage}{41}
+\indexentry{CROW |hyperpage}{42}
+\indexentry{Software!Multivariant|hyperpage}{47}
+\indexentry{Software!Multivariant|hyperpage}{47}
+\indexentry{Software!Multivariant|hyperpage}{47}
+\indexentry{Software!Multivariant|hyperpage}{48}
+\indexentry{Software!Multivariant|hyperpage}{48}
+\indexentry{Software!Multivariant|hyperpage}{48}
+\indexentry{Software!Multivariant|hyperpage}{48}
+\indexentry{Software!Multivariant|hyperpage}{48}
+\indexentry{Software!Multivariant|hyperpage}{48}
+\indexentry{Software!Multivariant|hyperpage}{48}
+\indexentry{Software!Multivariant|hyperpage}{48}
+\indexentry{Software!Multivariant|hyperpage}{48}
+\indexentry{Software!Multivariant|hyperpage}{49}
+\indexentry{Software!Multivariant|hyperpage}{49}

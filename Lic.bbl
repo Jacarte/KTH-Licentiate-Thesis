@@ -31,13 +31,8 @@ Hilbig,A., Lehmann,D., and Pradel,M. (2021).
   languages, use cases.
 \newblock {\em Proceedings of the Web Conference 2021}.
 
-\bibitem[{Cabrera Arteaga} et~al., 2021b]{2021arXiv210808125C}
-{Cabrera Arteaga},J., {Laperdrix},P., {Monperrus},M., and {Baudry},B. (2021b).
-\newblock {Multi-Variant Execution at the Edge}.
-\newblock {\em arXiv e-prints}, page arXiv:2108.08125.
-
-\bibitem[{Cabrera Arteaga} et~al., 2021a]{MEWE}
-{Cabrera Arteaga},J., {Laperdrix},P., {Monperrus},M., and {Baudry},B. (2021a).
+\bibitem[{Cabrera Arteaga} et~al., 2021]{MEWE}
+{Cabrera Arteaga},J., {Laperdrix},P., {Monperrus},M., and {Baudry},B. (2021).
 \newblock {Multi-Variant Execution at the Edge}.
 \newblock {\em arXiv e-prints}, page arXiv:2108.08125.
 
@@ -75,6 +70,12 @@ Runeson,P., Engstr{\"o}m,E., and Storey,M.-A. (2020).
   Engineering}, pages 127--147.
 \newblock Springer International Publishing, Cham.
 
+\bibitem[{Mendki}, 2020]{pMendkiServerless}
+{Mendki},P. (2020).
+\newblock Evaluating webassembly enabled serverless approach for edge
+  computing.
+\newblock In {\em 2020 IEEE Cloud Summit}, pages 161--166.
+
 \bibitem[Lehmann et~al., 2020]{usenixWasm2020}
 Lehmann,D., Kinder,J., and Pradel,M. (2020).
 \newblock Everything old is new again: Binary security of webassembly.
@@ -97,6 +98,12 @@ Chen,D. and {\relax W3C group} (2020).
 \newblock {WebAssembly documentation: Security}.
 \newblock {Accessed: 18 June 2020}.
 
+\bibitem[Cabrera~Arteaga et~al., 2020]{WasmSuperoptimizer}
+Cabrera~Arteaga,J., Donde,S., Gu,J., Floros,O., Satabin,L., Baudry,B., and
+  Monperrus,M. (2020).
+\newblock {\em Superoptimization of WebAssembly Bytecode}, page 36–40.
+\newblock Association for Computing Machinery, New York, NY, USA.
+
 \bibitem[Bryant, 2020]{bryant2020webassembly}
 Bryant,D. (2020).
 \newblock Webassembly outside the browser: A new foundation for pervasive
@@ -117,11 +124,23 @@ Churchill,B., Padon,O., Sharma,R., and Aiken,A. (2019).
   Language Design and Implementation}, PLDI 2019, page 1027–1040, New York,
   NY, USA. Association for Computing Machinery.
 
+\bibitem[Cabrera~Arteaga et~al., 2019]{STRAC}
+Cabrera~Arteaga,J., Monperrus,M., and Baudry,B. (2019).
+\newblock Scalable comparison of javascript v8 bytecode traces.
+\newblock In {\em Proceedings of the 11th ACM SIGPLAN International Workshop on
+  Virtual Machines and Intermediate Languages}, VMIL 2019, page 22–31, New
+  York, NY, USA. Association for Computing Machinery.
+
 \bibitem[Aga and Austin, 2019]{aga2019smokestack}
 Aga,M.~T. and Austin,T. (2019).
 \newblock Smokestack: thwarting dop attacks with runtime stack layout
   randomization.
 \newblock In {\em Proc. of CGO}, pages 26--36.
+
+\bibitem[Varda, 2018]{CloudflareWasm}
+Varda,K. (2018).
+\newblock Webassembly on cloudflare workers.
+\newblock Technical report.
 
 \bibitem[Silvanovich, 2018]{ChromeZero}
 Silvanovich,N. (2018).
@@ -138,6 +157,17 @@ Lu,K., Xu,M., Song,C., Kim,T., and Lee,W. (2018).
 Li,J., Zhao,B., and Zhang,C. (2018).
 \newblock {Fuzzing: a survey}.
 \newblock {\em Cybersecurity}, 1(1):1--13.
+
+\bibitem[Jacobsson and W{\aa}hsl{\'e}n, 2018]{1244493Jacobsson}
+Jacobsson,M. and W{\aa}hsl{\'e}n,J. (2018).
+\newblock Virtual machine execution for wearables based on webassembly.
+\newblock In {\em EAI International Conference on Body Area Networks}, pages
+  381--389. Springer, Cham.
+
+\bibitem[Hickey, 2018]{FastlyWasm}
+Hickey,P. (2018).
+\newblock Announcing lucet: Fastly’s native webassembly compiler and runtime.
+\newblock Technical report.
 
 \bibitem[Gupta et~al., 2018]{SMTGupta}
 Gupta,S., Saxena,A., Mahajan,A., and Bansal,S. (2018).

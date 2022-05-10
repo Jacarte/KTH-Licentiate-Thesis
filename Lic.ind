@@ -1,37 +1,39 @@
 \begin{theindex}
 
-  \item \emph  {code replacement overlapping}, \hyperpage{23}
+  \item CROW , \hyperpage{20--26}, \hyperpage{29}, \hyperpage{33}, 
+		\hyperpage{41, 42}
 
   \indexspace
 
-  \item CROW , \hyperpage{18--24}, \hyperpage{27}, \hyperpage{31}, 
-		\hyperpage{39, 40}
+  \item JavaScript
+    \subitem Programming language, \hyperpage{5--7}, \hyperpage{11}
 
   \indexspace
 
-  \item MEWE , \hyperpage{18}, \hyperpage{24}, \hyperpage{27}
-  \item multivariant , \hyperpage{12, 13}, \hyperpage{18}, 
-		\hyperpage{24--27}, \hyperpage{29}, \hyperpage{36--38}, 
-		\hyperpage{45--47}
+  \item MEWE , \hyperpage{20}, \hyperpage{26}, \hyperpage{29}
 
   \indexspace
 
-  \item program variant , \hyperpage{10--12}, \hyperpage{23}, 
-		\hyperpage{39}
+  \item Software
+    \subitem Artificial Diversity, \hyperpage{10}
+    \subitem Diversification, \hyperpage{vi}, \hyperpage{1}, 
+		\hyperpage{10}, \hyperpage{12}, \hyperpage{14--16}, 
+		\hyperpage{23}
+    \subitem Multivariant, \hyperpage{14, 15}, \hyperpage{20}, 
+		\hyperpage{26--29}, \hyperpage{31}, \hyperpage{39, 40}, 
+		\hyperpage{47--49}
+    \subitem Mutation strategies, \hyperpage{11}
+    \subitem Natural diversity, \hyperpage{10}
+    \subitem Replacement overlapping, \hyperpage{25}
+    \subitem Variant, \hyperpage{12--14}, \hyperpage{25}, 
+		\hyperpage{41}
 
   \indexspace
 
-  \item Software Diversification , \hyperpage{1}, \hyperpage{8}, 
-		\hyperpage{10}, \hyperpage{12--14}, \hyperpage{21}
-
-  \indexspace
-
-  \item Wasm , \hyperpage{4--9}, \hyperpage{15}, \hyperpage{18}, 
-		\hyperpage{20}, \hyperpage{22--24}, \hyperpage{27}, 
-		\hyperpage{37}
-  \item WebAssembly , \hyperpage{1}, \hyperpage{3--5}, \hyperpage{7, 8}, 
-		\hyperpage{13--15}, \hyperpage{17--20}, \hyperpage{22}, 
-		\hyperpage{24--26}, \hyperpage{29--31}, 
-		\hyperpage{35--40}, \hyperpage{43}, \hyperpage{46}
+  \item WebAssembly, \hyperpage{7}, \hyperpage{10}
+    \subitem Programming language, \hyperpage{6--11}, \hyperpage{17}, 
+		\hyperpage{20}, \hyperpage{22}, \hyperpage{24--26}, 
+		\hyperpage{29}
+    \subitem Security, \hyperpage{10}
 
 \end{theindex}

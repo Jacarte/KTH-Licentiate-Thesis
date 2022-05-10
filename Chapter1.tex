@@ -1,35 +1,37 @@
 \chapter{Introduction}
 
-\chapterprecishere{"\input{quotes/cinderella1.tex}"\par\raggedleft--- {\footnotesize\textup{MR. Cox}, Cinderella: Three hundred and forty-five variants \cite{cox1893cinderella}, 1893}}
-
-\todo{Two references per paragraph}
-
-
-\todo{Base paragraph by the papers}
-
+\chapterprecishere{"\input{quotes/cinderella1.tex}"\par\raggedleft--- {\small\textup{MR. Cox} \textbf{1893}, Cinderella: Three hundred and forty-five variants \cite{cox1893cinderella}}}
 
 
 \newcommand{\subscript}[2]{$#1 _ #2$}
 
-\newcommand{\rqone}{RQ1. To what extent can we artifically generate program variants for \wasm?}
+\newcommand{\rqone}{To what extent can we artifically generate program variants for WebAssembly?}
 
-\newcommand{\rqtwo}{RQ2. To what extent are the generated variants dynamically different?}
-\newcommand{\rqthree}{RQ3. To what extent do the artificial variants exhibit different execution times on Edge-Cloud platforms?}
+\newcommand{\rqtwo}{To what extent are the generated variants dynamically different?}
+\newcommand{\rqthree}{To what extent do the artificial variants exhibit different execution times on Edge-Cloud platforms?}
+
+\todo{Two references per paragraph}
+
+\todo{Base paragraph by the papers}
+
+% WebAssembly as new technology
+
+% Security and reliability issues
+% - Engines are not yet mature and are prone to errors, stress the case of the CVE
+
+% Software diversification as a preemptive solution and as a Moving Target Defense strategy
+
+% Lack of Natural Software Diversification and a high presence of monoculture
+% - the birth of a new package manager and the translation of preexisting ones such as cargo and the LLVM itself.
+One motivation for this work is that \wasm was adopted in 2017, and it lacks of natural diversity \citationneeded. Moreover, compared to the work of Harrand \etal \citationneeded, in WebAssembly, we cannot use preexisting and different programs to provide diversification. In fact, according to the work of Hilbig \etal \citationneeded, the artificial variants created with one of our works contributes to the half of executable and available \wasm binaries in the wild. 
+
+The low presence of defenses implementations for \wasm motivates our work on \termidx[Software Diversification]{Software!Diversification}as a preemptive technique that can help against known and yet unknown vulnerabilities.
+
+% Our solution is to artificially diversify
 
 
-\section*{Internet of Software Monoculture}
 
-\section*{\termidx{Software Diversification }as a solution}
-
-\todo{Moved from Chapter 2}
-The low presence of defenses implementations for \wasm motivates our work on \termidx{Software Diversification }as a preemptive technique that can help against known and yet unknown vulnerabilities.
-
-\section*{Artificial Software Diversification}
-
-
-\section*{Fine-grained Diversification}
-
-\section{Thesis Statement}
+%\section{Thesis Statement}
 
 %\section{Motivation}
 
@@ -38,47 +40,85 @@ The low presence of defenses implementations for \wasm motivates our work on \te
 \section{Research questions}
 \label{intro:definition:rq}
 
+In this section, we present our three research questions. Our research questions are formulated by merging our publications and experiences during the creation of Software Diversification for WebAssembly. 
 
-\begin{enumerate}
-    \item \rqone
-    \todo{Motivation}
+\begin{enumerate}[label=\subscript{RQ}{{\arabic*}}]
+    \item \textbf{\rqone}\\
+    With this research question, we quantitatively assess the static differences between program variants created by our approach. We answer this question at the population level, where a program population is the collection of one original program and its generated variants. We aim to investigate the code properties that increases(or diminishes) generated diversification at population level. 
 
-    \item \rqtwo
-    \todo{Motivation}
+    \item \textbf{\rqtwo} \\
+    With this research question, we complement $RQ_1$. We aim to investigate the impact on execution traces and execution times of the generated program variants.
+
+    \item \textbf{\rqthree} \\
+    %\todo{Intro motiv}
+    With this research question, we aim to investigate the impact of Software Diversification for WebAssembly in an emerging technology, Edge-Cloud computing. We evaluate the impact of a novel multivariant execution approach on real-world WebAssembly programs in a world-wide scale experiment.
     
-    \item \rqthree
-    \todo{Motivation}
     
 \end{enumerate}
 
-%T%he main motivation for this research question is that \wasm was adopted in 2017, and it lacks of natural diversity \citationneeded. Moreover, compared to the work of Harrand \etal \citationneeded, in WebAssembly, we cannot use preexisting and different programs to provide diversification. In fact, according to the work of Hilbig \etal \citationneeded, the artificial variants created with one of our works contributes to the half of executable and available \wasm binaries in the wild. 
+
+\renewcommand{\rqone}{$RQ_1$. To what extent can we artifically generate program variants for WebAssembly?}
+
+\renewcommand{\rqtwo}{$RQ_2$. To what extent are the generated variants dynamically different?}
+\renewcommand{\rqthree}{$RQ_3$. To what extent do the artificial variants exhibit different execution times on Edge-Cloud platforms?}
 
 \section{Contributions}
 
 The contributions of this thesis are:
 
-\begin{enumerate}[label=(\subscript{C}{{\arabic*}})]
-    \item Methodological contribution: \todo{}
-    \item Experimental contribution: \todo{}
-    \item Theoretical contribution: \todo{}
-    \item Technical contribution: \todo{} \todo{Point to chapter 3}
+\begin{enumerate}[label=\subscript{C}{{\arabic*}}]
+    \item Technical contribution: Along with this work, we contribute with several software artifacts and summarize the main challenges faced during their implementation.
+    
+    \item Methodological contribution: We propose a quantitative methodology to evaluate the impact of our artifacts, assessing the creation of Artificial Software Diversification for WebAssembly.  
+    
+    \item Experimental contribution: We contribute to generate Artificial Software Diversification for WebAssembly. We empirically demonstrate the impact on static and dynamic behavior for our diversification technique.
+    
+    \item Theoretical contribution: We summarize the code transformations used to artifically generate software diversification through an exhaustive literature review and highlight the lack of diversification techniques for WebAssembly. In addition, we discuss the incorporation of \emph{Constant Inferring} as a new diversification technique.
 \end{enumerate}
 
 \section{Publications}
 
-\begin{enumerate}[label=(\subscript{P}{{\arabic*}})]
-    \item Bytecode analysis for V8 and DTW: \todo{}
-    \item Superoptimization: \todo{}
-    \item CROW: \todo{}
-    \item MEWE: \todo{}
+This work is based on the following publications:
+
+\begin{enumerate}[label=\subscript{P}{{\arabic*}}]
+    \item Superoptimization of WebAssembly Bytecode \cite{WasmSuperoptimizer}\\
+    {\small\textbf{Javier Cabrera-Arteaga}, Shrinish Donde, Jian Gu, Orestis Floros, Lucas Satabin, Benoit Baudry, Martin Monperrus}\\
+        \emph{Programming 2020, MoreVMs'20}\\
+        {\small
+        \textbf{Abstract:} Motivated by the fast adoption of WebAssembly, we propose the first functional pipeline to support the superoptimization of WebAssembly bytecode. Our pipeline works over LLVM and Souper. We evaluate our superoptimization pipeline with 12 programs from the Rosetta code project. Our pipeline improves the code section size of 8 out of 12 programs. We discuss the challenges faced in superoptimization of WebAssembly with two case studies.}
+    \item CROW: Code Diversification for WebAssembly \cite{CROW}\\
+    {\small\textbf{Javier Cabrera-Arteaga}, Orestis Floros, Oscar Vera-Pérez, Benoit Baudry,  Martin Monperrus}\\
+    \emph{NDSS 2021, MADWeb}\\
+    {\small
+    \textbf{Abstract:} The adoption of WebAssembly has rapidly increased in the last few years as it provides a fast and safe model for program execution. However, WebAssembly is not exempt from vulnerabilities that could be exploited by side channels attacks. This class of vulnerabilities that can be addressed by code diversification. In this paper, we present the first fully automated workflow for the diversification of WebAssembly binaries. We present CROW, an open-source tool implementing this workflow. We evaluate CROW's capabilities on 303 C programs and study its use on a real-life security-sensitive program: libsodium, a cryptographic library. Overall, CROW is able to generate diverse variants for 239 out of 303,(79\%) small programs. Furthermore, our experiments show that our approach and tool is able to successfully diversify off-the-shelf cryptographic software (libsodium).}
+    \item Multi-Variant Execution at the Edge \cite{MEWE}\\
+    {\small\textbf{Javier Cabrera-Arteaga}, Pierre Laperdrix, Martin Monperrus, Benoit Baudry}\\
+    \emph{Under review}\\
+    {\small
+    \textbf{Abstract:} Edge-cloud computing offloads parts of the computations that traditionally occurs in the cloud to edge nodes,e.g., CDN servers, in order to get closer to the users and reduce latency. To improve performance even further, WebAssembly is increasingly used in this context. Edge-cloud computing providers, such as Fastly or Cloudflare, let their clients deploy stateless services in the form of WebAssembly binaries, which are then translated to machine code and sandboxed for a safe execution at the edge.
+    In this context, we propose a technique that (i) automatically diversifies WebAssembly binaries that are deployed to the edge and (ii) randomizes execution paths at runtime, turning the execution of the services into a moving target. Given a service tobe deployed at the edge, we automatically synthesize functionally equivalent variants for the functions that implement the service.All the variants are then wrapped into a single multivariant WebAssembly binary. When the service endpoint is executed,every time a function is invoked, one of its variants is randomly selected. We implement this technique in the MEWE tool and we validate it with 7 services for cryptography and QR encoding. MEWE generates multivariant binaries that embed hundreds of function variants. We execute the multivariant binaries on the worldwide edge platform provided by Fastly. We show that,at runtime, the multivariant exhibit a remarkable diversity ofexecution traces, across the whole edge platform. }
 \end{enumerate}
 
-\subsection*{Origin of contributions ?}
-
+% \subsection*{Origin of contributions ?}
 \subsection*{Other publications and talks}
 
 \begin{enumerate}
-    \item wasm-mutate: \todo{}
+    \item Scalable Comparison of JavaScript V8 Bytecode Traces \cite{STRAC}\\
+    {\small\textbf{Javier Cabrera-Arteaga}, Martin Monperrus, Benoit Baudry}\\
+    \emph{SPLASH 2019, VMIL}\\
+    {\small
+    \textbf{Abstract:} 
+    The comparison and alignment of runtime traces are essential, e.g., for semantic analysis or debugging. However, naive sequence alignment algorithms cannot address the needs of the modern web: (i) the bytecode generation process of V8 is not deterministic; (ii) bytecode traces are large.
+    We present STRAC, a scalable and extensible tool tailored to compare bytecode traces generated by the V8 JavaScript engine. Given two V8 bytecode traces and a distance function between trace events, STRAC computes and provides the best alignment. The key insight is to split access between memory and disk. STRAC can identify semantically equivalent web pages and is capable of processing huge V8 bytecode traces whose order of magnitude matches today's web like https://2019.splashcon.org, which generates approx. 150k of V8 bytecode instructions.
+     }
+    \item (Talk) Wasm-mutate: Fuzzing WebAssembly Compilers with E-Graphs\\
+    \textbf{Javier Cabrera-Arteaga}, Nicholas Fitzgerald, Martin Monperrus, Benoit Baudry\\
+    \emph{PLDI 2022, EGRAPHs}\\
 \end{enumerate}
 
 \section*{Thesis layout}
+
+This dissertation is organized in five chapters including this. \autoref{chapter:sota} presents background and the state of the art for WebAssembly and Artificial Software Diversification.
+\autoref{chapter:technical} describes our technical contributions, faced challenges and engineering decisions carried out to implement our artifacts. \autoref{chapter:method} describes the methodology followed to answer the three main
+research questions driving this thesis. \autoref{chapter:results} details the main results of this work. \autoref{chapter:conclude} concludes and discuss future work. 
+In addition, this dissertation contains the collection of research papers previously mentioned in this chapter.

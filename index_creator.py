@@ -9,6 +9,8 @@ DISTANCE = 20
 BLACKLIST = ["termidx", 'cite', '{diagrams', 'fromjson']
 AUTO = True
 
+# https://es.overleaf.com/learn/latex/Indices
+
 if __name__ == '__main__':
 
     for dirpath, dirs, files in os.walk(DIR):

@@ -2,8 +2,6 @@
 \section{\rqone}
 \label{rq1:method}
 
-\todo{the main issue with "Methoology for RQ1" is that \termidx{CROW }has not been introcuded / cast as a contribution yet}
-
 \begin{figure}[h]
     \centering
     \includegraphics[height=4.1in]{diagrams/RQ1.pdf}
@@ -99,9 +97,9 @@ Beyond the program's population, we also want to compare how many program varian
 
 
 \subsection*{Protocol}
-To generate program variants, we synthesize program variants with an enumerative strategy, checking each synthesis for equivalence modulo input \cite{Li2018} against the original program. \todo{link with SOTA}. For obvious reasons, this space is nearly impossible to explore in a reasonable time as soon as the limit of instructions increases.
+To generate program variants, we synthesize program variants with an enumerative strategy, checking each synthesis for equivalence modulo input \cite{Li2018} against the original program, as it is described in \autoref{section:crow}. For obvious reasons, this space is nearly impossible to explore in a reasonable time as soon as the limit of instructions increases.
 Therefore, we use two parameters to control the size of the search space and hence the time required to traverse it.
-On the one hand, one can limit the size of the variants. On the other hand, one can limit the set of instructions used for the synthesis. In our experiments for RQ1, we use all the $60$ supported instructions in our synthesizer.
+On the one hand, one can limit the size of the variants. On the other hand, one can limit the set of instructions used for the synthesis. In our experiments for RQ1, we use all instructions in the CROW diversifier synthesis.
 
 
 The former parameter allows us to find a trade-off between the number of variants that are synthesized and the time taken to produce them. For the current evaluation, given the size of the corpus and the properties of its programs, we set the exploration time to 1 hour maximum per function for \corpusrosetta. In the cases of \corpussodium\ and\ \corpusqrcode, we set the timeout to 5 minutes per function. The decision behind the usage of lower timeout for \corpussodium

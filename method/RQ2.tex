@@ -15,9 +15,7 @@ The static analysis focuses on the appreciated differences among the program var
 With RQ2, we focus on the last category, the dynamic analysis of the generated variants. This decision is supported because dynamic analysis complements RQ1 and, it is essential to provide a full understanding of diversification.
 We use the original functions from \corpusrosetta corpus described in \autoref{section:crow:corpora} and their variants generated to answer RQ1. 
 We use only \corpusrosetta to answer RQ2 because this corpus is composed of simple programs that can be executed directly without user interaction, \ie we only need to call the interpreter passing the \wasm binary to it. 
-
-\todo{Motivate, Increasing attack surface does not necesarilly has an impact on defence. For example, reordering instructions for code blocks that are never executed does not impact attacker}
-
+%\todo{Motivate, Increasing attack surface does not necesarilly has an impact on defence. For example, reordering instructions for code blocks that are never executed does not impact attacker}
 To dynamically compare programs and their variants, we execute each program on each programs' population to collect and execution times. We define execution trace and execution time in the following section.
 %\todo{vague and subjective, avoid or elaborate: We perform fine-grained} comparisons by comparing the traces and execution times for all pairs of programs. Therefore, the defined metrics are formulated to support a pairwise comparison strategy.
 %In the following, we define the metrics used to answer RQ2.
@@ -28,12 +26,11 @@ To dynamically compare programs and their variants, we execute each program on e
 We compare the execution traces of two any programs of the same population with a global alignment metric. We propose a global alignment approach using Dynamic Time Warping (DTW).
 Dynamic Time Warping \cite{NEEDLEMAN1970443} computes the global alignment between two sequences. It returns a value capturing the cost of this alignment, which is a distance metric. The larger the DTW distance, the more different the two sequences are.
 DTW has been used for comparing traces in different domains. For software, De A. Maia \etal \cite{ Maia08usinga} proposed to identify similarity between programs from execution traces.
-In our experiments, we define the traces as the sequence of the stack operations during runtime, \ie the consecutive list of \texttt{push} and \texttt{pop} operations performed by the \wasm engine during the execution of the program.
+\todo{Add STRAC here later}
+As we discussed in \autoref{sota:wasm}, a theoretical \wasm engine perform \texttt{push} and \texttt{pop} operations when the program instructions are executed. Therefore, in our experiments, we define the execution traces as the sequence of the stack operations during the execution of the \wasm program. 
 In the following, we define the $\DTW$ metric. 
  
-
-
-\todo{before, define this and give an illutrative listing plus, says how you collect those traces, that's part of the protocol: between the stack operation traces }
+%\todo{before, define this and give an illutrative listing plus, says how you collect those traces, that's part of the protocol: between the stack operation traces }
 
 \begin{metric}{\DTW{}:}
 \label{metric:stack}

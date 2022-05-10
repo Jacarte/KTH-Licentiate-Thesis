@@ -16,10 +16,7 @@
 \DeclareFloatingEnvironment[fileext=frm,placement={tph},name=Listing]{code}
 \captionsetup[lstlisting]{singlelinecheck=false, margin=0pt}
 
-\newcommand{\termidx}[1]{#1\index{#1}}
-\newcommand{\wasm}{\termidx{WebAssembly }\xspace}
-\newcommand{\ie}{\textit{i.e.,}\xspace}
-\newcommand{\etal}{et al.\xspace}
+\input{custom_commands.tex}
 
 
 \newcommand*\badge[1]{ \colorbox{red}{\color{white}#1}}

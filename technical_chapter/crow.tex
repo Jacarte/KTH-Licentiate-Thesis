@@ -43,7 +43,7 @@ In the following, we describe our engineering decisions. All our implementation 
 \begin{definition}{Code replacement:}
     \label{def:code-replacement}
     Let $P$ be a program and $T$ a pair of code blocks $(B_1, B_2)$. $T$ is a candidate code replacement if $B_1$ and $B_2$ are both functionally equivalent as defined in \autoref{def:functional-equivalence}.
-    Applying $T$ to $P$ means replacing $B_1$ by $B_2$. The application of $T$ to $P$ produces a \termidx{program variant }$P'$ which consequently is functionally equivalent to $P$.     
+    Applying $T$ to $P$ means replacing $B_1$ by $B_2$. The application of $T$ to $P$ produces a \termidx[program variant ]{Software!Variant}$P'$ which consequently is functionally equivalent to $P$.     
 \end{definition}
 \end{comment}
 
@@ -69,7 +69,7 @@ Each syntactically correct expression in the search space is semantically checke
 
 Notice that the searching space exponentially increases with the size of the LLVM IR language subset. Thus,
 % Additional changes, not needed instructions
-we prevent Souper from synthesizing instructions that have no correspondence in the \wasm backend. This decision reduces the searching space. For example, creating expression having the  \texttt{freeze} LLVM instructions will increase the searching space for an instruction without a \termidx{Wasm }suitable opcode in the end.
+we prevent Souper from synthesizing instructions that have no correspondence in the \wasm backend. This decision reduces the searching space. For example, creating expression having the  \texttt{freeze} LLVM instructions will increase the searching space for an instruction without a \termidx[Wasm]{WebAssembly!Programming language}suitable opcode in the end.
 % removal or pruning strategies
 Moreover, we disable the majority of the pruning strategies of Souper for the sake of more variants. For example, Souper avoids to construct redundant expressions such as commutative operations. We disable strategies like this for the sake of more statically different programs.  %Our modified version of Souper can be found at \todo{}.
 
@@ -158,20 +158,20 @@ Souper can deal with this case, generating the program in \autoref{inferring}. I
 \subsection*{Combining replacements}
 
 When we retarget Souper, to create variants, we recombine all code replacements, including those for which a constant inferring was performed.
-This allows us to create variants that are also better than the original program in terms of size and performance. Most of the Artificial \termidx{Software Diversification }works generate variants that are as performant or iller than the original program. By using a superdiversifier, we could be able to generate variants that are better, in terms of performance, than the original program. This will give the option to developers to decide between performance and diversification without sacrificing the former. 
+This allows us to create variants that are also better than the original program in terms of size and performance. Most of the Artificial \termidx[Software Diversification]{Software!Diversification}works generate variants that are as performant or iller than the original program. By using a superdiversifier, we could be able to generate variants that are better, in terms of performance, than the original program. This will give the option to developers to decide between performance and diversification without sacrificing the former. 
 
 On the other hand, when Souper finds a replacement, it is applied to all equal instructions in the original LLVM binary. In our implementation, we apply the transformation only to the instruction for which it was found in the first place. For example, if we find a replacement that is suitable for $N$ difference places in the original program, we generate $N$ different programs by applying the transformation in only one place at a time. Notice that this strategy provides a combinatorial explosion of program variants as soon as the number of replacements increases.
 
 \subsection*{Removing latter optimizations for LLVM}
 
-During the implementation of \termidx{CROW }we have the premise of removing all builtin optimizations in the LLVM backend that could reverse \termidx{Wasm }variants.
+During the implementation of \termidx{CROW }we have the premise of removing all builtin optimizations in the LLVM backend that could reverse \termidx[Wasm]{WebAssembly!Programming language}variants.
 Therefore, in addition to the extension of Souper, we modify the LLVM compiler and the \wasm backend.
 We disable all optimizations in the \wasm backend that could reverse the superoptimizer transformations, such as constant folding and instructions normalization.
 
 
 %\todo{We disable cost restrictions and the LLVM backend optimizations...maybe for the assesment RQ ?}
 
-\subsection{\termidx{CROW }instantiation}
+\subsection*{\termidx{CROW }instantiation}
 %\label{section:crow:example}
 %In \autoref{section:crow} we describe the main components and contributions of CROW. In this section we instantiate the workflow presented in \autoref{workflow} from the input of an example C code to the generation of a pool of \wasm program variants.
 
@@ -184,9 +184,9 @@ Let us illustrate how \termidx{CROW }works with the simple example code in \auto
 CROW, detects \texttt{code\_1} and \texttt{code\_2} as the enclosing boxes in the left most part of \autoref{example:crow:original:llvm} shows. \termidx{CROW }synthesizes $2 + 1$ candidate code replacements for each code respectively as the green highlighted lines show in the right most parts of \autoref{example:crow:original:llvm}.
 The baseline strategy of \termidx{CROW }is to generate variants out of all possible combinations of the candidate code replacements, \ie uses the power set of all candidate code replacements.
 
-In the example, the power set is the cartesian product of the found candidate code replacements for each code block, including the original ones, as \autoref{example:crow:original:combination} shows. The power set size results in $6$ potential function variants. Yet, the generation stage would eventually generate $4$ variants from the original program. \termidx{CROW }generated 4 statically different \termidx{Wasm }files, as \autoref{example:crow:variants:wasm} illustrates. This gap between the potential and the actual number of variants is a consequence of the redundancy among the bitcode variants when composed into one. In other words, if the replaced code removes other code blocks, all possible combinations having it will be in the end the same program. In the example case, replacing \texttt{code\_2} by \texttt{mul nsw \%0, 3}, turns \texttt{code\_1} into dead code, thus, later replacements generate the same program variants. The rightmost part of \autoref{example:crow:original:combination} illustrates how for three different combinations, \termidx{CROW }produces the same variant. We call this phenomenon a \termidx{\emph{code replacement overlapping}}.
+In the example, the power set is the cartesian product of the found candidate code replacements for each code block, including the original ones, as \autoref{example:crow:original:combination} shows. The power set size results in $6$ potential function variants. Yet, the generation stage would eventually generate $4$ variants from the original program. \termidx{CROW }generated 4 statically different \termidx[Wasm]{WebAssembly!Programming language}files, as \autoref{example:crow:variants:wasm} illustrates. This gap between the potential and the actual number of variants is a consequence of the redundancy among the bitcode variants when composed into one. In other words, if the replaced code removes other code blocks, all possible combinations having it will be in the end the same program. In the example case, replacing \texttt{code\_2} by \texttt{mul nsw \%0, 3}, turns \texttt{code\_1} into dead code, thus, later replacements generate the same program variants. The rightmost part of \autoref{example:crow:original:combination} illustrates how for three different combinations, \termidx{CROW }produces the same variant. We call this phenomenon a \termidx[\emph{code replacement overlapping}]{Software!Replacement overlapping}.
 
 \input{snippets/wasm_codes.tex}
 
-One might think that a reasonable heuristic could be implemented to avoid such overlapping cases. Instead, we have found it easier and faster to generate the variants with the combination of the replacement and check their uniqueness after the \termidx{program variant }is compiled. This prevents us from having an expensive checking for overlapping inside the \termidx{CROW }code. Still, this phenomenon calls for later optimizations in future works.
+One might think that a reasonable heuristic could be implemented to avoid such overlapping cases. Instead, we have found it easier and faster to generate the variants with the combination of the replacement and check their uniqueness after the \termidx[program variant ]{Software!Variant}is compiled. This prevents us from having an expensive checking for overlapping inside the \termidx{CROW }code. Still, this phenomenon calls for later optimizations in future works.
 

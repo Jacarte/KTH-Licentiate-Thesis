@@ -1,4 +1,4 @@
-\section{Software Diversification}
+\section{\termidx[Software Diversification]{Software!Diversification}}
 \label{sota:sota}
 %Checkmarck symbol
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
@@ -48,7 +48,7 @@
 
 %\todo{Given a collection of pgorams, then enumerate the usages. Second approach, multiple encapsulation in one single program.}
 
-\termidx{Software Diversification }has been widely studied in the past decades. This section discusses its state of the art.
+\termidx[Software Diversification]{Software!Diversification}has been widely studied in the past decades. This section discusses its state of the art.
 % What is Software diversity
 Software diversification consists in synthesizing, reusing, distributing, and executing different, functionally equivalent programs. 
 According to the survey of Baudry and Monperrus \cite{natural_diversity}, the motivation for software diversification can be separated in five categories: reusability \cite{pohl2005software}, software testing \cite{Chen2010AdaptiveRT}, performance \cite{10.1145/2025113.2025133}, fault tolerance \cite{1659219} and security \cite{cohen1993operating}. Our work contributes to the latter two categories. In this section we discuss related works by highlighting how they generate diversification and how they use the generated diversification. 
@@ -66,7 +66,7 @@ According to the survey of Baudry and Monperrus \cite{natural_diversity}, the mo
 
 %\subsection*{Artificial Software Diversity.}
 
-There are two primary sources of software diversification: Natural and Artificial Diversity \cite{natural_diversity}. This work contributes to the state of the art of Artificial Diversity, which consists of artificially synthesizing software. 
+There are two primary sources of software diversification: \termidx[Natural Diversity]{Software!Natural diversity} and \termidx[Artificial Diversity]{Software!Artificial Diversity}\cite{natural_diversity}. This work contributes to the state of the art of Artificial Diversity, which consists of artificially synthesizing software. 
 % Intro to Cohen and that functional/semantic equivalence is 
 We have found that the foundation for artificial software diversity has barely changed since Cohen in 1993 \cite{cohen1993operating}. Therefore, the work of Cohen is the cornerstone of this dissertation.
 
@@ -76,7 +76,7 @@ We have found that the foundation for artificial software diversity has barely c
 
 \subsection*{Variants' generation}
 % Mutation strategy
-Cohen \etal proposed to generate artificial software diversification through mutation strategies.
+Cohen \etal proposed to generate artificial software diversification through \termidx[mutation strategies]{Software!Mutation strategies}.
 A mutation strategy is a set of rules to define how a specific component of software development should be changed to provide a different yet functionally equivalent program. Cohen \etal proposed 10 concrete transformation strategies that can be applied at fine-grained level. 
 All described strategies can be mixed together. They can be applied in any sequence and recursively, providing a richer diversity environment. We summarize them, complemented with the work of Baudry and Monperrus \cite{natural_diversity} and the work of Jackson \etal \cite{jackson}, in 5 strategies.
 
@@ -119,14 +119,14 @@ All described strategies can be mixed together. They can be applied in any seque
     \label{strategy:S3}
     \normalfont
     This strategy creates program variants by adding, changing, or removing jumps and calls in the original program. Cohen \cite{cohen1993operating} mainly illustrated the case by inserting bogus jumps in programs. Pettis and Hansen \cite{pettisochhansen} proposed to split basic blocks and functions for the PA-RISC architecture, inserting jumps between splits.
-    Similarly, Crane \etal~\cite{crane2015thwarting} de-inline basic blocks of code as an LLVM pass. In their approach, each de-inlined code is transformed into semantically equivalent functions that are randomly selected at runtime to replace the original code calculation. On the same topic, Bhatkar \etal \cite{bhatkar2005efficient} extended their previous approach \cite{bhatkar03}, replacing function calls by indirect pointer calls in C source code, allowing post binary reordering of function calls. Recently, Romano \etal \cite{wobfuscator} proposed an obfuscation technique for JavaScript in which part of the code is replaced by calls to complementary \termidx{Wasm }function.
+    Similarly, Crane \etal~\cite{crane2015thwarting} de-inline basic blocks of code as an LLVM pass. In their approach, each de-inlined code is transformed into semantically equivalent functions that are randomly selected at runtime to replace the original code calculation. On the same topic, Bhatkar \etal \cite{bhatkar2005efficient} extended their previous approach \cite{bhatkar03}, replacing function calls by indirect pointer calls in C source code, allowing post binary reordering of function calls. Recently, Romano \etal \cite{wobfuscator} proposed an obfuscation technique for \termidx[JavaScript ]{JavaScript!Programming language}in which part of the code is replaced by calls to complementary \termidx[Wasm]{WebAssembly!Programming language}function.
 \end{strategy}
 
 
 \begin{strategy}{Program memory and stack randomization}
     \label{strategy:S4}
     \normalfont
-    This strategy changes the layout of programs in the host memory. Also, it can randomize how a \termidx{program variant }operates its memory. The work of Bhatkar \etal \cite{bhatkar03, bhatkar2005efficient} also proposed to randomize the base addresses of applications and the library memory regions, and the random introduction of gaps between memory objects in ELF binaries. Tadesse Aga and Autin \cite{aga2019smokestack} and Lee \etal \cite{lee2021savior} recently proposed a technique to randomize the local stack organization for function calls using a custom LLVM compiler.
+    This strategy changes the layout of programs in the host memory. Also, it can randomize how a \termidx[program variant ]{Software!Variant}operates its memory. The work of Bhatkar \etal \cite{bhatkar03, bhatkar2005efficient} also proposed to randomize the base addresses of applications and the library memory regions, and the random introduction of gaps between memory objects in ELF binaries. Tadesse Aga and Autin \cite{aga2019smokestack} and Lee \etal \cite{lee2021savior} recently proposed a technique to randomize the local stack organization for function calls using a custom LLVM compiler.
     Younan \etal \cite{Younan2006} proposed to separate a conventional stack into multiple stacks where each stack contains a particular class of
     data. 
     On the same topic, Xu \etal \cite{xu2020merr} transform programs to reduce memory exposure time, improving the time needed for frequent memory address randomization. 
@@ -153,7 +153,7 @@ All described strategies can be mixed together. They can be applied in any seque
 \begin{strategy}{Intermixing}
     \label{strategy:S10}
     \normalfont
-    With the existence of more than one program variant, the execution of program variants can be mixed. The decision of which variant executes is decided at runtime. This strategy is the core for randomization, \termidx{multivariant }execution and the execution by consensus defined in \autoref{goal:reliability}. This strategy is 
+    With the existence of more than one program variant, the execution of program variants can be mixed. The decision of which variant executes is decided at runtime. This strategy is the core for randomization, \termidx[multivariant ]{Software!Multivariant}execution and the execution by consensus defined in \autoref{goal:reliability}. This strategy is 
     complex to implement because the integrity of the memory and stack needs to be stable between programs.
 \end{strategy}
 \end{comment}
@@ -166,7 +166,7 @@ Equivalence checking between program variants is an essential component for any 
 Equivalence checking proves that two pieces of code or programs are semantically equivalent.
 This process is undecidable; still, some approaches approximate it \cite{churchill2019}. % Why is important
 Cohen \cite{cohen1993operating} simplifies this process by enunciating the following property: two programs are equivalent if given identical input, they produce the identical output. We use this same enunciation as the definition of \emph{functional equivalence} along with this dissertation. 
-Equivalence checking in \termidx{Software Diversification }aims to preserve the original functionality for programs while changing observable behaviors. For example, two programs can be statically different or have different execution times and provide the same computation. 
+Equivalence checking in \termidx[Software Diversification]{Software!Diversification}aims to preserve the original functionality for programs while changing observable behaviors. For example, two programs can be statically different or have different execution times and provide the same computation. 
 
 
 
@@ -180,7 +180,7 @@ Equivalence checking in \termidx{Software Diversification }aims to preserve the 
 
 
 % Using the test suite and equivalence by construction
-The easiest way to guarantee the equivalence property is by construction. For example, in the case illustrated in \autoref{strategy:S1} for Cleemput \etal \cite{Cleemput2012} and Homescu \etal \cite{homescu2013profile}, the transformation strategy is designed to generate semantically equivalent program variants. However, this process is prone to developer errors, and further validation is needed. For example, the test suite of the original program can be used to check the variant. If the test suite passes for the \termidx{program variant }\cite{harrand2020java}, it is equivalent to the original. However, it is limited due to the need for a preexisting test suite. When the test suite does not exist, another technique is needed to check for equivalence.
+The easiest way to guarantee the equivalence property is by construction. For example, in the case illustrated in \autoref{strategy:S1} for Cleemput \etal \cite{Cleemput2012} and Homescu \etal \cite{homescu2013profile}, the transformation strategy is designed to generate semantically equivalent program variants. However, this process is prone to developer errors, and further validation is needed. For example, the test suite of the original program can be used to check the variant. If the test suite passes for the \termidx[program variant ]{Software!Variant}\cite{harrand2020java}, it is equivalent to the original. However, it is limited due to the need for a preexisting test suite. When the test suite does not exist, another technique is needed to check for equivalence.
 
 % Automatic equivalence checking
 If there is no test suite or the technique does not inherently implement the equivalence property, the previously mentioned works use theorem solvers (SMT solvers) \cite{SMT_solver} or fuzzers \citationneeded to prove equivalence. For SMT solvers, the main idea is to turn the two code variants into mathematical expressions. The SMT solver checks for counter-examples. When the SMT solver finds a counter-example, there exists an input for which the two math expressions return a different output. The main limitation of this technique is that all algorithms cannot be translated to a math expression, for example, loops. Yet, this technique tends to be the most used for no-branching-programs checking like basic block and peephole replacements \citationneeded.
@@ -215,7 +215,7 @@ After program variants are generated, they can be used in two main scenarios: Ra
         \centering
         \includegraphics[height=3.1in]{diagrams/randomization.pdf}
         \vspace{0.5cm}
-        \caption{Randomization scenario. Given a pool of program variants, one variant is deployed per host. Each deployment randomly selects which variant is assigned to each host. The same \termidx{program variant }is executed in the host at every program invocation between deployments. }        \label{diagrams:sota:randomization}
+        \caption{Randomization scenario. Given a pool of program variants, one variant is deployed per host. Each deployment randomly selects which variant is assigned to each host. The same \termidx[program variant ]{Software!Variant}is executed in the host at every program invocation between deployments. }        \label{diagrams:sota:randomization}
 
     \end{subfigure}
     \hspace{1.5mm}
@@ -224,10 +224,10 @@ After program variants are generated, they can be used in two main scenarios: Ra
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[height=2.8in]{diagrams/mve.pdf}
-        \caption{Multivariant Execution scenario. Given a pool of program variants, a sample of the pool is packaged in a \termidx{multivariant }binary that is deployed per. Each deployment randomly selects which \termidx{multivariant }binary is assigned to each host. A variant from the \termidx{multivariant }binary is randomly executed at runtime in the host, .}        \label{diagrams:sota:mve}
+        \caption{Multivariant Execution scenario. Given a pool of program variants, a sample of the pool is packaged in a \termidx[multivariant ]{Software!Multivariant}binary that is deployed per. Each deployment randomly selects which \termidx[multivariant ]{Software!Multivariant}binary is assigned to each host. A variant from the \termidx[multivariant ]{Software!Multivariant}binary is randomly executed at runtime in the host, .}        \label{diagrams:sota:mve}
 
     \end{subfigure}
-    \caption{\termidx{Software Diversification }usages. }
+    \caption{\termidx[Software Diversification]{Software!Diversification}usages. }
 \end{figure}
 
 % \todo{Split in what and how?}
@@ -254,14 +254,14 @@ After program variants are generated, they can be used in two main scenarios: Ra
     \label{usage:mve}
     \normalfont
     % What
-    In the second scenario \autoref{diagrams:sota:mve}, multiple program variants are composed in one single binary (\termidx{multivariant }binary) \cite{cox06}. Each multivariant binary is randomly deployed to a client. Once in the client, the \termidx{multivariant }binary executes its embedded program variants at runtime. 
+    In the second scenario \autoref{diagrams:sota:mve}, multiple program variants are composed in one single binary (\termidx[multivariant ]{Software!Multivariant}binary) \cite{cox06}. Each multivariant binary is randomly deployed to a client. Once in the client, the \termidx[multivariant ]{Software!Multivariant}binary executes its embedded program variants at runtime. 
     % How
     The execution of the embedded variants can be either in parallel to check for inconsistencies or a single program to randomize execution paths \cite{bhatkar03}. Bruschi et al. \cite{bruschi2007diversified} extended the idea of executing two variants in parallel with not-overlapping and randomized memory layouts. Simultaneously, Salamat \etal \cite{salamat2007stopping} modified a standard library that generates 32-bit Intel variants where the stack grows in the opposite direction, checking for memory inconsistencies. Notably, Davi \etal proposed Isomeron \cite{davi2015isomeron}, an approach  for execution-path randomization. Isomeron simultaneously loads the original program and a variant. While the program is running, Isomeron continuously flips a coin to decide which copy of the program should be executed next at the level of function calls. 
     %With Davi \etal approach, a potential attacker cannot predict whether the original or the variant of a program will execute.
     % Their approach prevents against memory corruption. 
     %Also, this system can be reached dynamically, like the work of Courouss{\'e} \etal, creating an MVE through code polymorphism \cite{10.1145/3281662}.  
-    Neatly exploiting the limit case of executing only two variants in a \termidx{multivariant }binary has demonstrated to harden systems \cite{salamat2009orchestra, maurer2012tachyon,Kim2015, lu2018stopping, davi2015isomeron}.  Further two variants per \termidx{multivariant }binary,
-    Agosta \etal~\cite{agosta2015meet} and Crane \etal~\cite{crane2015thwarting} used more than two generated programs in the \termidx{multivariant }composition, randomizing software control flow at runtime.  
+    Neatly exploiting the limit case of executing only two variants in a \termidx[multivariant ]{Software!Multivariant}binary has demonstrated to harden systems \cite{salamat2009orchestra, maurer2012tachyon,Kim2015, lu2018stopping, davi2015isomeron}.  Further two variants per \termidx[multivariant ]{Software!Multivariant}binary,
+    Agosta \etal~\cite{agosta2015meet} and Crane \etal~\cite{crane2015thwarting} used more than two generated programs in the \termidx[multivariant ]{Software!Multivariant}composition, randomizing software control flow at runtime.  
     %Besides, . 
     
 
@@ -271,7 +271,7 @@ After program variants are generated, they can be used in two main scenarios: Ra
 \end{usage}
 
 
-Both scenarios have demonstrated to harden security by tackling know vulnerabilities such as (JIT)ROP attacks \cite{jackson2011compiler} and power side-channels \cite{amarilli2011can}. Moreover, Artificial \termidx{Software Diversification }is a preemptive technique for yet unknown vulnerabilities \cite{jackson}. Our work contributes to both scenarios as a preemptive technique for hardening \wasm.
+Both scenarios have demonstrated to harden security by tackling know vulnerabilities such as (JIT)ROP attacks \cite{jackson2011compiler} and power side-channels \cite{amarilli2011can}. Moreover, Artificial \termidx[Software Diversification]{Software!Diversification}is a preemptive technique for yet unknown vulnerabilities \cite{jackson}. Our work contributes to both scenarios as a preemptive technique for hardening \wasm.
 
 %\begin{usage}{Moving Target Defense(MTD):}
 %    \label{usage:mtd}
@@ -289,8 +289,8 @@ Both scenarios have demonstrated to harden security by tackling know vulnerabili
 \section{Statement of Novelty}
 \label{sota:novelty}
 
-We contribute to \termidx{Software Diversification }for \wasm using Artificial Diversification, for Randomization and Multivariant Execution usages (\autoref{usage:randomization}, \autoref{usage:mve}). 
-In \autoref{table:sota:comparison} we listed related work on Artificial \termidx{Software Diversification }that support our work. The table is composed by the authors and the reference to their work, followed by one column for each strategy and usage ( \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5}, \autoref{usage:randomization} and \autoref{usage:mve}). The last column of the table summarize their technical contribution and the reach of their work. Each cell in the table contains a checkmark if the strategy or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. The last two rows locate our contributions. 
+We contribute to \termidx[Software Diversification]{Software!Diversification}for \wasm using Artificial Diversification, for Randomization and Multivariant Execution usages (\autoref{usage:randomization}, \autoref{usage:mve}). 
+In \autoref{table:sota:comparison} we listed related work on Artificial \termidx[Software Diversification]{Software!Diversification}that support our work. The table is composed by the authors and the reference to their work, followed by one column for each strategy and usage ( \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5}, \autoref{usage:randomization} and \autoref{usage:mve}). The last column of the table summarize their technical contribution and the reach of their work. Each cell in the table contains a checkmark if the strategy or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. The last two rows locate our contributions. 
 
 \input{sota/sota_table.tex}
 
@@ -298,7 +298,7 @@ In \autoref{table:sota:comparison} we listed related work on Artificial \termidx
 %The primary motivation for our contributions is that we see in \wasm a monoculture problem. If one environment is vulnerable, all the others are vulnerable in the same manner as the same \wasm binary is replicated. 
 %Besides, the \wasm environment lacks natural diversity \cite{natural_diversity}. Compared to the work of Harrand \etal \citationneeded, in WebAssembly, one could not use preexisting and different program versions to provide diversification. On the other hand, while the number of related work for software diversity is large, only one approach has been applied to the context of \wasm. 
 % Move to the table
-%To the best of our knowledge, the closest diversification work on the browsers involving \wasm is the work of Romano \etal \cite{wobfuscator}. They proposed to de-inline JavaScript subexpressions and replace them with function calls to \wasm counterparts.  They empirically demonstrated that malware classifiers could be evaded with this diversification technique. 
+%To the best of our knowledge, the closest diversification work on the browsers involving \wasm is the work of Romano \etal \cite{wobfuscator}. They proposed to de-inline \termidx[JavaScript ]{JavaScript!Programming language}subexpressions and replace them with function calls to \wasm counterparts.  They empirically demonstrated that malware classifiers could be evaded with this diversification technique. 
 %\wasm is a novel technology, and the adoption of defenses for it is still under development \cite{Narayan2021Swivel, johnson2021}. The current limitations on security and the lack of software diversity approaches for \wasm motivate our work.
 % CROW
 Our first contribution, CROW \cite{CROW} generates multiple program variants for \wasm using the LLVM pipeline.
@@ -307,10 +307,10 @@ It contributes to state of the art in artificially creating randomization for \w
 %Besides, our contribution can be used in fuzzing campaigns \citationneeded to provide reliability. The diversification created by \termidx{CROW }can unleash hidden behaviors in compilers and interpreters. Thanks to CROW, a bug was discovered in the Lucet compiler \footnote{\url{https://www.fastly.com/blog/defense-in-depth-stopping-a-wasm-compiler-bug-before-it-became-a-problem}}.
 %MEWE
 %Notably, researching on MVE in a distributed setting like the Edge \citationneeded has been less researched. 
-With MEWE \cite{MEWE}, our second contribution, we randomly select from several variants at runtime, creating a \termidx{multivariant }execution scheme(\autoref{usage:mve}) that randomizes the observable behaviors at each run of the \termidx{multivariant }binary. %We use the natural redundancy of Edge-Cloud computing architectures to deploy an internet-based MVE.
+With MEWE \cite{MEWE}, our second contribution, we randomly select from several variants at runtime, creating a \termidx[multivariant ]{Software!Multivariant}execution scheme(\autoref{usage:mve}) that randomizes the observable behaviors at each run of the \termidx[multivariant ]{Software!Multivariant}binary. %We use the natural redundancy of Edge-Cloud computing architectures to deploy an internet-based MVE.
 
 % Move to intro
-% Only Voulimeneas \etal recently proposed a \termidx{multivariant }execution system by parallelizing the execution of the variants in different machines \cite{voulimeneas2021dmvx} for the sake of efficiency. 
+% Only Voulimeneas \etal recently proposed a \termidx[multivariant ]{Software!Multivariant}execution system by parallelizing the execution of the variants in different machines \cite{voulimeneas2021dmvx} for the sake of efficiency. 
 % Move this to the technical part
 %CROW, extrapolates the idea of superdiversification \cite{jacob2008superdiversifier} for \wasm. \termidx{CROW }works directly with LLVM IR, enabling it to generalize to more languages and CPU architectures, something not possible with the x86-specific approach of previous works.
 
