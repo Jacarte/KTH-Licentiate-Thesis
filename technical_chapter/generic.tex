@@ -5,7 +5,7 @@ The work of Hilbig et al. \cite{Hilbig2021AnES} at 2021 influences our engineeri
 Other solutions would have been to diversify at the source code level, or at the \wasm binary level. However, the former would limit the applicability of our work. The latter, will be addressed in future works (\autoref{future_work}).
 
 LLVM is composed by three main components \citationneeded. First, the frontend (compilers such as clang and rustc) converts the program source code to LLVM intermediate representation (LLVM IR). Second, optimization and transformation passes improve the LLVM IR. Third and final, the backend component is in charge of generating the target machine code. Notice that, the LLVM architecture is highly scalable. The machine code translation of LLVM IR might have any number of custom intermediate passes. In \autoref{diagrams:generic} we show the generic workflow followed in our contributions. 
-In the context of our work the LLVM architecture is instantiated over all LLVM frontends \step{1}, it adds a Diversifier as a LLVM IR pass \step{2} and uses a custom \termidx[Wasm]{WebAssembly!Programming language}backend \step{3}.
+In the context of our work the LLVM architecture is instantiated over all LLVM frontends \step{1}, it adds a Diversifier as a LLVM IR pass \step{2} and uses a custom Wasm  backend \step{3}.
 The dashed squares in \autoref{diagrams:generic} wrap the components for which we contribute.
 
 \begin{figure*}[h]
@@ -17,10 +17,10 @@ The dashed squares in \autoref{diagrams:generic} wrap the components for which w
 
 The generic workflow in \autoref{diagrams:generic} starts by receiving the source code from the program to be compiled to \wasm. Then, an LLVM frontend transforms this source code into LLVM IR representation. The resulting LLVM IR is the input for the Diversifier \step{1}.  
 % Our diversifier and first contribution
-The diversifier generates LLVM IR variants from of the output of the frontend \step{2}. These variants are inputs for our customized \termidx[Wasm]{WebAssembly!Programming language}backend. In our case the LLVM backend is always for \wasm and, it finalizes the creation of the variants \step{3}. 
+The diversifier generates LLVM IR variants from of the output of the frontend \step{2}. These variants are inputs for our customized Wasm  backend. In our case the LLVM backend is always for \wasm and, it finalizes the creation of the variants \step{3}. 
 
-Our first technical contribution, \termidx{CROW } \cite{CROW}, includes the implementation of the diversifier for LLVM and the customized \wasm backend. \termidx{CROW }is able to create several \wasm program variants out of a source code program. In \autoref{section:crow} we dissect \termidx{CROW }into more details.
-In addition, an orthogonal contribution comes from the generation of LLVM IR variants at Step~\step{2}. Our second contribution, \termidx{MEWE } \cite{MEWE}, merges and creates \termidx[multivariant ]{Software!Multivariant}binaries to provide MVE for \wasm \step{4}. In \autoref{section:mewe} we describe \termidx{MEWE }in details.
+Our first technical contribution, CROW  \cite{CROW}, includes the implementation of the diversifier for LLVM and the customized \wasm backend. CROW is able to create several \wasm program variants out of a source code program. In \autoref{section:crow} we dissect CROW into more details.
+In addition, an orthogonal contribution comes from the generation of LLVM IR variants at Step~\step{2}. Our second contribution, MEWE  \cite{MEWE}, merges and creates multivariant binaries to provide MVE for \wasm \step{4}. In \autoref{section:mewe} we describe MEWE in details.
 
 %Besides, as we discussed previously, our intention is also to study the impact of our contributions in edge computing and distributed systems and the top edge computing execution platforms, e.g. Cloudflare and Fastly, mostly take \wasm binaries as input. 
 %LLVM, on the contrary, supports different languages, with a rich ecosystem of frontends it it can reliably be retargeted to \wasm, thanks to the corresponding mature component in the LLVM toolchain. In addition, the LLVM ecosystem as a whole is very active, providing us with many different tools to facilitate our research endeavour.

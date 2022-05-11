@@ -26,7 +26,7 @@ We summarize the results in \autoref{table:crow:general_results}.
 The table illustrates the corpus name, the number of functions to diversify, the number of successfully diversified functions (functions with at least one artificially created variant), the cumulative number of variants (\emph{\corpuspopulationsizename}) and the cumulative number of unique variants (\emph{\corpusuniquepopulationsizename}).
 
 % General results on the number of diversified functions per corpus
-We produce at least one unique \termidx[program variant ]{Software!Variant} for $239/303{}$ single function programs for \corpusrosetta with one hour for a diversification timeout. For the rest of the programs ($64/303{}$), the timeout is reached before \termidx{CROW }can find any valid variant. 
+We produce at least one unique program variant  for $239/303{}$ single function programs for \corpusrosetta with one hour for a diversification timeout. For the rest of the programs ($64/303{}$), the timeout is reached before CROW can find any valid variant. 
 In the case of \corpussodium and \corpusqrcode, we produce variants for $\py{\diversifiedsodium}/\py{\libsodiumfunctions}$ and $\py{\diversifiedqrcode}/\py{\qrcodefunctions}$ functions respectively, with 5 minutes per function as timeout. The rest of the functions resulted in timeout before finding function variants or produce no variants. For all programs in all corpora, we achieve $356/3021$ successfully diversified functions, representing a $11.78\%$ of the total.
 % General growing factor
 As the four and fifth columns show, the number of artifically created variants and the number of unique variants are larger than the original number of functions by one order of magnitude. In the case of \corpusrosetta, the corpus population size is close to one million of programs.
@@ -51,7 +51,7 @@ We have noticed a remarkable difference between the number of diversified functi
 The variants generated out of the combination of several code replacements are not necessarily unique. Some code replacements can dominate over others, generating the same \wasm programs.
 
 % Why large unique count in low time ? 
-A low timeout offers more unique variants compared to the population size despite the low number of diversified functions, like the \corpussodium and \corpusqrcode cases. This happens because, \termidx{CROW }first generates variants out of single code replacements and then starts to combine them. Thus, more unique variants are generated in the very first moments of the diversification process with CROW.
+A low timeout offers more unique variants compared to the population size despite the low number of diversified functions, like the \corpussodium and \corpusqrcode cases. This happens because, CROW first generates variants out of single code replacements and then starts to combine them. Thus, more unique variants are generated in the very first moments of the diversification process with CROW.
 
 %Moreover, we look at the cases that yield a few variants per function. There is no direct correlation between the number of identified codes for replacement and the number of unique variants. Therefore, 
 
@@ -169,18 +169,18 @@ At the \wasm level, we have not observed variants performing changes in the cont
 
 While our work is very limited by the provided corpora, it can be easily extended to other\dots
 
-An application that benefits from the ablity of \termidx{CROW }is the large amount of generated variants. 
+An application that benefits from the ablity of CROW is the large amount of generated variants. 
 
 
 - CHeckLong questions for 80%
 - Stress how to do experiments in Software Engineering, the theory behind how to do this in CS.
 - The objects of the experiments are programs that ... 
 - Motivate the corpora selection, size, can be ported, security sensitive, etc,
-- Do not mention \termidx{CROW }in the selection criteria.
+- Do not mention CROW in the selection criteria.
 - The motivation is not related to tools, only to concepts
 - Move paragraph after listing of coprpora to before.
 - 
-%The proposed methodology can generate program variants that are syntactically different from their original versions. We have shown that \termidx{CROW }generates diversity among the binary code variants using semantically equivalent code transformations. We identified the properties that original programs should have to provide a handful number of variants. Besides, we enumerated the challenges faced to provide automatic diversification by retargeting a superoptimizer.
+%The proposed methodology can generate program variants that are syntactically different from their original versions. We have shown that CROW generates diversity among the binary code variants using semantically equivalent code transformations. We identified the properties that original programs should have to provide a handful number of variants. Besides, we enumerated the challenges faced to provide automatic diversification by retargeting a superoptimizer.
 
 %In the next chapter, we evaluate the assessment of the generated variants answering to what extent the artificial programs are different from the original in terms of static difference, execution behavior, and preservation.
 

@@ -25,11 +25,11 @@
 %This chapter investigates whether we can artificially create program variants through semantically equivalent code transformations. We propose a framework to generate program variants functionally equivalent to their original.
 %We introduce the retargeting of a superoptimizer, using its exhaustive search strategy to provide semantically equivalent code transformations. 
 %The presented methodology and transformation tool, CROW, are contributions to this thesis.
-%We evaluate the usage of \termidx{CROW }on two corpora of open-source and nature diverse programs. 
+%We evaluate the usage of CROW on two corpora of open-source and nature diverse programs. 
 In this chapter, we present our methodology to answer the research questions enunciated in \autoref{intro:definition:rq}.
 We investigate three research questions. In the first question, we aim to investigate the static differences between variants. We evaluate the code properties the lead less or more software diversification.
 Our second research question focuses on comparing their behavior during their execution, complementing our first research question. The generated variants should be statically different, but also should provide different observable behavior. 
-The final research question evaluates the feasibility of using the program variants in security-sensitive environments. We evaluate our generated program variants in an Edge-Cloud computing platform proposing a novel \termidx[multivariant ]{Software!Multivariant}execution approach.
+The final research question evaluates the feasibility of using the program variants in security-sensitive environments. We evaluate our generated program variants in an Edge-Cloud computing platform proposing a novel multivariant execution approach.
 
 % \todo{too generic: READ AGAIN to see how to land this
 The main objective of this thesis is to study the feasibility of automatically creating program variants out of preexisting program sources. To achieve this objective,
@@ -63,7 +63,7 @@ In the following, we describe the filtering and description of each corpus.
 In \autoref{table:corpora} we listed the corpus name, the language of the programs in the corpus, the number of modules, the total number of functions, the range of lines of code, and the original location of the corpus. 
 
 
-%The first corpus, \textbf{\termidx{CROW }prime}, . The second corpus, \textbf{\termidx{MEWE }prime}, is part of the \termidx{MEWE }contribution \cite{}. In \autoref{table:corpora} we summarize the selection criteria, and we mention each corpus properties. With both corpora we evaluate \termidx{CROW }with a total of $303 + \py{\allmewefunctions}$ functions. 
+%The first corpus, \textbf{CROW prime}, . The second corpus, \textbf{MEWE prime}, is part of the MEWE contribution \cite{}. In \autoref{table:corpora} we summarize the selection criteria, and we mention each corpus properties. With both corpora we evaluate CROW with a total of $303 + \py{\allmewefunctions}$ functions. 
 
 \begin{table}[h]
     \renewcommand{\arraystretch}{1.0}
@@ -115,7 +115,7 @@ In \autoref{table:corpora} we listed the corpus name, the language of the progra
 
 \section*{Conclusions}
 
-This chapter presents the methodology we follow to answer our three research questions. We first describe and propose the corpora of programs used in this work. We propose to measure the ability of our approach to generate variants out of \py{303  + \libsodiumfunctions + \qrcodefunctions} functions of our corpora. Then, we suggest using the generated variants to study to what extent they offer different observable behavior through dynamic analysis. We propose a protocol to study the impact of the composition variants in a \termidx[multivariant ]{Software!Multivariant}binary deployed at the Edge. Besides, we enumerate and enunciate the properties and metrics that might lead us to answer the impact of automatic diversification for \wasm programs. In the next chapter, we present and discuss the results obtained with this methodology.
+This chapter presents the methodology we follow to answer our three research questions. We first describe and propose the corpora of programs used in this work. We propose to measure the ability of our approach to generate variants out of \py{303  + \libsodiumfunctions + \qrcodefunctions} functions of our corpora. Then, we suggest using the generated variants to study to what extent they offer different observable behavior through dynamic analysis. We propose a protocol to study the impact of the composition variants in a multivariant binary deployed at the Edge. Besides, we enumerate and enunciate the properties and metrics that might lead us to answer the impact of automatic diversification for \wasm programs. In the next chapter, we present and discuss the results obtained with this methodology.
 
 
 %\todo{Add the unique and the total.}

@@ -1,0 +1,32 @@
+
+import json
+import sys
+
+def process(f, tex, revision, repo):
+    issues = json.loads(open(f, 'r').read())
+    file = open(tex, 'r').read()
+
+    # language issues
+
+    # Exit with error if threshold of warnings is reached
+    print("## %s Warnings"%(len(issues["matches"])))
+
+    for m in issues["matches"]:
+        sentence = m["sentence"]
+        rule = m["rule"]["description"]
+        message = m["message"]
+        position = m["offset"]
+        length = m["length"]
+        
+        error = file[position:position + length]
+
+        # estimating line
+        prev = file[:position]
+        n = len(prev.split("\n"))
+
+
+        print(f"- [ ] [*{error}*]({repo}/blob/{revision}/{tex}#L{n}) {message}\n  {rule}")
+        pass
+
+if __name__ == "__main__":
+    process(*sys.argv[1:])

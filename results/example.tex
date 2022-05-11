@@ -1,23 +1,23 @@
 
 \subsection{Example}
 \label{section:crow:example}
- Let us illustrate how \termidx{CROW }works with the simple example code in \autoref{CExample}. The \texttt{f} function calculates the value of $2 * x + x$ where \texttt{x} is the input for the function.  \termidx{CROW }compiles this source code and generates the intermediate LLVM bitcode in the left most part of \autoref{example:crow:original:llvm}. \termidx{CROW }potentially finds two code blocks to look for variants, as the right-most part of \autoref{example:crow:original:llvm} shows.
+ Let us illustrate how CROW works with the simple example code in \autoref{CExample}. The \texttt{f} function calculates the value of $2 * x + x$ where \texttt{x} is the input for the function.  CROW compiles this source code and generates the intermediate LLVM bitcode in the left most part of \autoref{example:crow:original:llvm}. CROW potentially finds two code blocks to look for variants, as the right-most part of \autoref{example:crow:original:llvm} shows.
 
 % snippet of code showing the detection of code blocks
 \input{snippets/llvm_code_blocks.tex}
     
 
-CROW, in the exploration stage detects 2 code blocks, \texttt{code\_block\_1} and \texttt{code\_block\_2} as the enclosing boxes in the left most part of \autoref{example:crow:original:llvm} show. \termidx{CROW }synthesizes $2 + 1$ candidate code replacements for each code block respectively as the green highlighted lines show in the right most parts of \autoref{example:crow:original:llvm}.
-The baseline strategy of \termidx{CROW }is to generate variants out of all possible combinations of the candidate code replacements, \ie uses the power set of all candidate code replacements.
+CROW, in the exploration stage detects 2 code blocks, \texttt{code\_block\_1} and \texttt{code\_block\_2} as the enclosing boxes in the left most part of \autoref{example:crow:original:llvm} show. CROW synthesizes $2 + 1$ candidate code replacements for each code block respectively as the green highlighted lines show in the right most parts of \autoref{example:crow:original:llvm}.
+The baseline strategy of CROW is to generate variants out of all possible combinations of the candidate code replacements, \ie uses the power set of all candidate code replacements.
 
-In the example, the power set is the cartesian product of the found candidate code replacements for each code block, including the original ones, as \autoref{example:crow:original:combination} shows. The power set size results in $6$ potential function variants. Yet, the generation stage would eventually generate $4$ variants from the original program. \termidx{CROW }generated 4 statically different \termidx[Wasm]{WebAssembly!Programming language}files, as \autoref{example:crow:variants:wasm} illustrates. This gap between the potential and the actual number of variants is a consequence of the redundancy among the bitcode variants when composed into one. In other words, if the replaced code removes other code blocks, all possible combinations having it will be in the end the same program. In the example case, replacing \texttt{code\_block\_2} by \texttt{mul nsw \%0, 3}, turns \texttt{code\_block\_1} into dead code, thus, later replacements generate the same program variants. The rightmost part of \autoref{example:crow:original:combination} illustrates how for three different combinations, \termidx{CROW }produces the same variant. We call this phenomenon an overlapping.
+In the example, the power set is the cartesian product of the found candidate code replacements for each code block, including the original ones, as \autoref{example:crow:original:combination} shows. The power set size results in $6$ potential function variants. Yet, the generation stage would eventually generate $4$ variants from the original program. CROW generated 4 statically different Wasm  files, as \autoref{example:crow:variants:wasm} illustrates. This gap between the potential and the actual number of variants is a consequence of the redundancy among the bitcode variants when composed into one. In other words, if the replaced code removes other code blocks, all possible combinations having it will be in the end the same program. In the example case, replacing \texttt{code\_block\_2} by \texttt{mul nsw \%0, 3}, turns \texttt{code\_block\_1} into dead code, thus, later replacements generate the same program variants. The rightmost part of \autoref{example:crow:original:combination} illustrates how for three different combinations, CROW produces the same variant. We call this phenomenon an overlapping.
 
-One might think that a reasonable heuristic could be implemented to avoid such overlapping cases. Instead, we have found it easier and faster to generate the variants with the combination of the replacement and check their uniqueness after the \termidx{program variant }is compiled. This prevents us from having an expensive checking for overlapping inside the \termidx{CROW }code. Still, this phenomenon calls for later optimizations in future works.
+One might think that a reasonable heuristic could be implemented to avoid such overlapping cases. Instead, we have found it easier and faster to generate the variants with the combination of the replacement and check their uniqueness after the program variant is compiled. This prevents us from having an expensive checking for overlapping inside the CROW code. Still, this phenomenon calls for later optimizations in future works.
 
 \input{snippets/wasm_codes.tex}
 
 
-In this chapter, we investigate to what extent the artifically created variants are different. We propose a methodology to compare the program variants both statically and during runtime. Besides, we present a novel study on code preservation, demonstrating that the code transformations introduced by \termidx{CROW }are resilient to later compiling transformations during machine code generation. We evaluate the variant's preservation in both existing scenarios for \wasm, browsers and standalone engines.
+In this chapter, we investigate to what extent the artifically created variants are different. We propose a methodology to compare the program variants both statically and during runtime. Besides, we present a novel study on code preservation, demonstrating that the code transformations introduced by CROW are resilient to later compiling transformations during machine code generation. We evaluate the variant's preservation in both existing scenarios for \wasm, browsers and standalone engines.
 
 \section{Metrics}
 
@@ -58,8 +58,8 @@ We measure the difference between programs at runtime by evaluating their execut
 
 The last metric is needed because \wasm is an intermediate language and compilers use it to produce machine code. For program variants, this means that compilers can undo artificial introduced transformations, for example, through optimization passes. When a code transformation is maintained from the first time it is introduced to the final machine code generation is  a preserved variant. 
 
-Part of the contributions of this thesis are our strategies to prevent reversion of code transformations. We take engineering decision regarding this in all the stages of the \termidx{CROW }workflow. We disable all optimizations inside \termidx{CROW }in the generation of the \wasm binaries. This prevents the LLVM toolchain used to remove some introduced transformations. However, the LLVM toolchain applies optimizations by default, such as constant folding or logical operations' normalization. As we illustrate previously, these are some transformations found and applied by CROW. We modified the LLVM backend for \wasm to avoid this reversion during the creation of \termidx[Wasm]{WebAssembly!Programming language}binaries.
-This phenomenon is sometimes bypassed by diversification studies when they are conducted at high-level. As another contribution, we conduct a study on preservation for both scenarios where \termidx[Wasm]{WebAssembly!Programming language}is used, browsers and standalone engines. In
+Part of the contributions of this thesis are our strategies to prevent reversion of code transformations. We take engineering decision regarding this in all the stages of the CROW workflow. We disable all optimizations inside CROW in the generation of the \wasm binaries. This prevents the LLVM toolchain used to remove some introduced transformations. However, the LLVM toolchain applies optimizations by default, such as constant folding or logical operations' normalization. As we illustrate previously, these are some transformations found and applied by CROW. We modified the LLVM backend for \wasm to avoid this reversion during the creation of Wasm  binaries.
+This phenomenon is sometimes bypassed by diversification studies when they are conducted at high-level. As another contribution, we conduct a study on preservation for both scenarios where Wasm  is used, browsers and standalone engines. In
 
 The final metric corresponds to the preservation study. We compare two programs to be different under the \wasm representation and under the machine code representation after they are compiled through a collection of selected \wasm engines. We use two instances of \autoref{metric:static1} for two different code representations, \wasm and x86. The key property we consider is as follows: \\
 
@@ -71,7 +71,7 @@ This decision is not arbitrary, according to the study of \todo{Paper on binary 
 
 \section{Evaluation}
 
-To answer RQ2 we use the same corpora proposed and evaluated in \autoref{chapter:generation}, \textbf{\termidx{CROW }prime} and \textbf{\termidx{MEWE }prime}. We analyze the variants generated in the RQ1 answering. \todo{Add the numbers here}
+To answer RQ2 we use the same corpora proposed and evaluated in \autoref{chapter:generation}, \textbf{CROW prime} and \textbf{MEWE prime}. We analyze the variants generated in the RQ1 answering. \todo{Add the numbers here}
 
 % Static
 \subsection{Static comparison}
@@ -95,11 +95,11 @@ We collect \autoref{metric:preservation} for all programs and their generated va
 	%\hline
 	Name & Properties \\
 	\hline
-	V8 \citationneeded & V8  is the engine used by Chrome and NodeJS to execute \termidx[JavaScript ]{JavaScript!Programming language}and \wasm. \todo{Explain compilation process} \\
+	V8 \citationneeded & V8  is the engine used by Chrome and NodeJS to execute JavaScript and \wasm. \todo{Explain compilation process} \\
 	\hline
 	wasmtime \citationneeded & Wasmtime is a standalone runtime for WebAssembly. This engine is used by the Fastly platform to provide Edge-Cloud computing services. \todo{Explain compilation process}  \\		
 	\end{tabular}
-	\caption{\termidx[Wasm]{WebAssembly!Programming language}engines used during the diversification assessment study. The table is composed by the name of the engine and the description of the compilation process for them.}
+	\caption{Wasm  engines used during the diversification assessment study. The table is composed by the name of the engine and the description of the compilation process for them.}
 	\label{assesment:preservation:engines}
 \end{table}
 

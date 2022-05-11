@@ -1,0 +1,42 @@
+name: Build document to artifact
+# This workflow is triggered on pushes to the repository.
+on: [push]
+
+jobs:
+  build:
+    name: Build document
+    # This job runs on Linux
+    runs-on: jacarte/latex-build
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build document
+        run: pdflatex -interaction=nonstopmode Lic.tex && bibtex Lic.tex && makeindex Lic.tex && pdflatex -interaction=nonstopmode Lic.tex && ls .
+
+      # If the build works, do the spell check
+
+      - name: Spell check
+        run: |
+          
+      - name: Archive pdf artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: Lic.pdf
+          path: ./Lic.pdf
+
+      - name: Cloning mysite
+        run: git clone https://github.com/Jacarte/jacarte.github.io.git
+      - name: Uploading compiled to mysite
+        run: |
+         cp Lic.pdf jacarte.github.io/assets/pdf/Lic.pdf 
+         cd jacarte.github.io
+         
+         git config --global user.name "github-actions[bot]"
+         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+         git add assets/pdf/Lic.pdf && git commit -m "Updating Lic document"
+         
+         git push https://$USERNAME:$REPO_KEY@github.com/Jacarte/jacarte.github.io.git
+         
+        env:
+          REPO_KEY: ${{secrets.REPO_KEY}}
+          USERNAME: github-actions[bot]
