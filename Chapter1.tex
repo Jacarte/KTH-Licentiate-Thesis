@@ -10,22 +10,32 @@
 \newcommand{\rqtwo}{To what extent are the generated variants dynamically different?}
 \newcommand{\rqthree}{To what extent do the artificial variants exhibit different execution times on Edge-Cloud platforms?}
 
-\todo{Two references per paragraph}
+%\todo{Two references per paragraph}
 
-\todo{Base paragraph by the papers}
+%\todo{Base paragraph by the papers}
 
 % WebAssembly as new technology
+The W3C standarized bytecode for the web environment with \wasm (Wasm) language in 2015, opening up the browser clients ecosystem to a broader collection of programming languages. Wasm allows the use of existing programs or libraries that are written in other languages, such as C and Rust, to be run in the web browser environment. It also claims that is better than JavaScript to perform compute-intensive tasks \cite{Haas_2017}. 
+Further browser environments, it evolves to be a new technology for Edge-Cloud computing platforms, resulting in bandwidth saving, execution improvement, and process-on-demand fast spawning \cite{9640153, wen2020wasmachine}. However, since it a relatively new technology, it is not exempt of vulnerabilities.
 
-% Security and reliability issues
+% Moving target defense
+Software bugs are inherited in any software development process, including both, the \wasm engines and the source code that generates the Wasm binaries. One temporary solution to deal with bugs is to move them in time as a preemptive solution, the bug is only available in a time window. This strategy is usually called Moving Target Defense (MTD).  Moving Target Defense for software was first proposed as a collection of techniques that aim to improve the security of a system by constantly moving its vulnerable components \cite{MTDNationalCyberLaep, okhravi2013survey}. Usually, MTD techniques revolve around changing systems to reduce vulnerable surfaces. This increases uncertainty for attackers and makes their attacks more difficult. Ultimately, potential attackers cannot hit what they cannot see. MTD can be implemented in different ways, including via Software Diversification. 
+%In the case of \autoref{usage:n-version}, this usage lacks of the time dimension, \ie program variants are not changed from time to time. 
+
+Software Diversification has shown to be a good preemptive technique \citationneeded, preventing exploitation of vulnerabilities or hardening harmful analysis of programs. In one of our experiments, a CVE was discovered inside the Lucet compiler, showing new vulnerabilities are still present in battle-tested engines. This CVE was discovered thanks to our Software Diversification strategies and was solved even before it was public. 
+
+
+%Due to the current evolution of the \wasm roadmap, every time is harder to find vulnerabilities and keep up to the date the engines. 
+
 % - Engines are not yet mature and are prone to errors, stress the case of the CVE
 
 % Software diversification as a preemptive solution and as a Moving Target Defense strategy
 
+
 % Lack of Natural Software Diversification and a high presence of monoculture
 % - the birth of a new package manager and the translation of preexisting ones such as cargo and the LLVM itself.
-One motivation for this work is that \wasm was adopted in 2017, and it lacks of natural diversity \citationneeded. Moreover, compared to the work of Harrand \etal \citationneeded, in WebAssembly, we cannot use preexisting and different programs to provide diversification. In fact, according to the work of Hilbig \etal \citationneeded, the artificial variants created with one of our works contributes to the half of executable and available \wasm binaries in the wild. 
-
-The low presence of defenses implementations for \wasm motivates our work on \termidx[Software Diversification]{Software!Diversification}as a preemptive technique that can help against known and yet unknown vulnerabilities.
+The low presence of defenses implementations for \wasm and the pace of their practical adoption motivate our work on \termidx[Software Diversification]{Software!Diversification}as a preemptive technique that can help against known and yet unknown vulnerabilities.
+Another motivation for this work is that \wasm lacks of natural diversity, \ie for a single \wasm program in the wild, it has a lower presence of versions. Moreover, compared to the work of Harrand \etal \cite{Harrand1650630}, in WebAssembly, we cannot use preexisting and different programs to provide diversification. In fact, according to the work of Hilbig \etal \cite{Hilbig2021AnES}, they filter out half of internet available \wasm corpus due to that filtered programs where artifically provided by one of our tools. 
 
 % Our solution is to artificially diversify
 
@@ -57,10 +67,10 @@ In this section, we present our three research questions. Our research questions
 \end{enumerate}
 
 
-\renewcommand{\rqone}{$RQ_1$. To what extent can we artifically generate program variants for WebAssembly?}
+\renewcommand{\rqone}{$RQ_1$.To what extent can we artifically generate program variants for WebAssembly?}
 
-\renewcommand{\rqtwo}{$RQ_2$. To what extent are the generated variants dynamically different?}
-\renewcommand{\rqthree}{$RQ_3$. To what extent do the artificial variants exhibit different execution times on Edge-Cloud platforms?}
+\renewcommand{\rqtwo}{$RQ_2$.To what extent are the generated variants dynamically different?}
+\renewcommand{\rqthree}{$RQ_3$.To what extent do the artificial variants exhibit different execution times on Edge-Cloud platforms?}
 
 \section{Contributions}
 

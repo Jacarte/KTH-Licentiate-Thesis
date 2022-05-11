@@ -11,7 +11,7 @@
 %\subsection*{}
 
 % Javascript was first, and then more attempts.
-Over the past decades, \termidx[JavaScript ]{JavaScript!Programming language} has been used in the majority of the browser clients to allow client-side scripting. However, due to the complexity of this language and to gain in performance, several approaches appeared, supporting different languages in the browser.  For example, Java applets were introduced on web pages late in the 90's, Microsoft made an attempt with ActiveX in 1996  and Adobe added ActionScript later on 1998. All these attempts failed to persist, mainly due to security issues and the lack of consensus on the community of browser vendors. 
+Over the past decades, \termidx[JavaScript ]{JavaScript!Programming language} has been used in the majority of the browser clients to allow client-side scripting. However, due to the complexity of this language and to gain in performance, several approaches appeared, supporting different languages in the browser.  For example, Java applets were introduced on web pages late in the 90's, Microsoft made an attempt with ActiveX in 1996, Adobe added ActionScript later on 1998, and Microsoft proposed Silverlight in 2007. All these attempts failed to persist, mainly due to security issues and the lack of consensus on the community of browser vendors. 
 
 % asm.js and the demonstration of bad language patterns
 In 2014, Emscripten proposed with a strict subset of JavaScript, asm.js, to allow low level code such as C to be compiled to \termidx[JavaScript ]{JavaScript!Programming language}itself. Asm.js was first implemented as an LLVM backend. This approach came with the benefits of having all the ahead-of-time optimizations from LLVM, gaining in performance on browser clients \cite{asmjs} compared to standard \termidx[JavaScript ]{JavaScript!Programming language}code. The main reason why asm.js is faster, is that it limits the language features to those that can be optimized in the LLVM pipeline or those that can be directly translated from the source code. Besides, it removes the majority of the dynamic characteristics of the language, limiting it to numerical types, top-level functions, and one large array in the memory directly accessed as raw data. Since asm.js is a subset of \termidx[JavaScript ]{JavaScript!Programming language}it was compatible with all engines at that moment. Asm.js demonstrated that client-code could be improved with the right language design and standarization.
@@ -44,13 +44,7 @@ In 2019, the Bytecode Alliance \footnote{\url{https://bytecodealliance.org/}} pr
 
 % Talk about benchmarks and performance numbers
 
-%Previous studies resulted in performance increasing in terms of bandwidth saving, execution, and process-on-demand spawning \cite{9640153, wen2020wasmachine}. The words of Solomon Hykes \footnote{\url{https://twitter.com/solomonstre/status/1111004913222324225}}, the former CEO of docker, show the impact of WASI: 
-
-%\begin{displayquote}
-%\textit{
-%    If WASM+WASI existed in 2008, we wouldn't have needed to created Docker. That's how important it is. Webassembly on the server is the future of computing. A standardized system interface was the missing link. Let's hope WASI is up to the task!
-%}
-%\end{displayquote}
+%
 
 %\todo{How to obtain \termidx[WebAssembly]{WebAssembly}binaries}
 

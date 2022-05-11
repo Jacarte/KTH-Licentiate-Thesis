@@ -1,0 +1,14 @@
+﻿@phdthesis{Harrand1650630,
+   author = {Harrand, Nicolas},
+   institution = {KTH, Software and Computer systems, SCS},
+   note = {QCR 20220413},
+   pages = {100},
+   school = {KTH, Software and Computer systems, SCS},
+   title = {Software Diversity for Third-Party Dependencies},
+   series = {TRITA-EECS-AVL},
+   number = {2022:22},
+   keywords = {Automated Software Engineering, Software Diversity, Software libraries, Software Monoculture},
+   abstract = {Thanks to the emergence of package managers and online software repositories, modern software development heavily relies on the reuse of third-party libraries. This practice has significant benefits in terms of productivity and reliability. Yet, the reuse of software libraries leads large groups of applications to share a significant amount of code, including potential defects such as bugs or vulnerabilities. The lack of diversity in these group of applications make them more prone to large-scale failures, and more predictable for attackers attempting to exploit their shared vulnerabilities.To mitigate these risks opened by library reuse, this dissertation proposes to introduce diversity in software applications.We create variants of software applications through transformations targeting the libraries they depend on. These variants provide functionalities equivalent to their original, while not sharing the exact same behavior. In this dissertation, we cover three aspects of software diversity.First, we study the existing behavioral diversity of alternative libraries implementing similar functionalities.We perform two case studies on two families of reusable software artifacts: JSON libraries and Bytecode decompilers. We provide empirical evidence that both groups of artifacts exhibit significant natural input/output behavioral diversity. Second, we study software transformations targeting libraries themselves. We propose six source-to-source transformations targeting software libraries, as well as a general architecture to implement library substitution. We implement this architecture in a JSON library substitution framework, leveraging the diversity of behavior we observe in JSON libraries. We assess the impact of these transformations on open-source libraries and software applications through two experiments. Finally, we study the properties of software applications and libraries that make them prone to transformation without changing their functionalities. We analyze the variants produced during our software diversification experiments and discuss our findings. In particular, we observe that the existence of alternative implementations at different granularity, instructions, methods, classes, and libraries, provides an important source of potential diversity that can be leveraged. },
+   ISBN = {978-91-8040-184-5},
+   year = {2022}
+}

@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Licch2only.aux
+The style file: apalike.bst
+Database file #1: Lic.bib
+Warning--to sort, need author or key in WASI
+Warning--empty institution in ChromeZero
+You've used 58 entries,
+            1935 wiz_defined-function locations,
+            802 strings with 15370 characters,
+and the built_in function-call counts, 27310 in all, are:
+= -- 2693
+> -- 1296
+< -- 44
++ -- 460
+- -- 449
+* -- 2105
+:= -- 4502
+add.period$ -- 184
+call.type$ -- 58
+change.case$ -- 510
+chr.to.int$ -- 57
+cite$ -- 61
+duplicate$ -- 1208
+empty$ -- 1791
+format.name$ -- 524
+if$ -- 5628
+int.to.chr$ -- 2
+int.to.str$ -- 0
+missing$ -- 50
+newline$ -- 289
+num.names$ -- 177
+pop$ -- 581
+preamble$ -- 1
+purify$ -- 510
+quote$ -- 0
+skip$ -- 957
+stack$ -- 0
+substring$ -- 1499
+swap$ -- 354
+text.length$ -- 28
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 346
+warning$ -- 2
+while$ -- 187
+width$ -- 0
+write$ -- 757
+(There were 2 warnings)

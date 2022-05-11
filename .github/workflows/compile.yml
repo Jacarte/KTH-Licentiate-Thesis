@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install latex
-        run: sudo apt-get update && sudo apt-get install -y texlive-full git wget
+        run: sudo apt-get update && sudo apt-get install -y texlive-full git wget jq
       - name: Build document
         run: pdflatex -interaction=nonstopmode Lic.tex && ls .
       - name: Archive pdf artifacts

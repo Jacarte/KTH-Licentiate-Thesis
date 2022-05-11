@@ -1,39 +1,39 @@
 \begin{theindex}
 
-  \item CROW , \hyperpage{20--26}, \hyperpage{29}, \hyperpage{33}, 
-		\hyperpage{41, 42}
+  \item CROW , \hyperpage{22--28}, \hyperpage{31}, \hyperpage{35}, 
+		\hyperpage{43, 44}
 
   \indexspace
 
   \item JavaScript
-    \subitem Programming language, \hyperpage{5--7}, \hyperpage{11}
+    \subitem Programming language, \hyperpage{7--9}, \hyperpage{13}
 
   \indexspace
 
-  \item MEWE , \hyperpage{20}, \hyperpage{26}, \hyperpage{29}
+  \item MEWE , \hyperpage{22}, \hyperpage{28}, \hyperpage{31}
 
   \indexspace
 
   \item Software
-    \subitem Artificial Diversity, \hyperpage{10}
-    \subitem Diversification, \hyperpage{vi}, \hyperpage{1}, 
-		\hyperpage{10}, \hyperpage{12}, \hyperpage{14--16}, 
-		\hyperpage{23}
-    \subitem Multivariant, \hyperpage{14, 15}, \hyperpage{20}, 
-		\hyperpage{26--29}, \hyperpage{31}, \hyperpage{39, 40}, 
-		\hyperpage{47--49}
-    \subitem Mutation strategies, \hyperpage{11}
-    \subitem Natural diversity, \hyperpage{10}
-    \subitem Replacement overlapping, \hyperpage{25}
-    \subitem Variant, \hyperpage{12--14}, \hyperpage{25}, 
-		\hyperpage{41}
+    \subitem Artificial Diversity, \hyperpage{12}
+    \subitem Diversification, \hyperpage{vi}, \hyperpage{2}, 
+		\hyperpage{12}, \hyperpage{14}, \hyperpage{16--18}, 
+		\hyperpage{25}
+    \subitem Multivariant, \hyperpage{16, 17}, \hyperpage{22}, 
+		\hyperpage{28--31}, \hyperpage{33}, \hyperpage{41, 42}, 
+		\hyperpage{49--51}
+    \subitem Mutation strategies, \hyperpage{13}
+    \subitem Natural diversity, \hyperpage{12}
+    \subitem Replacement overlapping, \hyperpage{27}
+    \subitem Variant, \hyperpage{14--16}, \hyperpage{27}, 
+		\hyperpage{43}
 
   \indexspace
 
-  \item WebAssembly, \hyperpage{7}, \hyperpage{10}
-    \subitem Programming language, \hyperpage{6--11}, \hyperpage{17}, 
-		\hyperpage{20}, \hyperpage{22}, \hyperpage{24--26}, 
-		\hyperpage{29}
-    \subitem Security, \hyperpage{10}
+  \item WebAssembly, \hyperpage{9}, \hyperpage{12}
+    \subitem Programming language, \hyperpage{8--13}, \hyperpage{19}, 
+		\hyperpage{22}, \hyperpage{24}, \hyperpage{26--28}, 
+		\hyperpage{31}
+    \subitem Security, \hyperpage{12}
 
 \end{theindex}

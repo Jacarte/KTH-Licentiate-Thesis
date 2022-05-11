@@ -7,6 +7,18 @@ Romano,A., Lehmann,D., Pradel,M., and Wang,W. (2022).
 \newblock In {\em 2022 2022 IEEE Symposium on Security and Privacy (SP) (SP)},
   pages 1101--1116, Los Alamitos, CA, USA. IEEE Computer Society.
 
+\bibitem[Harrand, 2022]{Harrand1650630}
+Harrand,N. (2022).
+\newblock {\em Software Diversity for Third-Party Dependencies}.
+\newblock PhD thesis, KTH, Software and Computer systems, SCS.
+\newblock QCR 20220413.
+
+\bibitem[Spies and Mock, 2021]{9640153}
+Spies,B. and Mock,M. (2021).
+\newblock An evaluation of webassembly in non-web environments.
+\newblock In {\em 2021 XLVII Latin American Computing Conference (CLEI)}, pages
+  1--10.
+
 \bibitem[Narayan et~al., 2021]{Narayan2021Swivel}
 Narayan,S., Disselkoen,C., Moghimi,D., Cauligi,S., Johnson,E., Gang,Z.,
   Vahldiek-Oberwagner,A., Sahita,R., Shacham,H., Tullsen,D., et~al. (2021).
@@ -46,11 +58,21 @@ Cabrera~Arteaga,J., Floros,O., Vera~Perez,O., Baudry,B., and Monperrus,M.
  (2021).
 \newblock Webassembly system interface.
 
+\bibitem[MTD, 2021]{MTDNationalCyberLaep}
+ (2021).
+\newblock {National Cyber Leap Year}.
+
 \bibitem[Xu et~al., 2020]{xu2020merr}
 Xu,Y., Solihin,Y., and Shen,X. (2020).
 \newblock Merr: Improving security of persistent memory objects via efficient
   memory exposure reduction and randomization.
 \newblock In {\em Proc. of ASPLOS}, pages 987--1000.
+
+\bibitem[Wen and Weber, 2020]{wen2020wasmachine}
+Wen,E. and Weber,G. (2020).
+\newblock Wasmachine: Bring iot up to speed with a webassembly os.
+\newblock In {\em 2020 IEEE International Conference on Pervasive Computing and
+  Communications Workshops (PerCom Workshops)}, pages 1--4. IEEE.
 
 \bibitem[Tsoupidi et~al., 2020]{Tsoupidi2020ConstraintBasedSD}
 Tsoupidi,R.~M., Lozano,R.~C., and Baudry,B. (2020).
@@ -267,6 +289,13 @@ Le,V., Afshari,M., and Su,Z. (2014).
 \newblock Compiler validation via equivalence modulo inputs.
 \newblock In {\em Proceedings of the 35th ACM SIGPLAN Conference on Programming
   Language Design and Implementation}, PLDI ’14, page 216–226.
+
+\bibitem[Okhravi et~al., 2013]{okhravi2013survey}
+Okhravi,H., Rabe,M., Mayberry,T., Leonard,W., Hobson,T., Bigelow,D., and
+  Streilein,W. (2013).
+\newblock Survey of cyber moving targets.
+\newblock {\em Massachusetts Inst of Technology Lexington Lincoln Lab, No.
+  MIT/LL-TR-1166}.
 
 \bibitem[Homescu et~al., 2013]{homescu2013profile}
 Homescu,A., Neisius,S., Larsen,P., Brunthaler,S., and Franz,M. (2013).

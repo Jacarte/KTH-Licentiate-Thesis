@@ -10,3 +10,4 @@ cartesian
 superoptimizer
 superdiversifier
 MEWE
+malintencious
