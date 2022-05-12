@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build document
-        run: pdflatex -interaction=nonstopmode Lic.tex && bibtex Lic.tex && pdflatex -interaction=nonstopmode Lic.tex && ls .
+        run: pdflatex -interaction=nonstopmode -shell-escape Lic.tex && bibtex Lic && pdflatex -shell-escape -interaction=nonstopmode Lic.tex && ls .
 
       # If the build works, do the spell check
 
