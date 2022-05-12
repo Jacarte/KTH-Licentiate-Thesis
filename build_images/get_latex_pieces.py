@@ -58,9 +58,9 @@ def process(folder):
                     ))
 
                 REPORT.append(obj)
-                return REPORT
+    return REPORT
 
-        print(maps)
+        #print(maps)
 
 
 if __name__ == '__main__':

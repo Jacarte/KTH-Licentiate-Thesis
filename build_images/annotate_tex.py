@@ -24,12 +24,13 @@ def get_similar_position(substr, content):
 def process(jsonmap, ignore):
     report = json.loads(open(jsonmap, 'r').read())
     ignore = open(ignore, 'r').readlines()
-    RANGE = 10
+    RANGE = 5
 
     for match in report:
         id, matches = match['id'], match['matches'] 
         p, _, f = id
         content = open(f, 'r').read()
+        print(f)
         for m in matches:
             offset = m['offset']
             length = m['errorLength']
@@ -46,6 +47,8 @@ def process(jsonmap, ignore):
             # \pdfmarkupcomment[markup=StrikeOut,color=red]{stupid}{replace stupid with funny
             rep = ",".join(m['replacements'])
             message = f"{m['message']}: '{exact}'...{chunk}.... Replacements: {rep}"
+
+            # Avoid to insert 
             content = content[:position_in_tex] + "\\pdfmarkupcomment[markup=Highlight,color=yellow]{" + content[ position_in_tex: position_in_tex + length:]+ f"}}{{{message}}}" + content[ position_in_tex + length:]
             # Modify the tex file with a TODO, add a comment in the code
         open(f, 'w').write(content)

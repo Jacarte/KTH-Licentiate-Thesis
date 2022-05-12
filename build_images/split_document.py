@@ -1,7 +1,9 @@
 from PyPDF2 import PdfFileWriter, PdfFileReader
 import os
+import sys
 
-inputpdf = PdfFileReader(open("Lic.pdf", "rb"))
+inputpdf = PdfFileReader(open(sys.argv[1], "rb"))
+OUT = sys.argv[2]
 
 ranges = []
 pages = []
@@ -13,7 +15,7 @@ for i in range(inputpdf.numPages):
     content = inputpdf.getPage(i).extractText() + "\n"
     
     if content.startswith("Chapter"):
-        with open("%s/chapter%s.pdf" % (os.path.dirname(__file__),num), "wb") as outputStream:
+        with open("%s/chapter%s.pdf" % (OUT, "wb")) as outputStream:
             for p in pages:
                 output.addPage(p)
                 output.write(outputStream)
@@ -22,7 +24,7 @@ for i in range(inputpdf.numPages):
 
     pages.append(inputpdf.getPage(i))
 
-with open("%s/chapter%s.pdf" % (os.path.dirname(__file__),num), "wb") as outputStream:
+with open("%s/chapter%s.pdf" % (OUT, "wb")) as outputStream:
     for p in pages:
         output.addPage(p)
         output.write(outputStream)

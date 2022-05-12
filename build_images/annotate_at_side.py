@@ -1,4 +1,4 @@
-from PyPDF2 import PdfFileWriter, PdfFileReader
+from PyPDF4 import PdfFileWriter, PdfFileReader
 import os
 import sys
 from reportlab.pdfgen import canvas
@@ -6,7 +6,6 @@ from reportlab.lib.pagesizes import letter
 from reportlab.graphics.shapes import _baseGFontName, _baseGFontNameBI
 from reportlab.lib.units import inch
 
-import io
 
 inputpdf = PdfFileReader(open(sys.argv[1], "rb"))
 
@@ -53,6 +52,8 @@ with open("%s/annotated.pdf" % (os.path.dirname(__file__),), "wb") as outputStre
         y = float(origcrop[1]) - 300                    
         M = 50
         YOFFSET = 10
+
+
         if '/Annots' in p:
             for annot in p['/Annots']:
                 # Modify the page size to add the annotations at the right
