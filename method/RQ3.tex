@@ -22,7 +22,7 @@ To answer RQ3, we use the variants generated for the programs of \corpussodium a
 In RQ3, we study whether the created variants can be used in real-world applications and what properties offer the composition of the variants as multivariant binaries. We build multivariant binaries (according to \autoref{def:EP}), and we deploy and execute them at the Edge. 
 The usage of Edge-Cloud computing platforms to answer RQ3 is motivated by two reasons. First, it is an emerging technology. 
 Using Wasm as an intermediate layer is better in terms of startup and memory usage, than containerization or virtualization \cite{pMendkiServerless, 1244493Jacobsson}. 
-This has encouraged edge computing platforms like Cloudflare or Fastly to adopt \wasm to deploy client applications in a modular and sandboxed manner  \cite{CloudflareWasm, FastlyWasm}.
+This has encouraged edge computing platforms like Cloudflare and Fastly to use \wasm to deploy client applications in a modular and sandboxed manner  \cite{CloudflareWasm, FastlyWasm}.
 Second, Edge-Cloud computing platforms are shown to be not completely secure \cite{Narayan2021Swivel} and multivariant execution offers a preemptive technique against predictable behaviors such as execution time.
 
 
@@ -39,9 +39,9 @@ We use the execution time of the multivariant binaries to answer RQ3. We use the
 
 
 %\todo{too fast. tell the reader why you need HTTP now}
-We answer RQ3 by analyzing a real-world scenario. We run our experiments for RQ3 on the Edge. 
+We answer RQ3 by analyzing a real-world scenarios on the Edge. 
 Edge applications are designed to be deployed as isolated HTTP services, having one single responsibility that is executed at every HTTP request. This development model is known as serverless computing, or function-as-a-service \cite{shillaker2020faasm,Narayan2021Swivel}. 
-We deploy and execute the multivariant binaries as end-to-end HTTP services on the Edge and we collect their execution times.
+We deploy and execute the multivariant binaries as end-to-end HTTP services on the Edge, and we collect their execution times.
 To remove the natural jitter in the network, the execution times are measured at the backend space, \ie we collect the execution times inside the Edge node and not from the client computer. 
 Therefore, we instrument the binaries to return the execution time as an HTTP header. 
 

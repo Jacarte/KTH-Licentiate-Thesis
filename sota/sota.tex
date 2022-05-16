@@ -51,7 +51,7 @@
 Software Diversification  has been widely studied in the past decades. This section discusses its state of the art.
 % What is Software diversity
 Software diversification consists in synthesizing, reusing, distributing, and executing different, functionally equivalent programs. 
-According to the survey of Baudry and Monperrus \cite{natural_diversity}, the motivation for software diversification can be separated in five categories: reusability \cite{pohl2005software}, software testing \cite{Chen2010AdaptiveRT}, performance \cite{10.1145/2025113.2025133}, fault tolerance \cite{1659219} and security \cite{cohen1993operating}. Our work contributes to the latter two categories. In this section we discuss related works by highlighting how they generate diversification and how they put it into practice. 
+According to the survey by Baudry \etal \cite{natural_diversity}, the motivation for software diversification can be separated in five categories: reusability \cite{pohl2005software}, software testing \cite{Chen2010AdaptiveRT}, performance \cite{10.1145/2025113.2025133}, fault tolerance \cite{1659219} and security \cite{cohen1993operating}. Our work contributes to the latter two categories. In this section we discuss related works by highlighting how they generate diversification and how they put it into practice. 
 %We finalize by comparing our contributions with the related work.
 
 %\todo{Do not talk about complexity of replacements, stress them in the other chapters. Stress the comparison between techniques.}
@@ -143,7 +143,7 @@ All described strategies can be mixed together. They can be applied in any seque
     to create a unique mapping between artificial CPU instructions and real ones.
     On the same topic, Chew and Song \cite{Chew02mitigatingbuffer} target operating system randomization. They randomize the interface between the operating system and the user applications.
     Courouss{\'e} \etal~\cite{courousse2016runtime} implement an assembly-like DSL to generate equivalent code at runtime in order to increase protection against side-channel attacks. Their technique generates a different program during execution using an interpreter for their DSL.
-    Code obfuscation \cite{wobfuscator} \todo{find a new citation here} can be seen as a simplification of \emph{ISA randomization}. The main difference between encoding and obfuscating code is that the former requires the final target to know the encoding key while the latter executes as it is in any client. Yet, both strategies are meant to tackle program analysis from potential attackers. 
+    Code obfuscation \cite{wobfuscator} can be seen as a simplification of \emph{ISA randomization}. The main difference between encoding and obfuscating code is that the former requires the final target to know the encoding key while the latter executes as it is in any client. Yet, both strategies are meant to tackle program analysis from potential attackers. 
 
     %It is an interpretation mechanism similar to encoding (\autoref{strategy:S9}), but the execution of programs is delegated to a custom interpreter instead of using preexisting execution hosts. The program is decoded at runtime every time it is invoked. 
     

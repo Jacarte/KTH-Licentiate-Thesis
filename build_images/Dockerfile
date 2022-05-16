@@ -9,6 +9,8 @@ RUN apt-get install -y chromium-browser
 RUN apt-get install -y python3 default-jre python3-pip
 # Ruby
 RUN apt-get install -y bundler ruby-full 
+# Encoding fixes
+RUN apt-get install -y locales >/dev/null
 
 # Spell checking tooling
 RUN mkdir /tools
