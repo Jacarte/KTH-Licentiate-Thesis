@@ -135,7 +135,7 @@ In Wasm, all instructions are grouped into blocks, being the start of a function
 %\todo{Exported function signature allows typing validation before the code is executed}
 
 
-\subsection{WebAssembly'ssecurity}
+\subsection{WebAssembly security}
 
 As we described, \wasm is deterministic and well-typed, follows a structured control flow and explicitly separates its linear memory model, global variables and the execution stack. This design is robust \cite{WebAssemblySecurity} and makes it easy for compilers and engines to sandbox the execution of Wasm  binaries. Following the specification of Wasm  for typing, memory, virtual stack and function calling,
 host environments should provide protection against data corruption, code injection, and return-oriented programming (ROP).
@@ -147,4 +147,5 @@ Moreover, binaries itself can be vulnerable. The work of Lehmann \etal ~\cite{us
 % Current proposals
 Several proposals for extending \wasm in the current roadmap could address some existing vulnerabilities. For example, having multiple memories \footnote{\url{https://github.com/WebAssembly/multi-memory/blob/main/proposals/multi-memory/Overview.md}} could incorporate more than one memory, stack and global spaces, shrinking the attack surface. However, the implementation, adoption and settlement of the proposals are far from being a reality in all browser vendors \footnote{\url{https://webassembly.org/roadmap/}}.
 
+\cite{DeRoover2022}
 % In fact, according to the work of Hilbig \etal \cite{Hilbig2021AnES}, the artificial variants created with one of our works contribute to the half of executable and available \wasm binaries in the wild.

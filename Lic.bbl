@@ -1,5 +1,12 @@
 \begin{thebibliography}{}
 
+\bibitem[Sti\'{e}venart et~al., 2022]{DeRoover2022}
+Sti\'{e}venart,Q., De~Roover,C., and Ghafari,M. (2022).
+\newblock Security risks of porting c programs to webassembly.
+\newblock In {\em Proceedings of the 37th ACM/SIGAPP Symposium on Applied
+  Computing}, SAC '22, page 1713–1722, New York, NY, USA. Association for
+  Computing Machinery.
+
 \bibitem[Romano et~al., 2022]{wobfuscator}
 Romano,A., Lehmann,D., Pradel,M., and Wang,W. (2022).
 \newblock Wobfuscator: Obfuscating javascript malware via opportunistic

@@ -6,7 +6,12 @@ jobs:
   build:
     name: Build document
     # This job runs on Linux
-    runs-on: jacarte/latex-build
+    runs-on: ubuntu-20.04
+    container:
+      image: ghcr.io/jacarte/latex-build:latest2
+      credentials:
+        username: jacarte
+        password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Build document
@@ -29,15 +34,21 @@ jobs:
           python3 /tools/split_document.py Lic.pdf chapters && ls chapters
 
       
+      - name: Archive pdf chapters
+        uses: actions/upload-artifact@v1
+        with:
+          name: chapters
+          path: ./chapters
+
       - name: Spell checking report
         run: |
-          mkdir chapters 
           python3 /tools/get_latex_pieces.py .
 
       - name: Archive spell report
         uses: actions/upload-artifact@v1
         with:
           name: report.json
+          path: report.json
       
       - name: GIT
         run: git config --global user.email "action@github.com" && git config --global user.name "GitHub Action"
@@ -45,14 +56,19 @@ jobs:
 
       - name: Annotate new pdf on a new branch
         run: |
+          git config --global --add safe.directory /__w/KTH-Licentiate-Thesis/KTH-Licentiate-Thesis
           git branch spell2pdf
           python3 /tools/annotate_tex.py report.json dico.text > report.logs
 
       - name: GIT
-        run: git rm -rf . && git checkout -b reports && git add report.logs report.json && git commit -m 'Spell check report' 
+        run: |
+          git rm -rf . && git checkout -b reports
+          git add report.logs report.json && git commit -m 'Spell check report' 
 
       - name: GIT
         run: git push origin reports --force
+
+      # Last step, publish the thesin in my personal webpage
 
       #- name: Cloning mysite
       #  run: git clone https://github.com/Jacarte/jacarte.github.io.git

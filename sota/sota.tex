@@ -279,7 +279,6 @@ Virtual machines and operating systems can be also randomized. On this topic, Kc
 The execution of the embedded variants can be either in parallel to check for inconsistencies or a single program to randomize execution paths \cite{bhatkar03}. 
 Bruschi et al. \cite{bruschi2007diversified} extended the idea of executing two variants in parallel with not-overlapping and randomized memory layouts. Simultaneously, Salamat \etal \cite{salamat2007stopping} modified a standard library that generates 32-bit Intel variants where the stack grows in the opposite direction, checking for memory inconsistencies. 
 Notably, Davi \etal proposed Isomeron \cite{davi2015isomeron}, an approach  for execution-path randomization. Isomeron simultaneously loads the original program and a variant. While the program is running, Isomeron continuously flips a coin to decide which copy of the program should be executed next at the level of function calls. 
-
 % More than two variants
 The previously mentioned works showed the benefits of exploiting the limit case of executing only two variants in a multivariant environment.
 Agosta \etal~\cite{agosta2015meet} and Crane \etal~\cite{crane2015thwarting} used more than two generated programs in the multivariant composition, randomizing software control flow at runtime. 
@@ -314,20 +313,9 @@ Both scenarios have demonstrated to harden security by tackling know vulnerabili
 \section{Open challenges}
 \label{sota:openchallenges}
 
-
-\todo{ Lack of defenses in Wasm}
-
-\todo{ Lack of SD works on Wasm due to non targetted solutions.}
-
-
-
-
-\section{Statement of Novelty}
-\label{sota:novelty}
-
-\todo{Move from here}
-We contribute to Software Diversification  for \wasm using Artificial Diversification, for Randomization and Multivariant Execution usages (\autoref{usage:randomization}, \autoref{usage:mve}). 
-In \autoref{table:sota:comparison} we list the related work on Artificial Software Diversification  that support our approaches. The first and second columns in the table correspond to the author names and the references to their work, followed by one column for each strategy and usage ( \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5}, \autoref{usage:randomization} and \autoref{usage:mve}). The last column of the table summarizes the technical contribution and the reach of the referred work. Each cell in the table contains a checkmark if the strategy or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. The last two rows locate our contributions. 
+%We contribute to Software Diversification  for \wasm using Artificial Diversification, for Randomization and Multivariant Execution usages (\autoref{usage:randomization}, \autoref{usage:mve}). 
+In \autoref{table:sota:comparison} we list the related work on Artificial Software Diversification  that support our approaches. The first and second columns in the table correspond to the author names and the references to their work, followed by one column for each strategy and usage ( \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5}, \autoref{usage:randomization} and \autoref{usage:mve}). The last column of the table summarizes the technical contribution and the reach of the referred work. Each cell in the table contains a checkmark if the strategy or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. 
+%The last two rows locate our contributions. 
 
 \input{sota/sota_table.tex}
 
