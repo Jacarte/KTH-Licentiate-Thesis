@@ -34,13 +34,6 @@ jobs:
           mkdir chapters 
           python3 /tools/split_document.py Lic.pdf chapters && ls chapters
 
-      
-      - name: Archive pdf chapters
-        uses: actions/upload-artifact@v1
-        with:
-          name: chapters
-          path: ./chapters
-
       - name: Spell checking report
         run: |
           python3 /tools/get_latex_pieces.py .
@@ -64,7 +57,7 @@ jobs:
           wc -c README.md
           head -c 65536 README.md > CHUNK.md 
           cat count.txt
-          
+
           git rm -rf . && git checkout -b reports
           git add README.md report.json && git commit -m 'Spell check report' 
           git push origin reports --force
