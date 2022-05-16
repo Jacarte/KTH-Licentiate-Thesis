@@ -216,6 +216,10 @@ Sasnauskas,R., Chen,Y., Collingbourne,P., Ketema,J., Lup,G., Taneja,J., and
 \newblock {Souper: A Synthesizing Superoptimizer}.
 \newblock {\em arXiv preprint 1711.04422}.
 
+\bibitem[{Oracle}, 2017]{javaapplet}
+{Oracle} ({2017}).
+\newblock {JDK 9 Release Notes. Deprecation of Java Applets}.
+
 \bibitem[Haas et~al., 2017]{Haas_2017}
 Haas,A., Rossberg,A., Schuff,D.~L., Schuff,D.~L., Titzer,B.~L., Holman,M.,
   Gohman,D., Wagner,L., Zakai,A., and Bastien,J.~F. (2017).
@@ -275,6 +279,14 @@ Agosta,G., Barenghi,A., Pelosi,G., and Scandale,M. (2015).
   side channel attacks.
 \newblock {\em IEEE Transactions on Computer-Aided Design of Integrated
   Circuits and Systems}, 34(8):1320--1333.
+
+\bibitem[{Zakai and colleagues}, 2014b]{emscripten}
+{Zakai and colleagues} ({2014}b).
+\newblock {Emscripten}.
+
+\bibitem[{Zakai and colleagues}, 2014a]{asmjsweb}
+{Zakai and colleagues} ({2014}a).
+\newblock {asm.js}.
 
 \bibitem[Le et~al., 2014]{LeCompilers}
 Le,V., Afshari,M., and Su,Z. (2014).
@@ -367,6 +379,10 @@ Salamat,B., Gal,A., Jackson,T., Manivannan,K., Wagner,G., and Franz,M. (2007).
 \newblock Technical report, Technical Report 07-13, School of Information and
   Computer Sciences, UCIrvine.
 
+\bibitem[{Microsoft}, 2007]{silverlight}
+{Microsoft} ({2007}).
+\newblock {Silverlight}.
+
 \bibitem[Bruschi et~al., 2007]{bruschi2007diversified}
 Bruschi,D., Cavallaro,L., and Lanzi,A. (2007).
 \newblock Diversified process replic{\ae} for defeating memory error exploits.
@@ -429,6 +445,10 @@ Barrantes,E.~G., Ackley,D.~H., Forrest,S., Palmer,T.~S., Stefanovic,D., and
 Chew,M. and Song,D. (2002).
 \newblock Mitigating buffer overflows by operating system randomization.
 \newblock Technical Report CS-02-197, Carnegie Mellon University.
+
+\bibitem[{Microsoft}, 1996]{activex}
+{Microsoft} ({1996}).
+\newblock {Microsoft Announces ActiveX Technologies}.
 
 \bibitem[Cohen, 1993]{cohen1993operating}
 Cohen,F.~B. (1993).
