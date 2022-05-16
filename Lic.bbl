@@ -191,14 +191,6 @@ Hickey,P. (2018).
 \newblock Announcing lucet: Fastly’s native webassembly compiler and runtime.
 \newblock Technical report.
 
-\bibitem[Gupta et~al., 2018]{SMTGupta}
-Gupta,S., Saxena,A., Mahajan,A., and Bansal,S. (2018).
-\newblock Effective use of smt solvers for program equivalence checking through
-  invariant-sketching and query-decomposition.
-\newblock In Beyersdorff,O. and Wintersteiger,C.~M., editors, {\em Theory and
-  Applications of Satisfiability Testing -- SAT 2018}, pages 365--382, Cham.
-  Springer International Publishing.
-
 \bibitem[Genkin et~al., 2018]{Genkin2018DrivebyKC}
 Genkin,D., Pachmanov,L., Tromer,E., and Yarom,Y. (2018).
 \newblock Drive-by key-extraction cache attacks from portable code.
@@ -210,13 +202,13 @@ Belleville,N., Courouss\'{e},D., Heydemann,K., and Charles,H.-P. (2018).
   attacks.
 \newblock {\em ACM Trans. Archit. Code Optim.}, 15(4).
 
-\bibitem[{WebAssembly Community Group}, 2017b]{wasm_spec}
-{WebAssembly Community Group} (2017b).
-\newblock {WebAssembly Specification}.
+\bibitem[Zalewski, 2017]{zalewski2017american}
+Zalewski,M. (2017).
+\newblock American fuzzy lop.
 
-\bibitem[{WebAssembly Community Group}, 2017a]{wasm_roadmap}
-{WebAssembly Community Group} (2017a).
-\newblock {WebAssembly Roadmap}.
+\bibitem[{WebAssembly Community Group}, 2017]{wasm_spec}
+{WebAssembly Community Group} (2017).
+\newblock {WebAssembly Specification}.
 
 \bibitem[Sasnauskas et~al., 2017]{Sasnauskas2017Souper:Superoptimizer}
 Sasnauskas,R., Chen,Y., Collingbourne,P., Ketema,J., Lup,G., Taneja,J., and
@@ -237,6 +229,11 @@ Van~Es,N., Nicolay,J., Stievenart,Q., D'Hondt,T., and De~Roover,C. (2016).
   Computing}, SAC '16, page 1944–1951, New York, NY, USA. Association for
   Computing Machinery.
 
+\bibitem[Phothilimthana et~al., 2016]{SuperoptimizationScaling}
+Phothilimthana,P.~M., Thakur,A., Bodik,R., and Dhurjati,D. (2016).
+\newblock Scaling up superoptimization.
+\newblock {\em SIGARCH Comput. Archit. News}, 44(2):297–310.
+
 \bibitem[Courouss{\'e} et~al., 2016]{courousse2016runtime}
 Courouss{\'e},D., Barry,T., Robisson,B., Jaillon,P., Potin,O., and Lanet,J.-L.
   (2016).
@@ -249,11 +246,6 @@ Courouss{\'e},D., Barry,T., Robisson,B., Jaillon,P., Potin,O., and Lanet,J.-L.
 Morgan,T.~D. and Morgan,J.~W. (2015).
 \newblock Web timing attacks made practical.
 \newblock {\em Black Hat}.
-
-\bibitem[Kim et~al., 2015]{Kim2015}
-Kim,D., Kwon,Y., Sumner,W.~N., Zhang,X., and Xu,D. (2015).
-\newblock Dual execution for on the fly fine grained execution comparison.
-\newblock {\em SIGPLAN Not.}
 
 \bibitem[Davi et~al., 2015]{davi2015isomeron}
 Davi,L., Liebchen,C., Sadeghi,A.-R., Snow,K.~Z., and Monrose,F. (2015).
@@ -302,12 +294,6 @@ Homescu,A., Neisius,S., Larsen,P., Brunthaler,S., and Franz,M. (2013).
 \newblock Profile-guided automated software diversity.
 \newblock In {\em Proceedings of the 2013 IEEE/ACM International Symposium on
   Code Generation and Optimization (CGO)}, pages 1--11. IEEE.
-
-\bibitem[Maurer and Brumley, 2012]{maurer2012tachyon}
-Maurer,M. and Brumley,D. (2012).
-\newblock Tachyon: Tandem execution for efficient live patch testing.
-\newblock In {\em 21st USENIX Security Symposium (USENIX Security 12)}, pages
-  617--630.
 
 \bibitem[Jackson, 2012]{jackson}
 Jackson,T. (2012).

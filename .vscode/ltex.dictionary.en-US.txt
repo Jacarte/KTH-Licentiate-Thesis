@@ -11,3 +11,7 @@ superoptimizer
 superdiversifier
 MEWE
 malintencious
+Baudry
+fuzzers
+Fuzzers
+fuzzer
