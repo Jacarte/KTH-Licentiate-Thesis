@@ -6,6 +6,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.graphics.shapes import _baseGFontName, _baseGFontNameBI
 from reportlab.lib.units import inch
 
+import io
 
 inputpdf = PdfFileReader(open(sys.argv[1], "rb"))
 

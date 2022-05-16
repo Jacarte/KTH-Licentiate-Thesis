@@ -41,8 +41,7 @@ A dispatcher function is a synthetic function that is in charge of choosing a va
 With the introduction of dispatcher function,  \tool turns the original call graph into a multivariant call graph, defined as follows. 
 
 \begin{definition}{Multivariant Call Graph (MCG):}\label{def:EP}
-  
-    A multivariant call graph is a call graph $\langle N,E \rangle$ where the nodes in $N$ represent all the functions in the binary and an edge $(f_1,f_2) \in E$ represents a possible invocation of $f_2$ by $f_1$  \cite{ryder1979}, where the nodes are typed. The nodes in $N$ have three possible types: a function present in the original program,  a generated function variant, or a dispatcher function.
+    A multivariant call graph is a call graph $\langle N, E \rangle$ where the nodes in $N$ represent all the functions in the binary and an edge $(f_1,f_2) \in E$ represents a possible invocation of $f_2$ by $f_1$  \cite{ryder1979}, where the nodes are typed. The nodes in $N$ have three possible types: a function present in the original program,  a generated function variant, or a dispatcher function.
 \end{definition}
 
 
@@ -125,13 +124,6 @@ For the random generator, we rely on WASI's specification \cite{WASI} for the ra
 
 The \tool mixer creates a new entrypoint for the binary called \emph{entrypoint tampering}.
 It simply wraps the dispatcher for the entrypoint variants as a new function for the final Wasm  binary and is declared as the application entrypoint. %This fixes an issue with  
-
-% How to turn function into endpoints
-%The entrypoint tampering is needed for binariess passed to MEWE. We refer to the entrypoint as the entering main function of the original binary passed to MEWE. The tampering is needed because dispatchers for entrypoint variants make the multivariant invalid to be directly executed after it is compiled to Wasm.
-
-%Throughout this paper, we refer to an endpoint as the closure of invoked functions when the entry point of the \wasm binary is executed.
-
-
 
 \begin{comment}
 

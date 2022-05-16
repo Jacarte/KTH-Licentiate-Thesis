@@ -9,9 +9,9 @@
 
 % Execute a python script for small calculations
 \newcommand{\py}[1]{\input{|python3 interpreter.py #1}}
-\newcommand{\fromjson}[2]{\input{| jq -r '#2' #1}}
+\newcommand{\fromjson}[2]{\input{| jq -r '#2' '#1}}
 
-\newcommand{\corpusrosetta}{\fromjson{data/crow_corpus.json}{.[0].name}}
+\newcommand{\corpusrosetta}{Rosetta\xspace}
 \newcommand{\corpussodium}{Libsodium\xspace}
 \newcommand{\corpusqrcode}{QrCode\xspace}
 
@@ -76,21 +76,21 @@ In \autoref{table:corpora} we listed the corpus name, the language of the progra
             \corpusrosetta & C &
             - %\footnote{ The concept of module does not apply for this corpus programs. } 
             &
-            \fromjson{data/crow_corpus.json}{.[0].functions}  & 
-            \fromjson{data/crow_corpus.json}{.[0].min_lines} - 
-            \fromjson{data/crow_corpus.json}{.[0].max_lines} & 
+            303  & 
+            7 - 
+            150 & 
             \url{https://github.com/KTH/slumps/tree/master/benchmark_programs/rossetta/valid/no_input}\\
         \hline
         \corpussodium & LLVM IR + Rust &
         102 &
-        \fromjson{data/allinone.multivariant.bc.massive.sodium.json}{.total_functions}  &
-        \fromjson{data/allinone.multivariant.bc.massive.sodium.json}{.min_llvm_loc} - \fromjson{data/allinone.multivariant.bc.massive.sodium.json}{.max_llvm_loc}  &   
+        869  &
+        8 - 2703 &   
         \url{https://github.com/jedisct1/libsodium/tree/2b5f8f2b6810121c2d9a8cc8a392e01f4d3de433 }\\
         \hline
         \corpusqrcode & LLVM IR + Rust &
         2 &
-        \fromjson{data/allinone.multivariant.bc.massive.qr.json}{.total_functions}  & 
-        \fromjson{data/allinone.multivariant.bc.massive.qr.json}{.min_llvm_loc} - \fromjson{data/allinone.multivariant.bc.massive.qr.json}{.max_llvm_loc}   & 
+        1849  & 
+        4 - 725   & 
         \url{https://github.com/kennytm/qrcode-rust/commit/faa4397ba7c5f441cb9a2b436c1e84a0d52ae942} \\
         % Total stats
         \hline

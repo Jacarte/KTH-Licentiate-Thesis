@@ -13,7 +13,7 @@ RUN mkdir /tools
 WORKDIR /tools
 
 RUN wget https://github.com/sylvainhalle/textidote/releases/download/v0.8.3/textidote.jar
-RUN pip install PyPDF4 reportlab PyPDF2
+RUN pip install PyPDF4 reportlab PyPDF2 pylatexenc language_tool_python
 # Download parsing script
 COPY parse_json2md.py parse_json2md.py 
 COPY annotate_at_side.py annotate_at_side.py 

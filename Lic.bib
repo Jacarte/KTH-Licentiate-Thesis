@@ -1292,3 +1292,21 @@
   isbn        = {978-91-8040-184-5},
   year        = {2022}
 }
+
+@inproceedings{10.1145/3477314.3507308,
+  author    = {Sti\'{e}venart, Quentin and De Roover, Coen and Ghafari, Mohammad},
+  title     = {Security Risks of Porting C Programs to Webassembly},
+  year      = {2022},
+  isbn      = {9781450387132},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3477314.3507308},
+  doi       = {10.1145/3477314.3507308},
+  abstract  = {WebAssembly is a compilation target for cross-platform applications that is increasingly being used. In this paper, we investigate whether one can transparently cross-compile C programs to WebAssembly, and if not, what impact porting can have on their security. We compile 17 802 programs that exhibit common vulnerabilities to 64-bit x86 and to WebAssembly binaries, and we observe that the execution of 4 911 binaries produces different results across these platforms. Through manual inspection, we identify three classes of root causes for such differences: the use of a different standard library implementation, the lack of security measures in WebAssembly, and the different semantics of the execution environments. We describe our observations and discuss the ones that are critical from a security point of view and need most attention from developers. We conclude that compiling an existing C program to WebAssembly for cross-platform distribution may require source code adaptations; otherwise, the security of the WebAssembly application may be at risk.},
+  booktitle = {Proceedings of the 37th ACM/SIGAPP Symposium on Applied Computing},
+  pages     = {1713–1722},
+  numpages  = {10},
+  keywords  = {WebAssembly, security, cross-compilation},
+  location  = {Virtual Event},
+  series    = {SAC '22}
+}
