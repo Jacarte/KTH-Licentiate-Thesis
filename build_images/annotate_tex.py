@@ -2,6 +2,8 @@ import os
 import json
 import sys
 
+THRESHOLD = int(os.environ.get("THRESHOLD", "1000000000"))
+
 def get_line_and_col(position, content):
     L = 0
     COL = 0
@@ -38,16 +40,16 @@ def get_similar_position(substr, content):
     
     return max(SCORES, key = lambda x: x[0])
 
-def process(jsonmap, ignore):
+def process(jsonmap, ignore, revision, origin):
     report = json.loads(open(jsonmap, 'r').read())
     ignore = open(ignore, 'r').readlines()
     RANGE = 5
-
+    TOTAL_COUNT = 0
     for match in report[::-1]:
         id, matches = match['id'], match['matches'] 
         p, _, f = id
         content = open(f, 'r').read()
-        print(f)
+        print(f"## {f}")
         notes = []
         for m in matches:
             offset = m['offset']
@@ -81,9 +83,18 @@ def process(jsonmap, ignore):
             #content = content[:position_in_tex] + note + content[ position_in_tex + length:]
             notes.append((position_in_tex, len(note)))
             L, C = get_line_and_col(position_in_tex, content)
-            print(f"{f}:{L}:{C}", message)
+            print(f"-  [{f}]({origin}/blob/{revision}/{f[2:]}#L{L}):{L}:{C}", message)
+            print(f"{origin}/blob/{revision}/{f[2:]}#L{L}")
+            TOTAL_COUNT += 1
+
             # Modify the tex file with a TODO, add a comment in the code
         #open(f, 'w').write(content)
-
+    print(f"# {TOTAL_COUNT} Warnings")
+    return TOTAL_COUNT
 if __name__ == '__main__':
-    process(sys.argv[1], sys.argv[2])
+    TOTAL_COUNT = process(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+
+    #if TOTAL_COUNT >= THRESHOLD:
+    sys.stderr.write(f"{TOTAL_COUNT}")
+
+#https://github.com/Jacarte/KTH-Licentiate-Thesis/blob/b1eb874bfada7fe430a70173f492722e0fec87e8/Chapter1.tex#L37

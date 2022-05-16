@@ -144,8 +144,7 @@ WebAssembly is vulnerable \cite{ChromeZero}.
 Implementations in both browsers and standalone runtimes~\cite{Narayan2021Swivel} are vulnerable.
 Genkin \etal demonstrated that Wasm  could be used to exfiltrate data using cache timing-side channels \cite{Genkin2018DrivebyKC}.
 Moreover, binaries itself can be vulnerable. The work of Lehmann \etal ~\cite{usenixWasm2020} proved that C/C++ source code vulnerabilities can propagate to Wasm  such as overwriting constant data or manipulating the heap using stackoverflow. Even though these vulnerabilities need a specific standard library implementation to be exploited, they make a call for better defenses for \wasm. 
+Recently, Stiévenart and colleagues demonstrate that C/C++ source code vulnerabilities can be ported to Wasm \cite{DeRoover2022}.
 % Current proposals
-Several proposals for extending \wasm in the current roadmap could address some existing vulnerabilities. For example, having multiple memories \footnote{\url{https://github.com/WebAssembly/multi-memory/blob/main/proposals/multi-memory/Overview.md}} could incorporate more than one memory, stack and global spaces, shrinking the attack surface. However, the implementation, adoption and settlement of the proposals are far from being a reality in all browser vendors \footnote{\url{https://webassembly.org/roadmap/}}.
-
-\cite{DeRoover2022}
+Several proposals for extending \wasm in the current roadmap could address some existing vulnerabilities. For example, having multiple memories \footnote{\url{https://github.com/WebAssembly/multi-memory/blob/main/proposals/multi-memory/Overview.md}} could incorporate more than one memory, stack and global spaces, shrinking the attack surface. However, the implementation, adoption and settlement of the proposals are far from being a reality in all browser vendors \footnote{\url{https://webassembly.org/roadmap/}}. 
 % In fact, according to the work of Hilbig \etal \cite{Hilbig2021AnES}, the artificial variants created with one of our works contribute to the half of executable and available \wasm binaries in the wild.

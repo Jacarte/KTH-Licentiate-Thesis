@@ -7,6 +7,8 @@ RUN apt-get install -y texlive-full git wget jq
 RUN apt-get install -y chromium-browser
 # We will need python and java as well
 RUN apt-get install -y python3 default-jre python3-pip
+# Ruby
+RUN apt-get install -y bundler ruby-full 
 
 # Spell checking tooling
 RUN mkdir /tools
