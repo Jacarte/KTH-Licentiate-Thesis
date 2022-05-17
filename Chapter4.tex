@@ -3,21 +3,6 @@
 
 \pagestyle{plain}
 % Define some numbers here for the autmation of the tables
-\newcommand{\libsodiumfunctions}{869}
-\newcommand{\qrcodefunctions}{1849}
-\newcommand{\allmewefunctions}{\libsodiumfunctions + \qrcodefunctions}
-
-% Execute a python script for small calculations
-\newcommand{\py}[1]{\input{|python3 interpreter.py #1}}
-\newcommand{\fromjson}[2]{\input{| jq -r '#2' '#1}}
-
-\newcommand{\corpusrosetta}{Rosetta\xspace}
-\newcommand{\corpussodium}{Libsodium\xspace}
-\newcommand{\corpusqrcode}{QrCode\xspace}
-
-
-\newcommand{\DTWStatic}{dt\_static\xspace}
-\newcommand{\DTW}{TraceDiff\xspace}
 \renewcommand{\tool}{CROW\xspace}
 
 %\todo{Recheck the selection of the modules for sodium}
