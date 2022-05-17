@@ -8,7 +8,7 @@ jobs:
     # This job runs on Linux
     runs-on: ubuntu-20.04
     container:
-      image: ghcr.io/jacarte/latex-build:latest15
+      image: ghcr.io/jacarte/latex-build:latest20
       credentials:
         username: jacarte
         password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
@@ -51,14 +51,14 @@ jobs:
       - name: Annotate new pdf on a new branch
         run: |
           git config --global --add safe.directory /__w/KTH-Licentiate-Thesis/KTH-Licentiate-Thesis
-          python3 /tools/annotate_tex.py report.json dico.text $(git log -n 1 --pretty=%H) $(git config --get remote.origin.url) 2> count.txt > README.md
+          python3 /tools/annotate_tex.py report.json dico.text $(git log -n 1 --pretty=%H) $(git config --get remote.origin.url) 2> count.txt
 
-          wc -c README.md
-          head -c 65536 README.md > CHUNK.md 
           cat count.txt
+          
+          # cp /tools/*.md .
 
           git rm -rf . && git checkout -b reports
-          git add README.md report.json && git commit -m 'Spell check report' 
+          git add *.md report.json && git commit -m 'Spell check report' 
           git push origin reports --force
 
           if [ $(cat count.txt) -gt $THRESHOLD ]

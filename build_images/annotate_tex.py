@@ -43,21 +43,31 @@ def get_similar_position(substr, content):
 def process(jsonmap, ignore, revision, origin):
     report = json.loads(open(jsonmap, 'r').read())
     ignore = open(ignore, 'r').readlines()
-    RANGE = 5
+    ignore = [i.lower() for i in ignore]
+
+    RANGE = 3
     TOTAL_COUNT = 0
-    for match in report[::-1]:
+    OVERALL = {}
+    for match in report:
         id, matches = match['id'], match['matches'] 
         p, _, f = id
+        
+        if not os.path.exists(f):
+            continue
+
         content = open(f, 'r').read()
-        print(f"## {f}")
+        #print(f"## {f}")
         notes = []
         for m in matches:
             offset = m['offset']
             length = m['errorLength']
+            cat = m['category']
+            rule = m['ruleId']
+
             chunk = p[max(offset - RANGE,0): offset + length + RANGE]
             exact = p[offset: offset + length]
 
-            if exact in ignore:
+            if exact.lower() in ignore:
                 continue
             #print(chunk, exact)
             
@@ -72,12 +82,15 @@ def process(jsonmap, ignore, revision, origin):
                 rep = ""
             # PATCH
             rep = ""
-            
+
             message = f"{m['message']}: '{exact}' {rep} {m['category']}"
             note = "\\pdfmarkupcomment[markup=Highlight,color=yellow]{" + content[ position_in_tex: position_in_tex + length:]+ f"}}{{{message}}}"
 
             # Avoid to insert one inside other
             notes = sorted(notes, key=lambda x: x[0])
+            if cat not in OVERALL:
+                OVERALL[cat] = {}
+
             for ni, length in notes:
                 if position_in_tex >= ni and position_in_tex <= ni + length:
                     # overlap ?
@@ -86,13 +99,46 @@ def process(jsonmap, ignore, revision, origin):
             #content = content[:position_in_tex] + note + content[ position_in_tex + length:]
             notes.append((position_in_tex, len(note)))
             L, C = get_line_and_col(position_in_tex, content)
-            print(f"-  [{f}]({origin}/blob/{revision}/{f[2:]}#L{L}):{L}:{C}", message)
-            print(f"{origin}/blob/{revision}/{f[2:]}#L{L}")
+            #print(f"-  [{f}]({origin}/blob/{revision}/{f[2:]}#L{L}):{L}:{C}", message)
+            #print(f"{origin}/blob/{revision}/{f[2:]}#L{L}")
             TOTAL_COUNT += 1
+            sys.stdout.write(f"\r{TOTAL_COUNT}      ")
+
+            if f not in OVERALL[cat]:
+                OVERALL[cat][f] = []
+
+            OVERALL[cat][f].append(dict(
+                    file=f,
+                    message=message,
+                    line=L,
+                    column=C,
+                    rule=rule
+                )
+            )
 
             # Modify the tex file with a TODO, add a comment in the code
         #open(f, 'w').write(content)
-    print(f"# {TOTAL_COUNT} Warnings")
+    print(f"\n# {TOTAL_COUNT} Warnings")
+
+    # Generating files
+    for c in OVERALL.keys():
+        # Create file
+        md = open(f"({len(OVERALL[c])}){c}.md", 'w')
+        md.write(f"# {len(OVERALL[c])} Warnings\n")
+
+        print(c, len(OVERALL[c]))
+
+        for file, matches in OVERALL[c].items():
+            md.write(f"## {f}\n")
+            for m in matches:
+                message = m['message']
+                L = m['line']
+                C = m['column']
+                f = file
+
+                md.write(f"-  [{f}]({origin}/blob/{revision}/{f[2:]}#L{L}):{L}:{C} {message}\n")
+                md.write(f"{origin}/blob/{revision}/{f[2:]}#L{L}\n")
+        md.close()
     return TOTAL_COUNT
 if __name__ == '__main__':
     TOTAL_COUNT = process(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
