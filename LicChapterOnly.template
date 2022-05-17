@@ -242,26 +242,26 @@
 %\addcontentsline{toc}{chapter}{Note: \\ It is not allowed to "copy and paste" from your papers to your dissertation.} % these are notes and they are not a part of the thesis
 
 \frontmatter
-\maketitle
-\input{abstract_english} % calls the separate document named abstract_english.tex
-\selectlanguage{swedish} % changes language for writing the swedish summary
-\input{summary_swedish} % calls the separate document named summary_swedish.tex
-\selectlanguage{english}
-\clearpage
-\input{acknowledgement} % calls the separate document named acknowledgement.tex
-\clearpage
+%\maketitle
+%\input{abstract_english} % calls the separate document named abstract_english.tex
+%\selectlanguage{swedish} % changes language for writing the swedish summary
+%\input{summary_swedish} % calls the separate document named summary_swedish.tex
+%\selectlanguage{english}
+%\clearpage
+%\input{acknowledgement} % calls the separate document named acknowledgement.tex
+%\clearpage
 
 \setcounter{tocdepth}{2} % used for content layout
 \renewcommand{\contentsname}{Contents} % changes the appearance of Contents
 \tableofcontents
-\clearpage
+%\clearpage
 
 %\listoffigures
 %\clearpage
 %\listoftables
 %\clearpage
 %\input{abbreviation}
-\clearpage
+%\clearpage
 
 \mainmatter
 \setcounter{secnumdepth}{3} % used for content layout
@@ -271,12 +271,8 @@
 %\section{RQ1, generation}
 %\section{RQ2, assesment}
 %\section{RQN, usage}
-\input{Chapter1}
-\input{Chapter2}
-\input{Chapter3}
-\input{Chapter4}
-\input{Chapter5}
-\input{Chapter6}
+
+<< CHAPTER >>
 
 %\bibliographystyle{IEEEtranS} % this is just an example, other styles can be used as well
 \bibliographystyle{apalike} % this is just an example, other styles can be used as well

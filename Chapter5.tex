@@ -1,17 +1,18 @@
-\chapter{Conclusion and Future Work}
-\label{chapter:conclude}
+\chapter{Results} 
+\label{chapter:results}
 
-\section{Summary of the results}
+In this chapter, we sum up the results of the research of this thesis. We illustrate the key insights and challenges faced in answering each research question. To obtain our results, we followed the methodology formulated in \autoref{chapter:method}.
 
+\input{results/RQ1.tex}
 
-\section{Future work}
-\label{future_work}
+\input{results/RQ2.tex}
 
-One of our previous contributions trigger a CVE\footnote{\url{https://www.fastly.com/blog/defense-in-depth-stopping-a-wasm-compiler-bug-before-it-became-a-problem}} on the code generation component of wasmtime, highlighting that even when the language specification is meant to be secure, the underlying host implementation might not be. 
+\input{results/RQ3.tex}
+% Define some numbers here for the autmation of the tables
 
-\todo{Side channel reproduction and study of the impact of side-channel}
+%\pagebreak
+\section*{Conclusions}
 
-\subsection{wasm-mutate future work}
-\todo{Obfuscation and data augmentation}
+Our approach introduces static and dynamic, variants for up to 11.78\% of the programs in our three corpora, increasing the original count of programs by $4.15$ times. We highlighted the importance of complementing static and dynamic studies for programs diversification. Moreover, combining function variants in multivariant binaries makes virtually impossible to predict which variant is executed for a given query. We empirically demonstrate the feasibility and the application of automatically generating \wasm program variants.
 
-
+% While our approach targets \wasm environments, previous works have demonstrated the importance of execution path randomization \cite{davi2015isomeron}. The work of Davi \etal proposed to randomly switch between two program executions, the original and a variant to provide an unpredictable behavior. 
