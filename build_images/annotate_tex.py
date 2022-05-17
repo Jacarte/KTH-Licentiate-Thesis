@@ -70,6 +70,9 @@ def process(jsonmap, ignore, revision, origin):
                 rep = "Replacements: " + ",".join(m['replacements'])
             else:
                 rep = ""
+            # PATCH
+            rep = ""
+            
             message = f"{m['message']}: '{exact}' {rep} {m['category']}"
             note = "\\pdfmarkupcomment[markup=Highlight,color=yellow]{" + content[ position_in_tex: position_in_tex + length:]+ f"}}{{{message}}}"
 
