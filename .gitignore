@@ -27,6 +27,7 @@ chapter_*.idx
 chapter_*.ilg
 chapter_*.ind
 chapter_*.tex
+chapter_*.blg
 Chapter*.pdf
 Chapter*.toc
 Chapter*.log
