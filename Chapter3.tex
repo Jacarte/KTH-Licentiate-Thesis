@@ -1,12 +1,9 @@
-\chapter{Technical contributions}
+\chapter{Automatic Diversity for \wasm}
 \label{chapter:technical}
-% / Automatic Diversity for Wasm/ 
 
 
 % The need for technical contributions...
-We aim to create Artificial Software Diversity for \wasm, by providing tools to make the process easier and feasible for developers and researchers. As far as we know, there is no software that provides Artificial Software Diversification for WebAssembly. Therefore, we need to enunciate the engineering foundation to implement the strategies in \autoref{sota:sota}. Our implementations are part of the contributions of this thesis. Concretely, we provide two software artifacts that complement this work. Our approach generate \wasm program variants statically at compile time to provide randomization. Besides, it provides the tooling to generate MVE binaries for WebAssembly.
-
-
+We aim to create artificial software diversity for \wasm, by providing tools to make the process easier and feasible for developers and researchers. As far as we know, there is no software that provides Artificial Software Diversification for WebAssembly. Therefore, we need to enunciate the engineering foundation to implement the strategies defined in \autoref{sota:sota}. Our implementations are part of the contributions of this thesis. Concretely, we provide two software artifacts that complement this work. Our approach generate \wasm program variants statically at compile time to provide randomization. Besides, it provides the tooling to generate MVE binaries for WebAssembly.
 In this chapter we describe our technical contributions. In \autoref{tech:generic} we enunciate how the current state-of-the-art lead us to contribute with Software Diversification through LLVM. We follow by describing our two contributions and their main technical insights in \autoref{section:crow} and \autoref{section:mewe}. Besides, we describe a new transformation strategy as part of our contributions. 
 
 
@@ -32,12 +29,12 @@ In this chapter we describe our technical contributions. In \autoref{tech:generi
 \input{technical_chapter/mewe.tex}
 
 
-\section*{Accompanying Source Code}
+\section{Accompanying Source Code}
 
 This thesis is accompanied by the source code of both contributions, CROW and MEWE. The source code is accessible through the links:
 \begin{enumerate}
-    \item CROW: \todo{slumps}
-    \item MEWE: \todo{mewe}
+    \item CROW: \url{https://github.com/KTH/slumps}
+    \item MEWE: \url{https://github.com/Jacarte/MEWE}
 \end{enumerate}
 
 Our software artifacts are licensed under the MIT License. The dependent source codes, such as LLVM, are licensed under their original licenses.

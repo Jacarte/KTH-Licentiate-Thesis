@@ -48,7 +48,7 @@ In the following, we describe our engineering decisions. All our implementation 
 \end{comment}
 
 
-\subsection*{Exploration}
+\subsection{Exploration}
 
 %\subsection*{Variants' generation}
 
@@ -83,7 +83,7 @@ As we discussed in \autoref{sota:sota}, the equivalence checking is an important
 
 %We implement the \emph{exploration} stage of CROW by retargeting Souper. The main objective of Souper is to find the best (smallest) possible program,  
 
-\subsection*{Constant inferring}
+\subsection{Constant inferring}
 
 By extending Souper as a superdiversifier, we contribute with a new mutation strategy, \emph{constant inferring} (in addition to the before mentioned strategies in \autoref{sota:sota}).  
 The main component of Souper infers pieces of code as a single constant assignment particularly for boolean valued variables that are used to control branches.
@@ -155,14 +155,14 @@ However, standard LLVM tools cannot unroll the \texttt{\textbf{while}}-loop beca
 % Souper
 Souper can deal with this case, generating the program in \autoref{inferring}. It infers the value of \texttt{current} in Line 2 such that the Babbage condition is reached. Therefore, the condition in the loop will always be false. Then, the loop is dead code, and is removed in the final compilation. It is clear that the new program in \autoref{inferring} is remarkably smaller and faster than the original code. Notice that for the sake of illustration, we show both codes in C language, this process inside CROW is performed directly in LLVM IR. Also notice that the two programs in the example follow the definition of \emph{functional equivalence} discussed in \autoref{sota:sota}.
 
-\subsection*{Combining replacements}
+\subsection{Combining replacements}
 
 When we retarget Souper, to create variants, we recombine all code replacements, including those for which a constant inferring was performed.
 This allows us to create variants that are also better than the original program in terms of size and performance. Most of the Artificial Software Diversification  works generate variants that are as performant or iller than the original program. By using a superdiversifier, we could be able to generate variants that are better, in terms of performance, than the original program. This will give the option to developers to decide between performance and diversification without sacrificing the former. 
 
 On the other hand, when Souper finds a replacement, it is applied to all equal instructions in the original LLVM binary. In our implementation, we apply the transformation only to the instruction for which it was found in the first place. For example, if we find a replacement that is suitable for $N$ difference places in the original program, we generate $N$ different programs by applying the transformation in only one place at a time. Notice that this strategy provides a combinatorial explosion of program variants as soon as the number of replacements increases.
 
-\subsection*{Removing latter optimizations for LLVM}
+\subsection{Removing latter optimizations for LLVM}
 
 During the implementation of CROW we have the premise of removing all builtin optimizations in the LLVM backend that could reverse Wasm  variants.
 Therefore, in addition to the extension of Souper, we modify the LLVM compiler and the \wasm backend.

@@ -31,7 +31,7 @@ The final output of Step~\step{III} is a standalone multivariant \wasm binary th
 \end{figure*}
 
 
-\subsection*{Multivariant generation}
+\subsection{Multivariant generation}
 
 The key component of \tool consists in combining the variants into a single binary.
 The goal is to support execution-path randomization at runtime.
@@ -114,7 +114,7 @@ define internal i32 @foo(i32 %0) {
 \end{minipage}
 \end{code}
 
-\subsection*{Mixer}
+\subsection{Mixer}
 
 The Mixer has four specific objectives: tamper the entrypoint of the application, link the LLVM multivariant binary, inject a random generator and merge all these components into a multivariant \wasm binary.
 % Implementation
