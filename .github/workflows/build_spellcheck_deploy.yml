@@ -93,14 +93,8 @@ jobs:
 
           git add .
           git commit -m "Automatic deploy from thesis repo"
-          git push
-          
-          echo "en_US UTF-8" > /etc/locale.gen
-          locale-gen en_US.UTF-8
-          export LANG=en_US.UTF-8
-          export LANGUAGE=en_US:en
-          export LC_ALL=en_US.UTF-8
+          git pushes
 
-          bash ./bin/deploy_auto 
+          # The action on the page will automatically deploy the documents
         env:
           REPO_KEY: '${{ secrets.REPO_KEY2 }}'
