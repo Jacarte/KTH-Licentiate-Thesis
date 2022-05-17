@@ -31,33 +31,8 @@ jobs:
 
       - name: Split by chapter
         run: |
-          mkdir chapters
           
-          sed  's/<< CHAPTER >>/\\input{Chapter1}/g' LicChapterOnly.template > temp.tex
-          pdflatex -interaction=nonstopmode -shell-escape temp.tex && bibtex temp && pdflatex -shell-escape -interaction=nonstopmode temp.tex
-          cp temp.pdf chapters/chapter1.pdf
-
-          sed  's/<< CHAPTER >>/\\input{Chapter2}/g' LicChapterOnly.template > temp.tex
-          pdflatex -interaction=nonstopmode -shell-escape temp.tex && bibtex temp && pdflatex -shell-escape -interaction=nonstopmode temp.tex
-          cp temp.pdf chapters/chapter2.pdf
-          
-
-          sed  's/<< CHAPTER >>/\\input{Chapter2.5}/g' LicChapterOnly.template > temp.tex
-          pdflatex -interaction=nonstopmode -shell-escape temp.tex && bibtex temp && pdflatex -shell-escape -interaction=nonstopmode temp.tex
-          cp temp.pdf chapters/chapter3.pdf
-
-          sed  's/<< CHAPTER >>/\\input{Chapter3}/g' LicChapterOnly.template > temp.tex
-          pdflatex -interaction=nonstopmode -shell-escape temp.tex && bibtex temp && pdflatex -shell-escape -interaction=nonstopmode temp.tex
-          cp temp.pdf chapters/chapter4.pdf
-
-          sed  's/<< CHAPTER >>/\\input{Chapter4}/g' LicChapterOnly.template > temp.tex
-          pdflatex -interaction=nonstopmode -shell-escape temp.tex && bibtex temp && pdflatex -shell-escape -interaction=nonstopmode temp.tex
-          cp temp.pdf chapters/chapter5.pdf
-
-
-          sed  's/<< CHAPTER >>/\\input{Chapter5}/g' LicChapterOnly.template > temp.tex
-          pdflatex -interaction=nonstopmode -shell-escape temp.tex && bibtex temp && pdflatex -shell-escape -interaction=nonstopmode temp.tex
-          cp temp.pdf chapters/chapter6.pdf
+          bash build_images/build_by_chapter.sh
 
           ls chapters
 

@@ -1,4 +1,5 @@
 \documentclass{kthesis}
+\includeonly{Chapter2}
 % the used packages are just examples, you can use your preferred packages instead
 \input{packages.tex}
 
@@ -272,11 +273,12 @@
 %\section{RQ2, assesment}
 %\section{RQN, usage}
 
+
 << CHAPTER >>
 
 %\bibliographystyle{IEEEtranS} % this is just an example, other styles can be used as well
 \bibliographystyle{apalike} % this is just an example, other styles can be used as well
-\bibliography{Lic} % calls the separate document named Lic.bbl
+\bibliography{chapter} % calls the separate document named Lic.bbl
 
 %\backmatter % should be used for the actual thesis, separate documents can be added without the numbering, similar to the \frontmatter
 %\appendix{\input{app_papers}}

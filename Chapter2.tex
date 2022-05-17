@@ -1,51 +1,23 @@
-\chapter{Technical contributions}
-\label{chapter:technical}
-% / Automatic Diversity for Wasm/ 
+\chapter{Background \& State of the art}
+\label{chapter:sota}
+
+This chapter discusses the state of the art in the areas of \emph{\wasm} and \emph{Software Diversification}. In \autoref{sota:wasm} we discuss the \wasm language, its motivation, how \wasm binaries are generated, the language specification, and security-related issues. In \autoref{sota:sota}, we present a summary of Software Diversification, its foundational concepts and highlighted related works.  
+We select the discussed works by their novelty, critical insights, and representativeness of their techniques. 
+In \autoref{sota:openchallenges}, we finalize the chapter by highlighting open challenges in state-of-the-art related works.
 
 
-% The need for technical contributions...
-We aim to create Artificial Software Diversity for \wasm, by providing tools to make the process easier and feasible for developers and researchers. As far as we know, there is no software that provides Artificial Software Diversification for WebAssembly. Therefore, we need to enunciate the engineering foundation to implement the strategies in \autoref{sota:sota}. Our implementations are part of the contributions of this thesis. Concretely, we provide two software artifacts that complement this work. Our approach generate \wasm program variants statically at compile time to provide randomization. Besides, it provides the tooling to generate MVE binaries for WebAssembly.
+%In \autoref{sota:wasm} we describe the context in which this dissertation is based, \wasm. We include both usage scenarios for Wasm and its main security issues. In \autoref{sota:diversification} we discuss the main diversification techniques in the wild, we introduce the concept of superoptimization used in this work, and we end the section by highlighting superdiversification as the cornerstone of our contributions are based. In \autoref{sota:randomization} we mention close works to runtime diversification and how diversification can be used to construct resilient binaries. 
 
+\input{sota/wasm.tex}
 
-In this chapter we describe our technical contributions. In \autoref{tech:generic} we enunciate how the current state-of-the-art lead us to contribute with Software Diversification through LLVM. We follow by describing our two contributions and their main technical insights in \autoref{section:crow} and \autoref{section:mewe}. Besides, we describe a new transformation strategy as part of our contributions. 
+\input{sota/sota.tex}
 
-
-% What does it solve ?
-% The aim of massive-scale software diversity is to make it 
-
-% . However, 
-
-% In this chapter, we describe our threat model, return- and jump-oriented program- ming (see Section 4.2), new classes of code-reuse attacks. Code-reuse attacks are an attack class that is growing in popularity in response to other host-based defenses.
-% Then we describe several compiler-based transformations (Section 4.3) and their im- plementation (Section 4.4) in the LLVM 2.9 compiler toolchain. We also provide some metrics (Section 4.5) for evaluating the effectiveness of these techniques for preventing wide-scale deployment of code-reuse attacks
-
-%\todo{Make a real introduction, the paragraphs below is too fast}
-
-
-
-
-
-
-\input{technical_chapter/generic.tex}
-
-\input{technical_chapter/crow.tex}
-
-\input{technical_chapter/mewe.tex}
-
-
-\section*{Accompanying Source Code}
-
-This thesis is accompanied by the source code of both contributions, CROW and MEWE. The source code is accessible through the links:
-\begin{enumerate}
-    \item CROW: \todo{slumps}
-    \item MEWE: \todo{mewe}
-\end{enumerate}
-
-Our software artifacts are licensed under the MIT License. The dependent source codes, such as LLVM, are licensed under their original licenses.
-
-\section*{Conclusions}
-
-This chapter discusses the technical details for the artifacts implemented for our two contributions.
-We describe how CROW generates program variants.
-We introduce a new mutation strategy that is a consequence of retargeting a superoptimizer for LLVM as a superdiversifier.
-Besides, we dissect MEWE and how it creates an MVE system.
-In \autoref{chapter:method} we discuss the methodology we follow to evaluate the impact of CROW and MEWE.
+\subsection*{Conclusions}
+In this chapter, we presented the background on the \wasm language, including its security issues and related work.
+This chapter aims to settle down the foundation to study automatic diversification for \wasm. 
+We highlighted related work on Artificial Software Diversification, showing that it has been widely researched, not being the case for \wasm. 
+On the other hand, current available implementations for Software Diversification cannot be directly ported to Wasm. 
+The current limitations on security and the lack of software diversity approaches for \wasm motivate our work.
+We place our contributions in the field of artificial diversity. 
+In \autoref{chapter:technical} we describe the technical details that lead our contributions. 
+Besides, the impact of our contributions is evaluated by following the methodology described in \autoref{chapter:method}.
