@@ -48,7 +48,7 @@
 
 %\todo{Given a collection of pgorams, then enumerate the usages. Second approach, multiple encapsulation in one single program.}
 
-Software Diversification  has been widely studied in the past decades. This section discusses its state of the art.
+Software Diversification has been widely studied in the past decades. This section discusses its state of the art.
 % What is Software diversity
 Software diversification consists in synthesizing, reusing, distributing, and executing different, functionally equivalent programs. 
 According to the survey by Baudry \etal \cite{natural_diversity}, the motivation for software diversification can be separated in five categories: reusability \cite{pohl2005software}, software testing \cite{Chen2010AdaptiveRT}, performance \cite{10.1145/2025113.2025133}, fault tolerance \cite{1659219} and security \cite{cohen1993operating}. Our work contributes to the latter two categories. In this section we discuss related works by highlighting how they generate diversification and how they put it into practice. 
@@ -119,7 +119,7 @@ All described strategies can be mixed together. They can be applied in any seque
     \label{strategy:S3}
     \normalfont
     This strategy creates program variants by adding, changing, or removing jumps and calls in the original program. Cohen \cite{cohen1993operating} mainly illustrated the case by inserting bogus jumps in programs. Pettis and Hansen \cite{pettisochhansen} proposed to split basic blocks and functions for the PA-RISC architecture, inserting jumps between splits.
-    Similarly, Crane \etal~\cite{crane2015thwarting} de-inline basic blocks of code as an LLVM pass. In their approach, each de-inlined code is transformed into semantically equivalent functions that are randomly selected at runtime to replace the original code calculation. On the same topic, Bhatkar \etal \cite{bhatkar2005efficient} extended their previous approach \cite{bhatkar03}, replacing function calls by indirect pointer calls in C source code, allowing post binary reordering of function calls. Recently, Romano \etal \cite{wobfuscator} proposed an obfuscation technique for JavaScript in which part of the code is replaced by calls to complementary Wasm  function.
+    Similarly, Crane \etal~\cite{crane2015thwarting} de-inline basic blocks of code as an LLVM pass. In their approach, each de-inlined code is transformed into semantically equivalent functions that are randomly selected at runtime to replace the original code calculation. On the same topic, Bhatkar \etal \cite{bhatkar2005efficient} extended their previous approach \cite{bhatkar03}, replacing function calls by indirect pointer calls in C source code, allowing post binary reordering of function calls. Recently, Romano \etal \cite{wobfuscator} proposed an obfuscation technique for JavaScript in which part of the code is replaced by calls to complementary Wasm function.
 \end{strategy}
 
 
@@ -167,7 +167,7 @@ All described strategies can be mixed together. They can be applied in any seque
 Equivalence checking between program variants is an essential component for any program transformation task, from checking compiler optimizations \cite{LeCompilers} to the artificial synthesis of programs discussed in this chapter. 
 Equivalence checking proves that two pieces of code or programs are semantically equivalent \cite{churchill2019}. % Why is important
 Cohen \cite{cohen1993operating} simplifies this checking by enunciating the following property: two programs are equivalent if given identical input, they produce the identical output. We use this same enunciation as the definition of \emph{functional equivalence} along with this dissertation. 
-Equivalence checking in Software Diversification  aims to preserve the original functionality for programs while changing observable behaviors. For example, two programs can be statically different or have different execution times and provide the same computation. 
+Equivalence checking in Software Diversification aims to preserve the original functionality for programs while changing observable behaviors. For example, two programs can be statically different or have different execution times and provide the same computation. 
 
 
 
@@ -233,7 +233,7 @@ After program variants are generated, they can be used in two main scenarios: Ra
         \caption{Multivariant Execution scenario. Given a pool of program variants, a sample of the pool is packaged in a multivariant binary that is deployed. Each deployment randomly selects which multivariant binary is assigned to each host. A variant from the multivariant binary is randomly executed at runtime in the host, .}        \label{diagrams:sota:mve}
 
     \end{subfigure}
-    \caption{Software Diversification  usages. }
+    \caption{Software Diversification usages.}
 \end{figure}
 
 % \todo{Split in what and how?}
@@ -278,7 +278,7 @@ Virtual machines and operating systems can be also randomized. On this topic, Kc
 % How, with two variants
 The execution of the embedded variants can be either in parallel to check for inconsistencies or a single program to randomize execution paths \cite{bhatkar03}. 
 Bruschi et al. \cite{bruschi2007diversified} extended the idea of executing two variants in parallel with not-overlapping and randomized memory layouts. Simultaneously, Salamat \etal \cite{salamat2007stopping} modified a standard library that generates 32-bit Intel variants where the stack grows in the opposite direction, checking for memory inconsistencies. 
-Notably, Davi \etal proposed Isomeron \cite{davi2015isomeron}, an approach  for execution-path randomization. Isomeron simultaneously loads the original program and a variant. While the program is running, Isomeron continuously flips a coin to decide which copy of the program should be executed next at the level of function calls. 
+Notably, Davi \etal proposed Isomeron \cite{davi2015isomeron}, an approach for execution-path randomization. Isomeron simultaneously loads the original program and a variant. While the program is running, Isomeron continuously flips a coin to decide which copy of the program should be executed next at the level of function calls. 
 % More than two variants
 The previously mentioned works showed the benefits of exploiting the limit case of executing only two variants in a multivariant environment.
 Agosta \etal~\cite{agosta2015meet} and Crane \etal~\cite{crane2015thwarting} used more than two generated programs in the multivariant composition, randomizing software control flow at runtime. 
@@ -298,7 +298,7 @@ Agosta \etal~\cite{agosta2015meet} and Crane \etal~\cite{crane2015thwarting} use
 %
 
 % Concluding the section
-Both scenarios have demonstrated to harden security by tackling know vulnerabilities such as (JIT)ROP attacks \cite{jackson2011compiler} and power side-channels \cite{amarilli2011can}. Moreover, Artificial Software Diversification  is a preemptive technique for yet unknown vulnerabilities \cite{jackson}. Our work contributes to both usages scenarios for \wasm.
+Both scenarios have demonstrated to harden security by tackling know vulnerabilities such as (JIT)ROP attacks \cite{jackson2011compiler} and power side-channels \cite{amarilli2011can}. Moreover, Artificial Software Diversification is a preemptive technique for yet unknown vulnerabilities \cite{jackson}. Our work contributes to both usages scenarios for \wasm.
 
 %\begin{usage}{Moving Target Defense(MTD):}
 %    \label{usage:mtd}
@@ -313,8 +313,8 @@ Both scenarios have demonstrated to harden security by tackling know vulnerabili
 \section{Open challenges}
 \label{sota:openchallenges}
 
-%We contribute to Software Diversification  for \wasm using Artificial Diversification, for Randomization and Multivariant Execution usages (\autoref{usage:randomization}, \autoref{usage:mve}). 
-In \autoref{table:sota:comparison} we list the related work on Artificial Software Diversification  that support our approaches. The first and second columns in the table correspond to the author names and the references to their work, followed by one column for each strategy and usage ( \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5}, \autoref{usage:randomization} and \autoref{usage:mve}). The last column of the table summarizes the technical contribution and the reach of the referred work. Each cell in the table contains a checkmark if the strategy or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. 
+%We contribute to Software Diversification for \wasm using Artificial Diversification, for Randomization and Multivariant Execution usages (\autoref{usage:randomization}, \autoref{usage:mve}). 
+In \autoref{table:sota:comparison} we list the related work on Artificial Software Diversification that support our approaches. The first and second columns in the table correspond to the author names and the references to their work, followed by one column for each strategy and usage ( \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5}, \autoref{usage:randomization} and \autoref{usage:mve}). The last column of the table summarizes the technical contribution and the reach of the referred work. Each cell in the table contains a checkmark if the strategy or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. 
 %The last two rows locate our contributions. 
 
 \input{sota/sota_table.tex}
@@ -323,7 +323,7 @@ In \autoref{table:sota:comparison} we list the related work on Artificial Softwa
 %The primary motivation for our contributions is that we see in \wasm a monoculture problem. If one environment is vulnerable, all the others are vulnerable in the same manner as the same \wasm binary is replicated. 
 %Besides, the \wasm environment lacks natural diversity \cite{natural_diversity}. Compared to the work of Harrand \etal \citationneeded, in WebAssembly, one could not use preexisting and different program versions to provide diversification. On the other hand, while the number of related work for software diversity is large, only one approach has been applied to the context of \wasm. 
 % Move to the table
-%To the best of our knowledge, the closest diversification work on the browsers involving \wasm is the work of Romano \etal \cite{wobfuscator}. They proposed to de-inline JavaScript subexpressions and replace them with function calls to \wasm counterparts.  They empirically demonstrated that malware classifiers could be evaded with this diversification technique. 
+%To the best of our knowledge, the closest diversification work on the browsers involving \wasm is the work of Romano \etal \cite{wobfuscator}. They proposed to de-inline JavaScript subexpressions and replace them with function calls to \wasm counterparts. They empirically demonstrated that malware classifiers could be evaded with this diversification technique. 
 %\wasm is a novel technology, and the adoption of defenses for it is still under development \cite{Narayan2021Swivel, johnson2021}. The current limitations on security and the lack of software diversity approaches for \wasm motivate our work.
 % CROW
 Our first contribution, CROW \cite{CROW} generates multiple program variants for \wasm using the LLVM pipeline.

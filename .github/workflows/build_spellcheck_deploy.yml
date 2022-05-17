@@ -38,7 +38,7 @@ jobs:
         run: |
           python3 /tools/get_latex_pieces.py .
         env:
-          EXCLUDE: "['llvm_code_blocks.tex', 'overlaping_explain.tex', 'table_template copy.tex', 'table_template copy 2.tex', 'table_template.tex', 'old.tex', 'same_instruction.tex', 'example.tex' ,  'generation table_template.tex']"
+          EXCLUDE: "['llvm_code_blocks.tex', 'overlaping_explain.tex', 'table_template copy.tex', 'table_template copy 2.tex', 'table_template.tex', 'old.tex', 'same_instruction.tex', 'example.tex' ,  'generation table_template.tex', 'summary_swedish.tex']"
 
       - name: Archive spell report
         uses: actions/upload-artifact@v1

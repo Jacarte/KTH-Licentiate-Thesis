@@ -50,7 +50,7 @@ We build our three corpora in an escalating strategy based on the merging of our
 In the following, we describe the filtering and description of each corpus.
 
 \begin{enumerate}
-    \item \textbf{\corpusrosetta}: We take programs from the  Rosetta Code project\footnote{\url{http://www.rosettacode.org/wiki/Rosetta_Code}}. This website hosts a curated set of solutions for specific programming tasks in various programming languages. It contains many tasks, from simple ones, such as adding two numbers, to complex algorithms like a compiler lexer. We first collect all C programs from the Rosetta Code, representing $989$ programs as of 01/26/2020. We then apply several filters: the programs should successfully compile and, they should not require user inputs to automatically execute them, the programs should terminate and should not result in non-deterministic results. 
+    \item \textbf{\corpusrosetta}: We take programs from the Rosetta Code project\footnote{\url{http://www.rosettacode.org/wiki/Rosetta_Code}}. This website hosts a curated set of solutions for specific programming tasks in various programming languages. It contains many tasks, from simple ones, such as adding two numbers, to complex algorithms like a compiler lexer. We first collect all C programs from the Rosetta Code, representing $989$ programs as of 01/26/2020. We then apply several filters: the programs should successfully compile and, they should not require user inputs to automatically execute them, the programs should terminate and should not result in non-deterministic results. 
     
     The result of the filtering is a corpus of 303 C programs. All programs include a single function in terms of source code. These programs range from $7$ to $150$ lines of code.
 
