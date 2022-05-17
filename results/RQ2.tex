@@ -8,7 +8,7 @@ For each programs' population we compare the stack operation traces (\autoref{me
 
 This section is organized as follows. First, we analyze the programs' populations by comparing the traces for each pair of program/variant with \DTW of \autoref{metric:stack}. The pairwise comparison will hint at the results at the population level. We analyze not only the differences of a variant regarding its original program, we also compare the variants against other variants. Second, we do the same pairwise strategy for the execution time distributions \autoref{metric:time}, performing a Mann-Withney U test for each pair of program/variant times distribution. Finally, we conclude and answer RQ2.
 
-\subsection*{Stack operation traces.}
+\subsection{Stack operation traces.}
 
 
 % Describe the first figure
@@ -34,7 +34,7 @@ In some cases, we have observed variants that are statically different for which
 In the four cases, the operators are different (original in gray color and the replacement in green color) leaving the same values for equal operands.
 The (1) and (2) cases are comparison operations leaving the value $0$ or $1$ in the stack taking into account the sign of their operands.  In the third case, the replacement is less restricted to the original operator, but in both cases, the codes leave the same value in the stack. In the last case, both operands load a value of a local variable in the stack, the index of the local variable is different but the value of the variable that is appended to the trace is the same in both cases. 
 
-\subsection*{Execution times.}
+\subsection{Execution times.}
 
 %\todo{recall again that execution time diversification is important, should the reader have forgotten about this.}
 

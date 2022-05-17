@@ -252,8 +252,8 @@ After program variants are generated, they can be used in two main scenarios: Ra
 
 % How to generate the variant's pool
 
-El-Khalil and colleagues \cite{ElKhalil2004} proposed to use a custom compiler to generate different binaries out of the compilation process. El-Khalil and colleagues modified a version of GCC 4.1 to separate a conventional stack into several component parts, called multistacks.
-On the same topic, Aga and colleagues \cite{aga2019smokestack} proposed to generate program variants by randomizing its data layout in memory. Their approach makes each variant to operate the same data in memory with different memory offsets.
+El-Khalil and colleagues \cite{ElKhalil2004} propose to use a custom compiler to generate different binaries out of the compilation process. El-Khalil and colleagues modify a version of GCC 4.1 to separate a conventional stack into several component parts, called multistacks.
+On the same topic, Aga and colleagues \cite{aga2019smokestack} propose to generate program variants by randomizing its data layout in memory. Their approach makes each variant to operate the same data in memory with different memory offsets.
 Remarkably, the Polyverse company \footnote{\url{https://polyverse.com/}} materialize randomization at the commercial level in real life. They deliver a unique Linux distribution compilation for each of its clients by scrambling the Linux packages at the source code level.
     
 % How
@@ -271,7 +271,7 @@ Virtual machines and operating systems can be also randomized. On this topic, Kc
     \label{usage:mve}
     \normalfont
     % What
-    In the second scenario \autoref{diagrams:sota:mve}, multiple program variants are composed in one single binary (multivariant binary) \cite{cox06}. Each multivariant binary is randomly deployed to a client. Once in the client, the multivariant binary executes its embedded program variants at runtime. 
+    Multiple program variants are composed in one single binary (multivariant binary) \cite{cox06}. Each multivariant binary is randomly deployed to a client. Once in the client, the multivariant binary executes its embedded program variants at runtime. \autoref{diagrams:sota:mve} illustrates this scenario. 
     
 \end{usage}
 
@@ -314,7 +314,8 @@ Both scenarios have demonstrated to harden security by tackling know vulnerabili
 \label{sota:openchallenges}
 
 %We contribute to Software Diversification for \wasm using Artificial Diversification, for Randomization and Multivariant Execution usages (\autoref{usage:randomization}, \autoref{usage:mve}). 
-In \autoref{table:sota:comparison} we list the related work on Artificial Software Diversification that support our approaches. The first and second columns in the table correspond to the author names and the references to their work, followed by one column for each strategy and usage ( \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5}, \autoref{usage:randomization} and \autoref{usage:mve}). The last column of the table summarizes the technical contribution and the reach of the referred work. Each cell in the table contains a checkmark if the strategy or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. 
+In \autoref{table:sota:comparison} we list the related work on Artificial Software Diversification discussed along with this chapter. The first and second columns in the table correspond to the author names and the references to their work, followed by one column for each strategy and usage ( \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5}, \autoref{usage:randomization} and \autoref{usage:mve}). The last column of the table summarizes the technical contribution and the reach of the referred work. Each cell in the table contains a checkmark if the strategy or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. 
+In the following we enumerate the open challenges we have found in the literature research:
 %The last two rows locate our contributions. 
 
 \input{sota/sota_table.tex}
@@ -324,20 +325,45 @@ In \autoref{table:sota:comparison} we list the related work on Artificial Softwa
 %Besides, the \wasm environment lacks natural diversity \cite{natural_diversity}. Compared to the work of Harrand \etal \citationneeded, in WebAssembly, one could not use preexisting and different program versions to provide diversification. On the other hand, while the number of related work for software diversity is large, only one approach has been applied to the context of \wasm. 
 % Move to the table
 %To the best of our knowledge, the closest diversification work on the browsers involving \wasm is the work of Romano \etal \cite{wobfuscator}. They proposed to de-inline JavaScript subexpressions and replace them with function calls to \wasm counterparts. They empirically demonstrated that malware classifiers could be evaded with this diversification technique. 
-%\wasm is a novel technology, and the adoption of defenses for it is still under development \cite{Narayan2021Swivel, johnson2021}. The current limitations on security and the lack of software diversity approaches for \wasm motivate our work.
+
+
+\begin{enumerate}
+    \item \emph{WebAssembly is vulnerable:} \wasm is a novel technology, yet vulnerable. The adoption of defenses for it is still under development \cite{Narayan2021Swivel, johnson2021} and has a low pace.
+    
+    \item \emph{Software monoculture phenomenon:}  \wasm is evolving further web browsers as a technology to support Edge-Cloud computing platforms.
+    The Edge-Cloud computing model is based on replicating the same binary along with all computing nodes in a worldwide scale. Therefore, potential vulnerabilities are spread highlighting a clear monoculture phenomenon \cite{Harrand1650630}. 
+
+    \item \emph{Lack of Software Diversification for \wasm}:  Software Diversification has demonstrated to provide protection for known and yet-unknown vulnerabilities. Yet, only one Software Diversity approach has been applied to the context of \wasm. To the best of our knowledge, the closest diversification work involving \wasm is the work of Romano \etal \cite{wobfuscator}.
+    Moreover, as we illustrate in \autoref{table:sota:comparison}, the existing works for Software Diversification do not contribute directly to \wasm.
+    
+    \item \emph{Lack of research on MVE for \wasm:} 
+    Researching on MVE in a distributed setting like the Edge has been less researched. Only Voulimeneas \etal \cite{voulimeneas2021dmvx} recently proposed a multivariant execution system by parallelizing the execution of the variants in different machines for the sake of efficiency. 
+    
+    \item \emph{Porting current contributions:} 
+    The preexisting works based on the LLVM pipeline cannot be extended to Wasm due to technical challenges. The main reason is that previous works contribute to LLVM versions released before the inclusion of Wasm as an LLVM architecture. 
+    On the other hand, there is no mentioned work merging all mutation strategies in one solution.
+
+\end{enumerate}
+
+
+
+
+
+
+% Move this to the technical part
+%CROW, extrapolates the idea of superdiversification \cite{jacob2008superdiversifier} for \wasm. CROW works directly with LLVM IR, enabling it to generalize to more languages and CPU architectures, something not possible with the x86-specific approach of previous works.
 % CROW
-Our first contribution, CROW \cite{CROW} generates multiple program variants for \wasm using the LLVM pipeline.
-It contributes to state of the art in artificially creating randomization for \wasm (\autoref{usage:randomization}). Due to the specificities of code execution in the browser (mentioned in \autoref{sota:wasm}), this can be considered as a randomization approach. For example, since \wasm is served at each page load, every time a user asks for a \wasm binary, she can be served a different variant provided by CROW. 
+%We contributes to state of the art in artificially creating randomization for \wasm (\autoref{usage:randomization}). 
+
+%Due to the specificities of code execution in the browser (mentioned in \autoref{sota:wasm}), this can be considered as a randomization approach. For example, since \wasm is served at each page load, every time a user asks for a \wasm binary, she can be served a different variant provided by CROW. 
 % Move to intro
 %Besides, our contribution can be used in fuzzing campaigns \citationneeded to provide reliability. The diversification created by CROW can unleash hidden behaviors in compilers and interpreters. Thanks to CROW, a bug was discovered in the Lucet compiler \footnote{\url{https://www.fastly.com/blog/defense-in-depth-stopping-a-wasm-compiler-bug-before-it-became-a-problem}}.
 %MEWE
-%Notably, researching on MVE in a distributed setting like the Edge \citationneeded has been less researched. 
-With MEWE \cite{MEWE}, our second contribution, we randomly select from several variants at runtime, creating a multivariant execution scheme(\autoref{usage:mve}) that randomizes the observable behaviors at each run of the multivariant binary. %We use the natural redundancy of Edge-Cloud computing architectures to deploy an internet-based MVE.
+%
+% With MEWE \cite{MEWE}, our second contribution, we randomly select from several variants at runtime, creating a multivariant execution scheme(\autoref{usage:mve}) that randomizes the observable behaviors at each run of the multivariant binary. %We use the natural redundancy of Edge-Cloud computing architectures to deploy an internet-based MVE.
 
 % Move to intro
-% Only Voulimeneas \etal recently proposed a multivariant execution system by parallelizing the execution of the variants in different machines \cite{voulimeneas2021dmvx} for the sake of efficiency. 
-% Move this to the technical part
-%CROW, extrapolates the idea of superdiversification \cite{jacob2008superdiversifier} for \wasm. CROW works directly with LLVM IR, enabling it to generalize to more languages and CPU architectures, something not possible with the x86-specific approach of previous works.
+% 
 
 %CROW focuses on the static diversification of software. However, 
 

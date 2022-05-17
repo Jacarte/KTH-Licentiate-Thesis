@@ -20,6 +20,13 @@ Harrand,N. (2022).
 \newblock PhD thesis, KTH, Software and Computer systems, SCS.
 \newblock QCR 20220413.
 
+\bibitem[Voulimeneas et~al., 2021]{voulimeneas2021dmvx}
+Voulimeneas,A., Song,D., Larsen,P., Franz,M., and Volckaert,S. (2021).
+\newblock dmvx: Secure and efficient multi-variant execution in a distributed
+  setting.
+\newblock In {\em Proceedings of the 14th European Workshop on Systems
+  Security}, pages 41--47.
+
 \bibitem[Spies and Mock, 2021]{9640153}
 Spies,B. and Mock,M. (2021).
 \newblock An evaluation of webassembly in non-web environments.

@@ -20,7 +20,7 @@ As we describe in \autoref{rq1:method}, our first research question aims to answ
 This section is organized as follows. First we present the general results calculating the \emph{\corpuspopulationsizename}(\autoref{metric:rq1:corpus_pop}) and \emph{\corpusuniquepopulationsizename}(\autoref{metric:rq1:corpus_pop_unique}) for each corpus. 
 Second, we discuss the challenges and limitations in program variants generation. Finally, we illustrate the most common code transformations performed by our approach and answer RQ1.
 
-\subsection*{Program's populations}
+\subsection{Program's populations}
 
 We summarize the results in \autoref{table:crow:general_results}.
 The table illustrates the corpus name, the number of functions to diversify, the number of successfully diversified functions (functions with at least one artificially created variant), the cumulative number of variants (\emph{\corpuspopulationsizename}) and the cumulative number of unique variants (\emph{\corpusuniquepopulationsizename}).
@@ -39,7 +39,7 @@ The remarkable difference between the total number of variants and the number of
 \input{results/result_static_diversity.tex}
 
 
-\subsection*{Challenges for automatic diversification}
+\subsection{Challenges for automatic diversification}
 \label{rq1:challenges}
 
 % Low diversified functions
@@ -64,7 +64,7 @@ We have observed that our approach searches for a constant inferring for more th
 %\todo{Add all the found examples here}
 
 
-\subsection*{Properties for large diversification}
+\subsection{Properties for large diversification}
 
 We manually analyzed the programs to study the critical properties of programs producing a high number of variants.
 This reveals one key factor that favors many unique variants: the presence of bounded loops. In these cases, we synthesize variants for the loops by replacing them with a constant, if the constant inferring is successful. Every time a loop constant is inferred, the loop body is replaced by a single instruction. This creates a new, statically different program. The number of variants grows exponentially if the function contains nested loops for which we can successfully infer constants. 
