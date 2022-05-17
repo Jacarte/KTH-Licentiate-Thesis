@@ -23,7 +23,6 @@ To dynamically compare programs and their variants, we execute each program on e
 We compare the execution traces of two any programs of the same population with a global alignment metric. We propose a global alignment approach using Dynamic Time Warping (DTW).
 Dynamic Time Warping \cite{NEEDLEMAN1970443} computes the global alignment between two sequences. It returns a value capturing the cost of this alignment, which is a distance metric. The larger the DTW distance, the more different the two sequences are.
 DTW has been used for comparing traces in different domains. For software, De A. Maia \etal \cite{ Maia08usinga} proposed to identify similarity between programs from execution traces.
-\todo{Add STRAC here later}
 As we discussed in \autoref{sota:wasm}, a theoretical \wasm engine perform \texttt{push} and \texttt{pop} operations when the program instructions are executed. Therefore, in our experiments, we define the execution traces as the sequence of the stack operations during the execution of the \wasm program. 
 In the following, we define the $\DTW$ metric. 
  

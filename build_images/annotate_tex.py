@@ -67,7 +67,7 @@ def process(jsonmap, ignore, revision, origin):
             chunk = p[max(offset - RANGE,0): offset + length + RANGE]
             exact = p[offset: offset + length]
 
-            if exact.lower() in ignore:
+            if any([i in chunk.lower() for i  in ignore]):
                 continue
             #print(chunk, exact)
             
@@ -129,7 +129,7 @@ def process(jsonmap, ignore, revision, origin):
         print(c, len(OVERALL[c]))
 
         for file, matches in OVERALL[c].items():
-            md.write(f"## {f}\n")
+            md.write(f"## {file}\n")
             for m in matches:
                 message = m['message']
                 L = m['line']
