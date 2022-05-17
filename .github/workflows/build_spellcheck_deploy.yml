@@ -19,16 +19,6 @@ jobs:
           pdflatex -interaction=nonstopmode -shell-escape Lic.tex && bibtex Lic && pdflatex -shell-escape -interaction=nonstopmode Lic.tex
           
       # If the build works, do the spell check
-
-      - name: Spell check
-        run: |
-          
-      - name: Archive pdf artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: Lic.pdf
-          path: ./Lic.pdf
-
       - name: Split by chapter
         run: |
           
@@ -41,12 +31,6 @@ jobs:
           python3 /tools/get_latex_pieces.py .
         env:
           EXCLUDE: "['llvm_code_blocks.tex', 'overlaping_explain.tex', 'table_template copy.tex', 'table_template copy 2.tex', 'table_template.tex', 'old.tex', 'same_instruction.tex', 'example.tex' ,  'generation table_template.tex', 'summary_swedish.tex']"
-
-      - name: Archive spell report
-        uses: actions/upload-artifact@v1
-        with:
-          name: report.json
-          path: report.json
       
       - name: GIT
         run: git config --global user.email "action@github.com" && git config --global user.name "GitHub Action"
