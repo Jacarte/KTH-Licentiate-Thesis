@@ -13,7 +13,7 @@ def get_all_tex_files(folder):
 
     for d, _, files in os.walk(folder):
         for f in files:
-            if f.endswith('.tex') and f"{d}/{f}" not in exclude:
+            if f.endswith('.tex') and f"{f}" not in exclude:
                 r.append((d, f))
     return r
 

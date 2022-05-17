@@ -68,6 +68,7 @@ def process(jsonmap, ignore, revision, origin):
             exact = p[offset: offset + length]
 
             if any([i in chunk.lower() for i  in ignore]):
+                print(chunk, exact)
                 continue
             #print(chunk, exact)
             
