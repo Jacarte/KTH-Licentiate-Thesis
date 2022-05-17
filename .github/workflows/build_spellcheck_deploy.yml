@@ -26,6 +26,34 @@ jobs:
 
           ls chapters
 
+      - name: Deploy document
+        run: |
+          
+          mkdir /chapters
+          
+          cp chapters/*.pdf /chapters
+          ls /chapters
+          cp Lic.pdf /Lic.pdf
+
+          cd /
+          git clone https://${{secrets.REPO_KEY2}}@github.com/Jacarte/jacarte.github.io jacartepage
+          cd jacartepage
+          cp /Lic.pdf assets/pdf/thesis/Lic.pdf
+          cp -r /chapters/* assets/pdf/thesis
+
+          git config --global user.email "xppcoder@gmail.com"
+          git config --global user.name "jacarte"
+          git config --global credential.helper cache
+
+          git add .
+          git commit -m "Automatic deploy from thesis repo"
+          git push
+
+          # The action on the page will automatically deploy the documents
+        env:
+          REPO_KEY: '${{ secrets.REPO_KEY2 }}'
+
+
       - name: Spell checking report
         run: |
           python3 /tools/get_latex_pieces.py .
@@ -57,30 +85,3 @@ jobs:
 
         env:
           THRESHOLD: 200000
-
-      - name: Deploy document
-        run: |
-          
-          mkdir /chapters
-          
-          cp chapters/*.pdf /chapters
-          ls /chapters
-          cp Lic.pdf /Lic.pdf
-
-          cd /
-          git clone https://${{secrets.REPO_KEY2}}@github.com/Jacarte/jacarte.github.io jacartepage
-          cd jacartepage
-          cp /Lic.pdf assets/pdf/thesis/Lic.pdf
-          cp -r /chapters/* assets/pdf/thesis
-
-          git config --global user.email "xppcoder@gmail.com"
-          git config --global user.name "jacarte"
-          git config --global credential.helper cache
-
-          git add .
-          git commit -m "Automatic deploy from thesis repo"
-          git push
-
-          # The action on the page will automatically deploy the documents
-        env:
-          REPO_KEY: '${{ secrets.REPO_KEY2 }}'
