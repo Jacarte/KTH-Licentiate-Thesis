@@ -8,7 +8,7 @@ jobs:
     # This job runs on Linux
     runs-on: ubuntu-20.04
     container:
-      image: ghcr.io/jacarte/latex-build:latest24
+      image: ghcr.io/jacarte/latex-build:latest25
       credentials:
         username: jacarte
         password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
@@ -69,7 +69,7 @@ jobs:
 
         env:
           THRESHOLD: 200000
-          EXCLUDE: "['llvm_code_blocks.tex', 'overlaping_explain.tex', 'table_template copy.tex', 'table_template copy 2.tex', 'table_template.tex', 'old.tex', 'same_instruction.tex', 'example.tex']"
+          EXCLUDE: "['./llvm_code_blocks.tex', './overlaping_explain.tex', './table_template copy.tex', './table_template copy 2.tex', './table_template.tex', './old.tex', './same_instruction.tex', './example.tex']"
 
       - name: Deploy document
         run: |

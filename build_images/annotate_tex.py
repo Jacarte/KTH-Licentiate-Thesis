@@ -124,10 +124,13 @@ def process(jsonmap, ignore, revision, origin):
     # Generating files
     for c in OVERALL.keys():
         # Create file
-        md = open(f"({len(OVERALL[c])}){c}.md", 'w')
-        md.write(f"# {len(OVERALL[c])} Warnings\n")
+        TOTAL_WARNINGS = [ len(matches) for _, matches in OVERALL[c].items() ]
+        TOTAL_WARNINGS = sum(TOTAL_WARNINGS)
 
-        print(c, len(OVERALL[c]))
+        md = open(f"({TOTAL_WARNINGS}){c}.md", 'w')
+        md.write(f"# {TOTAL_WARNINGS} Warnings\n")
+
+        print(c, TOTAL_WARNINGS)
 
         for file, matches in OVERALL[c].items():
             md.write(f"## {file}\n")
