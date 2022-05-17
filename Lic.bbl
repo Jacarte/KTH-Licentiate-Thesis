@@ -437,6 +437,10 @@ El-Khalil,R. and Keromytis,A.~D. (2004).
   Communications Security}, pages 187--199, Berlin, Heidelberg. Springer Berlin
   Heidelberg.
 
+\bibitem[{LLVM}, 2003]{llvmofficialweb}
+{LLVM} ({2003}).
+\newblock { The LLVM Compiler Infrastructure }.
+
 \bibitem[Kc et~al., 2003]{Kc03}
 Kc,G.~S., Keromytis,A.~D., and Prevelakis,V. (2003).
 \newblock Countering code-injection attacks with instruction-set randomization.

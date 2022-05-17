@@ -2,10 +2,9 @@
 \label{tech:generic}
 
 The work of Hilbig et al. \cite{Hilbig2021AnES} at 2021 influences our design decisions. According to their work, 70\% of the \wasm binaries in the wild are created with LLVM-based compilers. Therefore, we decided to provide Artificial Sotfware Diversity for \wasm through LLVM. 
-Other solutions would have been to diversify at the source code level, or at the \wasm binary level. However, the former would limit the applicability of our work. The latter, will be addressed in future works (\autoref{future_work}).
+Other solutions would have been to diversify at the source code level, or at the \wasm binary level. However, the former would limit the applicability of our work. The latter, is proposed for future works.
 
-LLVM is compound of three main components \citationneeded. First, the frontend (compilers such as clang and rustc) converts the program source code to LLVM intermediate representation (LLVM IR). Second, optimization and transformation passes improve the LLVM IR. Third and final, the backend component is in charge of generating the target machine code. Notice that, the LLVM architecture is highly scalable. The machine code translation of LLVM IR might have any number of custom intermediate passes. In \autoref{diagrams:generic} we show the global workflow followed in our contributions. 
-The dashed squares in \autoref{diagrams:generic} wrap our contributions.
+LLVM is compound of three main components \cite{llvmofficialweb}. First, the frontend (compilers such as clang and rustc) converts the program source code to LLVM intermediate representation (LLVM IR). Second, optimization and transformation passes improve the LLVM IR. Third and final, the backend component is in charge of generating the target machine code. In \autoref{diagrams:generic} we show how we use the LLVM pipeline in our contributions, which are highlighted as dashed squares.
 
 \begin{figure*}[h]
     \includegraphics[width=\linewidth]{diagrams/architecture.pdf}
@@ -14,12 +13,16 @@ The dashed squares in \autoref{diagrams:generic} wrap our contributions.
 \end{figure*}
 
 
-The global workflow in \autoref{diagrams:generic} starts by receiving the source code from the program to be compiled to \wasm. Then, an LLVM frontend transforms this source code into LLVM IR representation. The resulting LLVM IR is the input for the Diversifier \step{1}.  
+The global workflow in \autoref{diagrams:generic} starts by receiving source code. Then, the LLVM frontend transforms it into LLVM IR representation \step{1}. We alter the LLVM pipeline that compiles source code to Wasm, with the introduction of a Diversifier component.  
 % Our diversifier and first contribution
-The diversifier generates LLVM IR variants from of the output of the frontend \step{2}. These variants are inputs for our customized Wasm  backend. In our case the LLVM backend is always for \wasm and, it finalizes the creation of the variants \step{3}. 
+The diversifier generates LLVM IR variants from of the output of the frontend \step{2}. 
+The LLVM IR variants are inputs for our customized Wasm  backend. 
+CROW creates \wasm program variants out of a source code program \step{3}. 
+In addition, an orthogonal contribution comes from the generation of LLVM IR variants at Step~\step{2}. MEWE  \cite{MEWE}, merges and creates multivariant binaries to provide MVE for \wasm \step{4}. 
+%In \autoref{section:mewe} we describe MEWE in details.
 
-Our first technical contribution, CROW  \cite{CROW}, includes the implementation of the diversifier for LLVM and the customized \wasm backend. CROW is able to create several \wasm program variants out of a source code program. In \autoref{section:crow} we dissect CROW into more details.
-In addition, an orthogonal contribution comes from the generation of LLVM IR variants at Step~\step{2}. Our second contribution, MEWE  \cite{MEWE}, merges and creates multivariant binaries to provide MVE for \wasm \step{4}. In \autoref{section:mewe} we describe MEWE in details.
+%Our first technical contribution, CROW  \cite{CROW}, includes the implementation of the diversifier for LLVM and the customized \wasm backend. 
+
 
 %Besides, as we discussed previously, our intention is also to study the impact of our contributions in edge computing and distributed systems and the top edge computing execution platforms, e.g. Cloudflare and Fastly, mostly take \wasm binaries as input. 
 %LLVM, on the contrary, supports different languages, with a rich ecosystem of frontends it it can reliably be retargeted to \wasm, thanks to the corresponding mature component in the LLVM toolchain. In addition, the LLVM ecosystem as a whole is very active, providing us with many different tools to facilitate our research endeavour.
