@@ -9,16 +9,27 @@
 %\todo{Base paragraph by the papers}
 
 % WebAssembly as new technology
-The W3C standardized bytecode for the web environment with \wasm (Wasm) language in 2015, opening up the browser clients ecosystem to a broader collection of programming languages. Wasm allows the use of existing programs or libraries that are written in other languages, such as C and Rust, to be run in the web browser environment. It also claims that is better than JavaScript to perform compute-intensive tasks \cite{Haas_2017}. 
-Further browser environments, it evolves to be a new technology for Edge-Cloud computing platforms, resulting in bandwidth saving, execution improvement, and process-on-demand fast spawning \cite{9640153, wen2020wasmachine}. However, since it a relatively new technology, it is not exempt of vulnerabilities.
-
-This latter, makes feasible the construction of a generic LLVM superdiversifier. \todo{This is a contribution, add it to the intro}
-
+The Web Consortium (W3C) standardized bytecode for the web environment with the \wasm (Wasm) language in 2015. Wasm allows browsers to execute existing programs or libraries that are written in other languages, such as C/C++ and Rust. It also claims that is better than JavaScript to perform compute-intensive tasks \cite{Haas_2017}. 
+Further browser environments, \wasm is a promising technology that evolves to be a new technology for Edge-Cloud computing platforms, resulting in bandwidth saving, execution improvement, and process-on-demand fast spawning \cite{9640153, wen2020wasmachine}. Despite being designed for sandbox and secure execution, it is not exempt of vulnerabilities \cite{Narayan2021Swivel, WebAssemblySecurity}.
 % Moving target defense
-Software bugs are inherited in any software development process, including both, the \wasm engines and the source code that generates the Wasm binaries. One temporary solution to deal with bugs is to move them in time as a preemptive solution, the bug is only available in a time window. This strategy is usually called Moving Target Defense (MTD). Moving Target Defense for software was first proposed as a collection of techniques that aim to improve the security of a system by constantly moving its vulnerable components \cite{MTDNationalCyberLaep, okhravi2013survey}. Usually, MTD techniques revolve around changing systems to reduce vulnerable surfaces. This increases uncertainty for attackers and makes their attacks more difficult. Ultimately, potential attackers cannot hit what they cannot see. MTD can be implemented in different ways, including via Software Diversification. 
-%In the case of \autoref{usage:n-version}, this usage lacks of the time dimension, \ie program variants are not changed from time to time. 
+For example, \wasm engines are vulnerable to speculative execution \cite{Narayan2021Swivel}, and C/C++ source code vulnerabilities are ported to Wasm binaries \cite{DeRoover2022}. 
 
-Software Diversification has shown to be a good preemptive technique \citationneeded, preventing exploitation of vulnerabilities or hardening harmful analysis of programs. In one of our experiments, a CVE was discovered inside the Lucet compiler, showing new vulnerabilities are still present in battle-tested engines. This CVE was discovered thanks to our Software Diversification strategies and was solved even before it was public. 
+% MTD and the need for variants
+One strategy to hide such vulnerabilities is to move them in time as a preemptive solution.
+The goal is to make potential vulnerabilities available only in a time window.  
+This strategy is usually called Moving Target Defense (MTD). 
+MTD for software was first proposed as a collection of techniques that aim to improve the security of a system by constantly moving its vulnerable components \cite{MTDNationalCyberLaep, okhravi2013survey}. 
+MTD increases uncertainty for potential attackers since malicious users cannot hit what they cannot see. 
+Yet, one premise for implementing MTD is the need of at least two variants of the same program.
+By switching the deployment and execution between at least two variants, a potential attacker needs to make double efforts perform the same attack for both variants if they are different.
+The program variants are not always present, presenting a lack of natural diversity \cite{Harrand1650630}.
+Yet, program variants could be artifically created. 
+
+Our exhaustive literature review shows a lack of software diversification approaches for hardening \wasm as a preemptive technique.
+With this work, we aim to generate artificial software diversification for WebAssembly.
+To reach such a goal, we answer three research questions enunciated in the following.
+
+%Compared to the work of Harrand \etal \cite{Harrand1650630}, in WebAssembly, we cannot use preexisting and different programs to provide software diversification. In fact, according to the work of Hilbig \etal \cite{Hilbig2021AnES}, they filter out half of internet available \wasm corpus due to that filtered programs where artifically provided by one of our tools. 
 
 
 %Due to the current evolution of the \wasm roadmap, every time is harder to find vulnerabilities and keep up to the date the engines. 
@@ -30,8 +41,6 @@ Software Diversification has shown to be a good preemptive technique \citationne
 
 % Lack of Natural Software Diversification and a high presence of monoculture
 % - the birth of a new package manager and the translation of preexisting ones such as cargo and the LLVM itself.
-The low presence of defenses implementations for \wasm and the pace of their practical adoption motivate our work on Software Diversification as a preemptive technique that can help against known and yet unknown vulnerabilities.
-Another motivation for this work is that \wasm lacks of natural diversity, \ie for a single \wasm program in the wild, it has a lower presence of versions. Moreover, compared to the work of Harrand \etal \cite{Harrand1650630}, in WebAssembly, we cannot use preexisting and different programs to provide diversification. In fact, according to the work of Hilbig \etal \cite{Hilbig2021AnES}, they filter out half of internet available \wasm corpus due to that filtered programs where artifically provided by one of our tools. 
 
 % Our solution is to artificially diversify
 
@@ -70,17 +79,7 @@ In this section, we present our three research questions. Our research questions
 
 \section{Contributions}
 
-The contributions of this thesis are:
-
-\begin{enumerate}[label=\subscript{C}{{\arabic*}}]
-    \item Technical contribution: Along with this work, we contribute with several software artifacts, and summarize the main challenges faced during their implementation.
-    
-    \item Methodological contribution: We propose a quantitative methodology to evaluate the impact of our artifacts, assessing the creation of Artificial Software Diversification for WebAssembly.  
-    
-    \item Experimental contribution: We contribute to generate Artificial Software Diversification for WebAssembly. We empirically demonstrate the impact on static and dynamic behavior for our diversification technique.
-    
-    \item Theoretical contribution: We summarize the code transformations used to artifically generate software diversification through an exhaustive literature review, and highlight the lack of diversification techniques for WebAssembly. In addition, we discuss the incorporation of \emph{Constant Inferring} as a new diversification technique.
-\end{enumerate}
+This thesis contributes through four milestones. First, as a theoretical contribution, we summarize the code transformations used to artifically generate software diversification through an exhaustive literature review. Consequently, we highlight the lack of diversification techniques for WebAssembly. In addition, we discuss the incorporation of \emph{constant Inferring} as a new transformation. Second, as a technical contribution, we provide two tools, CROW \cite{CROW} and MEWE \cite{MEWE}. Besides, we summarize the main challenges faced during their implementation. Third, we propose a methodology to quantitatively evaluate the impact of our tools, assessing the creation of artificial software diversification for WebAssembly. Fourth and final, we empirically demonstrate the impact on static and dynamic behavior for our diversification technique.
 
 \section{Publications}
 
@@ -90,19 +89,19 @@ This work is based on the following publications:
     \item Superoptimization of WebAssembly Bytecode \cite{WasmSuperoptimizer}\\
     {\small\textbf{Javier Cabrera-Arteaga}, Shrinish Donde, Jian Gu, Orestis Floros, Lucas Satabin, Benoit Baudry, Martin Monperrus}\\
         \emph{Programming 2020, MoreVMs'20}\\
-        {\small
-        \textbf{Abstract:} Motivated by the fast adoption of WebAssembly, we propose the first functional pipeline to support the superoptimization of WebAssembly bytecode. Our pipeline works over LLVM and Souper. We evaluate our superoptimization pipeline with 12 programs from the Rosetta code project. Our pipeline improves the code section size of 8 out of 12 programs. We discuss the challenges faced in superoptimization of WebAssembly with two case studies.}
+        %{\small
+        %\textbf{Abstract:} Motivated by the fast adoption of WebAssembly, we propose the first functional pipeline to support the superoptimization of WebAssembly bytecode. Our pipeline works over LLVM and Souper. We evaluate our superoptimization pipeline with 12 programs from the Rosetta code project. Our pipeline improves the code section size of 8 out of 12 programs. We discuss the challenges faced in superoptimization of WebAssembly with two case studies.}
     \item CROW: Code Diversification for WebAssembly \cite{CROW}\\
     {\small\textbf{Javier Cabrera-Arteaga}, Orestis Floros, Oscar Vera-Pérez, Benoit Baudry, Martin Monperrus}\\
     \emph{NDSS 2021, MADWeb}\\
-    {\small
-    \textbf{Abstract:} The adoption of WebAssembly has rapidly increased in the last few years as it provides a fast and safe model for program execution. However, WebAssembly is not exempt from vulnerabilities that could be exploited by side channels attacks. This class of vulnerabilities that can be addressed by code diversification. In this paper, we present the first fully automated workflow for the diversification of WebAssembly binaries. We present CROW, an open-source tool implementing this workflow. We evaluate CROW's capabilities on 303 C programs and study its use on a real-life security-sensitive program: libsodium, a cryptographic library. Overall, CROW is able to generate diverse variants for 239 out of 303,(79\%) small programs. Furthermore, our experiments show that our approach and tool is able to successfully diversify off-the-shelf cryptographic software (libsodium).}
+    %{\small
+    %\textbf{Abstract:} The adoption of WebAssembly has rapidly increased in the last few years as it provides a fast and safe model for program execution. However, WebAssembly is not exempt from vulnerabilities that could be exploited by side channels attacks. This class of vulnerabilities that can be addressed by code diversification. In this paper, we present the first fully automated workflow for the diversification of WebAssembly binaries. We present CROW, an open-source tool implementing this workflow. We evaluate CROW's capabilities on 303 C programs and study its use on a real-life security-sensitive program: libsodium, a cryptographic library. Overall, CROW is able to generate diverse variants for 239 out of 303,(79\%) small programs. Furthermore, our experiments show that our approach and tool is able to successfully diversify off-the-shelf cryptographic software (libsodium).}
     \item Multi-Variant Execution at the Edge \cite{MEWE}\\
     {\small\textbf{Javier Cabrera-Arteaga}, Pierre Laperdrix, Martin Monperrus, Benoit Baudry}\\
     \emph{Under review}\\
-    {\small
-    \textbf{Abstract:} Edge-cloud computing offloads parts of the computations that traditionally occurs in the cloud to edge nodes,e.g., CDN servers, in order to get closer to the users and reduce latency. To improve performance even further, WebAssembly is increasingly used in this context. Edge-cloud computing providers, such as Fastly or Cloudflare, let their clients deploy stateless services in the form of WebAssembly binaries, which are then translated to machine code and sandboxed for a safe execution at the edge.
-    In this context, we propose a technique that (i) automatically diversifies WebAssembly binaries that are deployed to the edge and (ii) randomizes execution paths at runtime, turning the execution of the services into a moving target. Given a service tobe deployed at the edge, we automatically synthesize functionally equivalent variants for the functions that implement the service.All the variants are then wrapped into a single multivariant WebAssembly binary. When the service endpoint is executed,every time a function is invoked, one of its variants is randomly selected. We implement this technique in the MEWE tool and we validate it with 7 services for cryptography and QR encoding. MEWE generates multivariant binaries that embed hundreds of function variants. We execute the multivariant binaries on the worldwide edge platform provided by Fastly. We show that,at runtime, the multivariant exhibit a remarkable diversity ofexecution traces, across the whole edge platform. }
+    %{\small
+    %\textbf{Abstract:} Edge-cloud computing offloads parts of the computations that traditionally occurs in the cloud to edge nodes,e.g., CDN servers, in order to get closer to the users and reduce latency. To improve performance even further, WebAssembly is increasingly used in this context. Edge-cloud computing providers, such as Fastly or Cloudflare, let their clients deploy stateless services in the form of WebAssembly binaries, which are then translated to machine code and sandboxed for a safe execution at the edge.
+    %In this context, we propose a technique that (i) automatically diversifies WebAssembly binaries that are deployed to the edge and (ii) randomizes execution paths at runtime, turning the execution of the services into a moving target. Given a service tobe deployed at the edge, we automatically synthesize functionally equivalent variants for the functions that implement the service.All the variants are then wrapped into a single multivariant WebAssembly binary. When the service endpoint is executed,every time a function is invoked, one of its variants is randomly selected. We implement this technique in the MEWE tool and we validate it with 7 services for cryptography and QR encoding. MEWE generates multivariant binaries that embed hundreds of function variants. We execute the multivariant binaries on the worldwide edge platform provided by Fastly. We show that,at runtime, the multivariant exhibit a remarkable diversity ofexecution traces, across the whole edge platform. }
 \end{enumerate}
 
 % \subsection*{Origin of contributions ?}
@@ -112,11 +111,11 @@ This work is based on the following publications:
     \item Scalable Comparison of JavaScript V8 Bytecode Traces \cite{STRAC}\\
     {\small\textbf{Javier Cabrera-Arteaga}, Martin Monperrus, Benoit Baudry}\\
     \emph{SPLASH 2019, VMIL}\\
-    {\small
-    \textbf{Abstract:} 
-    The comparison and alignment of runtime traces are essential, e.g., for semantic analysis or debugging. However, naive sequence alignment algorithms cannot address the needs of the modern web: (i) the bytecode generation process of V8 is not deterministic; (ii) bytecode traces are large.
-    We present STRAC, a scalable and extensible tool tailored to compare bytecode traces generated by the V8 JavaScript engine. Given two V8 bytecode traces and a distance function between trace events, STRAC computes and provides the best alignment. The key insight is to split access between memory and disk. STRAC can identify semantically equivalent web pages and is capable of processing huge V8 bytecode traces whose order of magnitude matches today's web like https://2019.splashcon.org, which generates approx. 150k of V8 bytecode instructions.
-     }
+    %\small
+    %\textbf{Abstract:} 
+    %The comparison and alignment of runtime traces are essential, e.g., for semantic analysis or debugging. However, naive sequence alignment algorithms cannot address the needs of the modern web: (i) the bytecode generation process of V8 is not deterministic; (ii) bytecode traces are large.
+    %We present STRAC, a scalable and extensible tool tailored to compare bytecode traces generated by the V8 JavaScript engine. Given two V8 bytecode traces and a distance function between trace events, STRAC computes and provides the best alignment. The key insight is to split access between memory and disk. STRAC can identify semantically equivalent web pages and is capable of processing huge V8 bytecode traces whose order of magnitude matches today's web like https://2019.splashcon.org, which generates approx. 150k of V8 bytecode instructions.
+    % }
     \item (Talk) Wasm-mutate: Fuzzing WebAssembly Compilers with E-Graphs\\
     \textbf{Javier Cabrera-Arteaga}, Nicholas Fitzgerald, Martin Monperrus, Benoit Baudry\\
     \emph{PLDI 2022, EGRAPHs}\\

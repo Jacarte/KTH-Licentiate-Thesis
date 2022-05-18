@@ -331,13 +331,14 @@ In the following we enumerate the open challenges we have found in the literatur
     \item \emph{WebAssembly is vulnerable:} \wasm is a novel technology, yet vulnerable. The adoption of defenses for it is still under development \cite{Narayan2021Swivel, johnson2021} and has a low pace.
     
     \item \emph{Software monoculture phenomenon:}  \wasm is evolving further web browsers as a technology to support Edge-Cloud computing platforms.
-    The Edge-Cloud computing model is based on replicating the same binary along with all computing nodes in a worldwide scale. Therefore, potential vulnerabilities are spread highlighting a clear monoculture phenomenon \cite{Harrand1650630}. 
+    The Edge-Cloud computing model is based on replicating the same binary along with all computing nodes in a worldwide scale. Therefore, potential vulnerabilities are spread, highlighting a clear monoculture phenomenon \cite{Harrand1650630}. 
 
-    \item \emph{Lack of Software Diversification for \wasm}:  Software Diversification has demonstrated to provide protection for known and yet-unknown vulnerabilities. Yet, only one software diversity approach has been applied to the context of \wasm. To the best of our knowledge, the closest diversification work involving \wasm is the work of Romano \etal \cite{wobfuscator}.
+    \item \emph{Lack of Software Diversification for \wasm}:  Software Diversification has demonstrated to provide protection for known and yet-unknown vulnerabilities. Yet, only one software diversity approach has been applied to the context of \wasm \cite{wobfuscator}. 
     Moreover, as we illustrate in \autoref{table:sota:comparison}, the existing works for Software Diversification do not contribute directly to \wasm.
     
-    \item \emph{Lack of research on MVE for \wasm:} 
-    Researching on MVE in a distributed setting like the Edge has been less researched. Only Voulimeneas \etal \cite{voulimeneas2021dmvx} recently proposed a multivariant execution system by parallelizing the execution of the variants in different machines for the sake of efficiency. 
+    \item \emph{Lack of research on MVE for \wasm:} \wasm has a growing adoption for Edge platforms. However, researching on MVE in a distributed setting like the Edge has been less researched. Only Voulimeneas \etal \cite{voulimeneas2021dmvx} recently proposed a multivariant execution system by parallelizing the execution of the variants in different machines for the sake of efficiency. This work 
+
+     % 
     
     \item \emph{Porting current contributions:} 
     The preexisting works based on the LLVM pipeline cannot be extended to Wasm due to technical challenges. The main reason is that previous works contribute to LLVM versions released before the inclusion of Wasm as an LLVM architecture. 
