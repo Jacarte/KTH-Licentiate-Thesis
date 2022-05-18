@@ -14,7 +14,8 @@
         "*.lot": true,
         "Lic.log": true,
         "*.synctex.gz": true,
-        "*.toc": true
+        "*.toc": true,
+        "chapter_*": true
     },
     "explorerExclude.backup": null,
     "workbench.colorCustomizations": {

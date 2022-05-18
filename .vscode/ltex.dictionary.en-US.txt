@@ -16,8 +16,6 @@ fuzzers
 Fuzzers
 fuzzer
 standarization
-standarizes
-Bytecode
-bitcode
-bytecode
-toolchain
+Diversifier
+Souper
+entrypoint

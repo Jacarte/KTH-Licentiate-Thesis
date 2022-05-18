@@ -16,9 +16,8 @@ LLVM is compound of three main components \cite{llvmofficialweb}. First, the fro
 The global workflow in \autoref{diagrams:generic} starts by receiving source code. Then, the LLVM frontend transforms it into LLVM IR representation \step{1}. We alter the LLVM pipeline that compiles source code to Wasm, with the introduction of a Diversifier component.  
 % Our diversifier and first contribution
 The diversifier generates LLVM IR variants from of the output of the frontend \step{2}. 
-The LLVM IR variants are inputs for our customized Wasm  backend. 
-CROW creates \wasm program variants out of a source code program \step{3}. 
-In addition, an orthogonal contribution comes from the generation of LLVM IR variants at Step~\step{2}. MEWE  \cite{MEWE}, merges and creates multivariant binaries to provide MVE for \wasm \step{4}. 
+The LLVM IR variants are inputs for our customized Wasm  backend. The Diversifier and the custom Wasm LLVM backend compose CROW, which creates \wasm program variants out of a source code program \step{3}. 
+In addition, an orthogonal tool comes from the generation of LLVM IR variants at Step~\step{2}. MEWE  \cite{MEWE}, merges and creates multivariant binaries to provide MVE for \wasm \step{4}. 
 %In \autoref{section:mewe} we describe MEWE in details.
 
 %Our first technical contribution, CROW  \cite{CROW}, includes the implementation of the diversifier for LLVM and the customized \wasm backend. 
