@@ -20,6 +20,13 @@ Harrand,N. (2022).
 \newblock PhD thesis, KTH, Software and Computer systems, SCS.
 \newblock QCR 20220413.
 
+\bibitem[Bhansali et~al., 2022]{10.1145/3507657.3528560}
+Bhansali,S., Aris,A., Acar,A., Oz,H., and Uluagac,A.~S. (2022).
+\newblock A first look at code obfuscation for webassembly.
+\newblock In {\em Proceedings of the 15th ACM Conference on Security and
+  Privacy in Wireless and Mobile Networks}, WiSec '22, page 140–145, New
+  York, NY, USA. Association for Computing Machinery.
+
 \bibitem[Voulimeneas et~al., 2021]{voulimeneas2021dmvx}
 Voulimeneas,A., Song,D., Larsen,P., Franz,M., and Volckaert,S. (2021).
 \newblock dmvx: Secure and efficient multi-variant execution in a distributed

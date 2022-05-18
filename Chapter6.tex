@@ -48,18 +48,18 @@ Therefore, our approaches can be used to harden unknown and yet-unknown vulnerab
 \label{future_work}
 
 % Smarter heuristic to prevent non-uniqueness
+Along with this dissertation we highlighted challenges and limitations. In all cases we proposed solutions, yet, some of them could be explored more in depth as a call for optimization. For example,
+as we mentioned in \autoref{results:rq1} our solution provides program variants, but remarkably lower unique variants as a consequence of the replacement combining process of CROW (\autoref{section:crow}). 
+Techniques relying on smart heuristics \citationneeded could help to increase the generation of unique variants by early discarding unsound combinations.
+On the other hand, constant inferring does not always finish in a successful replacement, due to the CROW's obliviousness for some computation models, such as memory operations. 
+A solution could be also to use heuristics to select which part of the code is more probable to become a constant assignment.
 
-% Better inferring for constants
+% Obfuscation
+As we mentioned in \autoref{chapter:technical}, another approach to provide software diversification for Wasm could be binary-to-binary (Wasm to Wasm) transformations \citationneeded. 
+This approach could be used to increase resilience in malware classifiers through the study of diversification as an obfuscation technique \cite{10.1145/3507657.3528560}.
+Obfuscation of Wasm code could be used to measure the accuracy of malware classifiers.
 
-% Wasm to Wasm solution
-
-% Impact study on side channels and port side channels
-
-One of our previous contributions trigger a CVE\footnote{\url{https://www.fastly.com/blog/defense-in-depth-stopping-a-wasm-compiler-bug-before-it-became-a-problem}} on the code generation component of wasmtime, highlighting that even when the language specification is meant to be secure, the underlying host implementation might not be. 
-
-\todo{Side channel reproduction and study of the impact of side-channel}
-
-\subsection{wasm-mutate future work}
-\todo{Obfuscation and data augmentation}
-
-
+By using a superdiversifier, the generated code transformations outperform hand-written transformations. An evidence of this is the CVE\footnote{\url{https://www.fastly.com/blog/defense-in-depth-stopping-a-wasm-compiler-bug-before-it-became-a-problem}} found in the code generation component of wasmtime. 
+We found this CVE during the implementation of MEWE with one of the generated variants.
+This highlighted the need for better strategies of stressing compilers, interpreters and validators of Wasm.
+CROW and MEWE can be included in fuzzing campaigns \citationneeded to provide better testing  and preventing vulnerabilities.

@@ -190,19 +190,19 @@
 }
 
 @misc{emscripten,
-url={{https://emscripten.org/}},
-year={{2014}},
-title={{Emscripten}},
-author={{Zakai and colleagues}},
-lastaccessed = {2022-16-05}
+  url          = {{https://emscripten.org/}},
+  year         = {{2014}},
+  title        = {{Emscripten}},
+  author       = {{Zakai and colleagues}},
+  lastaccessed = {2022-16-05}
 }
 
 
 @misc{asmjsweb,
-  url={{http://asmjs.org/spec/latest/}},
-  year={{2014}},
-  title={{asm.js}},
-  author={{Zakai and colleagues}},
+  url          = {{http://asmjs.org/spec/latest/}},
+  year         = {{2014}},
+  title        = {{asm.js}},
+  author       = {{Zakai and colleagues}},
   lastaccessed = {2022-16-05}
 }
 
@@ -796,7 +796,7 @@ lastaccessed = {2022-16-05}
   url     = {https://www.nitrd.gov/nitrdgroups/index.php?title=National_Cyber_Leap_Year},
   urldate = {2021-02-02},
   year    = {2021},
-  author = {{NSA}}
+  author  = {{NSA}}
 }
 
 @inproceedings{10.1145/3318216.3363338,
@@ -1425,3 +1425,21 @@ lastaccessed = {2022-16-05}
   keywords   = {program synthesis, superoptimization, SMT}
 }
 
+
+@inproceedings{10.1145/3507657.3528560,
+  author    = {Bhansali, Shrenik and Aris, Ahmet and Acar, Abbas and Oz, Harun and Uluagac, A. Selcuk},
+  title     = {A First Look at Code Obfuscation for WebAssembly},
+  year      = {2022},
+  isbn      = {9781450392167},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3507657.3528560},
+  doi       = {10.1145/3507657.3528560},
+  abstract  = {WebAssembly (Wasm) has seen a lot of attention lately as it spreads through the mobile computing domain and becomes the new standard for performance-oriented web development. It has diversified its uses far beyond just web applications by acting as an execution environment for mobile agents, containers for IoT devices, and enabling new serverless approaches for edge computing. Within the numerous uses of Wasm, not all of them are benign. With the rise of Wasm-based cryptojacking malware, analyzing Wasm applications has been a hot topic in the literature, resulting in numerous Wasm-based cryptojacking detection systems. Many of these methods rely on static analysis, which traditionally can be circumvented through obfuscation. However, the feasibility of the obfuscation techniques for Wasm programs has never been investigated thoroughly. In this paper, we address this gap and perform the first look at code obfuscation for Wasm. We apply numerous obfuscation techniques to Wasm programs, and test their effectiveness in producing a fully obfuscated Wasm program. Particularly, we obfuscate both benign Wasm-based web applications and cryptojacking malware instances and feed them into a state-of-the-art Wasm cryptojacking detector to see if current Wasm analysis methods can be subverted with obfuscation. Our analysis shows that obfuscation can be highly effective and can cause even a state-of-the-art detector to misclassify the obfuscated Wasm samples.},
+  booktitle = {Proceedings of the 15th ACM Conference on Security and Privacy in Wireless and Mobile Networks},
+  pages     = {140–145},
+  numpages  = {6},
+  keywords  = {webassembly, wasm, obfuscation, cryptojacking},
+  location  = {San Antonio, TX, USA},
+  series    = {WiSec '22}
+}
