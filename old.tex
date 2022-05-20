@@ -257,3 +257,41 @@ When we retarget Souper, to create variants, we recombine all code replacements,
 This allows us to create variants that are also better than the original program in terms of size and performance. Most of the Artificial Software Diversification  works generate variants that are as performant or iller than the original program. By using a superdiversifier, we could be able to generate variants that are better, in terms of performance, than the original program. This will give the option to developers to decide between performance and diversification without sacrificing the former. 
 
 On the other hand, when Souper finds a replacement, it is applied to all equal instructions in the original LLVM binary. In our implementation, we apply the transformation only to the instruction for which it was found in the first place. For example, if we find a replacement that is suitable for $N$ difference places in the original program, we generate $N$ different programs by applying the transformation in only one place at a time. Notice that this strategy provides a combinatorial explosion of program variants as soon as the number of replacements increases.
+
+
+\begin{comment}
+
+    \subsection{Multivariant Binary Execution at the Edge}
+    
+    \todo{Introduce as the use of MEWE}
+    
+    % What really is executed is the x86 code
+    When a WebAssembly binary is deployed on an edge platform, it is translated to machine code on the fly.
+    For our experiment, we deploy on the production edge nodes of Fastly. This edge computing platform uses Lucet, a native WebAssembly compiler and runtime, to compile and run the deployed Wasm  binary \footnote{\url{https://github.com/bytecodealliance/lucet}}.
+    Lucet generates x86 machine code and ensures that the generated machine code executes inside a secure sandbox, controlling memory isolation.
+    
+    
+    \begin{figure}
+    \centering
+      \includegraphics[width=1\linewidth]{diagrams/traces.pdf}
+      \caption{Top: an execution trace for the  \texttt{bin2base64} endpoint. Middle and bottom: two different execution traces for the multivariant \texttt{bin2base64}, exhibited by two different requests with exactly the same input.}
+      \label{http:workflow}
+    \end{figure}
+    
+    % How it works
+    \autoref{http:workflow} illustrates  the runtime behavior of the original and the multivariant binary,  when deployed on an Edge node.
+    The top most diagram illustrates the execution trace for the  original of the endpoint \texttt{bin2base64}.
+    When the HTTP request with the input \texttt{"Hello World!"} is received, it invokes functions $f1$, $f2$ followed by 27 recursive calls of function $f3$. Then, the endpoint sends the result \texttt{"0x000xccv0x10x00b3Jsx130x000x00 0x00xpopAHRvdGE="} of its base64 encoding in an HTTP response.
+    
+    The two diagrams at the bottom of \autoref{http:workflow} illustrate two executions traces observed through two different requests to the endpoint \texttt{bin2base64}.
+    In the first case, the request first triggers the invocation of dispatcher $d1$, which randomly decides to invoke the variant $f1_2$; then $f2$, which has not been diversified by \tool, is invoked; then the recursive invocations to $f3$ are replaced by iterations over the execution of dispatcher $d2$ followed by a random choice of variants of $f3$. Eventually the result is computed and sent back as an HTTP response. 
+    The second execution trace of the multivariant binary shows the same sequence of dispatcher and function calls as the previous trace, and also shows that for a different requests, the variants of $f1$ and $f3$ are different. 
+    
+    
+    The key insights from these figures are as follows. First, from a client's point of view, a request to the original or to a multivariant endpoint, is completely transparent. Clients send the same data, receive the same result, through the same protocol, in both cases.
+    Second, this figure shows that, at runtime, the execution paths for the same endpoint are different from one execution to another, and that this randomization process results from multiple random choices among function variants, made through the execution of the endpoint.
+    %From an attacker's perspective, this random selection of variants constantly moves the attack surface and is meant to render a potential vulnerability harder to reach or exploit \cite{davi2015isomeron, 10.5555/3091125.3091155, BEKIROGLU2021106601}.
+    
+    
+    \end{comment}
+    

@@ -3,8 +3,8 @@
 
 
 % The need for technical contributions...
-We aim to create artificial software diversity for \wasm, by providing tools to make the process easier and feasible for developers and researchers. As far as we know, there is no software that provides Artificial Software Diversification for WebAssembly. Therefore, we need to enunciate the engineering foundation to implement the strategies defined in \autoref{sota:sota}. Our implementations are part of the contributions of this thesis. Concretely, we provide two software artifacts that complement this work. Our approach generate \wasm program variants statically at compile time to provide randomization. Besides, it provides the tooling to generate MVE binaries for WebAssembly.
-In this chapter we describe our technical contributions. In \autoref{tech:generic} we enunciate how the current state-of-the-art lead us to contribute with Software Diversification through LLVM. We follow by describing our two contributions and their main technical insights in \autoref{section:crow} and \autoref{section:mewe}. Besides, we describe a new transformation strategy as part of our contributions. 
+We aim to create artificial software diversity for \wasm, by providing tools to make the process easier and feasible for developers and researchers. According to our exhaustive literature review, no software provides artificial software diversification for WebAssembly. Therefore, we need to enunciate the engineering foundation to implement the strategies defined in \autoref{sota:sota}. Our implementations are part of the contributions of this thesis. We provide two tools that complement this work: CROW and MEWE. First, the former tool generates \wasm program variants statically at compile time to provide randomization. The latter tool provides the tooling to generate MVE binaries for WebAssembly.
+In this chapter, we describe our technical contributions. In \autoref{tech:generic} we enunciate how the current state-of-the-art lead us to contribute with Software Diversification through LLVM. We follow by describing our two contributions and their main technical insights in \autoref{section:crow} and \autoref{section:mewe}. Besides, we describe a new transformation strategy as part of our contributions. 
 
 
 % What does it solve ?
@@ -41,9 +41,9 @@ Our software artifacts are licensed under the MIT License. The dependent source 
 
 \section*{Conclusions}
 
-This chapter discusses the technical details for the tools implemented for our main contributions.
+This chapter discusses the technical details of the tools implemented for our main contributions.
 We describe how CROW generates program variants for the sake of software diversification.
 We propose a global architecture for a generic LLVM superdiversifier
 We introduce a new mutation strategy that is a consequence of retargeting Souper as a superdiversifier.
 Besides, we dissect MEWE and how it creates an MVE system.
-In \autoref{chapter:method} we discuss the methodology we follow to evaluate how CROW and MEWE creates software diversification.
+In \autoref{chapter:method} we discuss the methodology we follow to evaluate how CROW and MEWE create software diversification.
