@@ -62,6 +62,7 @@ class CallGradient:
 
     def precalculate_path_quad(self):
 
+
         if self.x0 == self.x1:
             return self.precalculate_path_linear()
 
@@ -106,6 +107,13 @@ class CallGradient:
 
 
     def move(self, board, masks):
+        
+        if not self.moving:
+            #print("Not executed anymore", self.trigger)
+            #if self.trigger:
+                #print(self.trigger.moving)
+            return
+
         self.head += self.speed
 
         if self.head  <= self.delay:
@@ -123,7 +131,8 @@ class CallGradient:
         else:
             self.moving = False
             if self.trigger:
-                self.trigger()
+                self.trigger.moving = True
+                self.trigger.move(board, masks)
 
 class FunctionNode:
 
@@ -324,7 +333,7 @@ def load_map(path):
     return NODES_BY_CLUSTER, REVERSE
     
 
-def get_call_gradient(node1, node2, delay, color, trigger):
+def get_call_gradient(node1, node2, delay, color, trigger = None):
     direction = (
         node2.x - node1.x,
         node2.y - node1.y
@@ -360,15 +369,14 @@ if __name__ == "__main__":
         tracecolor =COLORS[T%len(COLORS)]
         last = None
         for f1, f2 in zip(trace, trace[1:]):
-            def unleash(n):
-                if n:
-                    n.moving = True
             # print(f1, f2)
-            gr = get_call_gradient(NODES_BY_ID[f1], NODES_BY_ID[f2], DELAY, tracecolor, trigger = lambda: unleash(last))
+            gr = get_call_gradient(NODES_BY_ID[f1], NODES_BY_ID[f2], 0 if last else DELAY, tracecolor)
             if not last:
                 gr.moving = True
             else:
                 gr.moving= False
+                last.trigger = gr
+
             gradients.append(gr)
             last = gr
             C += 100

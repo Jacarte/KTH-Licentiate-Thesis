@@ -50,12 +50,12 @@ Therefore, our approaches harden unknown and yet-unknown vulnerabilities.
 
 Along with this dissertation, we highlighted challenges and limitations. In all cases, we proposed solutions, yet, some of them could be explored more in-depth as a call for optimization. For example,
 as we mentioned in \autoref{results:rq1} our solution provides program variants but remarkably lower unique variants as a consequence of the replacement combining process of CROW (\autoref{section:crow}). 
-Techniques relying on intelligent heuristics \citationneeded could help increase the generation of unique variants by early discarding unsound combinations.
+Techniques relying on intelligent heuristics could help increase the generation of unique variants by early discarding unsound combinations.
 On the other hand, constant inferring does not always finish in a successful replacement due to the CROW's obliviousness to some computation models, such as memory operations. 
 A solution could also be to use heuristics to select which part of the code is more probable to become a constant assignment.
 
 % Obfuscation
-As we mentioned in \autoref{chapter:technical}, another approach to providing software diversification for Wasm could be binary to binary transformations \citationneeded. 
+As we mentioned in \autoref{chapter:technical}, another approach to providing software diversification for Wasm could be binary to binary transformations. 
 This approach could be used to increase resilience in malware classifiers through the study of diversification as an obfuscation technique \cite{10.1145/3507657.3528560}.
 Obfuscation of Wasm code could be used to measure the accuracy of malware classifiers.
 
