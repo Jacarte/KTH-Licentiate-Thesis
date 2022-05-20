@@ -9,24 +9,31 @@
 %\todo{Base paragraph by the papers}
 
 % WebAssembly as new technology
-The Web Consortium (W3C) standardized bytecode for the web environment with the \wasm (Wasm) language in 2015. Wasm allows browsers to execute existing programs or libraries that are written in other languages, such as C/C++ and Rust. It also claims that is better than JavaScript to perform compute-intensive tasks \cite{Haas_2017}. 
-Further browser environments, \wasm is a promising technology that evolves to be a new technology for Edge-Cloud computing platforms, resulting in bandwidth saving, execution improvement, and process-on-demand fast spawning \cite{9640153, wen2020wasmachine}. Despite being designed for sandbox and secure execution, it is not exempt of vulnerabilities \cite{Narayan2021Swivel, WebAssemblySecurity}.
-% Moving target defense
-For example, \wasm engines are vulnerable to speculative execution \cite{Narayan2021Swivel}, and C/C++ source code vulnerabilities are ported to Wasm binaries \cite{DeRoover2022}. 
+% Birth
+The Web Consortium (W3C) standarized bytecode for the web environment with the \wasm (Wasm) language in 2015. 
+% Evolution, history and importance
+Wasm allows web browsers to execute existing programs or libraries written in other languages, such as C/C++ and Rust.
+Beyond web environments, \wasm evolves to be part of Edge-Cloud computing platforms \cite{9640153, wen2020wasmachine}. 
+% Problems
+Despite being designed for sandboxing and secure execution, it is not exempt from vulnerabilities \cite{WebAssemblySecurity}.
+% Problem instantiation
+For example, \wasm engines are vulnerable to speculative execution \cite{Narayan2021Swivel}, and C/C++ source code vulnerabilities might be ported to Wasm binaries \cite{DeRoover2022}.  
 
 % MTD and the need for variants
 One strategy to hide such vulnerabilities is to move them in time as a preemptive solution.
-The goal is to make potential vulnerabilities available only in a time window.  
-This strategy is usually called Moving Target Defense (MTD). 
-MTD for software was first proposed as a collection of techniques that aim to improve the security of a system by constantly moving its vulnerable components \cite{MTDNationalCyberLaep, okhravi2013survey}. 
-MTD increases uncertainty for potential attackers since malicious users cannot hit what they cannot see. 
-Yet, one premise for implementing MTD is the need of at least two variants of the same program.
-By switching the deployment and execution between at least two variants, a potential attacker needs to make double efforts perform the same attack for both variants if they are different.
-The program variants are not always present, presenting a lack of natural diversity \cite{Harrand1650630}.
-Yet, program variants could be artifically created. 
+The goal is to make potential vulnerabilities available only in a time window. This makes potential attackers not hit what they cannot see.  
+This strategy is usually called Moving Target Defense (MTD) \cite{MTDNationalCyberLaep, okhravi2013survey}. 
+MTD for software is a collection of techniques that aim to improve the security of a system by constantly rotating its vulnerable programs from one variant to another. 
+A program variant should be different from the original program but functionally equivalent to it.
+By rotating the deployment and execution between the program variants, a potential attacker needs more efforts to perform the same attack for all variants \cite{sengupta}.
+Thus, one premise for effectively implementing MTD for a given program is the need for the program variants.
 
-Our exhaustive literature review shows a lack of software diversification approaches for hardening \wasm as a preemptive technique.
-With this work, we aim to generate artificial software diversification for WebAssembly.
+
+% SD
+In MTD, Software Diversification is the process of finding, creating, and deploying program variants.
+Usually, program variants could be found in the wild in a phenomenon called natural diversity \cite{Harrand1650630}. In the case of WebAssembly, since it is a novel technology, there is no natural diversity. Thus, effective MTD cannot be implemented due to the lack of program variants.
+This work proposes to create program variants for \wasm artificially. 
+Therefore, we aim to generate artificial software diversification for WebAssembly.
 To reach such a goal, we answer three research questions enunciated in the following.
 
 %Compared to the work of Harrand \etal \cite{Harrand1650630}, in WebAssembly, we cannot use preexisting and different programs to provide software diversification. In fact, according to the work of Hilbig \etal \cite{Hilbig2021AnES}, they filter out half of internet available \wasm corpus due to that filtered programs where artifically provided by one of our tools. 
@@ -79,7 +86,7 @@ In this section, we present our three research questions. Our research questions
 
 \section{Contributions}
 
-This thesis contributes through four milestones. First, as a theoretical contribution, we summarize the code transformations used to artifically generate software diversification through an exhaustive literature review. Consequently, we highlight the lack of diversification techniques for WebAssembly. In addition, we discuss the incorporation of \emph{constant Inferring} as a new transformation. Second, as a technical contribution, we provide two tools, CROW \cite{CROW} and MEWE \cite{MEWE}. Besides, we summarize the main challenges faced during their implementation. Third, we propose a methodology to quantitatively evaluate the impact of our tools, assessing the creation of artificial software diversification for WebAssembly. Fourth and final, we empirically demonstrate the impact on static and dynamic behavior for our diversification technique.
+This thesis contributes through four milestones. First, as a theoretical contribution, we summarize the code transformations used to artifically generate software diversification through an exhaustive literature review. Consequently, we highlight the lack of diversification techniques for WebAssembly. In addition, we discuss the incorporation of \emph{constant inferring} as a new transformation. Second, as a technical contribution, we provide two tools, CROW \cite{CROW} and MEWE \cite{MEWE}. Besides, we summarize the main challenges faced during their implementation. Third, we propose a methodology to quantitatively evaluate the impact of our tools, assessing the creation of artificial software diversification for WebAssembly. Fourth and final, we empirically demonstrate the impact of our technique by evaluating the static and dynamic behavior of the generated diversification.
 
 \section{Publications}
 
