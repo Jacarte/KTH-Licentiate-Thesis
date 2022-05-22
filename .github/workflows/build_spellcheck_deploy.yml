@@ -20,7 +20,7 @@ jobs:
 
           cp Lic.pdf Licnocontribs.pdf
         env:
-          ADDCONTRIB: False  
+          ADDCONTRIB: "False"  
 
       # If the build works, do the spell check
       - name: Split by chapter
@@ -34,7 +34,7 @@ jobs:
         run: |
           pdflatex -interaction=nonstopmode -shell-escape Lic.tex && bibtex Lic && pdflatex -shell-escape -interaction=nonstopmode Lic.tex || true
         env:
-          ADDCONTRIB: True 
+          ADDCONTRIB: "True" 
 
       - name: Deploy document
         run: |
