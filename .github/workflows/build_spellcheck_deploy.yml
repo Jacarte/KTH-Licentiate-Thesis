@@ -17,7 +17,10 @@ jobs:
       - name: Build document
         run: |
           pdflatex -interaction=nonstopmode -shell-escape Lic.tex && bibtex Lic && pdflatex -shell-escape -interaction=nonstopmode Lic.tex
-          
+          cp Lic.pdf Licnocontribs.pdf
+        env:
+          ADDCONTRIB: False  
+
       # If the build works, do the spell check
       - name: Split by chapter
         run: |
@@ -26,6 +29,13 @@ jobs:
 
           ls chapters
 
+      - name: Build document
+        run: |
+          pdflatex -interaction=nonstopmode -shell-escape Lic.tex && bibtex Lic && pdflatex -shell-escape -interaction=nonstopmode Lic.tex
+          cp Lic.pdf
+        env:
+          ADDCONTRIB: True 
+
       - name: Deploy document
         run: |
           
@@ -33,12 +43,14 @@ jobs:
           
           cp chapters/*.pdf /chapters
           ls /chapters
+          cp Licnocontribs.pdf /Licnocontribs.pdf
           cp Lic.pdf /Lic.pdf
 
           cd /
           git clone https://${{secrets.REPO_KEY2}}@github.com/Jacarte/jacarte.github.io jacartepage
           cd jacartepage
           cp /Lic.pdf assets/pdf/thesis/Lic.pdf
+          cp /Licnocontribs.pdf assets/pdf/thesis/Licnocontribs.pdf
           cp -r /chapters/* assets/pdf/thesis
 
           git config --global user.email "xppcoder@gmail.com"
