@@ -1,4 +1,4 @@
-\documentclass{kthesis}
+\documentclass[openany]{kthesis}
 % the used packages are just examples, you can use your preferred packages instead
 \input{packages.tex}
 
@@ -265,11 +265,8 @@
 \mainmatter
 \setcounter{secnumdepth}{3} % used for content layout
 
-%\input{Chapter1} % calls the separate document named Chapter1.tex
-%\chapter{State of the art}
-%\section{RQ1, generation}
-%\section{RQ2, assesment}
-%\section{RQN, usage}
+\part{Thesis}
+\clearpage
 
 \input{Chapter1}
 \input{Chapter2}
@@ -288,7 +285,7 @@
 
 
 %\addcontentsline{toc}{chapter}{Appended papers} % for template purposes
-%\input{Contributions}
+\input{Contributions}
 
 \printindex 
 
