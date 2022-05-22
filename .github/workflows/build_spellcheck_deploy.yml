@@ -33,7 +33,6 @@ jobs:
       - name: Build document
         run: |
           pdflatex -interaction=nonstopmode -shell-escape Lic.tex && bibtex Lic && pdflatex -shell-escape -interaction=nonstopmode Lic.tex || true
-          cp Lic.pdf
         env:
           ADDCONTRIB: True 
 
