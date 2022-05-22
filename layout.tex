@@ -1,0 +1,72 @@
+\definecolor{bluekth}{rgb}{0.16, 0.42, 0.705}
+
+% 0.16, 0.42, 0.705  107/255
+
+% chapter tiltes formatting
+\titleformat{\chapter}[display]
+  {\LARGE}
+  {\renewcommand{\thechapter}{{\color{gray}0}\arabic{chapter}}\hspace*{0.5em}
+  %\colorbox{blacm}
+  {{\bfseries\fontsize{50}{60}\selectfont
+  \thechapter
+    \parbox[c][1.2cm][c]{1cm}{%
+      \centering\textcolor{black}  {}}}}}
+  {-1ex}
+  {%\color{black}\titlerule
+  \vspace{-1.9ex}\filleft\MakeUppercase{#1}}
+  [\vspace{.0ex}
+  \color{black}
+  \titlerule
+  ]
+% chapter tiltes spacing
+\titlespacing*{\chapter}{0pt}{20pt}{50pt}
+
+% section tiltes formatting
+\titleformat{\section}
+  {\Large}{\MySecSquare\ \thesection}{1em}{#1}
+\titleformat{name=\section,numberless}
+  {\Large}{\MySecSquare}{1em}{#1}
+
+% subsection tiltes formatting
+\titleformat{\subsection}
+  {\Large}{\MySecSquare\ \thesubsection}{1em}{#1}
+\titleformat{name=\subsection,numberless}
+  {\Large}{\MySecSquare}{1em}{#1}
+
+
+% formatting for chapter entries in ToC  
+%\titlecontents{chapter}
+%  [1em]{}
+%  {\tiny\thecontentslabel{2.3em}}
+%  {\hspace*{-2.3em}}
+%  {\hfill\contentspage}
+  
+\titlecontents{chapter}[0pc]
+  {\addvspace{15pt}}%
+  {\color{doc!40}\Large\bfseries}
+  {\color{doc!40}\Large\bfseries}
+  {\hfill\large\contentspage}%
+
+% formatting for section entries in ToC  
+\titlecontents{section}
+  [7.0em]
+  {\addvspace{3pt}}%
+  {\large\contentslabel{2.3em}}
+  {\hspace*{-2.3em}}
+  {\titlerule*[1pc]{.}\contentspage}
+
+\titlecontents{subsection}
+  [10.0em]{}
+  {\large\contentslabel{3.3em}}
+  {\hspace*{-2.3em}}
+  {\titlerule*[1pc]{.}\contentspage}
+% Square to be used in itemize
+\newcommand\MySquare{%
+  \leavevmode\hbox to 1.2ex{\hss\vrule height .9ex width .7ex depth -.2ex\hss}}
+% Square to be used in section titles
+\newcommand\MySecSquare{%
+  \leavevmode\hbox to 1.2ex{\hss\vrule height 1.3ex width 1.1ex depth -.2ex\hss}}
+
+
+% First level of itemize uses a square
+\renewcommand\labelitemi{\MySquare}

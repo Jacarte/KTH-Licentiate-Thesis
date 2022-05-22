@@ -185,7 +185,7 @@ def load_from_traces(board, masks):
 
 
 
-    instrumented = data['bin2base64']['instrumented']
+    instrumented = data['crypto_aead_chacha20poly1305_ietf_decrypt_detached']['instrumented']
     pathsall = instrumented['paths']
     paths = []
 
@@ -242,8 +242,8 @@ def load_from_traces(board, masks):
 
     CLUSTERIDS = CLUSTERS.keys()
     CLUSTERIDS = list(CLUSTERIDS)
-    CUSTOMORDER = [0, 1, 2, 3, 4]
-    CLUSTERIDS = sorted(CLUSTERIDS, key =lambda x: CUSTOMORDER[x])
+    #CUSTOMORDER = [0, 1, 2, 3, 4]
+    #CLUSTERIDS = sorted(CLUSTERIDS, key =lambda x: CUSTOMORDER[x])
     # CLUSTERIDS sort, dispatchers before variants
     for clusterid in CLUSTERIDS:
         #CLUSTER_Y_POS_SIZE = int((HEIGHT-2*PADDING)/len(CLUSTERS[clusterid]))
@@ -255,7 +255,7 @@ def load_from_traces(board, masks):
             #print(node)
             if node.tpe == "DISPATCHER" or node.tpe == "ORIGINAL":
 
-                node.x = PADDING + CUSTOMORDER[clusterid]*CLUSTER_X_POS_SIZE
+                node.x = PADDING + clusterid*CLUSTER_X_POS_SIZE
                 node.y = CENTERY# PADDING + c*CLUSTER_Y_POS_SIZE
             else:
                 r = SPREAD# *len(CLUSTERS[clusterid]) # * math.sqrt(random.random())
@@ -263,7 +263,7 @@ def load_from_traces(board, masks):
                 rx = node.x + r * math.cos(theta)
                 yr = node.y + r * math.sin(theta)
 
-                node.x = PADDING + CUSTOMORDER[clusterid]*CLUSTER_X_POS_SIZE
+                node.x = PADDING + clusterid*CLUSTER_X_POS_SIZE
                 node.y = CENTERY + delta*c# PADDING + c*CLUSTER_Y_POS_SIZE
 
             NODES_BY_ID[node.id] = node
@@ -340,13 +340,13 @@ def get_call_gradient(node1, node2, delay, color, trigger = None):
     )
 
     # normalize
-    length = direction[0]*direction[0] + direction[1]*direction[1]
+    length = direction[0]*direction[0] + direction[1]*direction[1] + 1
     # print(length)
     length = math.sqrt(length)
     direction = (direction[0]/length, direction[1]/length)
 
     #print(direction)
-    return CallGradient(direction, color, speed=7, x=node1.x, y = node1.y, x0 = node1.x, x1 = node2.x, y0 = node1.y, y1 = node2.y, delay = delay, trigger = trigger)
+    return CallGradient(direction, color, speed=3, x=node1.x, y = node1.y, x0 = node1.x, x1 = node2.x, y0 = node1.y, y1 = node2.y, delay = delay, trigger = trigger)
 
 if __name__ == "__main__":
     board, masks = get_board()
