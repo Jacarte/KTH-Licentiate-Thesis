@@ -46,10 +46,6 @@ jobs:
       - name: Deploy document
         run: |
           
-          mkdir /chapters
-          
-          cp chapters/*.pdf /chapters
-          ls /chapters
           cp Licnocontribs.pdf /Licnocontribs.pdf
           cp Lic.pdf /Lic.pdf
 
@@ -58,8 +54,7 @@ jobs:
           cd jacartepage
           cp /Lic.pdf assets/pdf/thesis/Lic.pdf
           cp /Licnocontribs.pdf assets/pdf/thesis/Licnocontribs.pdf
-          cp -r /chapters/* assets/pdf/thesis
-
+          
           git config --global user.email "xppcoder@gmail.com"
           git config --global user.name "jacarte"
           git config --global credential.helper cache
