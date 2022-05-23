@@ -16,7 +16,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build document
         run: |
-          pdflatex -interaction=nonstopmode -shell-escape Lic.tex && bibtex Lic && pdflatex -shell-escape -interaction=nonstopmode Lic.tex || true
+          pdflatex -interaction=nonstopmode -shell-escape Lic.tex || true
+          sleep 5
+          bibtex Lic
+          sleep 5
+          pdflatex -shell-escape -interaction=nonstopmode Lic.tex || true
+          sleep 5
 
           cp Lic.pdf Licnocontribs.pdf
         env:
@@ -32,7 +37,12 @@ jobs:
 
       - name: Build document
         run: |
-          pdflatex -interaction=nonstopmode -shell-escape Lic.tex && bibtex Lic && pdflatex -shell-escape -interaction=nonstopmode Lic.tex || true
+          pdflatex -interaction=nonstopmode -shell-escape Lic.tex || true
+          sleep 5
+          bibtex Lic
+          sleep 5
+          pdflatex -shell-escape -interaction=nonstopmode Lic.tex || true
+          sleep 5
         env:
           ADDCONTRIB: "True" 
 
