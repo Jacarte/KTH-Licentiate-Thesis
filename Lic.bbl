@@ -66,6 +66,10 @@ Cabrera~Arteaga,J., Floros,O., Vera~Perez,O., Baudry,B., and Monperrus,M.
  (2021).
 \newblock Webassembly system interface.
 
+\bibitem[CVE, 2021]{CVE}
+ (2021).
+\newblock Stop a wasm compiler bug before it becomes a problem | fastly.
+
 \bibitem[Xu et~al., 2020]{xu2020merr}
 Xu,Y., Solihin,Y., and Shen,X. (2020).
 \newblock Merr: Improving security of persistent memory objects via efficient

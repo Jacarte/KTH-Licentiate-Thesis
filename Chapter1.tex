@@ -64,22 +64,26 @@ Consequently, millions of computer would execute different code even though they
 This strategy is called Software Diversification.
 % Monoculture and diversification motivation, 
 
-\section{Mitigating Software Monoculture with Software Diversification}
+\section{Software Diversification}
 
-Software Diversification is the process of finding, creating, and deploying program variants for a given original program \cite{okhravi2013survey}.
+Software Diversification is the process of finding, creating, and deploying program variants for a given original program \cite{okhravi2013survey} for the sake of security.
 Cohen \etal \cite{cohen1993operating} and Forrest \etal \cite{595185} pioneered this field. 
-They propose to produce variants of programs while preserving their functionalities with the goal of not being vulnerable to the same attacks.
+They propose to produce variants of programs while preserving their functionalities with the goal of not being vulnerable.
 Since then, transformations aiming at reducing the predictability of observable behavior of programs have been proposed. For example, works on this address proposed to diversify programs control flow \cite{davi2015isomeron}, instruction set \cite{barrantes2003randomized}, or the system calls they use \cite{Chew02mitigatingbuffer}. 
 Several of these transformations can be combined to produce less predictable variants.
-Each machine of a network can run a different variant to prevent them from being
-vulnerable to the same attack.
+Each computer's client can run a different variant to prevent them from being
+attacker with the same conditions.
 Previous works on software diversification demonstrated to remove vulnerabilities, but remarkably in all cases, it can be used as a preemptive solution.
-For example, if a vulnerability is present in one program variant, its discovery and dissemination will not affect other variants.
+For example, if a vulnerability is present in one program variant, discovering and disseminating it will not affect other variants.
+
+Moreover, software diversification can be used to stress execution hosts since each program variant executes a different part of the system. For example, during the implementation of our approaches a CVE \cite{CVE} was discovered in the compiler used by Fastly to provide Edge-Cloud computing.
+The CVE was discovered by deploying and executing one program variant created with our software diversification solution.
+The early discovery of this CVE prevented the exploitation of the whole platform.
 
 
 Software diversification has been widely researched, not being the case for JavaScript and \wasm.
-Only Romano \etal \cite{wobfuscator} proposed to intermix JavaScript and Wasm calls to provide obfuscation against code analysis. 
-The main reason for JavaScript is that software diversification solutions need to deal with the challenging properties of the language.
+In this field, only Romano \etal \cite{wobfuscator} proposed the intermixing JavaScript and Wasm function calls to provide obfuscation against code analysis. 
+In the case of JavaScript, it has been less researched because software diversification solutions need to deal with the challenging properties of the language.
 In one hand, the JavaScript engines perform Just-In-Time compilation, making software diversification unpredictable and in most of the cases not preserved \cite{STRAC}.
 On the other hand, the dynamic properties of the language and its lack of abstraction models for the memory and the stack make nearly impossible to apply traditional software transformations.
 Besides, software diversification usually comes with an overhead trade-off which is not desired for JavaScript. 
@@ -89,14 +93,14 @@ In the case of \wasm no software diversification solution has been proposed most
 
 \section{Artificial Software Diversification for \wasm}
 
-\wasm simplicity allows us to port code transformations proposed in previous works as a preemptive software diversification solution.
+WebAssembly's simplicity allows us to port code transformations proposed in previous works as a preemptive software diversification solution.
 We propose a novel approach to provide artificial software diversification for \wasm.
 In this thesis, we focus on \wasm because two main reasons. First,
 % Problems
 despite being designed for sandboxing and secure execution, it is not exempt from vulnerabilities \cite{WebAssemblySecurity}.
 % Problem instantiation
 For example, \wasm engines are vulnerable to speculative execution \cite{Narayan2021Swivel}, and C/C++ source code vulnerabilities might be ported to Wasm binaries \cite{DeRoover2022}.  
-Several approaches to harden \wasm appeared in the recent years \citationneeded, still the development of \wasm is mature and the adoption of proposed techniques are not implemented in time as new vulnerabilities are discovered.
+Remarkably, several approaches to harden \wasm recently appeared \cite{johnson2021}, still the adoption of proposed defenses are not implemented in time as new vulnerabilities are discovered.
 Second, \wasm is having a growing adoption in server side execution and Edge-Cloud computing platforms.
 This latter opens the door for vulnerabilities further web browsers.
 
@@ -173,7 +177,6 @@ Our research questions are formulated by merging our publications and experience
 
 This thesis contributes through four milestones. First, as a theoretical contribution, we summarize the code transformations used to artifically generate software diversification through an exhaustive literature review. Consequently, we highlight the lack of diversification techniques for WebAssembly.  Second, as a technical contribution, we provide two tools, CROW \cite{CROW} and MEWE \cite{MEWE}. Besides, we summarize the main challenges faced during their implementation. In addition, we discuss the incorporation of \emph{constant inferring} as a new transformation. Third, we propose a methodology to quantitatively evaluate the impact of our tools, assessing the creation of artificial software diversification for WebAssembly. Fourth and final, we empirically demonstrate the impact of our technique by evaluating the static and dynamic behavior of the generated diversification.
 
-\pagebreak
 \section{Publications}
 
 This work is based on the following publications:
