@@ -79,7 +79,10 @@ class CallGradient:
         if self.y1 < self.y0:
             mid[1] = self.y0 - mid[1]
         else:
-            mid[1] = self.y0 + mid[1]    
+            if self.y1 == self.y0:
+                mid[1] == 10 - random.randint(0, 20)
+            else:
+                mid[1] = self.y0 + mid[1]    
         
         xs = [self.x0, mid[0],  self.x1]
         ys = [self.y0, mid[1],  self.y1]
@@ -268,7 +271,7 @@ def load_from_traces(board, masks):
         c = 1
         print(clusterid, len(CLUSTERS[clusterid]))
         print(CLUSTERS[clusterid][0].id)
-        delta = 20
+        delta = 10
         for node in CLUSTERS[clusterid]:
             #print(node)
             if node.tpe == "DISPATCHER" or node.tpe == "ORIGINAL":
@@ -287,7 +290,7 @@ def load_from_traces(board, masks):
             NODES_BY_ID[node.id] = node
             c += 1
             if c >= len(CLUSTERS[clusterid])/2:
-                delta = -20
+                delta = -10
                 c = 1
 
 
