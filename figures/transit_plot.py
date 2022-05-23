@@ -6,16 +6,17 @@ import re
 import math
 import random
 import numpy as np
+from scipy import interpolate
 
-WIDTH=1200
-HEIGHT=1500
-PADDING=100
-SPREAD = 50
+WIDTH=1700
+HEIGHT=1700
+PADDING=200
+SPREAD = 30
 
 # Colors
 BACKGROUND_COLOR=(0,0,0, 255) # black, alpha
 FOREGROUND_COLOR=(255,255,255,255) # white
-DECAY_FACTOR = 1.5
+DECAY_FACTOR = 1.2
 COLORS = [
     FOREGROUND_COLOR,
     (255,0,0,255),
@@ -48,7 +49,7 @@ class CallGradient:
         self.color = color
         self.trigger = trigger
 
-        self.path = self.precalculate_path_linear()
+        self.path = self.precalculate_path_quad()
 
     def precalculate_path_linear(self):
 
@@ -62,33 +63,50 @@ class CallGradient:
 
     def precalculate_path_quad(self):
 
+        
+        mid = [
+            random.randint(0, abs(self.x0 - self.x1)),
+            random.randint(0, abs(self.y0 - self.y1))
+        ]
 
-        if self.x0 == self.x1:
-            return self.precalculate_path_linear()
+        DIRECTION = 1
+        if self.x1 < self.x0:
+            mid[0] = self.x0 - mid[0]
+            DIRECTION = -1
+        else:
+            mid[0] = self.x0 + mid[0]    
 
-        path = []
+        if self.y1 < self.y0:
+            mid[1] = self.y0 - mid[1]
+        else:
+            mid[1] = self.y0 + mid[1]    
+        
+        xs = [self.x0, mid[0],  self.x1]
+        ys = [self.y0, mid[1],  self.y1]
 
-        print(self.y0 , self.y1, np.arange(self.y0 - 10, self.y1 + 10, abs((self.y1 - self.y0 - 20))/10))
-        randomthird = (
-            random.choice(np.arange(min(self.x0, self.x1), max(self.x0, self.x1), abs((self.x1 - self.x0))/10)) ,
-            random.choice(np.arange(min(self.y0, self.y1) - 10, max(self.y0, self.y1) + 10, abs((self.y1 - self.y0 - 20))/10)),
-        )
+        if DIRECTION == -1:
+            xs = xs[::-1]
+            ys = ys[::-1]
 
-        self.x2 = self.x1
-        self.y2 = self.y1
-
-        self.x1 = randomthird[0]
-        self.y1 = randomthird[1]
-
-        for x in range(int(self.x0), int(self.x1)):
+        try:
+            print(len(xs), len(ys))
+            paths = interpolate.splrep(xs, ys,  k=1)
             
-            ny = ((x - self.x0)**2)/((self.x0 - self.x1)*(self.x0 - self.x2))*self.y0
-            ny += ((x - self.x1)**2)/((self.x1 - self.x0)*(self.x1 - self.x2))*self.y1
-            ny += ((x - self.x2)**2)/((self.x2 - self.x0)*(self.x2 - self.x1))*self.y2
+            x2 = np.linspace(xs[0], xs[-1], 200)
+            y2 = interpolate.splev(x2, paths)
+            #print(y2)
+            paths= [ (x, y) for x, y in zip(x2, y2) ]
 
-            path.append((x, ny))
-
-        return path
+            if DIRECTION == -1:
+                paths = paths[::-1]
+            
+            #print(paths, self.x0, self.y0, self.x1, self.y1)
+        except Exception as e:
+            print(e, self.x1 < self.x0)
+            print(mid, self.x0, self.x1, self.y0, self.y1)
+            paths = self.precalculate_path_linear()
+        # exit(1)
+        return paths
 
     @staticmethod
     def draw_thick(x, y, board, masks, color, rad=2):
@@ -185,7 +203,7 @@ def load_from_traces(board, masks):
 
 
 
-    instrumented = data['crypto_aead_chacha20poly1305_ietf_decrypt_detached']['instrumented']
+    instrumented = data['crypto_core_ed25519_scalar_random']['instrumented']
     pathsall = instrumented['paths']
     paths = []
 
