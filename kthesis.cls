@@ -149,6 +149,9 @@
     \vfill
     \normalsize\mdseries\thesubtitle\par
     \vfill
+
+    \includegraphics[width=4.5in]{cover/intro.png}
+
     \large\MakeUppercase{\theauthor}\par
   }\par
   \vfill\noindent

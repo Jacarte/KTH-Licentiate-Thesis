@@ -8,15 +8,15 @@ import random
 import numpy as np
 from scipy import interpolate
 
-WIDTH=1700
-HEIGHT=1700
+WIDTH=2000
+HEIGHT=2000
 PADDING=200
-SPREAD = 30
+SPREAD = 25
 
 # Colors
-BACKGROUND_COLOR=(0,0,0, 255) # black, alpha
-FOREGROUND_COLOR=(255,255,255,255) # white
-DECAY_FACTOR = 1.2
+BACKGROUND_COLOR=(255,255,255, 255) # black, alpha
+FOREGROUND_COLOR=(0,0,0,255) # white
+DECAY_FACTOR = 0.1
 COLORS = [
     FOREGROUND_COLOR,
     (255,0,0,255),
@@ -64,9 +64,10 @@ class CallGradient:
     def precalculate_path_quad(self):
 
         
+        #print(self.x0, self.x1, self.y0, self.y1)
         mid = [
-            random.randint(0, abs(self.x0 - self.x1)),
-            random.randint(0, abs(self.y0 - self.y1))
+            random.randint(0, abs(int(self.x0) - int(self.x1))),
+            random.randint(0, abs(int(self.y0) - int(self.y1)))
         ]
 
         DIRECTION = 1
@@ -80,7 +81,7 @@ class CallGradient:
             mid[1] = self.y0 - mid[1]
         else:
             if self.y1 == self.y0:
-                mid[1] == 10 - random.randint(0, 20)
+                mid[1] == self.y0 + 2*(0.5 - random.random())
             else:
                 mid[1] = self.y0 + mid[1]    
         
@@ -92,8 +93,8 @@ class CallGradient:
             ys = ys[::-1]
 
         try:
-            print(len(xs), len(ys))
-            paths = interpolate.splrep(xs, ys,  k=1)
+            #print(len(xs), len(ys))
+            paths = interpolate.splrep(xs, ys,  k=2)
             
             x2 = np.linspace(xs[0], xs[-1], 200)
             y2 = interpolate.splev(x2, paths)
@@ -105,8 +106,8 @@ class CallGradient:
             
             #print(paths, self.x0, self.y0, self.x1, self.y1)
         except Exception as e:
-            print(e, self.x1 < self.x0)
-            print(mid, self.x0, self.x1, self.y0, self.y1)
+            #print(e, self.x1 < self.x0)
+            #print(mid, self.x0, self.x1, self.y0, self.y1)
             paths = self.precalculate_path_linear()
         # exit(1)
         return paths
@@ -148,7 +149,7 @@ class CallGradient:
             current = self.path[self.head - self.delay]
 
             x, y = current
-            CallGradient.draw_thick(x, y, board, masks, self.color, rad = 2)
+            CallGradient.draw_thick(x, y, board, masks, self.color, rad = 6)
         else:
             self.moving = False
             if self.trigger:
@@ -175,8 +176,8 @@ class FunctionNode:
             for i in np.arange(- self.rad, self.rad, 0.5):
                 # if is inside circle
                 if i*i + j*j <= self.rad * self.rad:
-                    if i + self.x >= 0 and i + self.x <= HEIGHT:
-                        if  j + self.y >= 0 and  j + self.y <= WIDTH:
+                    if i + self.x < WIDTH and j + self.y < HEIGHT:
+                        if i + self.x >= 0 and j + self.y >= 0:
                             data[int(i + self.x), int(j + self.y)] = self.color
                             masks[int(i + self.x)][int(j + self.y)] = 1
 
@@ -187,7 +188,12 @@ def decay(board, maskmap):
     for i in range(WIDTH):
         for j in range(HEIGHT):
             if maskmap[i][j]:
-                data[i, j] = tuple([int(c/DECAY_FACTOR) for c in data[i, j]])
+                data[i, j] = (
+                    int(((1-DECAY_FACTOR)*data[i,j][0] + DECAY_FACTOR*BACKGROUND_COLOR[0])),
+                    int(((1-DECAY_FACTOR)*data[i,j][1] + DECAY_FACTOR*BACKGROUND_COLOR[1])),
+                    int(((1-DECAY_FACTOR)*data[i,j][2] + DECAY_FACTOR*BACKGROUND_COLOR[2])),
+                    255
+                )
                 if data[i, j] == 0:
                     maskmap[i][j] = 0
 
@@ -245,7 +251,7 @@ def load_from_traces(board, masks):
             for name, nodeid, raw, tpe in NODES_IN_CLUSTERS[mx]['nodes']:
                 #print(name)
                 if nodeid not in uniqueids:
-                    node = FunctionNode(nodeid, clusterid,tpe, 4, color=color_by_type(tpe), x = 0, y = 0)
+                    node = FunctionNode(nodeid, clusterid,tpe, 13, color=color_by_type(tpe), x = 0, y = 0)
 
                     if clusterid not in CLUSTERS:
                         CLUSTERS[clusterid] = []
@@ -256,7 +262,7 @@ def load_from_traces(board, masks):
 
     CLUSTER_X_POS_SIZE = int((WIDTH - 2*PADDING)   / len(CLUSTERS))   
     
-    print(CLUSTERS.keys(), REAL_ID, VISITED)
+    #print(CLUSTERS.keys(), REAL_ID, VISITED)
 
     NODES_BY_ID = {}
     CENTERY = HEIGHT/2
@@ -270,8 +276,8 @@ def load_from_traces(board, masks):
         #CLUSTER_Y_POS_SIZE = int((HEIGHT-2*PADDING)/len(CLUSTERS[clusterid]))
         c = 1
         print(clusterid, len(CLUSTERS[clusterid]))
-        print(CLUSTERS[clusterid][0].id)
-        delta = 10
+        #print(CLUSTERS[clusterid][0].id)
+        delta = 7
         for node in CLUSTERS[clusterid]:
             #print(node)
             if node.tpe == "DISPATCHER" or node.tpe == "ORIGINAL":
@@ -279,31 +285,33 @@ def load_from_traces(board, masks):
                 node.x = PADDING + clusterid*CLUSTER_X_POS_SIZE
                 node.y = CENTERY# PADDING + c*CLUSTER_Y_POS_SIZE
             else:
-                r = SPREAD# *len(CLUSTERS[clusterid]) # * math.sqrt(random.random())
+                r = 80 + SPREAD * math.sqrt(random.random())
                 theta = random.random() * 2 * math.pi
                 rx = node.x + r * math.cos(theta)
                 yr = node.y + r * math.sin(theta)
 
-                node.x = PADDING + clusterid*CLUSTER_X_POS_SIZE
-                node.y = CENTERY + delta*c# PADDING + c*CLUSTER_Y_POS_SIZE
+                node.x = PADDING + clusterid*CLUSTER_X_POS_SIZE + rx
+                node.y = CENTERY + delta*c + yr# PADDING + c*CLUSTER_Y_POS_SIZE
+
+                print(node.x, node.y)
 
             NODES_BY_ID[node.id] = node
             c += 1
             if c >= len(CLUSTERS[clusterid])/2:
-                delta = -10
+                delta = -7
                 c = 1
 
 
     return CLUSTERS, paths, NODES_BY_ID
 
 def color_by_type(tpe):
-
+    #0.16, 0.42, 0.705  107/255
     if tpe == "DISPATCHER":
-        return (0,255,0,255)
+        return (int(255*0.72), 125,  125, 255)
     if tpe == "ORIGINAL":
-        return (255,255,0,255)
+        return (int(255*0.16), int(255*0.42), int(255*0.705), 255)
     if tpe == "VARIANT":
-        return (120,120,120,255)
+        return (int(255*0.16), int(255*0.42), int(255*0.705), 100)
 
 def load_map(path):
     fcontent = open(path, 'r').readlines()
@@ -353,6 +361,14 @@ def load_map(path):
     open("test.json", 'w').write(json.dumps(NODES_BY_CLUSTER, indent=4))
     return NODES_BY_CLUSTER, REVERSE
     
+def invert(board):
+    
+    data = board.load()
+
+    for i in range(WIDTH):
+        for j in range(HEIGHT):
+                data[i, j] = tuple([int(255 - c) for c in data[i, j]])
+                
 
 def get_call_gradient(node1, node2, delay, color, trigger = None):
     direction = (
@@ -438,4 +454,6 @@ if __name__ == "__main__":
             for clusterid in nodes.keys():
                 for node in nodes[clusterid]:
                     node.draw(board, masks)
+
+
             board.save(f"out/img{i:03d}.png")
