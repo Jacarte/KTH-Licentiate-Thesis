@@ -7,7 +7,6 @@
 The first web browser, Nexus \cite{nexus}, appeared in 1990.
 At that moment, web browsing was only about retrieving and showing small and static HTML web pages, \ie potential users read the content of  pages without interactions further requesting a specific page.
 The growing of computing power of devices, the spread of the internet and the need for more interaction and experiences for users encourages the idea of executing code along with web pages.
-For instance, if a user has a web page loaded on her browser and her internet service provider goes down, she is still able to interact with the web pages already loaded on her browser without noticing the lack of internet.
 The Netscape browser makes possible the execution of code in the client side with the introduction of the JavaScript language in 1995.
 Remarkably, JavaScript is supported in all browsers since Netscape.
 Nowadays, the majority of the web pages include not only HTML, they also include JavaScript code that is executed in client computers.
@@ -15,7 +14,7 @@ The web browser is in charge of interpreting JavaScript in the user machine.
 During the past decades, web browsers become JavaScript language virtual machines, virtually evolving as operating systems that can run full-fledge applications, like video and audio players, animation creators and PDF document renderers such as the one showing this document.
 
 % Javascript problems
-JavaScript is currently the most used scripting language in all modern web browsers to allow client-side scripting. 
+JavaScript is currently the most used scripting language in all modern web browser. 
 However, JavaScript faces several limitations related to the characteristics of the language. For example, any JavaScript engine requires the parsing and the recompilation of the JavaScript code which implies a significant overhead.
 On the other hand, JavaScript faces security issues \cite{10.1145/1190216.1190252}.
 Because of these problems, the Web Consortium (W3C) standarized bytecode for the web environment with the \wasm (Wasm) language in 2015. 
@@ -101,7 +100,6 @@ Several approaches to harden \wasm appeared in the recent years \citationneeded,
 Second, \wasm is having a growing adoption in server side execution and Edge-Cloud computing platforms.
 This latter opens the door for vulnerabilities further web browsers.
 
-
 %This work proposes to create program variants for \wasm artificially. 
 %Therefore, we aim to generate artificial software diversification for WebAssembly.
 %To reach such a goal, we answer three research questions enunciated in the following.
@@ -147,7 +145,9 @@ This latter opens the door for vulnerabilities further web browsers.
 \section{Research questions}
 \label{intro:definition:rq}
 
-In this section, we present our three research questions. Our research questions are formulated by merging our publications and experiences during the creation of Software Diversification for WebAssembly. 
+Our work is conducted by three main research questions.
+In this section, we present them. 
+Our research questions are formulated by merging our publications and experiences during the creation of Software Diversification for WebAssembly. 
 
 \begin{enumerate}[label=\subscript{RQ}{{\arabic*}}]
     \item \textbf{\rqone}\\

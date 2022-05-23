@@ -28,13 +28,10 @@ jobs:
           ADDCONTRIB: "False"  
 
       # If the build works, do the spell check
-      - name: Split by chapter
-        run: |
+      #- name: Split by chapter
+      #  run: |
           
-          bash build_images/build_by_chapter.sh
-
-          ls chapters
-
+      
       - name: Build document
         run: |
           pdflatex -interaction=nonstopmode -shell-escape Lic.tex || true
