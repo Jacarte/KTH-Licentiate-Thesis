@@ -117,47 +117,51 @@ def process_pdf(pdffile, ignore):
                         #print(m.offsetInContext, m.offset)
                         print(m)
                         print()
-                        MAXLEVEL = max(data['level'])
-
+                        MAXLEVEL = 4
+                        found = False
                         for i in range(boxes):
-                            if data['level'][i] == MAXLEVEL: 
-                                offset += len(data['text'][i]) + 1
-                                if offset > m.offset:
-                                    # print(offset, i)
-                                    # This is the box
-                                    #i = i - 1
-                                    break
-                        (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
-                        # Annotate the entire page not roi
-                        globalx, globaly, _, _ = rect
-                        margin = 20
-                        cv2.rectangle(imagedata, (x + globalx - margin, y + globaly - margin), (x + w  + globalx + margin, y + h + globaly + margin), (255,36,12), 2)
-                        obj['places'].append(dict(
-                            x=x + globalx ,
-                            y =  y + globaly,
-                            w = w,
-                            h = h
-                        ))
+                            #if data['level'][i] >= MAXLEVEL: 
+                            offset += len(data['text'][i]) + 1
+                            if offset > m.offset:
+                                # print(offset, i)
+                                # This is the box
+                                #i = i - 1
+                                found = True
+                                break
+                        if found:
+                            (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
+                            # Annotate the entire page not roi
+                            globalx, globaly, _, _ = rect
+                            margin = 20
+                            cv2.rectangle(imagedata, (x + globalx - margin, y + globaly - margin), (x + w  + globalx + margin, y + h + globaly + margin), (255,36,12), 2)
+                            obj['places'].append(dict(
+                                x=x + globalx ,
+                                y =  y + globaly,
+                                w = w,
+                                h = h
+                            ))
                         obj['pagefile'] = relative
                         obj['pageannotatedfile'] = f"rois/annotated_{pagen}.png"
                         # Add a different color per rule and annotate the image
 
-                    ID += 1
-                    
-                    REPORTPAGE.append(obj)
+                        ID += 1
+                        REPORTPAGE.append(obj)
 
         if len(REPORTPAGE) > 0:
             cv2.imwrite(f"{OUT}/rois/annotated_{pagen}.png", imagedata)
 
             if name not in REPORT:
-                REPORT[relative] = []
+                REPORT[f"rois/annotated_{pagen}.png"] = []
 
-            REPORT[relative] += REPORTPAGE
+            REPORT[f"rois/annotated_{pagen}.png"] += REPORTPAGE
         else:
             os.remove(name)
 
         i += 1
         pagen += 1
+
+        if pagen == 15:
+            break
     open(f"{OUT}/report.json", "w").write(json.dumps(REPORT, indent=4))
 
 if __name__ == '__main__':
