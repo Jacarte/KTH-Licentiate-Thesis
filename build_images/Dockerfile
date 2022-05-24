@@ -10,7 +10,7 @@ RUN apt-get install -y python3 default-jre python3-pip
 # Ruby
 RUN apt-get install -y bundler ruby-full 
 # Encoding fixes
-RUN apt-get install -y locales poppler-utils >/dev/null
+RUN apt-get install -y locales poppler-utils tesseract-ocr >/dev/null
 
 # Spell checking tooling
 RUN mkdir /tools
