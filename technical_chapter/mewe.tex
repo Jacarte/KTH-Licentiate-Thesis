@@ -47,14 +47,14 @@ With the introduction of the dispatcher function,  \tool turns the original call
 \begin{figure}
     \centering
   \includegraphics[width=.8\linewidth]{diagrams/CFG.pdf}
-  \caption{Example of two static call graphs. At the top, the original call graph, at the bottom, the multivariant call graph, which includes nodes that represent function variants (in grey), dispatchers (in green), and original functions  (in yellow).
+  \caption{Example of two static call graphs. At the top, the original call graph, at the bottom, the multivariant call graph, which includes nodes that represent function variants (in gray), dispatchers (in green), and original functions  (in yellow).
 }
   \label{multivariant}
 \end{figure}
 
 % Instance of a multivariant module
 In \autoref{multivariant}, we show the original static call graph for and original program (top of the figure), as well as the multivariant call graph generated with \tool (bottom of the figure).
-The grey nodes represent function variants, the green nodes function dispatchers, and the yellow nodes are the original functions.
+The gray nodes represent function variants, the green nodes function dispatchers, and the yellow nodes are the original functions.
 The directed edges represent the possible calls.
 The original program includes three functions. \tool generates 43 variants for the first function, none for the second, and three for the third. 
 \tool introduces two dispatcher nodes for the first and third functions. Each dispatcher is connected to the corresponding function variants to invoke one variant randomly at runtime.

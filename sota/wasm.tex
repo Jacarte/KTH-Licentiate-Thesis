@@ -11,7 +11,7 @@
 %\subsection*{}
 
 % Javascript was first, and then more attempts.
-JavaScript is currently used in all modern web browsers to allow client-side scripting. However, due to the complexity of this language, its security flaws and to gain in performance, several alternatives appeared.  For example, Java applets were introduced on web pages late in the 90's to execute Java bytecode in the client side \cite{javaapplet}. Similarly, Microsoft made two attempts with ActiveX in 1996 \cite{activex}, and with Silverlight in 2007 \cite{silverlight}. All these attempts failed to persist or had low adoption, mainly due to security issues and the lack of consensus on the community of browser vendors.
+JavaScript is currently used in all modern web browsers to allow client-side scripting. However, due to the complexity of this language, its security flaws and to gain in performance, several alternatives appeared.  For example, Java applets were introduced on web pages late in the 90s to execute Java bytecode in the client side \cite{javaapplet}. Similarly, Microsoft made two attempts with ActiveX in 1996 \cite{activex}, and with Silverlight in 2007 \cite{silverlight}. All these attempts failed to persist or had low adoption, mainly due to security issues and the lack of consensus on the community of browser vendors.
 
 % asm.js and the demonstration of bad language patterns
 In 2014, Alon Zakai and colleagues proposed the Emscripten tool \cite{emscripten}. Emscripten used a strict subset of JavaScript, asm.js, to allow low-level code such as C to be compiled to JavaScript. Asm.js was first announced as an LLVM backend \cite{asmjsweb}. This approach came with the benefits of having all the ahead-of-time optimizations from LLVM, gaining in performance on browser clients \cite{asmjs} compared to standard JavaScript code. The main reason why asm.js is faster, is that it limits the language features to those that can be optimized in the LLVM pipeline. Besides, it removes the majority of the dynamic characteristics of the language, limiting it to numerical types, top-level functions, and one large array in the memory directly accessed as raw data. Since asm.js is a subset of JavaScript it was compatible with all engines at that moment. Asm.js demonstrated that client-code could be improved with the right language design and standarization.
@@ -36,7 +36,7 @@ Finally, the third step (Step \step{3}), includes the compilation and execution 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\linewidth]{diagrams/wasm_workflow.pdf}
-    \caption{WebAssemblybuilding, compilation in the host engine and execution. }
+    \caption{WebAssembly is built, then compiled by the host web browser and finally executed. }
     \label{diagrams:sota:wasm}
 \end{figure}
 

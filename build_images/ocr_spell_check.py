@@ -118,7 +118,6 @@ def process_pdf(pdffile, ignore):
                         print(m)
                         print()
                         MAXLEVEL = 4
-                        found = False
                         for i in range(boxes):
                             #if data['level'][i] >= MAXLEVEL: 
                             offset += len(data['text'][i]) + 1
@@ -126,20 +125,18 @@ def process_pdf(pdffile, ignore):
                                 # print(offset, i)
                                 # This is the box
                                 #i = i - 1
-                                found = True
                                 break
-                        if found:
-                            (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
-                            # Annotate the entire page not roi
-                            globalx, globaly, _, _ = rect
-                            margin = 20
-                            cv2.rectangle(imagedata, (x + globalx - margin, y + globaly - margin), (x + w  + globalx + margin, y + h + globaly + margin), (255,36,12), 2)
-                            obj['places'].append(dict(
-                                x=x + globalx ,
-                                y =  y + globaly,
-                                w = w,
-                                h = h
-                            ))
+                        (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
+                        # Annotate the entire page not roi
+                        globalx, globaly, _, _ = rect
+                        margin = 20
+                        cv2.rectangle(imagedata, (x + globalx - margin, y + globaly - margin), (x + w  + globalx + margin, y + h + globaly + margin), (255,36,12), 2)
+                        obj['places'].append(dict(
+                            x=x + globalx ,
+                            y =  y + globaly,
+                            w = w,
+                            h = h
+                        ))
                         obj['pagefile'] = relative
                         obj['pageannotatedfile'] = f"rois/annotated_{pagen}.png"
                         # Add a different color per rule and annotate the image
