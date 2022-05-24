@@ -1,1 +1,0 @@
-ffmpeg -f image2 -framerate 24 -i out/img%03d.png -loop -1 transit.gif
