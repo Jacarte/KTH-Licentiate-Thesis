@@ -8,30 +8,29 @@ The first web browser, Nexus \cite{nexus}, appeared in 1990.
 At that moment, web browsing was only about retrieving and showing small and static HTML web pages, \ie potential users read the content of pages without interactions further requesting a specific page.
 The growing computing power of devices, the spread of the internet, and the need for more interaction and experiences for users encourage the idea of executing code along with web pages.
 The Netscape browser made possible the execution of code on the client-side with the introduction of the JavaScript language in 1995.
-Remarkably, JavaScript has been supported in all browsers since Netscape.
-Nowadays, most of web pages include not only HTML, they also include JavaScript code that is executed in client computers.
+Remarkably, JavaScript has been supported in all browsers since its introduction.
+Nowadays, most of web pages include not only HTML, but also include JavaScript code that is executed in client computers.
 The web browser is in charge of interpreting JavaScript in the user machine.
 During the past decades, web browsers have become JavaScript language virtual machines, virtually evolving as operating systems that can run full-fledged applications, like video and audio players, animation creators, and PDF document renderers such as the one showing this document.
 
 % Javascript problems
 JavaScript is currently the most used scripting language in all modern web browsers. 
 However, JavaScript faces several limitations related to the characteristics of the language. For example, any JavaScript engine requires the parsing and the recompilation of the JavaScript code, which implies a significant overhead.
-On the other hand, JavaScript faces security issues \cite{10.1145/1190216.1190252}.
-Because of these problems, the Web Consortium (W3C) standarized bytecode for the web environment with the \wasm (Wasm) language in 2015. 
+Moreover, JavaScript faces security issues \cite{10.1145/1190216.1190252}.
+Because of these problems, the Web Consortium (W3C) standarized a bytecode for the web environment with the \wasm (Wasm) language in 2015. 
 \wasm becomes the fourth official language for the web with HTML, CSS, and JavaScript.
 
 % Describe WebAssembly
 Wasm is designed to be fast, portable, self-contained, and secure.
 All \wasm programs are compiled ahead-of-time from source languages such as C/C++ and Rust.
 \wasm is created by third-party compilers that might include optimizations like in the case of LLVM.  
-The \wasm language defines its Instruction Set Architecture \cite{wasm_spec} as an abstraction close to machine code instructions but agnostic to CPU architectures. Thus,  web browsers can use it to compile it target architectures rapidly. Therefore, \wasm outperforms JavaScript in the browser.
+The \wasm language defines its Instruction Set Architecture \cite{wasm_spec} as an abstraction close to machine code instructions but agnostic to CPU architectures. Thus,  web browsers can use it to rapidly compile to the target architectures. Therefore, \wasm outperforms JavaScript in the browser.
 
 
-Given the potential of \wasm, it evolves to be executed outside web browsers.
+Given the potential of \wasm, it has evolved to be executed outside web browsers.
 In 2019, the Bytecode Alliance \cite{bytecodealliance} proposed WebAssembly System Interface (WASI) \cite{WASI}. 
 WASI standarized the execution of \wasm outside the browser with a POSIX system interface platform.
-WASI standarizes the adoption of \wasm in heterogeneous platforms \cite{bryant2020webassembly}. 
-Because of WASI, \wasm evolves further web browsers also to be part of edge-cloud computing platforms \cite{9640153, wen2020wasmachine}
+WASI standarizes the adoption of \wasm in heterogeneous platforms \cite{bryant2020webassembly}, making it suitable for edge-cloud computing platforms \cite{9640153, wen2020wasmachine}
 WASI standarized a POSIX protocol to execute Wasm directly in the operating system. 
 To give an example of the importance of this evolution of \wasm, let us use the exact words of Solomon Hykes, the former CEO of docker: 
 
@@ -51,10 +50,10 @@ Web browsers and JavaScript have nearly three decades of development.
 Since then, web browsers have grown, nearly reaching 30 different implementations. 
 Nevertheless, only Firefox, Chrome, Safari, and Edge dominate the presence on user computers.
 This means that, for 5 arbitrary computers in a world of millions, at least two of them use the same web browser.
-This highlight a software monoculture problem.
+This highlights a software monoculture problem.
 On the other hand, nowadays, the serving of web pages, including JavaScript and WebAssembly code, is centralized and served through main sources.
 Therefore, millions of computers are executing the same code given the exact web browser implementation around the world.
-Vulnerabilities make an enormous impact on user computers because of this.
+Vulnerabilities make an enormous impact on user computers because of this, e.g., vulnerabilities are shared, and potential attackers can affect multiple devices using the same attack crafting.
 The software monoculture problem escalates if we consider the edge-cloud computing platforms and how they are adopting Wasm to provide services, as we previously mentioned.
 One might think that the solution is to adopt more web browser and interpreters implementations. 
 However, this is virtually impossible as 4 web browsers dominate the market, thus, a solution in this address is doomed to fail. 
@@ -69,20 +68,20 @@ This strategy is called Software Diversification.
 Software Diversification is the process of finding, creating, and deploying program variants for a given original program \cite{okhravi2013survey} for the sake of security.
 Cohen \etal \cite{cohen1993operating} and Forrest \etal \cite{595185} pioneered this field by proposing software diversification through code transformations. 
 They propose to produce variants of programs while preserving their functionalities to not be vulnerable.
-Since then, transformations aiming at reducing the predictability of observable behavior of programs have been proposed. For example, works on this address proposed to diversify programs control flow \cite{davi2015isomeron}, instruction set \cite{barrantes2003randomized}, or the system calls they use \cite{Chew02mitigatingbuffer}. 
+Since then, transformations aiming at reducing the predictability of observable behavior of programs have been proposed. For example, works on this direction proposed to diversify programs control flow \cite{davi2015isomeron}, instruction set \cite{barrantes2003randomized}, or the system calls they use \cite{Chew02mitigatingbuffer}. 
 Several of these transformations can be combined to produce less predictable variants.
 Previous works on software diversification demonstrated the removal of vulnerabilities, but remarkably in all cases, it can be used as a preemptive solution.
 For example, if a vulnerability is present in one program variant, discovering and disseminating it will not affect other variants.
 
-Moreover, software diversification can stress execution hosts since each program variant executes a different part of the system. For example, during the implementation of our approaches, a CVE \cite{CVE} was discovered in the compiler used by Fastly to provide edge-cloud computing.
-The CVE was discovered by deploying and executing one program variant created with our software diversification solution.
-The early discovery of this CVE prevented the exploitation of the whole platform.
+%Moreover, software diversification can stress execution hosts since each program variant executes a different part of the system. For example, during the implementation of our approaches, a CVE \cite{CVE} was discovered in the compiler used by Fastly to provide edge-cloud computing.
+%The CVE was discovered by deploying and executing one program variant created with our software diversification solution.
+%The early discovery of this CVE prevented the exploitation of the whole platform.
 
 
 Software diversification has been widely researched, not being the case for JavaScript and \wasm.
 In this field, only Romano \etal \cite{wobfuscator} proposed the intermixing JavaScript and Wasm function calls to provide obfuscation against code analysis. 
 In the case of JavaScript, it has been less researched because software diversification solutions need to deal with the challenging properties of the language.
-On the one hand, the JavaScript engines perform Just-In-Time compilation, making software diversification unpredictable and, in most cases, not preserved \cite{STRAC}.
+On the one hand, the JavaScript engines perform Just-In-Time compilation, making software diversification unpredictable and, in many cases, not preserved \cite{STRAC}.
 On the other hand, the dynamic properties of the language and its lack of abstraction models for the memory and the stack make it nearly impossible to apply traditional software transformations.
 Besides, software diversification usually comes with an overhead trade-off not desired for JavaScript. 
 In the case of \wasm no software diversification solution has been proposed, primarily due to its novelty.
@@ -114,7 +113,7 @@ Our research questions are formulated by merging our publications and experience
 
 \begin{enumerate}[label=\subscript{RQ}{{\arabic*}}]
     \item \textbf{\rqone}\\
-    With this research question, we quantitatively assess the static differences between program variants created by our approach. We answer this question at the population level, where a program population is the collection of one original program and its generated variants. We aim to investigate the code properties that increases(or diminishes) generated diversification at population level. 
+    With this research question, we quantitatively assess the static differences between program variants created by our approach. We answer this question at the population level, where a program population is the collection of one original program and its generated variants. We aim to investigate the code properties that increase(or diminish) generated diversification at population level. 
 
     \item \textbf{\rqtwo} \\
     With this research question, we complement $RQ_1$. We aim to investigate the impact on execution traces and execution times of the generated program variants.
@@ -134,14 +133,14 @@ Our research questions are formulated by merging our publications and experience
 
 \section{Contributions}
 
-This thesis contributes through four milestones. First, as a \emph{theoretical contribution}, we summarize the code transformations used to generate software diversification through an exhaustive literature review artificially. Consequently, we highlight the lack of diversification techniques for WebAssembly.
+This thesis contributes through four milestones. First, as a \emph{theoretical contribution}, we summarize the code transformations used to generate artificial software diversification through an exhaustive literature review. Consequently, we highlight the lack of diversification techniques for WebAssembly.
 Second, as a \emph{technical contribution}, we provide two tools, CROW \cite{CROW} and MEWE \cite{MEWE}. CROW creates 
 Wasm program variants by retargeting a superoptimizer \cite{Sasnauskas2017Souper:Superoptimizer}.
 MEWE merges several Wasm program variants in a multivariant execution schema \cite{okhravi2013survey}.
 In addition, we summarize the main challenges faced during their implementation, such as i) program properties that make it prone to generate more variants and ii) program properties that make the observable behavior of variants different. 
 Besides, we discuss the incorporation of \emph{constant inferring} as a new transformation. 
 Third, we propose a \emph{methodology} to quantitatively evaluate the impact of our tools, assessing the creation of artificial software diversification for WebAssembly. 
-Fourth and final, we \emph{empirically demonstrate} the impact of our technique by evaluating the static and dynamic behavior of the generated diversification.
+Fourth and final, we \emph{empirically demonstrate} the impact of our technique by evaluating the static and dynamic behavior of the generated diversity.
 Our results show that creating software diversification is feasible for \wasm. 
 Moreover, the created diversification remarkably affects the observable behavior of program variants in web browsers and standalone interpreters.
 
@@ -174,7 +173,7 @@ This work is based on the following publications:
 \pagebreak
 \section*{Thesis layout}
 
-This dissertation is organized in five chapters including this. \autoref{chapter:sota} presents background and the state of the art for WebAssembly and Artificial Software Diversification.
+This dissertation is organized in five chapters including this. \autoref{chapter:sota} presents the background and the state of the art for WebAssembly and Artificial Software Diversification.
 \autoref{chapter:technical} describes our technical contributions, faced challenges and engineering decisions carried out to implement our artifacts. \autoref{chapter:method} describes the methodology followed to answer the three main
-research questions driving this thesis. \autoref{chapter:results} details the main results of this work. \autoref{chapter:conclude} concludes and discuss future work. 
+research questions driving this thesis. \autoref{chapter:results} details the main results of this work. \autoref{chapter:conclude} concludes and discusses future work. 
 In addition, this dissertation contains the collection of research papers previously mentioned in this chapter.
