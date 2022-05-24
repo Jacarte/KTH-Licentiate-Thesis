@@ -523,12 +523,6 @@ Ryder,B.~G. (1979).
 \newblock Constructing the call graph of a program.
 \newblock {\em IEEE Transactions on Software Engineering}, (3):216--226.
 
-\bibitem[Needleman and Wunsch, 1970]{NEEDLEMAN1970443}
-Needleman,S.~B. and Wunsch,C.~D. (1970).
-\newblock A general method applicable to the search for similarities in the
-  amino acid sequence of two proteins.
-\newblock 48(3):443--453.
-
 \bibitem[Gnanadesikan and Wilk, 1968]{gnanadesikan1968probability}
 Gnanadesikan,R. and Wilk,M.~B. (1968).
 \newblock Probability plotting methods for the analysis of data.

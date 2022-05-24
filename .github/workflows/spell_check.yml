@@ -24,6 +24,8 @@ jobs:
           sleep 30
         env:
           ADDCONTRIB: "False"  
+          # Avoid widows, this helps the OCR for preventing the "CASING" error
+          NOWIDOW: "True"
 
       - name: Spell checking report
         run: |
@@ -37,10 +39,15 @@ jobs:
       - name: Annotate new pdf on a new branch
         run: |
           git config --global --add safe.directory /__w/KTH-Licentiate-Thesis/KTH-Licentiate-Thesis
+          
+          ls -R .
+          
+          cp -r /tools/rois ./rois
+          cp /tools/report.json ./report.json
+
           python3 /tools/create_html_report.py report.json index.html
 
           
-          cp -r /tools/rois ./rois
 
           git rm -rf . && git checkout -b gh-pages
           git add rois index.html report.json && git commit -m 'Spell check report' 

@@ -237,6 +237,16 @@
 \tolerance=2000 
 \emergencystretch=10pt
 \makeindex 
+
+
+\getenv[\NOWIDOW]{NOWIDOW}
+\ifthenelse{\equal{\NOWIDOW}{True}}%
+    {
+      \widowpenalties 1 10000
+      \raggedbottom
+    } % 
+    {} %
+
 \begin{document}
 %\addcontentsline{toc}{chapter}{Note: \\ It is not allowed to "copy and paste" from your papers to your dissertation.} % these are notes and they are not a part of the thesis
 
