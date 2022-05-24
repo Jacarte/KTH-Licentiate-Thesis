@@ -20,6 +20,13 @@ Harrand,N. (2022).
 \newblock PhD thesis, KTH, Software and Computer systems, SCS.
 \newblock QCR 20220413.
 
+\bibitem[Bhansali et~al., 2022]{10.1145/3507657.3528560}
+Bhansali,S., Aris,A., Acar,A., Oz,H., and Uluagac,A.~S. (2022).
+\newblock A first look at code obfuscation for webassembly.
+\newblock In {\em Proceedings of the 15th ACM Conference on Security and
+  Privacy in Wireless and Mobile Networks}, WiSec '22, page 140–145, New
+  York, NY, USA. Association for Computing Machinery.
+
 \bibitem[Voulimeneas et~al., 2021]{voulimeneas2021dmvx}
 Voulimeneas,A., Song,D., Larsen,P., Franz,M., and Volckaert,S. (2021).
 \newblock dmvx: Secure and efficient multi-variant execution in a distributed
@@ -51,6 +58,12 @@ Johnson,E., Thien,D., Alhessi,Y., Narayan,S., Brown,F., Lerner,S., McMullen,T.,
 \newblock Sfi safety for native-compiled wasm.
 \newblock {\em NDSS. Internet Society}.
 
+\bibitem[Hilbig et~al., 2021]{Hilbig2021AnES}
+Hilbig,A., Lehmann,D., and Pradel,M. (2021).
+\newblock An empirical study of real-world webassembly binaries: Security,
+  languages, use cases.
+\newblock {\em Proceedings of the Web Conference 2021}.
+
 \bibitem[{Cabrera Arteaga} et~al., 2021]{MEWE}
 {Cabrera Arteaga},J., {Laperdrix},P., {Monperrus},M., and {Baudry},B. (2021).
 \newblock {Multi-Variant Execution at the Edge}.
@@ -65,6 +78,10 @@ Cabrera~Arteaga,J., Floros,O., Vera~Perez,O., Baudry,B., and Monperrus,M.
 \bibitem[WAS, 2021]{WASI}
  (2021).
 \newblock Webassembly system interface.
+
+\bibitem[CVE, 2021]{CVE}
+ (2021).
+\newblock Stop a wasm compiler bug before it becomes a problem | fastly.
 
 \bibitem[Xu et~al., 2020]{xu2020merr}
 Xu,Y., Solihin,Y., and Shen,X. (2020).
@@ -83,6 +100,24 @@ Tsoupidi,R.~M., Lozano,R.~C., and Baudry,B. (2020).
 \newblock Constraint-based software diversification for efficient mitigation of
   code-reuse attacks.
 \newblock {\em ArXiv}, abs/2007.08955.
+
+\bibitem[Shillaker and Pietzuch, 2020]{shillaker2020faasm}
+Shillaker,S. and Pietzuch,P. (2020).
+\newblock Faasm: Lightweight isolation for efficient stateful serverless
+  computing.
+\newblock In {\em USENIX Annual Technical Conference}, pages 419--433.
+
+\bibitem[Runeson et~al., 2020]{Runeson2020}
+Runeson,P., Engstr{\"o}m,E., and Storey,M.-A. (2020).
+\newblock {\em The Design Science Paradigm as a Frame for Empirical Software
+  Engineering}, pages 127--147.
+\newblock Springer International Publishing, Cham.
+
+\bibitem[{Mendki}, 2020]{pMendkiServerless}
+{Mendki},P. (2020).
+\newblock Evaluating webassembly enabled serverless approach for edge
+  computing.
+\newblock In {\em 2020 IEEE Cloud Summit}, pages 161--166.
 
 \bibitem[Lehmann et~al., 2020]{usenixWasm2020}
 Lehmann,D., Kinder,J., and Pradel,M. (2020).
@@ -149,6 +184,11 @@ Aga,M.~T. and Austin,T. (2019).
   randomization.
 \newblock In {\em Proc. of CGO}, pages 26--36.
 
+\bibitem[Varda, 2018]{CloudflareWasm}
+Varda,K. (2018).
+\newblock Webassembly on cloudflare workers.
+\newblock Technical report.
+
 \bibitem[Silvanovich, 2018]{ChromeZero}
 Silvanovich,N. (2018).
 \newblock The problems and promise of webassembly.
@@ -159,6 +199,22 @@ Lu,K., Xu,M., Song,C., Kim,T., and Lee,W. (2018).
 \newblock Stopping memory disclosures via diversification and replicated
   execution.
 \newblock {\em IEEE Transactions on Dependable and Secure Computing}.
+
+\bibitem[Li et~al., 2018]{Li2018}
+Li,J., Zhao,B., and Zhang,C. (2018).
+\newblock {Fuzzing: a survey}.
+\newblock {\em Cybersecurity}, 1(1):1--13.
+
+\bibitem[Jacobsson and W{\aa}hsl{\'e}n, 2018]{1244493Jacobsson}
+Jacobsson,M. and W{\aa}hsl{\'e}n,J. (2018).
+\newblock Virtual machine execution for wearables based on webassembly.
+\newblock In {\em EAI International Conference on Body Area Networks}, pages
+  381--389. Springer, Cham.
+
+\bibitem[Hickey, 2018]{FastlyWasm}
+Hickey,P. (2018).
+\newblock Announcing lucet: Fastly’s native webassembly compiler and runtime.
+\newblock Technical report.
 
 \bibitem[Genkin et~al., 2018]{Genkin2018DrivebyKC}
 Genkin,D., Pachmanov,L., Tromer,E., and Yarom,Y. (2018).
@@ -214,6 +270,11 @@ Courouss{\'e},D., Barry,T., Robisson,B., Jaillon,P., Potin,O., and Lanet,J.-L.
   attacks.
 \newblock In {\em IFIP International Conference on Information Security Theory
   and Practice}, pages 136--152. Springer.
+
+\bibitem[Morgan and Morgan, 2015]{morgan2015web}
+Morgan,T.~D. and Morgan,J.~W. (2015).
+\newblock Web timing attacks made practical.
+\newblock {\em Black Hat}.
 
 \bibitem[Davi et~al., 2015]{davi2015isomeron}
 Davi,L., Liebchen,C., Sadeghi,A.-R., Snow,K.~Z., and Monrose,F. (2015).
@@ -314,6 +375,14 @@ Salamat,B., Jackson,T., Gal,A., and Franz,M. (2009).
 \newblock In {\em Proceedings of the 4th ACM European conference on Computer
   systems}, pages 33--46.
 
+\bibitem[Maia et~al., 2008]{Maia08usinga}
+Maia,M. D.~A., Sobreira,V., Paixão,K.~R., Amo,R. A.~D., and Silva,I.~R.
+  (2008).
+\newblock Using a sequence alignment algorithm to identify specific and common
+  code from execution traces.
+\newblock In {\em Proceedings of the 4th International Workshop on Program
+  Comprehension through Dynamic Analysis (PCODA}, pages 6--10.
+
 \bibitem[Jacob et~al., 2008]{jacob2008superdiversifier}
 Jacob,M., Jakubowski,M.~H., Naldurg,P., Saw,C. W.~N., and Venkatesan,R. (2008).
 \newblock The superdiversifier: Peephole individualization for software
@@ -386,6 +455,10 @@ El-Khalil,R. and Keromytis,A.~D. (2004).
   Communications Security}, pages 187--199, Berlin, Heidelberg. Springer Berlin
   Heidelberg.
 
+\bibitem[{LLVM}, 2003]{llvmofficialweb}
+{LLVM} ({2003}).
+\newblock { The LLVM Compiler Infrastructure }.
+
 \bibitem[Kc et~al., 2003]{Kc03}
 Kc,G.~S., Keromytis,A.~D., and Prevelakis,V. (2003).
 \newblock Countering code-injection attacks with instruction-set randomization.
@@ -435,10 +508,37 @@ Pettis,K. and Hansen,R.~C. (1990).
   Language Design and Implementation}, PLDI '90, page 16–27, New York, NY,
   USA. Association for Computing Machinery.
 
+\bibitem[Henry, 1987]{Massalin1987}
+Henry,M. (1987).
+\newblock {Superoptimizer: a look at the smallest program}.
+\newblock {\em ACM SIGARCH Computer Architecture News}, 15(5):122--126.
+
 \bibitem[Avizienis and Kelly, 1984]{1659219}
 Avizienis and Kelly (1984).
 \newblock Fault tolerance by design diversity: Concepts and experiments.
 \newblock {\em Computer}, 17(8):67--80.
+
+\bibitem[Ryder, 1979]{ryder1979}
+Ryder,B.~G. (1979).
+\newblock Constructing the call graph of a program.
+\newblock {\em IEEE Transactions on Software Engineering}, (3):216--226.
+
+\bibitem[Needleman and Wunsch, 1970]{NEEDLEMAN1970443}
+Needleman,S.~B. and Wunsch,C.~D. (1970).
+\newblock A general method applicable to the search for similarities in the
+  amino acid sequence of two proteins.
+\newblock 48(3):443--453.
+
+\bibitem[Gnanadesikan and Wilk, 1968]{gnanadesikan1968probability}
+Gnanadesikan,R. and Wilk,M.~B. (1968).
+\newblock Probability plotting methods for the analysis of data.
+\newblock {\em Biometrika}, 55(1):1--17.
+
+\bibitem[Mann and Whitney, 1947]{mann1947}
+Mann,H.~B. and Whitney,D.~R. (1947).
+\newblock On a test of whether one of two random variables is stochastically
+  larger than the other.
+\newblock {\em Ann. Math. Statist.}, 18(1):50--60.
 
 \bibitem[Cox, 1893]{cox1893cinderella}
 Cox,M.~R. (1893).
