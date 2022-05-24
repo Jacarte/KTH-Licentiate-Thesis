@@ -6,7 +6,7 @@
 % Overview
 This section describes MEWE \cite{MEWE}. 
 \tool synthesizes diversified function variants by using CROW.
-It then provides execution-path randomization in a Multivariant Execution (MVE.
+It then provides execution-path randomization in a Multivariant Execution (MVE).
 The tool generates application-level multivariant binaries without changing the operating system or \wasm runtime.
 MEWE creates an MVE by intermixing functions for which CROW generates variants, as step \step{2} in \autoref{diagrams:generic} shows.
 CROW generates each one of these variants with fine-grained diversification at the instruction level, applying the majority of the strategies discussed in \autoref{sota:sota} and \emph{constant inferring}. \tool adds a new mutation strategy. It inlines function variants when appropriate, resulting in call stack diversification at runtime.

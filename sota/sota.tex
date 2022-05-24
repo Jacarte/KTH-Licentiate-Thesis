@@ -181,7 +181,7 @@ Equivalence checking in Software Diversification aims to preserve the original f
 
 
 % Using the test suite and equivalence by construction
-The equivalence property is often guaranteed by construction. For example, in the case illustrated in \autoref{strategy:S1} for Cleemput \etal \cite{Cleemput2012} and Homescu \etal \cite{homescu2013profile}, their transformation strategies are designed to generate semantically equivalent program variants. However, this process is prone to developer errors, and further validation is needed. For example, the test suite of the original program can be used to check the variant. If the test suite passes for the program variant \cite{harrand2020java}, can be considered equivalent to the original. However, it is limited due to the need for a preexisting test suite. When the test suite does not exist, another technique is needed to check for equivalence.
+The equivalence property is often guaranteed by construction. For example, in the case illustrated in \autoref{strategy:S1} for Cleemput \etal \cite{Cleemput2012} and Homescu \etal \cite{homescu2013profile}, their transformation strategies are designed to generate semantically equivalent program variants. However, this process is prone to developer errors, and further validation is needed. For example, the test suite of the original program can be used to check the variant. If the test suite passes for the program variant \cite{harrand2020java}, then this variant can be considered equivalent to the original. However, this technique is limited due to the need for a preexisting test suite. When the test suite does not exist, another technique is needed to check for equivalence.
 
 % Automatic equivalence checking SMT
 If there is no test suite or the technique does not inherently implement the equivalence property, the previously mentioned works use theorem solvers (SMT solvers) \cite{SMT_solver} to prove equivalence. For SMT solvers, the main idea is to turn the two code variants into mathematical formulas. The SMT solver checks for counter-examples. When the SMT solver finds a counter-example, there exists an input for which the two mathematical formulas return a different output. The main limitation of this technique is that all algorithms cannot be translated to a mathematical formula, for example, loops. Yet, this technique tends to be the most used for no-branching-programs checking like basic block and peephole replacements \cite{SuperoptimizationScaling}.
@@ -210,7 +210,7 @@ Fuzzers randomly generate inputs that provide different observable behavior. If 
 
 \subsection{Usages of Software Diversity}
 
-After program variants are generated, they can be used in two main scenarios: Randomization or Multivariant Execution(MVE) \cite{jackson}. In \autoref{diagrams:sota:randomization} and \autoref{diagrams:sota:mve} we illustrate both scenarios. 
+After program variants are generated, they can be used in two main scenarios: Randomization or Multivariant Execution (MVE) \cite{jackson}. In \autoref{diagrams:sota:randomization} and \autoref{diagrams:sota:mve} we illustrate both scenarios. 
 
 
 
@@ -254,7 +254,7 @@ After program variants are generated, they can be used in two main scenarios: Ra
 
 El-Khalil and colleagues \cite{ElKhalil2004} propose to use a custom compiler to generate different binaries out of the compilation process. El-Khalil and colleagues modify a version of GCC 4.1 to separate a conventional stack into several component parts, called multistacks.
 On the same topic, Aga and colleagues \cite{aga2019smokestack} propose to generate program variants by randomizing its data layout in memory. Their approach makes each variant to operate the same data in memory with different memory offsets.
-Remarkably, the Polyverse company \footnote{\url{https://polyverse.com/}} materialize randomization at the commercial level in real life. They deliver a unique Linux distribution compilation for each of its clients by scrambling the Linux packages at the source code level.
+Remarkably, the Polyverse company\footnote{\url{https://polyverse.com/}} materialize randomization at the commercial level in real life. They deliver a unique Linux distribution compilation for each of its clients by scrambling the Linux packages at the source code level.
     
 % How
 Virtual machines and operating systems can be also randomized. On this topic, Kc \etal \cite{Kc03} create a unique mapping between artificial CPU instructions and real ones. Their approach makes possible the assignation of different variants to specific target clients. Similarly, Xu \etal \cite{xu2020merr} recompile the Linux Kernel to reduce the exposure time of persistent memory objects, increasing the frequency of address randomization.
@@ -336,7 +336,7 @@ In the following we enumerate the open challenges we have found in the literatur
     \item \emph{Lack of Software Diversification for \wasm}:  Software Diversification has demonstrated to provide protection for known and yet-unknown vulnerabilities. Yet, only one software diversity approach has been applied to the context of \wasm \cite{wobfuscator}. 
     Moreover, as we illustrate in \autoref{table:sota:comparison}, the existing works for Software Diversification do not contribute directly to \wasm.
     
-    \item \emph{Lack of research on MVE for \wasm:} \wasm has a growing adoption for Edge platforms. However, researching on MVE in a distributed setting like the Edge has been less researched. Only Voulimeneas \etal \cite{voulimeneas2021dmvx} recently proposed a multivariant execution system by parallelizing the execution of the variants in different machines for the sake of efficiency. This work 
+    \item \emph{Lack of research on MVE for \wasm:} \wasm has a growing adoption for Edge platforms. However, researching on MVE in a distributed setting like the Edge has been less researched. Only Voulimeneas \etal \cite{voulimeneas2021dmvx} recently proposed a multivariant execution system by parallelizing the execution of the variants in different machines for the sake of efficiency. 
 
      % 
     
