@@ -1,4 +1,4 @@
-name: Build document to artifact
+name: Build and deploy
 # This workflow is triggered on pushes to the repository.
 on: [push]
 
@@ -8,7 +8,7 @@ jobs:
     # This job runs on Linux
     runs-on: ubuntu-20.04
     container:
-      image: ghcr.io/jacarte/latex-build:latest25
+      image: ghcr.io/jacarte/latex-build:latest26
       credentials:
         username: jacarte
         password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
@@ -67,35 +67,3 @@ jobs:
         env:
           REPO_KEY: '${{ secrets.REPO_KEY2 }}'
 
-
-      - name: Spell checking report
-        run: |
-          python3 /tools/get_latex_pieces.py .
-        env:
-          EXCLUDE: "['llvm_code_blocks.tex', 'overlaping_explain.tex', 'table_template copy.tex', 'table_template copy 2.tex', 'table_template.tex', 'old.tex', 'same_instruction.tex', 'example.tex' ,  'generation table_template.tex', 'summary_swedish.tex']"
-      
-      - name: GIT
-        run: git config --global user.email "action@github.com" && git config --global user.name "GitHub Action"
-
-
-      - name: Annotate new pdf on a new branch
-        run: |
-          git config --global --add safe.directory /__w/KTH-Licentiate-Thesis/KTH-Licentiate-Thesis
-          python3 /tools/annotate_tex.py report.json dico.text $(git log -n 1 --pretty=%H) $(git config --get remote.origin.url) 2> count.txt
-
-          cat count.txt
-          
-          # cp /tools/*.md .
-
-          git rm -rf . && git checkout -b reports
-          git add *.md report.json && git commit -m 'Spell check report' 
-          git push origin reports --force
-
-          if [ $(cat count.txt) -gt $THRESHOLD ]
-          then
-            echo "Number of warnings above the threshold: $(cat count.txt)"
-            exit 1
-          fi
-
-        env:
-          THRESHOLD: 200000

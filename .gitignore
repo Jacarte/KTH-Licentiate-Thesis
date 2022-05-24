@@ -68,3 +68,7 @@ images
 report.json
 
 chapters
+roi*
+rois/
+*.pyc
+index.html

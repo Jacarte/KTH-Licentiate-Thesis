@@ -1,0 +1,48 @@
+name: Spell checking
+# This workflow is triggered on pushes to the repository.
+on: [push]
+
+jobs:
+  build:
+    name: Spell checking
+    # This job runs on Linux
+    runs-on: ubuntu-20.04
+    container:
+      image: ghcr.io/jacarte/latex-build:latest26
+      credentials:
+        username: jacarte
+        password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build document
+        run: |
+          pdflatex -interaction=nonstopmode -shell-escape Lic.tex || true
+          sleep 10
+          bibtex Lic
+          sleep 10
+          pdflatex -shell-escape -interaction=nonstopmode Lic.tex || true
+          sleep 30
+        env:
+          ADDCONTRIB: "False"  
+
+      - name: Spell checking report
+        run: |
+          mkdir -p /tools/rois
+          python3 /tools/ocr_spell_check.py Lic.pdf dico.text
+        
+      - name: GIT
+        run: git config --global user.email "action@github.com" && git config --global user.name "GitHub Action"
+
+
+      - name: Annotate new pdf on a new branch
+        run: |
+          git config --global --add safe.directory /__w/KTH-Licentiate-Thesis/KTH-Licentiate-Thesis
+          python3 /tools/create_html_report.py report.json index.html
+
+          
+          cp -r /tools/rois ./rois
+
+          git rm -rf . && git checkout -b gh-pages
+          git add rois index.html report.json && git commit -m 'Spell check report' 
+          git push origin gh-pages --force
+
