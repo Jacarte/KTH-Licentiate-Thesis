@@ -74,6 +74,9 @@
             border: 1px solid black;
             padding: 10px;
         }
+        hr {
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>  
@@ -89,10 +92,12 @@
                         <div class="warning {{match.category}}" style="left: {{ place.x }}px; top: {{place.y + 0}}px">
                                
                             <div class="message">
-                                <p>{{ match.chunk }}</p>
+                                <p style="color: red">{{ ids.chunk }}</p>
+                                </hr>
                                 <p>{{ match.message }}
                                 </p>
-
+                                </hr>
+                                
                                 <p>{{ match.text }}</p>
                                 
 

@@ -132,122 +132,122 @@ def process_pdf(pdffile, ignore):
     pagen = 0
     REPORT = {}
     ID = 0
+
     for image in images:
-        # Save temp
-        REPORTPAGE = []
-        relative = f"rois/page_{pagen}.jpg"
-        name = f"{OUT}/{relative}"
-        image.save(name, "JPEG")
-        squares = get_paragraphs_from_image(name)
-        i = 0
-        imagedata = cv2.imread(name)
+        try:
+            # Save temp
+            REPORTPAGE = []
+            relative = f"rois/page_{pagen}.jpg"
+            name = f"{OUT}/{relative}"
+            image.save(name, "JPEG")
+            squares = get_paragraphs_from_image(name)
+            i = 0
+            imagedata = cv2.imread(name)
 
-        for roi, s, rect in squares:
-            # Comment this, it is debugging
-            data = pytesseract.image_to_data(roi,output_type='dict')#, config=custom_config)
-            #print(data)
-            boxes = len(data['level'])
-            text = ""
-            character_widths = []
-            character_heights = []
-            for i in range(boxes):
-                text += " " +  data['text'][i]
-            
+            for roi, s, rect in squares:
+                # Comment this, it is debugging
+                data = pytesseract.image_to_data(roi,output_type='dict')#, config=custom_config)
+                #print(data)
+                boxes = len(data['level'])
+                text = ""
+                for i in range(boxes):
+                    text += " " +  data['text'][i]
                 
-            # cv2.imwrite(f"{OUT}/rois/roi_{i}_{pagen}_{s}.png", roi)
-            # Some sanitization
-            text = text.replace("\n", " ")
-            text = text.replace(". ", ".\n")
-            text = text.strip()
-            text = text.replace("  ", " ")
+                    
+                # cv2.imwrite(f"{OUT}/rois/roi_{i}_{pagen}_{s}.png", roi)
+                # Some sanitization
+                text = text.replace("\n", " ")
+                text = text.replace(". ", ".\n")
+                text = text.strip()
+                text = text.replace("  ", " ")
 
-            # Call language tool or any other
+                # Call language tool or any other
 
-            matches = tool.check(text)
-            
-            if len(matches) > 0:
+                matches = tool.check(text)
                 
-                obj = dict(
-                            # Unique id
-                            id=ID,
-                            matches = []
-                            )
+                if len(matches) > 0:
+                    
+                    obj = dict(
+                                # Unique id
+                                id=ID,
+                                matches = []
+                                )
 
-                for m in matches:
-                    chunk = text[m.offset:m.offset + m.errorLength]
-                    if chunk.lower() not in words2ignore:
-                        obj['matches'].append(dict(
-                            message=m.message,
-                            replacements=m.replacements,
-                            ruleId=m.ruleId,
-                            offsetInContext=m.offsetInContext,
-                            category=m.category,
-                            offset=m.offset,
-                            errorLength=m.errorLength,
-                            text=text
-                        ))
-                        obj['places'] = []
+                    for m in matches:
+                        chunk = text[m.offset:m.offset + m.errorLength]
 
-                        offset = 0
-                        
-                        #print(m.offsetInContext, m.offset)
-                        print(m)
-                        print()
-                        margintext = 0
-                        chunk = text[max(m.offset - margintext, 0):m.offset + m.errorLength + (0 if m.offset + m.errorLength + margintext <= len(text) else  margintext)]
-                        globalx, globaly, _, _ = rect
-                        margin = 3
-                        # check each box and collect the text again, if it is equal to the error chunk, then, that is the place
-                        scores = []
-                        for i in range(boxes):
-                            text = data['text'][i]
-                            s = data['width'][i]*data['height'][i]
-                            score = get_score(text, chunk)
-                            scores.append((score, i, s))
+                        if not chunk:
+                            continue
+                        if chunk.lower() not in words2ignore:
+                            obj['matches'].append(dict(
+                                message=m.message,
+                                replacements=m.replacements,
+                                ruleId=m.ruleId,
+                                offsetInContext=m.offsetInContext,
+                                category=m.category,
+                                offset=m.offset,
+                                errorLength=m.errorLength,
+                                text=text
+                            ))
+                            obj['places'] = []
+                            #print(m.offsetInContext, m.offset)
+                            print(m)
+                            print()
+                            globalx, globaly, _, _ = rect
+                            margin = 3
+                            # check each box and collect the text again, if it is equal to the error chunk, then, that is the place
+                            scores = []
+                            for i in range(boxes):
+                                text = data['text'][i]
+                                s = data['width'][i]*data['height'][i]
+                                score = get_score(text, chunk)
+                                scores.append((score, i, s))
 
 
-                        # the smaller the rectangle the better
-                        scores = sorted(scores, key=lambda x: x[2])
-                        scores = sorted(scores, key=lambda x: x[0])
+                            # the smaller the rectangle the better
+                            scores = sorted(scores, key=lambda x: x[2])
+                            scores = sorted(scores, key=lambda x: x[0])
 
-                        #print(scores, chunk, data['text'][scores[0][1]])
 
-                        # Draw all rectangles with the same score
-                        prevsq = scores[0][2]
-                        for sc, i, sq in scores:
-                            if sc != scores[0][0]:
-                                break
-                            prevsq = sq
-                            x, y, w, h = data['left'][i], data['top'][i], data['width'][i], data['height'][i]
-                            cv2.rectangle(imagedata, (x + globalx - margin, y + globaly - margin), (x + w  + globalx + margin, y + h + globaly + margin), (255,36,12), 2)
-                        
-                        # But only keep one ?
-                        obj['places'].append(dict(
-                            x=x + globalx ,
-                            y =  y + globaly,
-                            w = w,
-                            h = h
-                        ))
-                        obj['pagefile'] = relative
-                        obj['chunk'] = chunk
-                        obj['pageannotatedfile'] = f"rois/annotated_{pagen}.png"
-                        # Add a different color per rule and annotate the image
+                            # Draw all rectangles with the same score
+                            for sc, i, sq in scores:
+                                if sq < 80:
+                                    continue
+                                if sc != scores[0][0]:
+                                    break
+                                x, y, w, h = data['left'][i], data['top'][i], data['width'][i], data['height'][i]
+                                cv2.rectangle(imagedata, (x + globalx - margin, y + globaly - margin), (x + w  + globalx + margin, y + h + globaly + margin), (255,36,12), 2)
 
-                        ID += 1
-                        REPORTPAGE.append(obj)
+                                if len(obj['places']) == 0:
+                                    # But only keep one ?
+                                    obj['places'].append(dict(
+                                        x=x + globalx ,
+                                        y =  y + globaly,
+                                        w = w,
+                                        h = h
+                                    ))
+                            obj['pagefile'] = relative
+                            obj['chunk'] = chunk
+                            obj['pageannotatedfile'] = f"rois/annotated_{pagen}.png"
+                            # Add a different color per rule and annotate the image
 
-        if len(REPORTPAGE) > 0:
-            cv2.imwrite(f"{OUT}/rois/annotated_{pagen}.png", imagedata)
+                            ID += 1
+                            REPORTPAGE.append(obj)
 
-            if name not in REPORT:
-                REPORT[relative] = []
+            if len(REPORTPAGE) > 0:
+                cv2.imwrite(f"{OUT}/rois/annotated_{pagen}.png", imagedata)
 
-            REPORT[relative] += REPORTPAGE
-        else:
-            os.remove(name)
+                if name not in REPORT:
+                    REPORT[relative] = []
 
-        i += 1
-        pagen += 1
+                REPORT[relative] += REPORTPAGE
+            else:
+                os.remove(name)
+
+            i += 1
+            pagen += 1
+        except KeyboardInterrupt:
+            break
 
     open(f"{OUT}/report.json", "w").write(json.dumps(REPORT, indent=4))
 
