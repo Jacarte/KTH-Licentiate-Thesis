@@ -26,14 +26,16 @@
             word-wrap: break-word;
             padding: 0;
             margin: 0; 
-            max-height: 500px;
             overflow-y: scroll;
+            height: 20px !important;
         }
         .warning:hover {
             opacity: 1;
             background: rgba(125, 255, 255, 0.8);
             padding: 0;
             margin: 0;
+            height: unset !important;
+            max-height: 500px;
         }
         .high {
             position: absolute;
@@ -87,8 +89,12 @@
                         <div class="warning {{match.category}}" style="left: {{ place.x }}px; top: {{place.y + 0}}px">
                                
                             <div class="message">
-                                {{ match.message }}
+                                <p>{{ match.chunk }}</p>
+                                <p>{{ match.message }}
+                                </p>
 
+                                <p>{{ match.text }}</p>
+                                
 
                                 <div class="suggestions">
                                     <h4>Suggestions</h4>

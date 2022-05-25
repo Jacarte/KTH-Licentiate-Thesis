@@ -1,3 +1,4 @@
+from statistics import mean, median
 import cv2
 import numpy as np
 from pdf2image import convert_from_path
@@ -5,6 +6,8 @@ import sys
 import os
 import pytesseract
 import json
+from intervaltree import Interval, IntervalTree
+from dtw import dtw
 
 import language_tool_python
 tool = language_tool_python.LanguageTool('en-US')
@@ -12,7 +15,7 @@ tool = language_tool_python.LanguageTool('en-US')
 OUT = os.path.dirname(__file__)
 
 
-def get_paragraphs_from_image(imagefile, sizemin=32000):
+def get_paragraphs_from_image(imagefile, sizemin=10000):
     print("Getting paragraphs from image")
     # Load image, grayscale, Gaussian blur, Otsu's threshold
     image = cv2.imread(imagefile)
@@ -21,22 +24,53 @@ def get_paragraphs_from_image(imagefile, sizemin=32000):
     thresh = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
 
     # Create rectangular structuring element and dilate
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (4,4))
-    dilate = cv2.dilate(thresh, kernel, iterations=10)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (10,3))
+    dilate = cv2.dilate(thresh, kernel, iterations=13)
 
     # Find contours and draw rectangle
     cnts = cv2.findContours(dilate, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     cnts = cnts[0] if len(cnts) == 2 else cnts[1]
     result = []
+
+    filtered = []
     for c in cnts:
+
+        x,y,w,h = cv2.boundingRect(c)
+
+        if w*h >= sizemin: 
+            filtered.append(c)
+    
+    non_overlap = []
+    for c1 in range(len(filtered)):
+        for c2 in range(len(filtered)):
+            if c1 != c2:
+                contour1 = filtered[c1]
+                contour2 = filtered[c2]
+                x,y,w,h = cv2.boundingRect(contour2)
+                
+                non_overlap.append(contour2)
+
+                r1 = cv2.pointPolygonTest(contour1, (x, y), False) in [1, 0]
+                r2 = cv2.pointPolygonTest(contour1, (x + w, y), False) in [1, 0]
+                r3 = cv2.pointPolygonTest(contour1, (x, y + h), False) in [1, 0]
+                r4 = cv2.pointPolygonTest(contour1, (x + w, y + h), False) in [1, 0]
+                
+                if all([r1, r2, r3, r4]):
+                    # Remove contour2
+                    non_overlap.pop()
+
+    
+    for c in non_overlap:
+        # Remove those contours that are inside other
+
         # Get the largest and not overlaping
         # Use a segment tree, kd tree ?
         x,y,w,h = cv2.boundingRect(c)
-        # cv2.rectangle(image, (x, y), (x + w, y + h), (36,255,12), 2)
+        cv2.rectangle(image, (x, y), (x + w, y + h), (36,255,12), 2)
 
         # Filter by size
         # print(w*h)
-        if w*h >= 30000: 
+        if w*h >= sizemin: 
             result.append((
                 image[y:y + h, x: x + w], w*h, (x, y, w, h))
             )
@@ -48,7 +82,46 @@ def get_paragraphs_from_image(imagefile, sizemin=32000):
     # cv2.imshow('image', image)
     # cv2.waitKey()
 
+    #cv2.imwrite(f"{imagefile}.contours.jpg", image)
+    #cv2.imwrite(f"{imagefile}.dilate.jpg", dilate)
     return result
+
+def get_score(text1, text2):
+
+
+    ec1 = text1.encode('utf-8')
+    ec2 = text2.encode('utf-8')
+
+    if len(ec1) < len(ec2):
+        ec1, ec2 = ec2, ec1
+
+    DTW = [[10000000000 for _ in range(len(ec1) + 1) ] for _ in range(len(ec2) + 1)]
+
+    def d(c1, c2):
+        if c1 == c2:
+            return 0
+        else:
+            return 300
+
+    DTW[0][0] = 0
+    for i in range(len(ec2) + 1):
+        for j in range(len(ec1) + 1):
+            if i == 0:
+                DTW[i][j] = 100*j
+                continue
+            if j == 0:
+                DTW[i][j] = 100*i
+                continue
+            
+            c1 = ec2[i - 1]
+            c2 = ec1[j - 1]
+
+            DTW[i][j] = min(
+                DTW[i - 1][j - 1] + d(c1, c2),
+                min(DTW[i - 1][j] + 100, DTW[i][j - 1] + 100)
+            )
+    #print(text1, text2, DTW[i][j])
+    return DTW[i][j]
 
 def process_pdf(pdffile, ignore):
     words2ignore = open(ignore, 'r').readlines()
@@ -75,8 +148,11 @@ def process_pdf(pdffile, ignore):
             #print(data)
             boxes = len(data['level'])
             text = ""
+            character_widths = []
+            character_heights = []
             for i in range(boxes):
                 text += " " +  data['text'][i]
+            
                 
             # cv2.imwrite(f"{OUT}/rois/roi_{i}_{pagen}_{s}.png", roi)
             # Some sanitization
@@ -117,20 +193,35 @@ def process_pdf(pdffile, ignore):
                         #print(m.offsetInContext, m.offset)
                         print(m)
                         print()
-                        MAXLEVEL = 4
-                        for i in range(boxes):
-                            #if data['level'][i] >= MAXLEVEL: 
-                            offset += len(data['text'][i]) + 1
-                            if offset > m.offset:
-                                # print(offset, i)
-                                # This is the box
-                                #i = i - 1
-                                break
-                        (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
-                        # Annotate the entire page not roi
+                        margintext = 0
+                        chunk = text[max(m.offset - margintext, 0):m.offset + m.errorLength + (0 if m.offset + m.errorLength + margintext <= len(text) else  margintext)]
                         globalx, globaly, _, _ = rect
-                        margin = 20
-                        cv2.rectangle(imagedata, (x + globalx - margin, y + globaly - margin), (x + w  + globalx + margin, y + h + globaly + margin), (255,36,12), 2)
+                        margin = 3
+                        # check each box and collect the text again, if it is equal to the error chunk, then, that is the place
+                        scores = []
+                        for i in range(boxes):
+                            text = data['text'][i]
+                            s = data['width'][i]*data['height'][i]
+                            score = get_score(text, chunk)
+                            scores.append((score, i, s))
+
+
+                        # the smaller the rectangle the better
+                        scores = sorted(scores, key=lambda x: x[2])
+                        scores = sorted(scores, key=lambda x: x[0])
+
+                        #print(scores, chunk, data['text'][scores[0][1]])
+
+                        # Draw all rectangles with the same score
+                        prevsq = scores[0][2]
+                        for sc, i, sq in scores:
+                            if sc != scores[0][0]:
+                                break
+                            prevsq = sq
+                            x, y, w, h = data['left'][i], data['top'][i], data['width'][i], data['height'][i]
+                            cv2.rectangle(imagedata, (x + globalx - margin, y + globaly - margin), (x + w  + globalx + margin, y + h + globaly + margin), (255,36,12), 2)
+                        
+                        # But only keep one ?
                         obj['places'].append(dict(
                             x=x + globalx ,
                             y =  y + globaly,
@@ -138,6 +229,7 @@ def process_pdf(pdffile, ignore):
                             h = h
                         ))
                         obj['pagefile'] = relative
+                        obj['chunk'] = chunk
                         obj['pageannotatedfile'] = f"rois/annotated_{pagen}.png"
                         # Add a different color per rule and annotate the image
 
@@ -148,17 +240,15 @@ def process_pdf(pdffile, ignore):
             cv2.imwrite(f"{OUT}/rois/annotated_{pagen}.png", imagedata)
 
             if name not in REPORT:
-                REPORT[f"rois/annotated_{pagen}.png"] = []
+                REPORT[relative] = []
 
-            REPORT[f"rois/annotated_{pagen}.png"] += REPORTPAGE
+            REPORT[relative] += REPORTPAGE
         else:
             os.remove(name)
 
         i += 1
         pagen += 1
 
-        if pagen == 15:
-            break
     open(f"{OUT}/report.json", "w").write(json.dumps(REPORT, indent=4))
 
 if __name__ == '__main__':
