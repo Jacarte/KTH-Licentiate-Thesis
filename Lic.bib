@@ -1219,6 +1219,21 @@
 
 
 
+@inproceedings{10.1007/978-3-642-14107-2_7,
+  author    = {Guha, Arjun
+               and Saftoiu, Claudiu
+               and Krishnamurthi, Shriram},
+  editor    = {D'Hondt, Theo},
+  title     = {The Essence of JavaScript},
+  booktitle = {ECOOP 2010 -- Object-Oriented Programming},
+  year      = {2010},
+  publisher = {Springer Berlin Heidelberg},
+  address   = {Berlin, Heidelberg},
+  pages     = {126--150},
+  abstract  = {We reduce JavaScript to a core calculus structured as a small-step operational semantics. We present several peculiarities of the language and show that our calculus models them. We explicate the desugaring process that turns JavaScript programs into ones in the core. We demonstrate faithfulness to JavaScript using real-world test suites. Finally, we illustrate utility by defining a security property, implementing it as a type system on the core, and extending it to the full language.},
+  isbn      = {978-3-642-14107-2}
+}
+
 
 
 @inproceedings{churchill2019,
@@ -1510,4 +1525,128 @@
   location  = {Nice, France},
   series    = {POPL '07}
 }
+
+
+
+@article{maliciousJS,
+  author   = {Y. {Fang} and C. {Huang} and L. {Liu} and M. {Xue}},
+  journal  = {IEEE Access},
+  title    = {Research on Malicious JavaScript Detection Technology Based on LSTM},
+  year     = {2018},
+  volume   = {6},
+  number   = {},
+  pages    = {59118-59125},
+  keywords = {Malware;Feature extraction;Browsers;Engines;Web pages;Semantics;Bills of materials;JavaScript;malicious code detection;bytecode;word vector;LSTM},
+  doi      = {10.1109/ACCESS.2018.2874098},
+  issn     = {2169-3536},
+  month    = {}
+}
+
+@inproceedings{mulazzani2013fast,
+  title        = {Fast and reliable browser identification with javascript engine fingerprinting},
+  author       = {Mulazzani, Martin and Reschl, Philipp and Huber, Markus and Leithner, Manuel and Schrittwieser, Sebastian and Weippl, Edgar and Wien, FC},
+  booktitle    = {Web 2.0 Workshop on Security and Privacy (W2SP)},
+  volume       = {5},
+  pages        = {4},
+  year         = {2013},
+  organization = {Citeseer}
+}
+
+@inproceedings{10.1145/3412841.3442001,
+  author    = {Ko, Yoonseok and Rezk, Tamara and Serrano, Manuel},
+  title     = {SecureJS Compiler: Portable Memory Isolation in JavaScript},
+  year      = {2021},
+  isbn      = {9781450381048},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3412841.3442001},
+  doi       = {10.1145/3412841.3442001},
+  abstract  = {The memory isolation mechanism plays an essential role to provide security enforcement in JavaScript programs. Existing secure interaction libraries such as Google Caja, SES, and VM2 rely on built-in memory isolation mechanisms provided by Node.js and browsers, yet most of the other engines such as JerryScript and Duktape, which are implementations for IoT devices, do not support such isolation mechanisms.In this paper, we report about the design and implementation of SecureJS, a portable JavaScript-to-JavaScript compiler that enforces memory isolation. As it only uses standard features, the compiled code it generates can be used by any JavaScript engine. We validated empirically the semantics preservation and memory isolation of SecureJS compiled programs by using 10,490 test programs of ECMAScript Test262 test suite. We also developed a novel experiment to evaluate memory isolation property of compiled code by instrumented JavaScript engines.},
+  booktitle = {Proceedings of the 36th Annual ACM Symposium on Applied Computing},
+  pages     = {1265–1274},
+  numpages  = {10},
+  keywords  = {compiler, JavaScript, memory isolation},
+  location  = {Virtual Event, Republic of Korea},
+  series    = {SAC '21}
+}
+
+@inproceedings{10.1145/3184558.3188736,
+  author    = {Peguero, Ksenia and Zhang, Nan and Cheng, Xiuzhen},
+  title     = {An Empirical Study of the Framework Impact on the Security of JavaScript Web Applications},
+  year      = {2018},
+  isbn      = {9781450356404},
+  publisher = {International World Wide Web Conferences Steering Committee},
+  address   = {Republic and Canton of Geneva, CHE},
+  url       = {https://doi.org/10.1145/3184558.3188736},
+  doi       = {10.1145/3184558.3188736},
+  abstract  = {textitBackground: JavaScript frameworks are widely used to create client-side and server-side parts of contemporary web applications. Vulnerabilities like cross-site scripting introduce significant risks in web applications. textitAim: The goal of our study is to understand how the security features of a framework impact the security of the applications written using that framework. textitMethod: In this paper, we present four locations in an application, relative to the framework being used, where a mitigation can be applied. We perform an empirical study of JavaScript applications that use the three most common template engines: Jade/Pug, EJS, and Angular. Using automated and manual analysis of each group of applications, we identify the number of projects vulnerable to cross-site scripting, and the number of vulnerabilities in each project, based on the framework used. textitResults: We analyze the results to compare the number of vulnerable projects to the mitigation locations used in each framework and perform statistical analysis of confounding variables. textitConclusions: The location of the mitigation impacts the application's security posture, with mitigations placed within the framework resulting in more secure applications.},
+  booktitle = {Companion Proceedings of the The Web Conference 2018},
+  pages     = {753–758},
+  numpages  = {6},
+  keywords  = {framework analysis, template engines, web frameworks, web security, cross-site scripting, javascript security},
+  location  = {Lyon, France},
+  series    = {WWW '18}
+}
+@inproceedings{grosskurth2005reference,
+  title        = {A reference architecture for web browsers},
+  author       = {Grosskurth, Alan and Godfrey, Michael W},
+  booktitle    = {21st IEEE International Conference on Software Maintenance (ICSM'05)},
+  pages        = {661--664},
+  year         = {2005},
+  organization = {IEEE}
+}
+
+@article{GARCES2021111004,
+  title    = {Three decades of software reference architectures: A systematic mapping study},
+  journal  = {Journal of Systems and Software},
+  volume   = {179},
+  pages    = {111004},
+  year     = {2021},
+  issn     = {0164-1212},
+  doi      = {https://doi.org/10.1016/j.jss.2021.111004},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0164121221001011},
+  author   = {Lina Garcés and Silverio Martínez-Fernández and Lucas Oliveira and Pedro Valle and Claudia Ayala and Xavier Franch and Elisa Yumi Nakagawa},
+  keywords = {Software architecture, Reference architecture, Systematic mapping, Secondary study},
+  abstract = {Software reference architectures have played an essential role in software systems development due to the possibility of knowledge reuse. Although increasingly adopted by industry, these architectures are not yet completely understood. This work presents a panorama on existing software reference architectures, characterizing them according to their context, goals, perspectives, application domains, design approaches, and maturity, as well as the industry involvement for their construction. For this, we planned and conducted a systematic mapping study. During last decade, the number of reference architectures in very diverse application domains has increased, resulting from efforts of industry, academia, and through their collaborations. Academic reference architectures are oriented to facilitate the reuse of architectural and domain knowledge. The industry has focused on architectures for standardization with certain maturity level. However, the great amount of architectures studied in this work have been designed without following a systematic process, and they lack the maturity to be used in real software projects. Further investigations can be oriented to gathering empirical evidences, from different sources than academic data libraries, that allow to understand how references architectures have been constructed, utilized, and maintained during the whole software life-cycle.}
+}
+
+@article{goth2003addressing,
+  title={Addressing the monoculture},
+  author={Goth, Greg},
+  journal={IEEE Security \& Privacy},
+  volume={1},
+  number={06},
+  pages={8--10},
+  year={2003},
+  publisher={IEEE Computer Society}
+}
+
+@article{lala2009monoculture,
+  title={It monoculture security risks and defenses},
+  author={Lala, Jaynarayan H and Schneider, Fred B},
+  journal={IEEE Security \& Privacy},
+  volume={7},
+  number={1},
+  pages={12--13},
+  year={2009},
+  publisher={IEEE}
+}
+
+
+
+@misc{BREAKFastly,
+    title= {{Global CDN Disruption}},
+    url = {https://status.fastly.com/incidents/vpk0ssybt3bj},
+    urldate = {2021-08-08},
+    year={2021}
+}
+
+
+@misc{leftPad,
+    title= {{How one programmer broke the internet by deleting a tiny piece of code}},
+    url = {https://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code/},
+    urldate = {2022-05-20},
+    year={2016}
+}
+
 
