@@ -47,12 +47,12 @@ This means that, for 5 arbitrary devices (computers, tablets, smartphones) in a 
 This highlights a software monoculture problem \cite{goth2003addressing}, as an ecosystem of machines running the exact same software. 
 The monoculture concept is an analogy from biology \cite{lala2009monoculture}. It describes an ecosystem that face extinction due to lack of diversity as all individuals share the exact same vulnerabilities.
 
-A similar argument can be used for the \wasm code that is served to web browsers. 
+
 Nowadays, the serving of web pages, including WebAssembly code, is centralized and served through main sources.
+Thus, a similar argument for software monoculture can be used for the \wasm code that is served to web browsers. 
 Despite being designed for sandboxing and secure execution, \wasm is not exempt from vulnerabilities \cite{WebAssemblySecurity}.
 For example, \wasm engines are vulnerable to speculative execution \cite{Narayan2021Swivel}, and C/C++ source code vulnerabilities might be ported to Wasm binaries \cite{DeRoover2022}.  
-Remarkably, several approaches to harden \wasm recently appeared \cite{johnson2021}, still, the adoption of proposed defenses are not implemented in time as new vulnerabilities are discovered.
-The sharing of the \wasm code through web browsers, also carried its vulnerabilities.
+Therefore, the sharing of the \wasm code through web browsers, also includes \wasm vulnerabilities.
 
 
 % Escalating
@@ -82,9 +82,6 @@ For example, if a vulnerability is present in one program variant, discovering a
 Software diversification has been widely researched, not being the case for \wasm.
 In this field, only Romano \etal \cite{wobfuscator} proposed the intermixing JavaScript and Wasm function calls to provide obfuscation against code analysis. 
 For \wasm, no software diversification solution has been proposed, primarily due to its novelty.
-
-
-
 
 
 
@@ -136,8 +133,8 @@ In addition, we summarize the main challenges faced during their implementation,
 Besides, we discuss the incorporation of \emph{constant inferring} as a new transformation. 
 Third, we propose a \emph{methodology} to quantitatively evaluate the impact of our tools, assessing the creation of artificial software diversification for WebAssembly. 
 Fourth and final, we \emph{empirically demonstrate} the impact of our technique by evaluating the static and dynamic behavior of the generated diversity.
-Our results show that creating software diversification is feasible for \wasm. 
-Moreover, the created diversification remarkably affects the observable behavior of program variants in web browsers and standalone interpreters.
+Our results show that creating software diversification  for \wasm is feasible. 
+Remarkably, our diversification approaches remarkably affect the observable behavior such as static program properties, execution traces and execution times.
 
 \section{Publications}
 
