@@ -23,7 +23,7 @@ In RQ3, we study whether the created variants can be used in real-world applicat
 The usage of edge-cloud computing platforms to answer RQ3 is motivated by two reasons. First, it is an emerging technology. 
 Using Wasm as an intermediate layer is better in terms of startup and memory usage, than containerization or virtualization \cite{pMendkiServerless, 1244493Jacobsson}. 
 This has encouraged edge computing platforms like Cloudflare and Fastly to use \wasm to deploy client applications in a modular and sandboxed manner  \cite{CloudflareWasm, FastlyWasm}.
-Second, edge-cloud computing platforms are shown to be not completely secure \cite{Narayan2021Swivel} and multivariant execution offers a preemptive technique against predictable behaviors such as execution time.
+Second, edge-cloud computing platforms are shown to not be completely secure \cite{Narayan2021Swivel} and multivariant execution offers a preemptive technique against predictable behaviors such as execution time.
 
 
 
@@ -58,5 +58,5 @@ We do the collection of the execution times twice, for the original program and 
 
 
 We collect 100k execution times for each binary, both the original and multivariant binaries. The number of execution time samples is motivated by the seminal work of Morgan \etal \cite{morgan2015web}. 
-We perform a Mann-Withney U test \cite{mann1947} to compare both execution time distributions. 
+We perform a Mann-Withney U test \cite{mann1947} to compare both execution-time distributions. 
 If the P-value is lower than 0.05, the two compared distributions are different.

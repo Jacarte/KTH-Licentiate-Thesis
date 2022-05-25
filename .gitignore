@@ -72,3 +72,4 @@ roi*
 rois/
 *.pyc
 index.html
+chromedriver
