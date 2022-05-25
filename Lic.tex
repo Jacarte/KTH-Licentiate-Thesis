@@ -264,6 +264,36 @@
       {\normalsize\contentslabel{3.3em}}
       {\hspace*{-2.3em}}
       {\titlerule*[1pc]{ }}
+
+
+      \renewcommand\labelitemi{}
+
+
+        % section tiltes formatting
+        \titleformat{\section}
+        {\Large}{}{1em}{#1}
+        \titleformat{name=\section,numberless}
+        {\Large}{}{1em}{#1}
+
+        % subsection tiltes formatting
+        \titleformat{\subsection}
+        {\Large}{}{1em}{#1}
+        \titleformat{name=\subsection,numberless}
+        {\Large}{}{1em}{#1}
+
+        \titleformat{\chapter}[display]
+        {\LARGE}
+        {\renewcommand{\thechapter}{}
+        %\colorbox{blacm}
+        {{\bfseries\fontsize{30}{40}\selectfont
+        \thechapter
+          \parbox[c][1.2cm][c]{1cm}{%
+            \centering\textcolor{black}  {}}}}}
+        {-1ex}
+        {%\color{black}\titlerule
+        \vspace{-1.9ex}\filleft\MakeUppercase{#1}}
+        [
+        ]
     } % 
     {} %
 
