@@ -6,15 +6,14 @@
 \wasm has become the fourth official web language along with HTM, CSS and JavaScript. 
 This new language allows web browsers to execute existing programs or libraries written in other languages, such as C/C++ and Rust.
 In addition, \wasm evolves to be part of edge-cloud computing platforms. 
-The serving of the same \wasm applications to web browsers and its replication in edge-cloud computing nodes highlights a software monoculture problem.
 % Problems
-Despite being designed with security as a premise, it is not exempt from vulnerabilities. 
-Therefore, vulnerabilities and flaws are also included in the distribution of \wasm binaries.
-Software diversification has shown to remove and harden software execution. Thus,
-we provide a preemptive solution with software diversity to harden the execution of \wasm.
+Despite being designed with security as a premise, \wasm is not exempt from vulnerabilities. 
+Therefore, vulnerabilities and flaws are also included in the distribution and execution of \wasm binaries. This highlights a software monoculture problem.
+On the other hand, while software diversity has shown to mitigate monoculture, no diversification approach has been proposed for \wasm. 
+This work proposes software diversity as a preemptive solution to mitigate software monoculture for \wasm.
 
-In this thesis, we propose an automatic approach to generate software diversification for \wasm programs. 
-In addition, we provide implementations for our approaches, including a generic LLVM superdiversifier that potentially extends our ideas to other programming languages.
+
+Besides, we provide implementations for our approaches, including a generic LLVM superdiversifier that potentially extends our ideas to other programming languages.
 We empirically demonstrate the impact of our approach by providing Randomization and Multivariant Execution (MVE) for \wasm. 
 Our results show that our approaches can provide an automated end-to-end solution for the diversification of \wasm programs. 
 The main contributions of this work are:
@@ -24,7 +23,7 @@ The main contributions of this work are:
 
     \item We highlight the lack of diversification techniques for WebAssembly through an exhaustive literature review.
     
-    \item We provide the implementation of two tools, CROW and MEWE. These tools provide randomization and multivariant execution for \wasm. 
+    \item We provide the implementation of two tools, CROW and MEWE, providing randomization and multivariant execution for \wasm. 
 
 
     \item We include \emph{constant inferring} as a new code transformation to generate software diversification for \wasm.
