@@ -73,24 +73,27 @@ The function body is composed of local-variable declarations and typed instructi
 
 % Example
 \begin{code}
-    \begin{minipage}[t]{0.4\linewidth}
+    \begin{minipage}[t]{0.45\linewidth}
         \lstset{language=C,caption={Example C function.},
         label=CExample,
+        breaklines=true, 
         basicstyle=\small\ttfamily,
+        postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
         escapeinside={(*@}{@*)}
         }
 \input{sota/code/code.c}
 \end{minipage}\hspace{10mm}
-\begin{minipage}[t]{0.4\linewidth}
+\begin{minipage}[t]{0.46\linewidth}
 \lstset{
     language=WAT,
     caption={\wasm code  for \autoref{CExample}.},
     style=WATStyle,
+    breaklines=true, 
     %stepnumber=0,
     escapeinside={(*@}{@*)},
     numbers=left,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
     label=WASMExample}
-
 %
 \input{sota/code/code.fix.wat}
 %\end{lstlisting}
