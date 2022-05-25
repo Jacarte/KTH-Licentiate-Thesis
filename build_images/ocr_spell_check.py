@@ -212,7 +212,7 @@ def process_pdf(pdffile, ignore):
                             for sc, i, w, h in scores:
                                 if w < 80:
                                     continue
-                                if h < 50:
+                                if h < 10:
                                     continue
                                 if sc != scores[0][0]:
                                     break
