@@ -6,8 +6,6 @@ import sys
 import os
 import pytesseract
 import json
-from intervaltree import Interval, IntervalTree
-from dtw import dtw
 
 import language_tool_python
 tool = language_tool_python.LanguageTool('en-US')
