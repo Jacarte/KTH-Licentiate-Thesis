@@ -61,6 +61,7 @@ Concretely, thousands of edge devices running the Wasm as backend services, thus
 This means that if one node in an edge network is vulnerable, all the others are vulnerable in the exact same manner as the same binary is replicated on each node. In other words, the same attacker payload would break all edge nodes at once.
 This illustrates how Wasm execution is fragile with respect to systemic vulnerabilities for the whole internet, like it happened on June 8, 2021, for Fastly \cite{BREAKFastly}.
 
+
 One might think that the solution is to adopt more web browser and interpreters implementations. 
 However, this is virtually impossible as 4 web browsers dominate the market, thus, a solution in this address is doomed to fail. 
 Another solution is to provide different WebAssembly codes as soon as they are requested from the internet. 
