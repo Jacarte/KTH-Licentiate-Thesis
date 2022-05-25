@@ -5,16 +5,16 @@
 % chapter tiltes formatting
 \titleformat{\chapter}[display]
   {\LARGE}
-  {\renewcommand{\thechapter}{{\color{gray}0}\arabic{chapter}\color{gray}\vspace{2.0ex}\titlerule}\hspace*{-1.5em}
+  {\renewcommand{\thechapter}{{\color{gray}0}\arabic{chapter}\color{gray}\vspace{2.0ex}\titlerule}
   %\colorbox{blacm}
   {{\bfseries\fontsize{40}{50}\selectfont
-  \thechapter
-    \parbox[c][1.2cm][c]{1cm}{%
+  \thechapter\hspace*{-1.5cm}
+    \parbox[t][1.2cm][t]{1cm}{%
       \centering\textcolor{black}  {}}}}}
   {-3ex}
   {%\color{black}\titlerule
-  \vspace{-10.2ex}\filleft\parbox[t]{0.5\textwidth}{\begin{flushright}\MakeUppercase{#1}\\\end{flushright}}\hspace*{2em}}
-  [\vspace{1ex}]
+  \vspace{-12.5ex}\filleft\parbox[b]{0.5\textwidth}{\begin{flushright}\MakeUppercase{#1}\\\end{flushright}}\hspace*{-0.08cm}\vspace{-0.5cm}}
+  [\vspace{0.1ex}]
 % chapter tiltes spacing
 \titlespacing*{\chapter}{0pt}{10pt}{50pt}
 
