@@ -8,7 +8,7 @@ jobs:
     # This job runs on Linux
     runs-on: ubuntu-20.04
     container:
-      image: ghcr.io/jacarte/latex-build:latest28
+      image: ghcr.io/jacarte/latex-build:latest27
       credentials:
         username: jacarte
         password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
@@ -29,8 +29,8 @@ jobs:
 
       - name: Spell checking report
         run: |
-          mkdir -p /tools/rois
-          python3 /tools/ocr_spell_check.py Lic.pdf dico.text
+          mkdir -p ./build_images/rois
+          python3 ./build_images/ocr_spell_check.py Lic.pdf dico.text
         
       - name: GIT
         run: git config --global user.email "action@github.com" && git config --global user.name "GitHub Action"
@@ -42,10 +42,10 @@ jobs:
           
           ls -R .
           
-          cp -r /tools/rois ./rois
-          cp /tools/report.json ./report.json
+          cp -r ./build_images/rois ./rois
+          cp ./build_images/report.json ./report.json
 
-          python3 /tools/create_html_report.py report.json index.html
+          python3 ./build_images/create_html_report.py report.json index.html
 
           
 

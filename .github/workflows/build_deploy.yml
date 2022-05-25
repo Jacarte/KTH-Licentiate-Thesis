@@ -8,7 +8,7 @@ jobs:
     # This job runs on Linux
     runs-on: ubuntu-20.04
     container:
-      image: ghcr.io/jacarte/latex-build:latest28
+      image: ghcr.io/jacarte/latex-build:latest27
       credentials:
         username: jacarte
         password: ${{  secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}

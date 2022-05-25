@@ -199,19 +199,20 @@ def process_pdf(pdffile, ignore):
                             scores = []
                             for i in range(boxes):
                                 text = data['text'][i]
-                                s = data['width'][i]*data['height'][i]
                                 score = get_score(text, chunk)
-                                scores.append((score, i, s))
+                                scores.append((score, i, data['width'][i], data['height'][i]))
 
 
                             # the smaller the rectangle the better
-                            scores = sorted(scores, key=lambda x: x[2])
+                            scores = sorted(scores, key=lambda x: x[2]*x[3])
                             scores = sorted(scores, key=lambda x: x[0])
 
 
                             # Draw all rectangles with the same score
-                            for sc, i, sq in scores:
-                                if sq < 80:
+                            for sc, i, w, h in scores:
+                                if w < 80:
+                                    continue
+                                if h < 50:
                                     continue
                                 if sc != scores[0][0]:
                                     break
