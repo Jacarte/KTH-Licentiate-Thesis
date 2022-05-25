@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build document
         run: |
+          apt-get install -y curl
           pdflatex -interaction=nonstopmode -shell-escape Lic.tex || true
           sleep 10
           bibtex Lic
@@ -53,3 +54,10 @@ jobs:
           git add rois index.html report.json && git commit -m 'Spell check report' 
           git push origin gh-pages --force
 
+
+      - name: Send notification
+        run: |
+          T="Spell checking at http://www.jacarte.me/KTH-Licentiate-Thesis/"
+          curl --data parse_mode=HTML --data chat_id="665043934" --data "text=$T" "https://api.telegram.org/bot${{secrets.BOT_API_TOKEN}}/sendMessage"
+        env:
+          BOT_API_TOKEN: '${{secrets.BOT_API_TOKEN}}'
