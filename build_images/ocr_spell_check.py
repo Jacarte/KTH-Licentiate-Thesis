@@ -6,6 +6,7 @@ import sys
 import os
 import pytesseract
 import json
+from readability import Readability
 
 import language_tool_python
 tool = language_tool_python.LanguageTool('en-US')
@@ -121,11 +122,129 @@ def get_score(text1, text2):
     #print(text1, text2, DTW[i][j])
     return DTW[i][j]
 
+def get_terms(text):
+
+    REMOVE = ['i.e.']
+    TO_SPLIT = [" ", "\n"]
+    
+    tokens = [text]
+    for t in TO_SPLIT:
+        tmp = []
+        for token in tokens:
+            tokensn = token.split(t)
+            tmp += tokensn
+        tokens = tmp
+    
+    tokens = list(filter(lambda x: x not in REMOVE, tokens))
+    
+    # 2-grams
+    _2grams = zip(tokens, tokens[1:])
+    _2grams = list(_2grams)
+
+    # 3-grams
+    _3grams = zip(_2grams, tokens[2:])
+    _3grams = list(_3grams)    
+    print(_3grams)
+    return []
+    
+def get_score(text):
+
+    #text = text.replace("\n", " ")
+    r = Readability(text)
+    if len(text.split(" ")) > 100:
+
+        print("flesch_kincaid", r.flesch_kincaid())
+        print("flesch", r.flesch())
+        print("gunning_fog", r.gunning_fog())
+        print("coleman_liau", r.coleman_liau())
+        print("dale_chall", r.dale_chall())
+        print("ari", r.ari())
+        print("linsear_write", r.linsear_write())
+    if len(text.split("\n")) > 8:
+        print("smog", r.smog())
+        print("spache", r.spache())
+
+def spell_check(ID, text, imagedata,pagen, tesseractdata, rect, relative, words2ignore = []):
+    matches = tool.check(text)
+
+    boxes = len(tesseractdata['level'])
+    obs = []
+    if len(matches) > 0:
+        
+        obj = dict(
+                    # Unique id
+                    id=ID,
+                    matches = []
+                    )
+
+        for m in matches:
+            chunk = text[m.offset:m.offset + m.errorLength]
+
+            if not chunk:
+                continue
+            if chunk.lower() not in words2ignore:
+                obj['matches'].append(dict(
+                    message=m.message,
+                    replacements=m.replacements,
+                    ruleId=m.ruleId,
+                    offsetInContext=m.offsetInContext,
+                    category=m.category,
+                    offset=m.offset,
+                    errorLength=m.errorLength,
+                    text=text
+                ))
+                obj['places'] = []
+                #print(m.offsetInContext, m.offset)
+                print(m)
+                print()
+                globalx, globaly, _, _ = rect
+                margin = 3
+                # check each box and collect the text again, if it is equal to the error chunk, then, that is the place
+                scores = []
+                for i in range(boxes):
+                    text = tesseractdata['text'][i]
+                    score = get_score(text, chunk)
+                    scores.append((score, i, tesseractdata['width'][i], tesseractdata['height'][i]))
+
+
+                # the smaller the rectangle the better
+                scores = sorted(scores, key=lambda x: x[2]*x[3])
+                scores = sorted(scores, key=lambda x: x[0])
+
+
+                # Draw all rectangles with the same score
+                for sc, i, w, h in scores:
+                    if w < 80:
+                        continue
+                    if h < 10:
+                        continue
+                    if sc != scores[0][0]:
+                        break
+                    x, y, w, h = tesseractdata['left'][i], tesseractdata['top'][i], tesseractdata['width'][i], tesseractdata['height'][i]
+                    cv2.rectangle(imagedata, (x + globalx - margin, y + globaly - margin), (x + w  + globalx + margin, y + h + globaly + margin), (255,36,12), 2)
+
+                    if len(obj['places']) == 0:
+                        # But only keep one ?
+                        obj['places'].append(dict(
+                            x=x + globalx ,
+                            y =  y + globaly,
+                            w = w,
+                            h = h
+                        ))
+                obj['pagefile'] = relative
+                obj['chunk'] = chunk
+                obj['pageannotatedfile'] = f"rois/annotated_{pagen}.png"
+                # Add a different color per rule and annotate the image
+
+                ID += 1
+                obs.append(obj)
+    return obs
+
 def process_pdf(pdffile, ignore):
     words2ignore = open(ignore, 'r').readlines()
     words2ignore = [l.lower().strip().replace("\n", "").replace("\\\\", "\\") for l in words2ignore]
 
-    images = convert_from_path(pdffile, dpi=350, first_page=0)
+    images = convert_from_path(pdffile, dpi=350, first_page=10)
 
     pagen = 0
     REPORT = {}
@@ -160,78 +279,16 @@ def process_pdf(pdffile, ignore):
                 text = text.replace("  ", " ")
 
                 # Call language tool or any other
-
-                matches = tool.check(text)
                 
-                if len(matches) > 0:
-                    
-                    obj = dict(
-                                # Unique id
-                                id=ID,
-                                matches = []
-                                )
+                # Sentiment analysis?
+                # scores = get_score(text)
 
-                    for m in matches:
-                        chunk = text[m.offset:m.offset + m.errorLength]
+                # This does spell check
+                obs = spell_check(ID, text, imagedata, pagen, data, rect, relative, words2ignore)
+                # here do different things
+                REPORTPAGE += obs
 
-                        if not chunk:
-                            continue
-                        if chunk.lower() not in words2ignore:
-                            obj['matches'].append(dict(
-                                message=m.message,
-                                replacements=m.replacements,
-                                ruleId=m.ruleId,
-                                offsetInContext=m.offsetInContext,
-                                category=m.category,
-                                offset=m.offset,
-                                errorLength=m.errorLength,
-                                text=text
-                            ))
-                            obj['places'] = []
-                            #print(m.offsetInContext, m.offset)
-                            print(m)
-                            print()
-                            globalx, globaly, _, _ = rect
-                            margin = 3
-                            # check each box and collect the text again, if it is equal to the error chunk, then, that is the place
-                            scores = []
-                            for i in range(boxes):
-                                text = data['text'][i]
-                                score = get_score(text, chunk)
-                                scores.append((score, i, data['width'][i], data['height'][i]))
-
-
-                            # the smaller the rectangle the better
-                            scores = sorted(scores, key=lambda x: x[2]*x[3])
-                            scores = sorted(scores, key=lambda x: x[0])
-
-
-                            # Draw all rectangles with the same score
-                            for sc, i, w, h in scores:
-                                if w < 80:
-                                    continue
-                                if h < 10:
-                                    continue
-                                if sc != scores[0][0]:
-                                    break
-                                x, y, w, h = data['left'][i], data['top'][i], data['width'][i], data['height'][i]
-                                cv2.rectangle(imagedata, (x + globalx - margin, y + globaly - margin), (x + w  + globalx + margin, y + h + globaly + margin), (255,36,12), 2)
-
-                                if len(obj['places']) == 0:
-                                    # But only keep one ?
-                                    obj['places'].append(dict(
-                                        x=x + globalx ,
-                                        y =  y + globaly,
-                                        w = w,
-                                        h = h
-                                    ))
-                            obj['pagefile'] = relative
-                            obj['chunk'] = chunk
-                            obj['pageannotatedfile'] = f"rois/annotated_{pagen}.png"
-                            # Add a different color per rule and annotate the image
-
-                            ID += 1
-                            REPORTPAGE.append(obj)
+                
 
             if len(REPORTPAGE) > 0:
                 cv2.imwrite(f"{OUT}/rois/annotated_{pagen}.png", imagedata)
@@ -245,6 +302,7 @@ def process_pdf(pdffile, ignore):
 
             i += 1
             pagen += 1
+            break
         except KeyboardInterrupt:
             break
 

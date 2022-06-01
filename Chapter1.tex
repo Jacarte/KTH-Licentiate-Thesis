@@ -5,13 +5,14 @@
 
 % From Web 1.0 to JavaScript and how it support full-fledge applications
 The first web browser, Nexus \cite{nexus}, appeared in 1990.
-At that moment, web browsing was only about retrieving and showing small and static HTML web pages, \ie potential users read the content of pages without interactions further requesting a specific page.
-The growing computing power of devices, the spread of the internet, and the need for more interaction and experiences for users encourage the idea of executing code along with web pages.
+At that moment, web browsing was only about retrieving and showing small and static HTML web pages.
+In other words, users read the content of pages without interactions.
+The growing computing power of devices, the spread of the internet, and the need for more interaction and experiences for users encouraged the idea of executing code along with web pages.
 The Netscape browser made possible the execution of code on the client-side with the introduction of the JavaScript \cite{10.1007/978-3-642-14107-2_7} language in 1995.
 Remarkably, all browsers have supported JavaScript since Netscape. 
 Nowadays, most web pages include not only HTML, but also include JavaScript code that is executed in client computers.
-The web browser is in charge of interpreting JavaScript in the user machine.
-During the past decades, web browsers have become JavaScript language virtual machines, virtually evolving as operating systems that can run full-fledged applications, like video and audio players, animation creators, and PDF document renderers such as the one showing this document.
+During the past decades, web browsers have become JavaScript language virtual machines. 
+They virtually evolved as operating systems that can run full-fledged applications, like video and audio players, animation creators, and PDF document renderers such as the one showing this document.
 
 
 
@@ -28,27 +29,27 @@ Because of these problems, the Web Consortium (W3C) standarized a bytecode for t
 Wasm is designed to be fast, portable, self-contained, and secure \cite{Haas_2017}.
 All \wasm programs are compiled ahead-of-time from source languages such as C/C++ and Rust.
 \wasm is created by third-party compilers that might include optimizations like in the case of LLVM.  
-The \wasm language defines its Instruction Set Architecture \cite{wasm_spec} as an abstraction close to machine code instructions but agnostic to CPU architectures. Thus,  web browsers can use it to rapidly compile to the target architectures. %Therefore, \wasm outperforms JavaScript in the browser.
+The \wasm language defines its Instruction Set Architecture \cite{wasm_spec} as an abstraction close to machine code instructions but agnostic to CPU architectures. Thus,  web browsers can use it to rapidly compile to the target architectures in a one-to-one translation process.
 
-WebAssembly is faster than JavaScript \cite{Haas_2017}. Moreover, recent works demonstrate that using WebAssembly as an intermediate layer is better in terms of startup and memory usage than containerization and virtualization \cite{pMendkiServerless, 1244493Jacobsson}. 
+WebAssembly evolved outside web browsers.
+Some works demonstrated that using WebAssembly as an intermediate layer is better in terms of startup and memory usage than containerization and virtualization \cite{pMendkiServerless, 1244493Jacobsson}. 
 Consequently, in 2019, the Bytecode Alliance \cite{bytecodealliance} proposed WebAssembly System Interface (WASI) \cite{WASI}. 
-WASI standarized the execution of \wasm outside the browser with a POSIX system interface platform.
-WASI standarizes the adoption of \wasm in heterogeneous platforms \cite{bryant2020webassembly}, making it suitable for edge-cloud computing platforms \cite{9640153, wen2020wasmachine}
-WASI standarized a POSIX protocol to execute Wasm directly in the operating system. 
-To give an example of the importance of this evolution of \wasm, let us use the exact words of Solomon Hykes, the former CEO of docker: 
-"\textit{If WASM+WASI existed in 2008, we wouldn't have needed to created Docker. That's how important it is. Webassembly on the server is the future of computing. A standardized system interface was the missing link. Let's hope WASI is up to the task!\footnote{\url{https://twitter.com/solomonstre/status/1111004913222324225}}}"
+WASI pionered the execution of \wasm with a POSIX system interface protocol, making possible to execute Wasm directly in the operating system. 
+Therefore, it standarizes the adoption of \wasm in heterogeneous platforms \cite{bryant2020webassembly}, making it suitable for edge-cloud computing platforms \cite{9640153, wen2020wasmachine}
 
 \section{Software Monoculture}
 % Monoculture
 Web browsers and JavaScript have nearly three decades of development.
-Since then, web browsers have grown, reaching 12 different implementations \cite{grosskurth2005reference, GARCES2021111004}. 
+Since then, web browsers have grown, reaching several different implementations \cite{grosskurth2005reference, GARCES2021111004}. 
 Nevertheless, only Firefox, Chrome, Safari, and Edge dominate the presence on user computers.
 This means that, for 5 arbitrary devices (computers, tablets, smartphones) in a world of millions, at least two of them use the same web browser.
 This highlights a software monoculture problem \cite{goth2003addressing}, as an ecosystem of machines running the exact same software. 
-The monoculture concept is an analogy from biology \cite{lala2009monoculture}. It describes an ecosystem that face extinction due to lack of diversity as all individuals share the exact same vulnerabilities.
+The monoculture concept is an analogy from biology \cite{lala2009monoculture}. 
+It describes an ecosystem that face extinction due to lack of diversity as all individuals share the exact same vulnerabilities.
+In other words, applications can crash due to a single shared vulnerability.
 
 
-Nowadays, the serving of web pages, including WebAssembly code, is centralized and served through main sources.
+Nowadays, the serving of web pages, including WebAssembly code, is centralized and provided through main servers \cite{STRAC}.
 Thus, a similar argument for software monoculture can be used for the \wasm code that is served to web browsers. 
 Despite being designed for sandboxing and secure execution, \wasm is not exempt from vulnerabilities \cite{WebAssemblySecurity}.
 For example, \wasm engines are vulnerable to speculative execution \cite{Narayan2021Swivel}, and C/C++ source code vulnerabilities might be ported to Wasm binaries \cite{DeRoover2022}.  
@@ -57,15 +58,20 @@ Therefore, the sharing of the \wasm code through web browsers, also includes \wa
 
 % Escalating
 The software monoculture problem escalates if we consider the edge-cloud computing platforms and how they are adopting Wasm to provide services, as we previously mentioned.
-Concretely, thousands of edge devices running the Wasm as backend services, thus not only client devices might be affected through web browsers due to vulnerabilities sharing.
+Concretely, along with browser clients, thousands of edge devices running the Wasm as backend services might be affected due to vulnerabilities sharing.
 This means that if one node in an edge network is vulnerable, all the others are vulnerable in the exact same manner as the same binary is replicated on each node. In other words, the same attacker payload would break all edge nodes at once.
-This illustrates how Wasm execution is fragile with respect to systemic vulnerabilities for the whole internet, like it happened on June 8, 2021, for Fastly \cite{BREAKFastly}.
-
+This illustrates how Wasm execution is fragile with respect to systemic vulnerabilities for the whole internet.
+Let us take the example of what happened on June 8, 2021 with Fastly \cite{BREAKFastly}.
+That day, the whole internet suffered a 45 minutes disruption because of a failure when one Wasm binary was deployed at Fastly.
+The complete Fastly platform crashed.
+This, combined with that most web pages are CDN-dependant, created a catastrophe.
+Therefore, a single distributed Wasm binary could unleash the same incident \cite{CVE}.
 
 One might think that the solution is to adopt more web browser and interpreters implementations. 
-However, this is virtually impossible as 4 web browsers dominate the market, thus, a solution in this address is doomed to fail. 
-Another solution is to provide different WebAssembly codes as soon as they are requested from the internet. 
-For example, a different source code, yet equivalent, can be provided when a web page is served \cite{CROW}. 
+However, this is virtually impossible as 4 web browsers dominate the market and edge-cloud computing platforms are not in the client-side.
+Thus, a solution in this address is doomed to fail. 
+Another solution is to provide different WebAssembly codes.
+For example, a different source code, yet equivalent, can be provided when a web page requests it \cite{CROW}. 
 Consequently, millions of computers would execute different codes even though they use the same web browser.
 This strategy is called Software Diversification.
 % Monoculture and diversification motivation, 
@@ -80,20 +86,20 @@ Several of these transformations can be combined to produce less predictable var
 
 Previous works on software diversification demonstrated the removal of vulnerabilities, but remarkably in all cases, it can be used as a preemptive solution.
 For example, if a vulnerability is present in one program variant, discovering and disseminating it will not affect other variants.
-Software diversification has been widely researched, not being the case for \wasm.
+Software diversification has been widely researched, yet, this is not the case for \wasm.
 In this field, only Romano \etal \cite{wobfuscator} proposed the intermixing JavaScript and Wasm function calls to provide obfuscation against code analysis. 
 For \wasm, no software diversification solution has been proposed, primarily due to its novelty.
 
 
 
-\section{Artificial Software Diversification for \wasm}
+%\section{Artificial Software Diversification for \wasm}
 
 
-We port, for \wasm, the code transformations proposed in previous works as a preemptive software diversity solution.
-Since the majority of the Wasm binaries are created by the LLVM pipeline \cite{Hilbig2021AnES}, we propose a novel approach to generate software diversification for \wasm through the LLVM pipeline.
-We create a general approach to make code analysis for Wasm code in-between the LLVM compilation process.
-In addition, we create several \wasm variants by transforming their intermediate LLVM representation.
-Moreover, we combine \wasm program variants in multivariant execution binaries, that are able to execute different, yet semantically equivalent, computations in worldwide internet platforms.
+%We port, for \wasm, the code transformations proposed in previous works as a preemptive software diversity solution.
+%Since the majority of the Wasm binaries are created by the LLVM pipeline \cite{Hilbig2021AnES}, we propose a novel approach to generate software diversification for \wasm through the LLVM pipeline.
+%We create a general approach to make code analysis for Wasm code in-between the LLVM compilation process.
+%In addition, we create several \wasm variants by transforming their intermediate LLVM representation.
+%Moreover, we combine \wasm program variants in multivariant execution binaries, that are able to execute different, yet semantically equivalent, computations in worldwide internet platforms.
 
 
 \section{Research questions}
@@ -106,7 +112,7 @@ Our research questions are formulated by merging our publications and experience
 
 \begin{enumerate}[label=\subscript{RQ}{{\arabic*}}]
     \item \textbf{\rqone}\\
-    With this research question, we quantitatively assess the static differences between program variants created by our approach. We answer this question at the population level, where a program population is the collection of one original program and its generated variants. We aim to investigate the code properties that increase(or diminish) diversification at population level. 
+    With this research question, we quantitatively assess the static differences between program variants created by our approach. We answer this question at the population level, where a program population is the collection of one original program and its generated variants. We aim to investigate the code properties that increase or diminish diversification at population level. 
 
     \item \textbf{\rqtwo} \\
     With this research question, we complement $RQ_1$. We aim to investigate the impact on execution traces and execution times of the generated program variants.
@@ -128,15 +134,16 @@ Our research questions are formulated by merging our publications and experience
 
 This thesis contributes through four milestones. First, as a \emph{theoretical contribution}, we summarize the code transformations used to generate artificial software diversification through an exhaustive literature review. Consequently, we highlight the lack of diversification techniques for WebAssembly.
 Second, as a \emph{technical contribution}, we provide two tools, CROW \cite{CROW} and MEWE \cite{MEWE}. CROW creates 
-Wasm program variants by retargeting a superoptimizer \cite{Sasnauskas2017Souper:Superoptimizer}.
+Wasm program variants by using state-of-the-art code transformations.
 MEWE merges several Wasm program variants in a multivariant execution schema \cite{okhravi2013survey}.
 In addition, we summarize the main challenges faced during their implementation, such as i) program properties that make it prone to generate more variants and ii) program properties that make the observable behavior of variants different. 
-Besides, we discuss the incorporation of \emph{constant inferring} as a new transformation. 
+Besides, we discuss the incorporation of a new code transformation. 
 Third, we propose a \emph{methodology} to quantitatively evaluate the impact of our tools, assessing the creation of artificial software diversification for WebAssembly. 
 Fourth and final, we \emph{empirically demonstrate} the impact of our technique by evaluating the static and dynamic behavior of the generated diversity.
 Our results show that creating software diversification  for \wasm is feasible. 
 Remarkably, our diversification approaches remarkably affect the observable behavior such as static program properties, execution traces and execution times.
 
+\pagebreak
 \section{Publications}
 
 This work is based on the following publications:
@@ -144,29 +151,24 @@ This work is based on the following publications:
 \begin{enumerate}[label=\subscript{P}{{\arabic*}}]
     \item Superoptimization of WebAssembly Bytecode \cite{WasmSuperoptimizer}\\
     {\small\textbf{Javier Cabrera-Arteaga}, Shrinish Donde, Jian Gu, Orestis Floros, Lucas Satabin, Benoit Baudry, Martin Monperrus}\\
-        \emph{Programming 2020, MoreVMs'20}
-        %{\small
-        %\textbf{Abstract:} Motivated by the fast adoption of WebAssembly, we propose the first functional pipeline to support the superoptimization of WebAssembly bytecode. Our pipeline works over LLVM and Souper. We evaluate our superoptimization pipeline with 12 programs from the Rosetta code project. Our pipeline improves the code section size of 8 out of 12 programs. We discuss the challenges faced in superoptimization of WebAssembly with two case studies.}
-    \item CROW: Code Diversification for WebAssembly \cite{CROW}\\
+        \emph{Conference Companion of the 4th International Conference on Art, Science, and Engineering of Programming (Programming 2021), MoreVMs}
+
+        \item CROW: Code Diversification for WebAssembly \cite{CROW}\\
     {\small\textbf{Javier Cabrera-Arteaga}, Orestis Floros, Oscar Vera-Pérez, Benoit Baudry, Martin Monperrus}\\
-    \emph{NDSS 2021, MADWeb}
-    %{\small
-    %\textbf{Abstract:} The adoption of WebAssembly has rapidly increased in the last few years as it provides a fast and safe model for program execution. However, WebAssembly is not exempt from vulnerabilities that could be exploited by side channels attacks. This class of vulnerabilities that can be addressed by code diversification. In this paper, we present the first fully automated workflow for the diversification of WebAssembly binaries. We present CROW, an open-source tool implementing this workflow. We evaluate CROW's capabilities on 303 C programs and study its use on a real-life security-sensitive program: libsodium, a cryptographic library. Overall, CROW is able to generate diverse variants for 239 out of 303,(79\%) small programs. Furthermore, our experiments show that our approach and tool is able to successfully diversify off-the-shelf cryptographic software (libsodium).}
+    \emph{Network and Distributed System Security Symposium (NDSS 2021), MADWeb}
+
     \item Multi-Variant Execution at the Edge \cite{MEWE}\\
     {\small\textbf{Javier Cabrera-Arteaga}, Pierre Laperdrix, Martin Monperrus, Benoit Baudry}\\
     \emph{Under review}
-    %{\small
-    %\textbf{Abstract:} Edge-cloud computing offloads parts of the computations that traditionally occurs in the cloud to edge nodes,e.g., CDN servers, in order to get closer to the users and reduce latency. To improve performance even further, WebAssembly is increasingly used in this context. Edge-cloud computing providers, such as Fastly or Cloudflare, let their clients deploy stateless services in the form of WebAssembly binaries, which are then translated to machine code and sandboxed for a safe execution at the edge.
-    %In this context, we propose a technique that (i) automatically diversifies WebAssembly binaries that are deployed to the edge and (ii) randomizes execution paths at runtime, turning the execution of the services into a moving target. Given a service tobe deployed at the edge, we automatically synthesize functionally equivalent variants for the functions that implement the service.All the variants are then wrapped into a single multivariant WebAssembly binary. When the service endpoint is executed,every time a function is invoked, one of its variants is randomly selected. We implement this technique in the MEWE tool and we validate it with 7 services for cryptography and QR encoding. MEWE generates multivariant binaries that embed hundreds of function variants. We execute the multivariant binaries on the worldwide edge platform provided by Fastly. We show that,at runtime, the multivariant exhibit a remarkable diversity ofexecution traces, across the whole edge platform. }
+
     \item Scalable Comparison of JavaScript V8 Bytecode Traces \cite{STRAC}\\
     {\small\textbf{Javier Cabrera-Arteaga}, Martin Monperrus, Benoit Baudry}\\
-    \emph{SPLASH 2019, VMIL}
+    \emph{11th ACM SIGPLAN International Workshop on Virtual Machines and Intermediate Languages (SPLASH 2019)}
 \end{enumerate}
 
-\pagebreak
 \section*{Thesis layout}
 
-This dissertation is organized in five chapters including this. \autoref{chapter:sota} presents the background and the state of the art for WebAssembly and Artificial Software Diversification.
+This dissertation is organized in five chapters including this. \autoref{chapter:sota} presents the background and the state of the art for WebAssembly and software diversification.
 \autoref{chapter:technical} describes our technical contributions, faced challenges and engineering decisions carried out to implement our artifacts. \autoref{chapter:method} describes the methodology followed to answer the three main
 research questions driving this thesis. \autoref{chapter:results} details the main results of this work. \autoref{chapter:conclude} concludes and discusses future work. 
 In addition, this dissertation contains the collection of research papers previously mentioned in this chapter.

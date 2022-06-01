@@ -13,6 +13,12 @@ HEIGHT=2000
 PADDING=200
 SPREAD = 25
 
+LOW = False
+if LOW:
+    WIDTH = 500
+    HEIGHT = 500
+    PADDING = 10
+
 # Colors
 BACKGROUND_COLOR=(255,255,255, 255) # black, alpha
 FOREGROUND_COLOR=(0,0,0,255) # white
@@ -49,7 +55,7 @@ class CallGradient:
         self.color = color
         self.trigger = trigger
 
-        self.path = self.precalculate_path_quad()
+        self.path = self.precalculate_path_linear()
 
     def precalculate_path_linear(self):
 
@@ -96,7 +102,7 @@ class CallGradient:
             #print(len(xs), len(ys))
             paths = interpolate.splrep(xs, ys,  k=2)
             
-            x2 = np.linspace(xs[0], xs[-1], 200)
+            x2 = np.linspace(xs[0], xs[-1], 200 if not LOW else 20)
             y2 = interpolate.splev(x2, paths)
             #print(y2)
             paths= [ (x, y) for x, y in zip(x2, y2) ]
@@ -212,7 +218,7 @@ def load_from_traces(board, masks):
 
 
 
-    instrumented = data['crypto_core_ed25519_scalar_random']['instrumented']
+    instrumented = data['bin2base64']['instrumented']
     pathsall = instrumented['paths']
     paths = []
 
@@ -251,7 +257,7 @@ def load_from_traces(board, masks):
             for name, nodeid, raw, tpe in NODES_IN_CLUSTERS[mx]['nodes']:
                 #print(name)
                 if nodeid not in uniqueids:
-                    node = FunctionNode(nodeid, clusterid,tpe, 13, color=color_by_type(tpe), x = 0, y = 0)
+                    node = FunctionNode(nodeid, clusterid,tpe, 30, color=color_by_type(tpe), x = 0, y = 0)
 
                     if clusterid not in CLUSTERS:
                         CLUSTERS[clusterid] = []
@@ -285,7 +291,7 @@ def load_from_traces(board, masks):
                 node.x = PADDING + clusterid*CLUSTER_X_POS_SIZE
                 node.y = CENTERY# PADDING + c*CLUSTER_Y_POS_SIZE
             else:
-                r = 80 + SPREAD * math.sqrt(random.random())
+                r = 200 + SPREAD * math.sqrt(random.random())
                 theta = random.random() * 2 * math.pi
                 rx = node.x + r * math.cos(theta)
                 yr = node.y + r * math.sin(theta)
@@ -307,11 +313,14 @@ def load_from_traces(board, masks):
 def color_by_type(tpe):
     #0.16, 0.42, 0.705  107/255
     if tpe == "DISPATCHER":
-        return (int(255*0.72), 125,  125, 255)
+        return (148, 194, 128, 255)
+        #return (int(255*0.72), 125,  125, 255)
     if tpe == "ORIGINAL":
-        return (int(255*0.16), int(255*0.42), int(255*0.705), 255)
+        return (253, 228, 158, 255)
+        #return (int(255*0.16), int(255*0.42), int(255*0.705), 255)
     if tpe == "VARIANT":
-        return (int(255*0.16), int(255*0.42), int(255*0.705), 100)
+        return (204,204,204, 128)
+        #return (int(255*0.16), int(255*0.42), int(255*0.705), 100)
 
 def load_map(path):
     fcontent = open(path, 'r').readlines()
@@ -383,7 +392,7 @@ def get_call_gradient(node1, node2, delay, color, trigger = None):
     direction = (direction[0]/length, direction[1]/length)
 
     #print(direction)
-    return CallGradient(direction, color, speed=3, x=node1.x, y = node1.y, x0 = node1.x, x1 = node2.x, y0 = node1.y, y1 = node2.y, delay = delay, trigger = trigger)
+    return CallGradient(direction, color, speed=3 if not LOW else 18, x=node1.x, y = node1.y, x0 = node1.x, x1 = node2.x, y0 = node1.y, y1 = node2.y, delay = delay, trigger = trigger)
 
 if __name__ == "__main__":
     board, masks = get_board()
@@ -437,6 +446,10 @@ if __name__ == "__main__":
             
             # draw the calls
             #for grad in gradients:
+            for clusterid in nodes.keys():
+                for node in nodes[clusterid]:
+                    node.draw(board, masks)
+
             for g in gradients:
                 g.move(board, masks)
             #first.move(board, masks)
@@ -451,9 +464,6 @@ if __name__ == "__main__":
 
             decay(board, masks)
 
-            for clusterid in nodes.keys():
-                for node in nodes[clusterid]:
-                    node.draw(board, masks)
 
 
             board.save(f"out/img{i:03d}.png")

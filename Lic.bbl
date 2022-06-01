@@ -92,14 +92,18 @@ Cabrera~Arteaga,J., Floros,O., Vera~Perez,O., Baudry,B., and Monperrus,M.
 \bibitem[WAS, 2021]{WASI}
  (2021).
 \newblock Webassembly system interface.
+\newblock \url{https://github.com/WebAssembly/WASI}.
 
 \bibitem[CVE, 2021]{CVE}
  (2021).
 \newblock Stop a wasm compiler bug before it becomes a problem | fastly.
+\newblock
+  \url{https://www.fastly.com/blog/defense-in-depth-stopping-a-wasm-compiler-bug-before-it-became-a-problem}.
 
 \bibitem[BRE, 2021]{BREAKFastly}
  (2021).
 \newblock {Global CDN Disruption}.
+\newblock \url{https://www.fastly.com/blog/summary-of-june-8-outage}.
 
 \bibitem[Xu et~al., 2020]{xu2020merr}
 Xu,Y., Solihin,Y., and Shen,X. (2020).
@@ -157,6 +161,7 @@ Gadepalli,P.~K., McBride,S., Peach,G., Cherkasova,L., and Parmer,G. (2020).
 \bibitem[Chen and {\relax W3C group}, 2020]{WebAssemblySecurity}
 Chen,D. and {\relax W3C group} (2020).
 \newblock {WebAssembly documentation: Security}.
+\newblock \url{https://webassembly.org/docs/security/}.
 \newblock {Accessed: 18 June 2020}.
 
 \bibitem[Cabrera~Arteaga et~al., 2020]{WasmSuperoptimizer}
@@ -195,6 +200,7 @@ Cabrera~Arteaga,J., Monperrus,M., and Baudry,B. (2019).
 \bibitem[{Bytecode Alliance }, 2019]{bytecodealliance}
 {Bytecode Alliance } ({2019}).
 \newblock {Bytecode Alliance}.
+\newblock \url{{https://bytecodealliance.org/}}.
 
 \bibitem[Aga and Austin, 2019]{aga2019smokestack}
 Aga,M.~T. and Austin,T. (2019).
@@ -252,6 +258,7 @@ Zalewski,M. (2017).
 \bibitem[{WebAssembly Community Group}, 2017]{wasm_spec}
 {WebAssembly Community Group} (2017).
 \newblock {WebAssembly Specification}.
+\newblock \url{https://webassembly.github.io/spec/core/syntax/index.html}.
 
 \bibitem[Sasnauskas et~al., 2017]{Sasnauskas2017Souper:Superoptimizer}
 Sasnauskas,R., Chen,Y., Collingbourne,P., Ketema,J., Lup,G., Taneja,J., and
@@ -262,6 +269,8 @@ Sasnauskas,R., Chen,Y., Collingbourne,P., Ketema,J., Lup,G., Taneja,J., and
 \bibitem[{Oracle}, 2017]{javaapplet}
 {Oracle} ({2017}).
 \newblock {JDK 9 Release Notes. Deprecation of Java Applets}.
+\newblock
+  \url{{https://www.oracle.com/java/technologies/javase/9-deprecated-features.html}}.
 
 \bibitem[Haas et~al., 2017]{Haas_2017}
 Haas,A., Rossberg,A., Schuff,D.~L., Schuff,D.~L., Titzer,B.~L., Holman,M.,
@@ -315,6 +324,7 @@ Baudry,B. and Monperrus,M. (2015).
 \bibitem[{Alon Zakai}, 2015]{asmjs}
 {Alon Zakai} (2015).
 \newblock {asm.js Speedups Everywhere}.
+\newblock \url{https://hacks.mozilla.org/2015/03/asm-speedups-everywhere/}.
 
 \bibitem[Agosta et~al., 2015]{agosta2015meet}
 Agosta,G., Barenghi,A., Pelosi,G., and Scandale,M. (2015).
@@ -326,10 +336,12 @@ Agosta,G., Barenghi,A., Pelosi,G., and Scandale,M. (2015).
 \bibitem[{Zakai and colleagues}, 2014b]{emscripten}
 {Zakai and colleagues} ({2014}b).
 \newblock {Emscripten}.
+\newblock \url {{https://emscripten.org/}}.
 
 \bibitem[{Zakai and colleagues}, 2014a]{asmjsweb}
 {Zakai and colleagues} ({2014}a).
 \newblock {asm.js}.
+\newblock \url{{http://asmjs.org/spec/latest/}}.
 
 \bibitem[Le et~al., 2014]{LeCompilers}
 Le,V., Afshari,M., and Su,Z. (2014).
@@ -451,6 +463,7 @@ Salamat,B., Gal,A., Jackson,T., Manivannan,K., Wagner,G., and Franz,M. (2007).
 \bibitem[{Microsoft}, 2007]{silverlight}
 {Microsoft} ({2007}).
 \newblock {Silverlight}.
+\newblock \url{{https://www.microsoft.com/silverlight/}}.
 
 \bibitem[Bruschi et~al., 2007]{bruschi2007diversified}
 Bruschi,D., Cavallaro,L., and Lanzi,A. (2007).
@@ -501,6 +514,7 @@ El-Khalil,R. and Keromytis,A.~D. (2004).
 \bibitem[{LLVM}, 2003]{llvmofficialweb}
 {LLVM} ({2003}).
 \newblock { The LLVM Compiler Infrastructure }.
+\newblock \url{{https://llvm.org/}}.
 
 \bibitem[Kc et~al., 2003]{Kc03}
 Kc,G.~S., Keromytis,A.~D., and Prevelakis,V. (2003).
@@ -539,6 +553,8 @@ Forrest,S., Somayaji,A., and Ackley,D. (1997).
 \bibitem[{Microsoft}, 1996]{activex}
 {Microsoft} ({1996}).
 \newblock {Microsoft Announces ActiveX Technologies}.
+\newblock
+  \url{{https://web.archive.org/web/20090828024117/http://www.microsoft.com/presspass/press/1996/mar96/activxpr.mspx}}.
 
 \bibitem[Cohen, 1993]{cohen1993operating}
 Cohen,F.~B. (1993).
@@ -548,6 +564,7 @@ Cohen,F.~B. (1993).
 \bibitem[{Tim Berners-Lee}, 1990]{nexus}
 {Tim Berners-Lee} ({1990}).
 \newblock {The WorldWideWeb browser}.
+\newblock \url{{https://www.w3.org/People/Berners-Lee/WorldWideWeb.html}}.
 
 \bibitem[Pettis and Hansen, 1990]{pettisochhansen}
 Pettis,K. and Hansen,R.~C. (1990).
