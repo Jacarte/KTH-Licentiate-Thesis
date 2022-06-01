@@ -76,8 +76,8 @@ This thesis is founded on the work of Cohen in 1993 \cite{cohen1993operating} as
 
 \subsection{Variants' generation}
 % Mutation strategy
-Cohen \etal proposed to generate artificial software diversification through mutation strategies.
-A mutation strategy is a set of rules to define how a specific component of software development should be changed to provide a different yet functionally equivalent program. Cohen \etal proposed 10 concrete transformation strategies that can be applied at fine-grained levels. 
+Cohen \etal \cite{cohen1993operating} proposed to generate artificial software diversification through mutation strategies.
+A mutation strategy is a set of rules to define how a specific component of software development should be changed to provide a different yet functionally equivalent program. Cohen and colleagues proposed 10 concrete transformation strategies that can be applied at fine-grained levels. 
 All described strategies can be mixed together. They can be applied in any sequence and recursively, providing a richer diversity environment. We summarize them, complemented with the work of Baudry \etal \cite{natural_diversity} and the work of Jackson \etal \cite{jackson}, in 5 strategies.
 
 % A mutation can be applied at different layers of software lifecycle, from compilation to execution and from source code to executable binary.
@@ -257,7 +257,7 @@ On the same topic, Aga and colleagues \cite{aga2019smokestack} propose to genera
 Remarkably, the Polyverse company\footnote{\url{https://polyverse.com/}} materializes randomization at the commercial level in real life. They deliver a unique Linux distribution compilation for each of its clients by scrambling the Linux packages at the source code level.
     
 % How
-Virtual machines and operating systems can be also randomized. On this topic, Kc \etal \cite{Kc03} create a unique mapping between artificial CPU instructions and real ones. Their approach makes possible the assignation of different variants to specific target clients. Similarly, Xu \etal \cite{xu2020merr} recompile the Linux Kernel to reduce the exposure time of persistent memory objects, increasing the frequency of address randomization.
+Virtual machines and operating systems can be also randomized. On this topic, Kc \etal \cite{Kc03} create a unique mapping between artificial CPU instructions and real ones. Their approach makes possible the assignment of different variants to specific target clients. Similarly, Xu \etal \cite{xu2020merr} recompile the Linux Kernel to reduce the exposure time of persistent memory objects, increasing the frequency of address randomization.
 
 %
 
@@ -328,21 +328,19 @@ In the following we enumerate the open challenges we have found in the literatur
 
 
 \begin{enumerate}
-    \item \emph{WebAssembly is vulnerable:} \wasm is a novel technology, yet vulnerable. The adoption of defenses for it is still under development \cite{Narayan2021Swivel, johnson2021} and has a low pace.
     
-    \item \emph{Software monoculture:}  \wasm is evolving further web browsers as a technology to support edge-cloud computing platforms.
-    The edge-cloud computing model is based on replicating the same binary along with all computing nodes in a worldwide scale. Therefore, potential vulnerabilities are spread, highlighting a clear monoculture phenomenon \cite{Harrand1650630}. 
+    \item \emph{Software monoculture:}  
+    The same Wasm code is executed in millions of clients devices through web browser.
+    In addition, \wasm is evolving further web browsers as a technology to support edge-cloud computing platforms, \ie replicating the same binary along with all computing nodes in a worldwide scale. Therefore, potential vulnerabilities are spread, highlighting a monoculture phenomenon \cite{Harrand1650630}. 
 
-    \item \emph{Lack of Software Diversification for \wasm}:  Software Diversification has demonstrated to provide protection for known and yet-unknown vulnerabilities. Yet, only one software diversity approach has been applied to the context of \wasm \cite{wobfuscator}. 
-    Moreover, as we illustrate in \autoref{table:sota:comparison}, the existing works for Software Diversification do not contribute directly to \wasm.
+    \item \emph{Lack of Software Diversification for \wasm}:  Software Diversification has demonstrated to provide protection for known and yet-unknown vulnerabilities. However, only one software diversity approach has been applied to the context of \wasm \cite{wobfuscator}. 
+    % Moreover, as we illustrate in \autoref{table:sota:comparison}, the existing works for software diversification do not contribute directly to \wasm.
+    Moreover, \wasm is a novel technology and, the adoption of defenses is still under development \cite{Narayan2021Swivel, johnson2021} and has a low pace, making software diversification a possible preemptive technique.
+    Besides, the preexisting works based on the LLVM pipeline cannot be extended to Wasm because they contribute to LLVM versions released before the inclusion of Wasm as an architecture. 
+    % On the other hand, there is no mentioned work merging all mutation strategies in one solution.
     
     \item \emph{Lack of research on MVE for \wasm:} \wasm has a growing adoption for Edge platforms. However, researching on MVE in a distributed setting like the Edge has been less researched. Only Voulimeneas \etal \cite{voulimeneas2021dmvx} recently proposed a multivariant execution system by parallelizing the execution of the variants in different machines for the sake of efficiency. 
 
-     % 
-    
-    \item \emph{Porting current contributions:} 
-    The preexisting works based on the LLVM pipeline cannot be extended to Wasm due to technical challenges. The main reason is that previous works contribute to LLVM versions released before the inclusion of Wasm as an LLVM architecture. 
-    On the other hand, there is no mentioned work merging all mutation strategies in one solution.
 
 \end{enumerate}
 

@@ -213,11 +213,6 @@ Varda,K. (2018).
 \newblock Webassembly on cloudflare workers.
 \newblock Technical report.
 
-\bibitem[Silvanovich, 2018]{ChromeZero}
-Silvanovich,N. (2018).
-\newblock The problems and promise of webassembly.
-\newblock Technical report.
-
 \bibitem[Lu et~al., 2018]{lu2018stopping}
 Lu,K., Xu,M., Song,C., Kim,T., and Lee,W. (2018).
 \newblock Stopping memory disclosures via diversification and replicated
