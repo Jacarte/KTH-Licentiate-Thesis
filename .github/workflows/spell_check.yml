@@ -31,6 +31,7 @@ jobs:
       - name: Spell checking report
         run: |
           mkdir -p ./build_images/rois
+          pip3 install readability
           python3 ./build_images/ocr_spell_check.py Lic.pdf dico.text
         
       - name: GIT
