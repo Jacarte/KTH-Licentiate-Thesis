@@ -183,6 +183,14 @@ Bryant,D. (2020).
   execution.
 \newblock In {\em ASPLOS}.
 
+\bibitem[Gurdeep~Singh and Scholliers, 2019]{WARDuino2019}
+Gurdeep~Singh,R. and Scholliers,C. (2019).
+\newblock Warduino: A dynamic webassembly virtual machine for programming
+  microcontrollers.
+\newblock In {\em Proceedings of the 16th ACM SIGPLAN International Conference
+  on Managed Programming Languages and Runtimes}, MPLR 2019, pages 27--36, New
+  York, NY, USA. ACM.
+
 \bibitem[Churchill et~al., 2019]{churchill2019}
 Churchill,B., Padon,O., Sharma,R., and Aiken,A. (2019).
 \newblock Semantic program alignment for equivalence checking.

@@ -42,8 +42,16 @@ Finally, the third step (Step \step{3}), includes the compilation and execution 
     \label{diagrams:sota:wasm}
 \end{figure}
 
-Wasm can execute directly and is platform independent. As such it is useful for IoT and Edge computing \cite{Narayan2021Swivel,Sledge}. For instance, Cloudflare and Fastly adapted their platforms to provide services directly with \wasm. In this case, the standard library, instead of JavaScript, is provided by any other language stack that the host environment supports.
-In 2019, the Bytecode Alliance \cite{bytecodealliance} proposed WebAssembly System Interface (WASI) \cite{WASI}. WASI is the foundation to build Wasm code outside the browser with a POSIX system interface platform. WASI standarizes the adoption of \wasm in heterogeneous platforms \cite{bryant2020webassembly}. 
+Wasm can execute directly and is platform independent.
+Thus, the Internet of Things (IoT) can be seen as the perfect match for \wasm \cite{Narayan2021Swivel,Sledge} outside web browsers.
+IoT devices are heterogeneous in terms of architecture and platform as the same for Edge computing.
+For example, Singh and colleagues \cite{WARDuino2019} proposed a virtual machine for Wasm in arduino based devices.
+On the other hand, Cloudflare and Fastly adapted their platforms to provide edge computing services directly with \wasm. 
+In these cases, the standard library, instead of JavaScript, is provided by any other language stack that the host environment supports.
+
+Remarkably, in 2019, the Bytecode Alliance \cite{bytecodealliance} proposed WebAssembly System Interface (WASI) \cite{WASI}. 
+WASI is the foundation to build Wasm code outside the browser with a POSIX system interface platform. 
+WASI standarizes the adoption of \wasm in heterogeneous platforms \cite{bryant2020webassembly}. 
 
 % Talk about benchmarks and performance numbers
 
