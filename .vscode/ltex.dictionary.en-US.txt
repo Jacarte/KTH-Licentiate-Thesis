@@ -19,3 +19,6 @@ standarization
 Diversifier
 Souper
 entrypoint
+inlining
+inlined
+cryptomining

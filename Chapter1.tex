@@ -61,10 +61,10 @@ The software monoculture problem escalates if we consider the edge-cloud computi
 Concretely, along with browser clients, thousands of edge devices running the Wasm as backend services might be affected due to vulnerabilities sharing.
 This means that if one node in an edge network is vulnerable, all the others are vulnerable in the exact same manner as the same binary is replicated on each node. In other words, the same attacker payload would break all edge nodes at once.
 This illustrates how Wasm execution is fragile with respect to systemic vulnerabilities for the whole internet.
-Let us take the example of what happened on June 8, 2021 with Fastly \cite{BREAKFastly}.
+Let us take the example of what happened on June 8, 2021, with Fastly \cite{BREAKFastly}.
 That day, the whole internet suffered a 45 minutes disruption because of a failure when one Wasm binary was deployed at Fastly.
 The complete Fastly platform crashed.
-This, combined with that most web pages are CDN-dependant, created a catastrophe.
+The bug, combined with most web pages being CDN-dependant, created a catastrophe.
 Therefore, a single distributed Wasm binary could unleash the same incident \cite{CVE}.
 
 One might think that the solution is to adopt more web browser and interpreters implementations. 
