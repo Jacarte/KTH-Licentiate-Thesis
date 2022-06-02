@@ -146,22 +146,6 @@ def get_terms(text):
     print(_3grams)
     return []
     
-def get_score(text):
-
-    #text = text.replace("\n", " ")
-    r = Readability(text)
-    if len(text.split(" ")) > 100:
-
-        print("flesch_kincaid", r.flesch_kincaid())
-        print("flesch", r.flesch())
-        print("gunning_fog", r.gunning_fog())
-        print("coleman_liau", r.coleman_liau())
-        print("dale_chall", r.dale_chall())
-        print("ari", r.ari())
-        print("linsear_write", r.linsear_write())
-    if len(text.split("\n")) > 8:
-        print("smog", r.smog())
-        print("spache", r.spache())
 
 def spell_check(ID, text, imagedata,pagen, tesseractdata, rect, relative, words2ignore = []):
     matches = tool.check(text)
