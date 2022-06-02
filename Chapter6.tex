@@ -59,32 +59,32 @@ As we mentioned in \autoref{results:rq1} our solution provides program variants 
 Techniques relying on intelligent heuristics could help increase the generation of unique variants by early discarding unsound combinations.
 On the other hand, constant inferring does not always finish in a successful replacement due to the CROW's obliviousness to some computation models, such as memory operations. 
 A solution could also be to use heuristics to select which part of the code is more probable to become a constant inferred assignment.
-On the other hand MEWE has shown to introduce overhead during the execution of the multivariant binaries.
-We identified the call of the variants as the main reason.
-Each time a new variant is executed, it involves the introduction of a new function call.
-Since our variants are artifically created, their body could be directly inlined in the dispatcher body.
-This means that we can reduce the number of function calls by the inlining of the variant.
-Yet, a deeper study on the security consequences is needed.
+On the other hand, MEWE introduces overhead during the execution of the multivariant binaries.
+We identified the dispatcher calling the function variants as the main reason.
+Each time a new variant executes, it involves the introduction of a new function call through the dispatcher.
+Our variants are artificially created. Thus, their bodies could be directly inlined in the dispatcher's body.
+This means that we can reduce the number of function calls by inlining the variant.
+Nevertheless, a deeper study on the security consequences is needed.
 \\
 
 \textbf{Obfuscation, data augmentation and malware classification:}
 % Obfuscation
 Wasm is remarkably used for cryptocurrency mining. 
-Sometimes the cryptomining is done without the consent of users, creating what is called crypto-malwares \cite{Hilbig2021AnES}.
-Antivirus software are able to detect them. 
-However, a recent work \cite{10.1145/3507657.3528560} shows that malware classifiers could be bypassed with the right obfuscation technique.
+Sometimes the crypto-mining is done without the consent of users, creating what is called crypto-malwares \cite{Hilbig2021AnES}.
+Antivirus software could detect them. 
+However, a recent work \cite{10.1145/3507657.3528560} shows that malware classifiers could be bypassed with the correct obfuscation technique.
 Our diversification approach could be used to increase resilience in malware classifiers by training them with augmented datasets on semantically equivalent malwares.
 On the other hand, superoptimization can be used to build a canonical code representation of a variant's population.
-Therefore, to train a classifier with such a canonical representation could mitigate malware obfuscation.
+Therefore, if a classifier uses a canonical representation, then malware obfuscation could be mitigated.
 \\
 
 \textbf{Better fuzzing:}
 Fuzzers have become one of the most used techniques for automated testing \cite{zalewski2017american}, and compilers are not the exception.
 Remarkably, Fastly uses this technique to test their compiler, Lucet.
-Their fuzzing technique randomly creates different Wasm binaries and pass them to the compiler, if it crashes, a bug report is created and fixed later.
-Our approaches created one binary that crashed their compiler\cite{CVE}, after they had none bug for months.
+Their fuzzing technique randomly creates different Wasm binaries and passes them to the compiler. If the compiler crashes, a bug report is created and fixed later.
+Our approaches created one binary that crashed their compiler\cite{CVE}, after they had no bug for months.
 Therefore, our code transformations outperform their code generation for testing. 
 This highlighted the need for better strategies for stressing compilers, interpreters, and validators for \wasm.
-CROW and MEWE might be used for fuzzing, preventing vulnerabilities and providing better testing of systems.
+CROW and MEWE might be used for fuzzing, preventing vulnerabilities, and providing better testing of systems.
 
 
