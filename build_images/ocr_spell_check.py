@@ -301,7 +301,6 @@ def process_pdf(pdffile, ignore):
 
             i += 1
             pagen += 1
-            break
         except KeyboardInterrupt:
             break
 
