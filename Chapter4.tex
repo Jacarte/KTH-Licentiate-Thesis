@@ -32,7 +32,7 @@ Our experiments assess the impact of artificially created diversity. The first s
 
 We build our three corpora in an escalating strategy based on the merging of our previous publications. The first corpus is diverse and contains simple programs in terms of code size, making them easy to manually analyze. The second corpus is a project meant for security-sensitive applications. The third corpus is a QR encoding decoding algorithm. 
 %The work of Hilbig \etal \cite{Hilbig2021AnES} shows that approximately 65\% of all \wasm programs come out of C/C++ source code through the LLVM pipeline, and more than 75\% if the Rust language is included. Therefore, all modules in the corpora are considered to come along the LLVM pipeline. 
-In the following, we describe the filtering and description of each corpus.
+In the following text, we describe the filtering and description of each corpus.
 
 \begin{enumerate}
     \item \textbf{\corpusrosetta}: We take programs from the Rosetta Code project\footnote{\url{http://www.rosettacode.org/wiki/Rosetta_Code}}. This website hosts a curated set of solutions for specific programming tasks in various programming languages. It contains many tasks, from simple ones, such as adding two numbers, to complex algorithms like a compiler lexer. We first collect all C programs from the Rosetta Code, representing $989$ programs as of 01/26/2020. We then apply several filters: the programs should successfully compile and, they should not require user inputs to automatically execute them, the programs should terminate and should not result in non-deterministic results. 

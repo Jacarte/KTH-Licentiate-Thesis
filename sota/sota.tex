@@ -66,7 +66,7 @@ According to the survey by Baudry \etal \cite{natural_diversity}, the motivation
 
 %\subsection*{artificial software diversity.}
 
-There are two primary sources of software diversification: Natural Diversity and Artificial Diversity\cite{natural_diversity}. This work contributes to the state of the art of Artificial Diversity, which consists of synthesizing software. 
+There are two primary sources of software diversification: Natural Diversity and Artificial Diversity\cite{natural_diversity}. This work contributes to the state of the art of Artificial Diversity, which consists of software synthesis. 
 % Intro to Cohen and that functional/semantic equivalence is 
 This thesis is founded on the work of Cohen in 1993 \cite{cohen1993operating} as follows.
 
@@ -143,7 +143,7 @@ All described strategies can be mixed together. They can be applied in any seque
     to create a unique mapping between artificial CPU instructions and real ones.
     On the same topic, Chew and Song \cite{Chew02mitigatingbuffer} target operating system randomization. They randomize the interface between the operating system and the user applications.
     Courouss{\'e} \etal~\cite{courousse2016runtime} implement an assembly-like DSL to generate equivalent code at runtime in order to increase protection against side-channel attacks. Their technique generates a different program during execution using an interpreter for their DSL.
-    Code obfuscation \cite{wobfuscator} can be seen as a simplification of \emph{ISA randomization}. The main difference between encoding and obfuscating code is that the former requires the final target to know the encoding key while the latter executes as it is in any client. Yet, both strategies are meant to tackle program analysis from potential attackers. 
+    Code obfuscation \cite{wobfuscator} can be seen as a simplification of \emph{ISA randomization}. The main difference between encoding and obfuscating code is that the former requires the final target to know the encoding key while the latter executes as is in any client. Yet, both strategies are meant to tackle program analysis from potential attackers. 
 
     %It is an interpretation mechanism similar to encoding (\autoref{strategy:S9}), but the execution of programs is delegated to a custom interpreter instead of using preexisting execution hosts. The program is decoded at runtime every time it is invoked. 
     
@@ -254,7 +254,7 @@ After program variants are generated, they can be used in two main scenarios: Ra
 
 El-Khalil and colleagues \cite{ElKhalil2004} propose to use a custom compiler to generate different binaries out of the compilation process. El-Khalil and colleagues modify a version of GCC 4.1 to separate a conventional stack into several component parts, called multistacks.
 On the same topic, Aga and colleagues \cite{aga2019smokestack} propose to generate program variants by randomizing its data layout in memory. Their approach makes each variant to operate the same data in memory with different memory offsets.
-Remarkably, the Polyverse company\footnote{\url{https://polyverse.com/}} materializes randomization at the commercial level in real life. They deliver a unique Linux distribution compilation for each of its clients by scrambling the Linux packages at the source code level.
+The Polyverse company\footnote{\url{https://polyverse.com/}} materializes randomization at the commercial level in real life. They deliver a unique Linux distribution compilation for each of its clients by scrambling the Linux packages at the source code level.
     
 % How
 Virtual machines and operating systems can be also randomized. On this topic, Kc \etal \cite{Kc03} create a unique mapping between artificial CPU instructions and real ones. Their approach makes possible the assignment of different variants to specific target clients. Similarly, Xu \etal \cite{xu2020merr} recompile the Linux Kernel to reduce the exposure time of persistent memory objects, increasing the frequency of address randomization.
@@ -315,7 +315,7 @@ Both scenarios have demonstrated to harden security by tackling know vulnerabili
 
 %We contribute to Software Diversification for \wasm using Artificial Diversification, for Randomization and Multivariant Execution usages (\autoref{usage:randomization}, \autoref{usage:mve}). 
 In \autoref{table:sota:comparison} we list the related work on Artificial Software Diversification discussed along with this chapter. The first and second columns in the table correspond to the author names and the references to their work, followed by one column for each strategy and usage ( \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5}, \autoref{usage:randomization} and \autoref{usage:mve}). The last column of the table summarizes the technical contribution and the reach of the referred work. Each cell in the table contains a checkmark if the strategy or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. 
-In the following we enumerate the open challenges we have found in the literature research:
+In the following text, we enumerate the open challenges we have found in the literature research:
 %The last two rows locate our contributions. 
 
 \input{sota/sota_table.tex}
@@ -339,7 +339,7 @@ In the following we enumerate the open challenges we have found in the literatur
     Besides, the preexisting works based on the LLVM pipeline cannot be extended to Wasm because they contribute to LLVM versions released before the inclusion of Wasm as an architecture. 
     % On the other hand, there is no mentioned work merging all mutation strategies in one solution.
     
-    \item \emph{Lack of research on MVE for \wasm:} \wasm has a growing adoption for Edge platforms. However, researching on MVE in a distributed setting like the Edge has been less researched. Only Voulimeneas \etal \cite{voulimeneas2021dmvx} recently proposed a multivariant execution system by parallelizing the execution of the variants in different machines for the sake of efficiency. 
+    \item \emph{Lack of research on MVE for \wasm:} \wasm has a growing adoption for Edge platforms. However, MVE in a distributed setting like the Edge has been less researched. Only Voulimeneas \etal \cite{voulimeneas2021dmvx} recently proposed a multivariant execution system by parallelizing the execution of the variants in different machines for the sake of efficiency. 
 
 
 \end{enumerate}

@@ -14,7 +14,7 @@ For all LLVM instructions, CROW produces a collection of functionally equivalent
 In the \emph{combining} stage, CROW assembles the code replacements to generate different LLVM IR variants.
 CROW generates the LLVM IR variants by traversing the power set of all possible combinations of code replacements.
 Finally, the custom Wasm LLVM backend compiles the assembled LLVM IR variants into \wasm binaries.
-In the following, we describe our design decisions. All our implementation choices are based on one premise: \emph{each design decision should increase the number of \wasm variants that CROW creates.}
+In the following text, we describe our design decisions. All our implementation choices are based on one premise: \emph{each design decision should increase the number of \wasm variants that CROW creates.}
 %\subsection*{Overview}
 
 \begin{figure*}[h]

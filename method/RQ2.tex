@@ -24,7 +24,7 @@ We compare the execution traces of two any programs of the same population with 
 Dynamic Time Warping \cite{NEEDLEMAN1970443} computes the global alignment between two sequences. It returns a value capturing the cost of this alignment, which is a distance metric. The larger the DTW distance, the more different the two sequences are.
 DTW has been used for comparing traces in different domains. For software, De A. Maia \etal\ \cite{Maia08usinga} proposed to identify similarity between programs from execution traces.
 As we discussed in \autoref{sota:wasm}, a theoretical \wasm engine perform \texttt{push} and \texttt{pop} operations when the program instructions are executed. Therefore, in our experiments, we define the execution traces as the sequence of the stack operations during the execution of the \wasm program. 
-In the following, we define the $\DTW$ metric. 
+In the following text, we define the $\DTW$ metric. 
  
 %\todo{before, define this and give an illutrative listing plus, says how you collect those traces, that's part of the protocol: between the stack operation traces }
 
