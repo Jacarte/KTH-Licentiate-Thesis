@@ -39,13 +39,13 @@ We use the execution time of the multivariant binaries to answer RQ3. We use the
 
 
 %\todo{too fast. tell the reader why you need HTTP now}
-We answer RQ3 by analyzing a real-world scenarios on the Edge. 
+We answer RQ3 by analyzing real-world scenarios on the Edge. 
 Edge applications are designed to be deployed as isolated HTTP services, having one single responsibility that is executed at every HTTP request. This development model is known as serverless computing, or function-as-a-service \cite{shillaker2020faasm,Narayan2021Swivel}. 
 We deploy and execute the multivariant binaries as end-to-end HTTP services on the Edge, and we collect their execution times.
 To remove the natural jitter in the network, the execution times are measured at the backend space, \ie we collect the execution times inside the Edge node and not from the client computer. 
 Therefore, we instrument the binaries to return the execution time as an HTTP header. 
 
-We do the collection of the execution times twice, for the original program and its multivariant binary. We deploy and execute the original and the multivariant binaries on 64 edge nodes located around the world. In \autoref{diagrams:protocol:rq3:map} we illustrate the word wide location of the edges nodes.
+We do the collection of the execution times twice, for the original program and its multivariant binary. We deploy and execute the original and the multivariant binaries on 64 edge nodes located around the world. In \autoref{diagrams:protocol:rq3:map} we illustrate the world wide location of the edges nodes.
 
 
 \begin{figure}[h]

@@ -15,12 +15,12 @@ In \autoref{workflow} we zoom MEWE from the blue highlighted square in \autoref{
 In the figure, we highlight the two components of MEWE, \emph{Multivariant Generation} and the \emph{Mixer}.
 In the \emph{Multivariant Generation} process, 
 MEWE merges the LLVM IR variants created by CROW and creates an LLVM multivariant binary.
-The merging of the variants intermixes the calling of function variants, making possible the execution path randomization.
+The merging of the variants intermixes the calling of function variants, allowing the execution path randomization.
 
 \emph{The Mixer} augments the LLVM multivariant binary with a random generator. The random generator is needed to perform the execution-path randomization.
 Also, \emph{The Mixer} fixes the entrypoint in the multivariant binary.
 Finally, MEWE generates a standalone multivariant \wasm binary using the same custom Wasm LLVM backend from CROW.
-Once generated, the generated multivariant \wasm binary can be deployed to any \wasm engine. 
+Once generated, the multivariant \wasm binary can be deployed to any \wasm engine. 
 
 \begin{figure*}
   \centering
@@ -35,12 +35,12 @@ Once generated, the generated multivariant \wasm binary can be deployed to any \
 
 The key component of \tool consists in combining the variants into a single binary.
 The goal is to support execution-path randomization at runtime.
-The core idea is introducing one dispatcher function per original function with variants.
+The core idea is to introduce one dispatcher function per original function with variants.
 A dispatcher function is a synthetic function in charge of choosing a variant at random when the original function is called.
 With the introduction of the dispatcher function,  \tool turns the original call graph into a multivariant call graph, defined as follows. 
 
 \begin{definition}{Multivariant Call Graph (MCG):}\label{def:EP}
-    A multivariant call graph is a call graph $\langle N, E \rangle$ where the nodes in $N$ represent all the functions in the binary and an edge $(f_1,f_2) \in E$ represents a possible invocation of $f_2$ by $f_1$  \cite{ryder1979}, where the nodes are typed. The nodes in $N$ have three possible types: a function present in the original program,  a generated function variant, or a dispatcher function.
+    A multivariant call graph is a call graph $\langle N, E \rangle$ where the nodes in $N$ represent all the functions in the binary and an edge $(f_1,f_2) \in E$ represents a possible invocation of $f_2$ by $f_1$  \cite{ryder1979}. The nodes in $N$ have three possible types: a function present in the original program,  a generated function variant, or a dispatcher function.
 \end{definition}
 
 
