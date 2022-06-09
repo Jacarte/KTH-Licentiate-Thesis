@@ -7,7 +7,7 @@
 This section describes MEWE \cite{MEWE}. 
 \tool synthesizes diversified function variants by using CROW.
 It then provides execution-path randomization in a Multivariant Execution (MVE).
-The tool generates application-level multivariant binaries without changing the operating system or \wasm runtime.
+The tool generates application-level multivariant binaries without changing the operating system or \wasm\ runtime.
 MEWE creates an MVE by intermixing functions for which CROW generates variants, as step \step{2} in \autoref{diagrams:generic} shows.
 CROW generates each one of these variants with fine-grained diversification at the instruction level, applying the majority of the strategies discussed in \autoref{sota:sota} and \emph{constant inferring}. \tool adds a new mutation strategy. It inlines function variants when appropriate, resulting in call stack diversification at runtime.
 
@@ -19,13 +19,13 @@ The merging of the variants intermixes the calling of function variants, allowin
 
 \emph{The Mixer} augments the LLVM multivariant binary with a random generator. The random generator is needed to perform the execution-path randomization.
 Also, \emph{The Mixer} fixes the entrypoint in the multivariant binary.
-Finally, MEWE generates a standalone multivariant \wasm binary using the same custom Wasm LLVM backend from CROW.
-Once generated, the multivariant \wasm binary can be deployed to any \wasm engine. 
+Finally, MEWE generates a standalone multivariant \wasm\ binary using the same custom Wasm LLVM backend from CROW.
+Once generated, the multivariant \wasm\ binary can be deployed to any \wasm\ engine. 
 
 \begin{figure*}
   \centering
   \includegraphics[height=3.2in]{diagrams/MEWE.pdf}
-  \caption{Overview of \tool workflow. It takes as input an LLVM binary. It first generates a set of functionally equivalent variants for each function in the binary using CROW. Then, MEWE generates an LLVM multivariant binary composed of all the function variants. Finally, the Mixer includes the behavior in charge of selecting a variant when a function is invoked. Finally, the \tool mixer composes the LLVM multivariant binary with a random number generation library and tampers the original application entrypoint. The final process produces a \wasm multivariant binary ready to be deployed. }
+  \caption{Overview of \tool workflow. It takes as input an LLVM binary. It first generates a set of functionally equivalent variants for each function in the binary using CROW. Then, MEWE generates an LLVM multivariant binary composed of all the function variants. Finally, the Mixer includes the behavior in charge of selecting a variant when a function is invoked. Finally, the \tool mixer composes the LLVM multivariant binary with a random number generation library and tampers the original application entrypoint. The final process produces a \wasm\ multivariant binary ready to be deployed. }
   \label{workflow}
 \end{figure*}
 
@@ -113,7 +113,7 @@ define internal i32 @foo(i32 %0) {
 
 \subsection{The Mixer}
 
-MEWE has four specific objectives: link the LLVM multivariant binary, inject a random generator, tamper the application's entrypoint, and merge all these components into a multivariant \wasm binary.
+MEWE has four specific objectives: link the LLVM multivariant binary, inject a random generator, tamper the application's entrypoint, and merge all these components into a multivariant \wasm\ binary.
 We use the Rustc compiler\footnote{\url{https://doc.rust-lang.org/rustc/what-is-rustc.html}} to orchestrate the mixing.
 For the random generator, we rely on WASI's specification \cite{WASI} for the random behavior of the dispatchers. However, its exact implementation is dependent on the platform on which the binary is deployed.
 The Mixer creates a new entrypoint for the binary called \emph{entrypoint tampering}.

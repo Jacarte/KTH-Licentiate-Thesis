@@ -31,7 +31,7 @@ Our experiments assess the impact of artificially created diversity. The first s
 
 
 We build our three corpora in an escalating strategy based on the merging of our previous publications. The first corpus is diverse and contains simple programs in terms of code size, making them easy to manually analyze. The second corpus is a project meant for security-sensitive applications. The third corpus is a QR encoding decoding algorithm. 
-%The work of Hilbig \etal \cite{Hilbig2021AnES} shows that approximately 65\% of all \wasm programs come out of C/C++ source code through the LLVM pipeline, and more than 75\% if the Rust language is included. Therefore, all modules in the corpora are considered to come along the LLVM pipeline. 
+%The work of Hilbig \etal \cite{Hilbig2021AnES} shows that approximately 65\% of all \wasm\ programs come out of C/C++ source code through the LLVM pipeline, and more than 75\% if the Rust language is included. Therefore, all modules in the corpora are considered to come along the LLVM pipeline. 
 In the following text, we describe the filtering and description of each corpus.
 
 \begin{enumerate}
@@ -100,7 +100,7 @@ In \autoref{table:corpora} we listed the corpus name, the language of the progra
 
 \section*{Conclusions}
 
-This chapter presents the methodology we follow to answer our three research questions. We first describe and propose the corpora of programs used in this work. We propose to measure the ability of our approach to generate variants out of \pypy{303  + \libsodiumfunctions + \qrcodefunctions} functions of our corpora. Then, we suggest using the generated variants to study to what extent they offer different observable behavior through dynamic analysis. We propose a protocol to study the impact of the composition variants in a multivariant binary deployed at the Edge. Besides, we enumerate and enunciate the properties and metrics that might lead us to answer the impact of automatic diversification for \wasm programs. In the next chapter, we present and discuss the results obtained with this methodology.
+This chapter presents the methodology we follow to answer our three research questions. We first describe and propose the corpora of programs used in this work. We propose to measure the ability of our approach to generate variants out of \pypy{303  + \libsodiumfunctions + \qrcodefunctions} functions of our corpora. Then, we suggest using the generated variants to study to what extent they offer different observable behavior through dynamic analysis. We propose a protocol to study the impact of the composition variants in a multivariant binary deployed at the Edge. Besides, we enumerate and enunciate the properties and metrics that might lead us to answer the impact of automatic diversification for \wasm\ programs. In the next chapter, we present and discuss the results obtained with this methodology.
 
 
 %\todo{Add the unique and the total.}

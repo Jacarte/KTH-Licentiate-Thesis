@@ -90,7 +90,7 @@ All described strategies can be mixed together. They can be applied in any seque
 
 
 % Jump to the need of artificial
-%Notice that Natural Diversity can rely on itself to escalate, and it is coped by the preexistence of software. This might be a limitation. For example, in the context o this work, the natural diversity for \wasm programs is nearly inexistence \cite{Hilbig2021AnES}. When natural diversity is not enough, it is innate to think that the source for diversification needs to be artificial. 
+%Notice that Natural Diversity can rely on itself to escalate, and it is coped by the preexistence of software. This might be a limitation. For example, in the context o this work, the natural diversity for \wasm\ programs is nearly inexistence \cite{Hilbig2021AnES}. When natural diversity is not enough, it is innate to think that the source for diversification needs to be artificial. 
 
 % Classification by Cohen
 
@@ -313,7 +313,7 @@ Both scenarios have demonstrated to harden security by tackling know vulnerabili
 \section{Open challenges}
 \label{sota:openchallenges}
 
-%We contribute to Software Diversification for \wasm using Artificial Diversification, for Randomization and Multivariant Execution usages (\autoref{usage:randomization}, \autoref{usage:mve}). 
+%We contribute to Software Diversification for \wasm\ using Artificial Diversification, for Randomization and Multivariant Execution usages (\autoref{usage:randomization}, \autoref{usage:mve}). 
 In \autoref{table:sota:comparison} we list the related work on Artificial Software Diversification discussed along with this chapter. The first and second columns in the table correspond to the author names and the references to their work, followed by one column for each strategy and usage ( \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5}, \autoref{usage:randomization} and \autoref{usage:mve}). The last column of the table summarizes the technical contribution and the reach of the referred work. Each cell in the table contains a checkmark if the strategy or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. 
 In the following text, we enumerate the open challenges we have found in the literature research:
 %The last two rows locate our contributions. 
@@ -321,25 +321,25 @@ In the following text, we enumerate the open challenges we have found in the lit
 \input{sota/sota_table.tex}
 
 % Move to introduction
-%The primary motivation for our contributions is that we see in \wasm a monoculture problem. If one environment is vulnerable, all the others are vulnerable in the same manner as the same \wasm binary is replicated. 
-%Besides, the \wasm environment lacks natural diversity \cite{natural_diversity}. Compared to the work of Harrand \etal \citationneeded, in WebAssembly, one could not use preexisting and different program versions to provide diversification. On the other hand, while the number of related work for software diversity is large, only one approach has been applied to the context of \wasm. 
+%The primary motivation for our contributions is that we see in \wasm\ a monoculture problem. If one environment is vulnerable, all the others are vulnerable in the same manner as the same \wasm\ binary is replicated. 
+%Besides, the \wasm\ environment lacks natural diversity \cite{natural_diversity}. Compared to the work of Harrand \etal \citationneeded, in WebAssembly, one could not use preexisting and different program versions to provide diversification. On the other hand, while the number of related work for software diversity is large, only one approach has been applied to the context of \wasm. 
 % Move to the table
-%To the best of our knowledge, the closest diversification work on the browsers involving \wasm is the work of Romano \etal \cite{wobfuscator}. They proposed to de-inline JavaScript subexpressions and replace them with function calls to \wasm counterparts. They empirically demonstrated that malware classifiers could be evaded with this diversification technique. 
+%To the best of our knowledge, the closest diversification work on the browsers involving \wasm\ is the work of Romano \etal \cite{wobfuscator}. They proposed to de-inline JavaScript subexpressions and replace them with function calls to \wasm\ counterparts. They empirically demonstrated that malware classifiers could be evaded with this diversification technique. 
 
 
 \begin{enumerate}
     
     \item \emph{Software monoculture:}  
     The same Wasm code is executed in millions of clients devices through web browser.
-    In addition, \wasm is evolving further web browsers as a technology to support edge-cloud computing platforms, \ie replicating the same binary along with all computing nodes in a worldwide scale. Therefore, potential vulnerabilities are spread, highlighting a monoculture phenomenon \cite{Harrand1650630}. 
+    In addition, \wasm\ is evolving further web browsers as a technology to support edge-cloud computing platforms, \ie replicating the same binary along with all computing nodes in a worldwide scale. Therefore, potential vulnerabilities are spread, highlighting a monoculture phenomenon \cite{Harrand1650630}. 
 
-    \item \emph{Lack of Software Diversification for \wasm}:  Software Diversification has demonstrated to provide protection for known and yet-unknown vulnerabilities. However, only one software diversity approach has been applied to the context of \wasm \cite{wobfuscator}. 
+    \item \emph{Lack of Software Diversification for \wasm}:  Software Diversification has demonstrated to provide protection for known and yet-unknown vulnerabilities. However, only one software diversity approach has been applied to the context of \wasm\ \cite{wobfuscator}. 
     % Moreover, as we illustrate in \autoref{table:sota:comparison}, the existing works for software diversification do not contribute directly to \wasm.
-    Moreover, \wasm is a novel technology and, the adoption of defenses is still under development \cite{Narayan2021Swivel, johnson2021} and has a low pace, making software diversification a possible preemptive technique.
+    Moreover, \wasm\ is a novel technology and, the adoption of defenses is still under development \cite{Narayan2021Swivel, johnson2021} and has a low pace, making software diversification a possible preemptive technique.
     Besides, the preexisting works based on the LLVM pipeline cannot be extended to Wasm because they contribute to LLVM versions released before the inclusion of Wasm as an architecture. 
     % On the other hand, there is no mentioned work merging all mutation strategies in one solution.
     
-    \item \emph{Lack of research on MVE for \wasm:} \wasm has a growing adoption for Edge platforms. However, MVE in a distributed setting like the Edge has been less researched. Only Voulimeneas \etal \cite{voulimeneas2021dmvx} recently proposed a multivariant execution system by parallelizing the execution of the variants in different machines for the sake of efficiency. 
+    \item \emph{Lack of research on MVE for \wasm:} \wasm\ has a growing adoption for Edge platforms. However, MVE in a distributed setting like the Edge has been less researched. Only Voulimeneas \etal \cite{voulimeneas2021dmvx} recently proposed a multivariant execution system by parallelizing the execution of the variants in different machines for the sake of efficiency. 
 
 
 \end{enumerate}
@@ -352,9 +352,9 @@ In the following text, we enumerate the open challenges we have found in the lit
 % Move this to the technical part
 %CROW, extrapolates the idea of superdiversification \cite{jacob2008superdiversifier} for \wasm. CROW works directly with LLVM IR, enabling it to generalize to more languages and CPU architectures, something not possible with the x86-specific approach of previous works.
 % CROW
-%We contributes to state of the art in artificially creating randomization for \wasm (\autoref{usage:randomization}). 
+%We contributes to state of the art in artificially creating randomization for \wasm\ (\autoref{usage:randomization}). 
 
-%Due to the specificities of code execution in the browser (mentioned in \autoref{sota:wasm}), this can be considered as a randomization approach. For example, since \wasm is served at each page load, every time a user asks for a \wasm binary, she can be served a different variant provided by CROW. 
+%Due to the specificities of code execution in the browser (mentioned in \autoref{sota:wasm}), this can be considered as a randomization approach. For example, since \wasm\ is served at each page load, every time a user asks for a \wasm\ binary, she can be served a different variant provided by CROW. 
 % Move to intro
 %Besides, our contribution can be used in fuzzing campaigns \citationneeded to provide reliability. The diversification created by CROW can unleash hidden behaviors in compilers and interpreters. Thanks to CROW, a bug was discovered in the Lucet compiler \footnote{\url{https://www.fastly.com/blog/defense-in-depth-stopping-a-wasm-compiler-bug-before-it-became-a-problem}}.
 %MEWE

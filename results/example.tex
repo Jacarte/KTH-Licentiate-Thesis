@@ -25,7 +25,7 @@ In this section we propose the metrics used along this chapter to answer RQ2. We
 
 \subsection{Static}
 
-To measure the static difference between programs, we compare their bytecode instructions using a global alignment approach. In a previous work of us we empirically demonstrated that programs semantic can be detected out of its natural diversity \citationneeded. We compare the \wasm of each program and its variant using Dynamic Time Warping (DTW) \cite{Maia08usinga}. DTW computes the global alignment between two sequences. It returns a value capturing the cost of this alignment, which is actually a distance metric. The larger the DTW distance, the more different the two sequences are.
+To measure the static difference between programs, we compare their bytecode instructions using a global alignment approach. In a previous work of us we empirically demonstrated that programs semantic can be detected out of its natural diversity \citationneeded. We compare the \wasm\ of each program and its variant using Dynamic Time Warping (DTW) \cite{Maia08usinga}. DTW computes the global alignment between two sequences. It returns a value capturing the cost of this alignment, which is actually a distance metric. The larger the DTW distance, the more different the two sequences are.
 
 \todo{Add and example here ?}
 
@@ -34,7 +34,7 @@ To measure the static difference between programs, we compare their bytecode ins
 	
 	A dt\_static($P_X$, $V_X$) of $0$ means that the code of both the original program and the variant is the same, i.e., they are statically identical in the representation $X$. The higher the value of dt\_static, the more different the programs are in representation X. \\
 
-	Notice that for comparing \wasm programs and its variants, the metric is the instantiation of \DTWStatic with $X=WebAssembly$.
+	Notice that for comparing \wasm\ programs and its variants, the metric is the instantiation of \DTWStatic with $X=WebAssembly$.
 \end{metric}
 
 \subsection{Program traces and execution times}
@@ -51,20 +51,20 @@ We measure the difference between programs at runtime by evaluating their execut
 
 
 \begin{metric}{Execution time:}\label{metric:time}
-	Given a \wasm program P, the execution time is the time spent to execute the binary.
+	Given a \wasm\ program P, the execution time is the time spent to execute the binary.
 \end{metric}
 
 \subsection{Variants preservation}
 
-The last metric is needed because \wasm is an intermediate language and compilers use it to produce machine code. For program variants, this means that compilers can undo artificial introduced transformations, for example, through optimization passes. When a code transformation is maintained from the first time it is introduced to the final machine code generation is a preserved variant. 
+The last metric is needed because \wasm\ is an intermediate language and compilers use it to produce machine code. For program variants, this means that compilers can undo artificial introduced transformations, for example, through optimization passes. When a code transformation is maintained from the first time it is introduced to the final machine code generation is a preserved variant. 
 
-Part of the contributions of this thesis are our strategies to prevent reversion of code transformations. We take engineering decision regarding this in all the stages of the CROW workflow. We disable all optimizations inside CROW in the generation of the \wasm binaries. This prevents the LLVM toolchain used to remove some introduced transformations. However, the LLVM toolchain applies optimizations by default, such as constant folding or logical operations' normalization. As we illustrate previously, these are some transformations found and applied by CROW. We modified the LLVM backend for \wasm to avoid this reversion during the creation of Wasm binaries.
+Part of the contributions of this thesis are our strategies to prevent reversion of code transformations. We take engineering decision regarding this in all the stages of the CROW workflow. We disable all optimizations inside CROW in the generation of the \wasm\ binaries. This prevents the LLVM toolchain used to remove some introduced transformations. However, the LLVM toolchain applies optimizations by default, such as constant folding or logical operations' normalization. As we illustrate previously, these are some transformations found and applied by CROW. We modified the LLVM backend for \wasm\ to avoid this reversion during the creation of Wasm binaries.
 This phenomenon is sometimes bypassed by diversification studies when they are conducted at high-level. As another contribution, we conduct a study on preservation for both scenarios where Wasm is used, browsers and standalone engines. In
 
-The final metric corresponds to the preservation study. We compare two programs to be different under the \wasm representation and under the machine code representation after they are compiled through a collection of selected \wasm engines. We use two instances of \autoref{metric:static1} for two different code representations, \wasm and x86. The key property we consider is as follows: \\
+The final metric corresponds to the preservation study. We compare two programs to be different under the \wasm\ representation and under the machine code representation after they are compiled through a collection of selected \wasm\ engines. We use two instances of \autoref{metric:static1} for two different code representations, \wasm\ and x86. The key property we consider is as follows: \\
 
 
-We only take into account the x86 representation after the \wasm code is compiled to the machine code. 
+We only take into account the x86 representation after the \wasm\ code is compiled to the machine code. 
 This decision is not arbitrary, according to the study of \todo{Paper on binary diff survey}, any conclusion carried out by comparing two program binaries under a specific target can be extrapolated to another target for the same binaries.
 
 %\section{Setup}
@@ -75,12 +75,12 @@ To answer RQ2 we use the same corpora proposed and evaluated in \autoref{chapter
 
 % Static
 \subsection{Static comparison}
-For each function on the corpora, we compare the sequence of instructions of each variant with the initial program and the other variants. We obtain the \autoref{metric:static} values for each program-variant \wasm pair code. We compute the DTW distances with STRAC~\cite{Cabrera19}. 
+For each function on the corpora, we compare the sequence of instructions of each variant with the initial program and the other variants. We obtain the \autoref{metric:static} values for each program-variant \wasm\ pair code. We compute the DTW distances with STRAC~\cite{Cabrera19}. 
 
 % Dynamic
 \subsection{Dynamic comparison}
 To compare program and variants behavior during runtime, we analyze all the unique program variants generated by \tool in a pairwise comparison. 
-We use SWAM\footnote{\url{https://github.com/satabin/swam}} to collect the function and instruction traces. SWAM is a \wasm interpreter that provides functionalities to capture the dynamic information of \wasm program executions including the stack operations. We compute the DTW distances with STRAC~\cite{Cabrera19}. 
+We use SWAM\footnote{\url{https://github.com/satabin/swam}} to collect the function and instruction traces. SWAM is a \wasm\ interpreter that provides functionalities to capture the dynamic information of \wasm\ program executions including the stack operations. We compute the DTW distances with STRAC~\cite{Cabrera19}. 
 
 Furthermore, we collect the execution time, \autoref{metric:time}, for all programs and their variants. We execute each program or variant \todo{XXX} times and we compare the collected execution times using a Mann-Withney test \citationneeded.
 
