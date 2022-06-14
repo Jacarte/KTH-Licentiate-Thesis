@@ -1,19 +1,22 @@
 \begin{abstract}
 
-WebAssembly har blivit det fjärde officiella webbspråket, tillsammans med HTML, CSS och JavaScript sedan 2019. Detta nya språk tillåter webben webbläsare för att köra befintliga program eller bibliotek skrivna på andra språk, som C/C++ och Rust. Dessutom utvecklas WebAssembly för att vara en del av edge-cloud dator plattformar. Trots att den är designad med säkerhet som en premiss är WebAssembly inte undantaget från sårbarheter. Därför, potentiella sårbarheter och brister ingår i dess distribution och exekvering, belyser ett problem med mjukvarumonokultur. På den andra hand, medan mångfald av programvara har visat sig mildra monokultur, nej diversifieringsmetod har föreslagits för WebAssembly. Detta jobb föreslår mångfald av programvara som en förebyggande lösning för att minska programvara monokultur för WebAssembly. 
+WebAssembly har sedan 2019 blivit det fjärde officiella webbspråket, tillsammans med HTML, CSS och JavaScript sedan 2019. Detta nya språk tillåter webbläsaren att köra befintliga program eller bibliotek skrivna på andra språk, såsom C/C++ och Rust. Dessutom utvecklas WebAssembly för att vara en del av edge-cloud dator -beräkningsplattformar. Trots att WebAssembly är designatd med säkerhet i fokus som en premiss är det inte undantaget från sårbarheter. Därför ingår potentiella sårbarheter och brister i dess distribution och exekvering, vilket belyser ett av problemen med mjukvarumonokultur. MÅ andra sidan, medan mångfald av programvara har visat sig mildra monokultur, har ingen diversifieringsmetod föreslagits för WebAssembly. Denna avhandling föreslår en mångfald av programvara som en förebyggande lösning med syfte att minska programvarumonokultur för WebAssembly. 
 
-Dessutom tillhandahåller vi implementeringar för våra tillvägagångssätt, inklusive en generisk LLVM superdiversifierare som potentiellt utökar våra idéer till andra programmeringsspråk. Vi visar empiriskt effekten av vårt tillvägagångssätt genom att tillhandahålla Randomisering och Multivariant Execution (MVE) för WebAssembly. Våra resultat visar att våra tillvägagångssätt kan ge en automatiserad end-to-end lösning för diversifiering av WebAssembly program. De viktigaste bidragen från detta arbete är: 
+Dessutom tillhandahåller vi implementeringar för våra tillvägagångssätt, däriblandinklusive en generisk LLVM- superdiversifierare som potentiellt utökar våra idéer till andra programmeringsspråk. Vi visar effekten av vårt tillvägagångssätt empiriskt genom att tillhandahålla rRandomisering och mMultivariante Exekvering (MVE) för WebAssembly. Våra resultat visar att våra tillvägagångssätt kan ge en automatiserad end-to-end lösning för diversifiering av program i WebAssembly. Detta arbetes viktigaste bidragen från detta arbete är:
+    
 
 \begin{itemize}
     
 \item Vi lyfter fram bristen på diversifieringstekniker för WebAssembly genom en uttömmande litteraturgenomgång.
-\item Vi tillhandahåller implementeringen av två verktyg, CROW och MEWE, som tillhandahåller randomisering och multivariant exekvering för WebAssembly. 
-\item Vi inkluderar ständiga slutsatser som en ny kod-transformation för att generera mjukvarudiversifiering för WebAssembly. 
+\item Vi tillhandahåller en implementationeringen av två verktyg, CROW och MEWE, som genomför tillhandahåller randomisering och multivariant exekvering för WebAssembly.  
+\item Vi inkluderar “constant inferring” som en ny kod-transformation för att generera mjukvarudiversifiering för WebAssembly. 
 \item Vi demonstrerar empiriskt effekten av vår teknik genom att utvärdera det statiska och dynamiska beteendet hos den genererade diversifieringen. 
  
 \end{itemize}
 
-Våra metoder härdar observerbara egenskaper som vanligtvis används för att utföra attacker, som statisk kodanalys, exekveringsspår och exekveringstid. 
+
+Våra metoder härdar mot observerbara egenskaper som vanligtvis används för att utföra attacker, som statisk kodanalys, exekveringsspår och exekveringstid. 
+ 
 \\
 \\
 \\
