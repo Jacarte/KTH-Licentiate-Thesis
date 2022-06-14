@@ -1,1 +1,0 @@
-{"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QOn the other hand, in our experiments, we use between \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q instruction (only additions) and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q instructions (all supported instructions in the synthesizer).\\E$"}
