@@ -48,7 +48,7 @@ We modify Souper to keep all possible solutions in their searching algorithm.
 Souper builds a Data Flow Graph for each LLVM integer-returning instruction. 
 Then, for each Data Flow Graph, Souper exhaustively builds all possible expressions from a subset of the LLVM IR language.
 Each syntactically correct expression in the search space is semantically checked versus the original with a theorem solver. Souper synthesizes the replacements in increasing size. Thus, the first found equivalent transformation is the optimal replacement result of the searching. 
-CROW keeps more equivalent replacements during the searching by removing the halting criteria. Instead the original halting conditions, CROW does not halt when it finds the first replacement, instead it continues the search until a timeout is reached or the replacements grow t o a size larger that a predefined threshold. 
+CROW keeps more equivalent replacements during the searching by removing the halting criteria. Instead the original halting conditions, CROW does not halt when it finds the first replacement. CROW continues the search until a timeout is reached or the replacements grow to a size larger that a predefined threshold. 
 
 Notice that the searching space increases exponentially with the size of the LLVM IR language subset. Thus,
 we prevent Souper from synthesizing instructions with no correspondence in the \wasm\ backend. This decision reduces the searching space. For example, creating an expression having the  \texttt{freeze} LLVM instructions will increase the searching space for instruction without a Wasm's opcode in the end.
@@ -136,10 +136,17 @@ The new program in \autoref{inferring} is remarkably smaller and faster than the
 \subsection{Removing subsequent optimizations for LLVM}
 
 During the implementation of CROW, we have the premise of removing all built-in optimizations in the LLVM backend that could reverse Wasm variants.
-Therefore, we modify the \wasm\ backend in addition to the extended Souper.
-We disable all optimizations in the \wasm\ backend that could reverse the superoptimizer transformations, such as constant folding and instructions normalization.
+Therefore, we modify the \wasm\ backend.
+We disable all optimizations in the \wasm\ backend that could reverse the CROW transformations.
+In the following enumeration, we list three concrete optimizations that we remove from the \wasm~backend.\footnote{
+We only illustrate three of the removed optimization for sake of simplicity.}
 
-
-%\todo{We disable cost restrictions and the LLVM backend optimizations...maybe for the assesment RQ ?}
+\begin{itemize}
+    \item Constant folding: this optimization calculates the operation over two (or more) constants in compiling time, and replaces the original expression by its constant result. For example, let us suppose \texttt{$a = 10 + 12$} a subexpression to be compiled, with the original optimization, the \wasm~ backend replaces it by \texttt{$a = 22$}.
+    
+    \item Expressions normalization: in this case, the comparison operations are normalized to its complementary operation, e.g. \texttt{$a > b$} is always replaced by \texttt{$b <= a$}.
+    
+    \item Redundant operation removal: expressions such as the multiplication of variables by \texttt{$a = b2^n$} are replaced by shift left operations \texttt{$a = b << n$}.  
+\end{itemize}
 
 

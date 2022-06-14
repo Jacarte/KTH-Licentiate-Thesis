@@ -64,7 +64,7 @@ For the illustrated program, many diversified variants are optimizations (blue d
 Our tool provides program variants in the whole spectrum of time executions, lower and faster variants than the original program. The developer is in charge of deciding between taking all variants or only the ones providing the same or less execution time for the sake of performance. Nevertheless, this result calls for using this timing spectrum phenomenon to provide binaries with unpredictable execution times by combining variants. The feasibility of this idea will be discussed in \autoref{results:rq3}.
 
 
-\begin{tcolorbox}[title=Answer to RQ2.,boxrule=2pt,arc=.3em,boxsep=1.5mm]
+\begin{tcolorbox}[title=Answer to \rqtwo,boxrule=2pt,arc=.3em,boxsep=1.5mm]
     We empirically demonstrate that our approach generates program variants for which execution traces are different. We stress the importance of complementing static and dynamic studies of programs variants. For example, if two programs are statically different, that does not necessarily mean different runtime behavior. There is at least one generated variant for all executed programs that provides a different execution trace. 
     % answer to RQ2
     We generate variants that exhibit a significant diversity of execution times. Concretely, for $169/239\,(71\%)$ of the diversified programs, at least one variant has an execution-time distribution that is different compared to the execution-time distribution of the original program. 

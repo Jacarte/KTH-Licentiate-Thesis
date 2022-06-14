@@ -155,8 +155,9 @@ For the generated machine code, we have observed that, for different variants, w
 The control flow change strategy (\autoref{strategy:S3}) is correctly achieved as a consequence of latter compilation of Wasm program variants.
 %This fact encourages us for future work on the impact of our Software Diversification technique in the latest stage of \wasm\ program generation, machine code.
 
-\begin{tcolorbox}[title=Answer to RQ1.,boxrule=2pt,arc=.3em,boxsep=1.5mm]
+\begin{tcolorbox}[title=Answer to \rqone ,boxrule=2pt,arc=.3em,boxsep=1.5mm]
     We can provide diversification for 11.78\% of the programs in our corpora. Constant inferring, complemented with the high presence of arithmetic operations and bounded loops in the original program increased the number of program variants. 
+    Our method based on the inclusion of a diversifier in the LLVM pipeline proved to be feasible, by providing statically different Wasm variants.
     %\todo{Remove or elaborate: Nevertheless, the combination of code replacements in our approach is not a determinant factor to provide a large number unique program variants.}
 \end{tcolorbox}
 

@@ -4,7 +4,7 @@
 
 % The need for technical contributions...
 We aim to create artificial software diversity for \wasm\ by providing methods and tools to make the process easier and feasible for developers and researchers. According to our exhaustive literature review, no paper provides artificial software diversification for WebAssembly. Therefore, we need to enunciate the engineering foundation to implement the strategies defined in \autoref{sota:sota}. Our implementations are part of the contributions of this thesis. We provide two tools that complement this work: CROW and MEWE. The former tool generates \wasm\ program variants statically at compile time to provide randomization. The latter tool provides the method to generate MVE binaries for WebAssembly.
-In this chapter, we describe our technical contributions. In \autoref{tech:generic} we enunciate how the current state-of-the-art leads us to contribute with Software Diversification through LLVM. We follow by describing our two contributions and their main technical insights in \autoref{section:crow} and \autoref{section:mewe}. Besides, we describe a new transformation strategy as part of our contributions. 
+In this chapter, we describe our technical contributions. In \autoref{tech:generic} we enunciate how the current state-of-the-art leads us to contribute with Software Diversification through LLVM. We follow by describing our tools and their main technical insights in \autoref{section:crow} and \autoref{section:mewe}. In addition, we describe a new transformation strategy as part of our contributions. 
 
 
 % What does it solve ?
@@ -34,10 +34,11 @@ In this chapter, we describe our technical contributions. In \autoref{tech:gener
 This thesis is accompanied by the source code of both contributions, CROW and MEWE. The source code is accessible through the links:
 \begin{enumerate}
     \item CROW: \url{https://github.com/KTH/slumps}
+    \item Customized LLVM backend: \url{https://github.com/Jacarte/llvm-project}
     \item MEWE: \url{https://github.com/Jacarte/MEWE}
 \end{enumerate}
 
-Our software artifacts are licensed under the MIT License. The dependent source codes, such as LLVM, are licensed under their original licenses.
+Our software artifacts are licensed under the MIT License. The dependent source codes, such as LLVM, are licensed under their original conditions.
 
 \section*{Conclusions}
 
