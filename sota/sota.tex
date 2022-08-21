@@ -126,7 +126,7 @@ All described strategies can be mixed together. They can be applied in any seque
 \begin{strategy}{Program memory and stack randomization}
     \label{strategy:S4}
     \normalfont
-    This strategy changes the layout of programs in the host memory. Also, it can randomize how a program variant operates its memory. The work of Bhatkar \etal \cite{bhatkar03, bhatkar2005efficient} propose to randomize the base addresses of applications and the library memory regions in ELF binaries. Tadesse Aga and Autin \cite{aga2019smokestack} and Lee \etal \cite{lee2021savior} propose a technique to randomize the local stack organization for function calls using a custom LLVM compiler.
+    This strategy changes the layout of programs in the host memory. Also, it can randomize how a program variant operates its memory. The work of Bhatkar \etal \cite{bhatkar03, bhatkar2005efficient} propose to randomize the base addresses of applications and the library memory regions in ELF binaries. Tadesse Aga and Autin \cite{aga2019smokestack}, and Lee \etal \cite{lee2021savior} propose a technique to randomize the local stack organization for function calls using a custom LLVM compiler.
     Younan \etal \cite{Younan2006} propose to separate a conventional stack into multiple stacks where each stack contains a particular class of
     data. 
     On the same topic, Xu \etal \cite{xu2020merr} transforms programs to reduce memory exposure time, improving the time needed for frequent memory address randomization. 
@@ -139,7 +139,7 @@ All described strategies can be mixed together. They can be applied in any seque
     \normalfont
     This strategy uses a key to cypher the original program binary into another encoded binary. 
     Once encoded, the program can be decoded only once at the target client, or it can be interpreted in the encoded form using a custom virtual machine implementation. This technique is strong against attacks involving code inspection. 
-    Kc \etal \cite{Kc03} and Barrantes \etal \cite{barrantes2003randomized} proposed seminal works on instruction-set randomization 
+    Kc \etal \cite{Kc03}, and Barrantes \etal \cite{barrantes2003randomized} proposed seminal works on instruction-set randomization 
     to create a unique mapping between artificial CPU instructions and real ones.
     On the same topic, Chew and Song \cite{Chew02mitigatingbuffer} target operating system randomization. They randomize the interface between the operating system and the user applications.
     Courouss{\'e} \etal~\cite{courousse2016runtime} implement an assembly-like DSL to generate equivalent code at runtime in order to increase protection against side-channel attacks. Their technique generates a different program during execution using an interpreter for their DSL.
@@ -257,7 +257,7 @@ On the same topic, Aga and colleagues \cite{aga2019smokestack} propose to genera
 The Polyverse company\footnote{\url{https://polyverse.com/}} materializes randomization at the commercial level in real life. They deliver a unique Linux distribution compilation for each of its clients by scrambling the Linux packages at the source code level.
     
 % How
-Virtual machines and operating systems can be also randomized. On this topic, Kc \etal \cite{Kc03} create a unique mapping between artificial CPU instructions and real ones. Their approach makes possible the assignment of different variants to specific target clients. Similarly, Xu \etal \cite{xu2020merr} recompile the Linux Kernel to reduce the exposure time of persistent memory objects, increasing the frequency of address randomization.
+Virtual machines and operating systems can be also randomized. On this topic, Kc \etal \cite{Kc03}, create a unique mapping between artificial CPU instructions and real ones. Their approach makes possible the assignment of different variants to specific target clients. Similarly, Xu \etal \cite{xu2020merr} recompile the Linux Kernel to reduce the exposure time of persistent memory objects, increasing the frequency of address randomization.
 
 %
 
@@ -298,7 +298,7 @@ Agosta \etal~\cite{agosta2015meet} and Crane \etal~\cite{crane2015thwarting} use
 %
 
 % Concluding the section
-Both scenarios have demonstrated to harden security by tackling know vulnerabilities such as (JIT)ROP attacks \cite{jackson2011compiler} and power side-channels \cite{amarilli2011can}. Moreover, Artificial Software Diversification is a preemptive technique for yet unknown vulnerabilities \cite{jackson}. Our work contributes to both usages scenarios for \wasm.
+Both scenarios have demonstrated to harden security by tackling known vulnerabilities such as (JIT)ROP attacks \cite{jackson2011compiler} and power side-channels \cite{amarilli2011can}. Moreover, Artificial Software Diversification is a preemptive technique for yet unknown vulnerabilities \cite{jackson}. Our work contributes to both usage scenarios for \wasm.
 
 %\begin{usage}{Moving Target Defense(MTD):}
 %    \label{usage:mtd}
@@ -314,7 +314,7 @@ Both scenarios have demonstrated to harden security by tackling know vulnerabili
 \label{sota:openchallenges}
 
 %We contribute to Software Diversification for \wasm\ using Artificial Diversification, for Randomization and Multivariant Execution usages (\autoref{usage:randomization}, \autoref{usage:mve}). 
-In \autoref{table:sota:comparison} we list the related work on Artificial Software Diversification discussed along with this chapter. The first column in the table correspond to the author names and the references to their work, followed by one column for each strategy and usage ( \autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5}, \autoref{usage:randomization} and \autoref{usage:mve}). The last column of the table summarizes the technical contribution and the reach of the referred work. Each cell in the table contains a checkmark if the strategy or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. 
+In \autoref{table:sota:comparison} we list the related work on Artificial Software Diversification discussed along with this chapter. The first column in the table correspond to the author names and the references to their work, followed by one column for each strategy and usage (\autoref{strategy:S1},  \autoref{strategy:S2},  \autoref{strategy:S3},  \autoref{strategy:S4},  \autoref{strategy:S5}, \autoref{usage:randomization} and \autoref{usage:mve}). The last column of the table summarizes the technical contribution and the reach of the referred work. Each cell in the table contains a checkmark if the strategy or the usage of the work match the previously mentioned classifications. The rows are sorted by the year of the work in ascending order. 
 In the following text, we enumerate the open challenges we have found in the literature research:
 %The last two rows locate our contributions. 
 
@@ -331,7 +331,7 @@ In the following text, we enumerate the open challenges we have found in the lit
     
     \item \emph{Software monoculture:}  
     The same Wasm code is executed in millions of clients devices through web browser.
-    In addition, \wasm\ is evolving further web browsers as a technology to support edge-cloud computing platforms, \ie replicating the same binary along with all computing nodes in a worldwide scale. Therefore, potential vulnerabilities are spread, highlighting a monoculture phenomenon \cite{Harrand1650630}. 
+    In addition, \wasm\ evolves to support edge-cloud computing platforms in backend scenarios, \ie replicating the same binary along with all computing nodes in a worldwide scale. Therefore, potential vulnerabilities are spread, highlighting a monoculture phenomenon \cite{Harrand1650630}. 
 
     \item \emph{Lack of Software Diversification for \wasm}:  Software Diversification has demonstrated to provide protection for known and yet-unknown vulnerabilities. However, only one software diversity approach has been applied to the context of \wasm\ \cite{wobfuscator}. 
     % Moreover, as we illustrate in \autoref{table:sota:comparison}, the existing works for software diversification do not contribute directly to \wasm.

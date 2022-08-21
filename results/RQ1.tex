@@ -17,7 +17,7 @@
 \newcommand{\allmewepopulation}{\libpopulation + \qrpopulation}
 
 As we describe in \autoref{rq1:method}, our first research question aims to answer how to artificially generate \wasm\ program variants. 
-This section is organized as follows. First we present the general results calculating the \emph{\corpuspopulationsizename}(\autoref{metric:rq1:corpus_pop}) and \emph{\corpusuniquepopulationsizename}(\autoref{metric:rq1:corpus_pop_unique}) for each corpus. 
+This section is organized as follows. First we present the general results calculating the \emph{\corpuspopulationsizename}\ (\autoref{metric:rq1:corpus_pop}) and \emph{\corpusuniquepopulationsizename}\ (\autoref{metric:rq1:corpus_pop_unique}) for each corpus. 
 Second, we discuss the challenges and limitations in program variants generation. Finally, we illustrate the most common code transformations performed by our approach and answer RQ1.
 
 \subsection{Program's population}
@@ -47,7 +47,7 @@ We have observed a noticeable difference between the number of successfully dive
 %\todo{so what? what does this mean for practitioners?: Setting up the timeout affects the capacity of our approach to generate variants. For our corpora, a low timeout implies a low number of diversified functions.}
 
 % High populatio size
-We have noticed a remarkable difference between the number of diversified functions for each corpus, \rossetapopulation\ programs for \corpusrosetta 4272 for \corpussodium and 6369 for \corpusqrcode. The corpus population size for \corpusrosetta is two orders of magnitude larger compared to the other two corpora. The reason behind the large number of variants for \corpusrosetta is that, after certain time, our approach starts to combine the code replacements to generate new variants. However, looking at the fifth column, the number of unique variants have the same order of magnitude for all corpora.
+We have noticed a remarkable difference between the number of diversified functions for each corpus, \rossetapopulation\ programs for \corpusrosetta 4272 for \corpussodium and 6369 for \corpusqrcode. The corpus population size for \corpusrosetta is two orders of magnitude larger compared to the other two corpora. The reason behind the large number of variants for \corpusrosetta is that, after a certain time, our approach starts to combine the code replacements to generate new variants. However, looking at the fifth column, the number of unique variants have the same order of magnitude for all corpora.
 The variants generated out of the combination of several code replacements are not necessarily unique. Some code replacements can dominate over others, generating the same \wasm\ programs.
 
 % Why large unique count in low time ? 

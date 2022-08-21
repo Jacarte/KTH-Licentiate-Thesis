@@ -139,7 +139,7 @@ During the implementation of CROW, we have the premise of removing all built-in 
 Therefore, we modify the \wasm\ backend.
 We disable all optimizations in the \wasm\ backend that could reverse the CROW transformations.
 In the following enumeration, we list three concrete optimizations that we remove from the \wasm~backend.\footnote{
-We only illustrate three of the removed optimization for sake of simplicity.}
+We only illustrate three of the removed optimization for the sake of simplicity.}
 
 \begin{itemize}
     \item Constant folding: this optimization calculates the operation over two (or more) constants in compiling time, and replaces the original expression by its constant result. For example, let us suppose \texttt{$a = 10 + 12$} a subexpression to be compiled, with the original optimization, the \wasm~ backend replaces it by \texttt{$a = 22$}.

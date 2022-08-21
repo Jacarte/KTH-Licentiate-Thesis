@@ -72,7 +72,7 @@ Nevertheless, a deeper study on the security consequences is needed.
 
 \textbf{Obfuscation, data augmentation and malware classification:}
 % Obfuscation
-Wasm is extensibly used for cryptocurrency mining. 
+Wasm is extensively used for cryptocurrency mining. 
 Sometimes the crypto-mining is done without the consent of users, creating what is called crypto-malwares \cite{Hilbig2021AnES}.
 Antivirus software could detect them. 
 However, a recent work \cite{10.1145/3507657.3528560} shows that malware classifiers could be bypassed with the correct obfuscation technique.
@@ -85,7 +85,7 @@ Therefore, if a classifier uses a canonical representation, then malware obfusca
 Fuzzers have become one of the most used techniques for automated testing \cite{zalewski2017american}, and compilers are not the exception.
 Fastly uses this technique to test their compiler, Lucet.
 Their fuzzing technique randomly creates different Wasm binaries and passes them to the compiler. If the compiler crashes, a bug report is created and fixed later.
-Our approaches created one binary that crashed their compiler\cite{CVE}, after they had no bug for months.
+Our approaches created one binary that crashed their compiler \cite{CVE}, after they had no bug for months.
 Therefore, our code transformations outperform their code generation for testing. 
 This highlighted the need for better strategies for stressing compilers, interpreters, and validators for \wasm.
 CROW and MEWE might be used for fuzzing, preventing vulnerabilities, and providing better testing of systems.
