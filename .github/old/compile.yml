@@ -21,18 +21,13 @@ jobs:
 
       - name: Cloning mysite
         run: git clone https://github.com/Jacarte/jacarte.github.io.git
-      - name: Uploading compiled to mysite
-        run: |
-         cp Lic.pdf jacarte.github.io/assets/pdf/Lic.pdf 
-         cd jacarte.github.io
-         
-         git config --global user.name "github-actions[bot]"
-         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-         git add assets/pdf/Lic.pdf && git commit -m "Updating Lic document"
-         
-         git push https://$USERNAME:$REPO_KEY@github.com/Jacarte/jacarte.github.io.git
-         
-        env:
-          REPO_KEY: ${{secrets.REPO_KEY}}
-          USERNAME: github-actions[bot]
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/release/analyzer
+          asset_name: analyzer
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "Analyzer binary for linux"

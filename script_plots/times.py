@@ -17,7 +17,7 @@ def get_times(jsonfile, func, original, random):
     return timesOriginal, timesmultivariant
 
 
-from seaborn_qqplot import pplot
+#from seaborn_qqplot import pplot
 
 # Patch qqplot to receive the axis instead
 
@@ -238,8 +238,8 @@ def plot_distributions(qqplots=False, normalize=True, remove_outliers=True):
 
             if i == len(function) - 1:
                 leg = ax.legend([
-                        "Normal distribution",
-                        "Uniform distribution",
+                        #"Normal distribution",
+                        #"Uniform distribution",
                         "Multivariant binary",
                         "Original binary"
                     ], bbox_to_anchor = (1.3,0.85), fontsize=fontSizeValue
