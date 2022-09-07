@@ -146,6 +146,7 @@
     \vfill
     \normalsize\mdseries\thesubtitle\par
     \vfill
+    \scalebox{0.192}{\includegraphics{figures/cover.png}}\par
     \large\MakeUppercase{\theauthor}\par
     \vfill
     \thethesistype\par
