@@ -25,7 +25,9 @@ jobs:
           pdflatex -shell-escape -interaction=nonstopmode Lic.tex || true
           sleep 30
 
-          cp Lic.pdf Licnocontribs.pdf
+          pip3 install pikepdf
+          python3 usab/fix_index.py Lic.pdf usab/kappa.pdf Lic.index.pdf
+          cp Lic.index.pdf Licnocontribs.pdf
         env:
           ADDCONTRIB: "False"  
 
@@ -42,6 +44,13 @@ jobs:
           sleep 5
           pdflatex -shell-escape -interaction=nonstopmode Lic.tex || true
           sleep 5
+
+          # Fix with usasb
+          pip3 install pikepdf
+          cp Lic.pdf Lic.pdf.bck
+          rm Lic.pdf
+          python3 usab/fix_index.pyLic.pdf.bck usab/kappa.pdf Lic.index.pdf
+          cp Lic.index.pdf Lic.pdf
         env:
           ADDCONTRIB: "True" 
 
