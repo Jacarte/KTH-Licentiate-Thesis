@@ -49,7 +49,7 @@ jobs:
           pip3 install pikepdf
           cp Lic.pdf Lic.pdf.bck
           rm Lic.pdf
-          python3 usab/fix_index.pyLic.pdf.bck usab/kappa.pdf Lic.index.pdf
+          python3 usab/fix_index.py Lic.pdf.bck usab/kappa.pdf Lic.index.pdf
           cp Lic.index.pdf Lic.pdf
         env:
           ADDCONTRIB: "True" 
