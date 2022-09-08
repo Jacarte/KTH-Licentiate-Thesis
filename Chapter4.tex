@@ -50,6 +50,7 @@ In \autoref{table:corpora} we listed the corpus name, the language of the progra
 
 %The first corpus, \textbf{CROW prime}, . The second corpus, \textbf{MEWE prime}, is part of the MEWE contribution \cite{}. In \autoref{table:corpora} we summarize the selection criteria, and we mention each corpus properties. With both corpora we evaluate CROW with a total of $303 + \pypy{\allmewefunctions}$ functions. 
 
+
 \begin{table}[h]
     \renewcommand{\arraystretch}{1.0}
     \small
@@ -59,7 +60,7 @@ In \autoref{table:corpora} we listed the corpus name, the language of the progra
         \midrule
             % CROW
             \corpusrosetta & C &
-            -\footnote{ The concept of module does not apply for this corpus. } 
+            - \footnotemark[2] 
             &
             303  & 
             7 - 
@@ -89,6 +90,8 @@ In \autoref{table:corpora} we listed the corpus name, the language of the progra
     \caption{Corpora description. The table is composed by the name of the corpus, programming language of the programs in the corpus, the number of modules, the number of functions, the lines of code range and the location of the corpus.}
     \label{table:corpora}
 \end{table}
+
+\footnotetext[2]{ The concept of module does not apply for this corpus since each potential module has a single function. } 
 
 \input{method/RQ1.tex}
 
