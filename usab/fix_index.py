@@ -10,16 +10,16 @@ if __name__ == "__main__":
     pdf = Pdf.open(file)
     usabpdf = Pdf.open(usab)
    
+    # first delete the first 
+    del pdf.pages[0:2]
+    # patch blank page
+    del pdf.pages[68]
+
     for n, page in enumerate(usabpdf.pages):
 
         if n == 3: break
 
-        print(page)
-
         pdf.pages.insert(n, page)
-        # remove next page
-        del pdf.pages[n+1]
     
-    del pdf.pages[68]
 
     pdf.save(f'{name}')
