@@ -35,6 +35,7 @@
 \emph{Conference Companion of the 4th International Conference on Art, Science, and Engineering of Programming (Programming 2021), MoreVMs}\\\\
 \url{https://doi.org/10.1145/3397537.3397567}\\
 
+% Add Abstract
 
 \ifthenelse{\equal{\ADDCONTRIB}{True}}%
     {\includepdf[pages=1-5]{papers/souper.pdf}} % 
@@ -58,7 +59,9 @@ Preprint version \\\\
 \emph{Accepted at the Conference on Computer and Communications Security (CCS 2022), Moving Target Defense (MTD)}\\\\
 preprint link \url{https://ui.adsabs.harvard.edu/abs/2021arXiv210808125C}\\\\
 
-\includepdf[pages=1-12]{papers/mewe_final.pdf}
+\ifthenelse{\equal{\ADDCONTRIB}{True}}%
+    {\includepdf[pages=1-12]{papers/mewe_final.pdf}} % 
+    {} %
     
 \chapter{Scalable Comparison of JavaScript V8 Bytecode Traces}
 
