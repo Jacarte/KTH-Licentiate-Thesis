@@ -11,9 +11,9 @@ if __name__ == "__main__":
     usabpdf = Pdf.open(usab)
    
     # first delete the first 
+    del pdf.pages[68]
     del pdf.pages[0:2]
     # patch blank page
-    del pdf.pages[67]
 
     for n, page in enumerate(usabpdf.pages):
 
